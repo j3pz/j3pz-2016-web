@@ -1,0 +1,56 @@
+<!-- 
+	@require buffCtrl.js
+	@require buff-ctrl.css
+ -->
+<div class="card panel card-underline" ng-controller="BuffController">
+	<div class="card-head card-head-sm" data-toggle="collapse" data-parent="#accordionTwo" href="#collapseNine" data-target="#collapseNine">
+		<header>奇穴与增益气劲</header>
+		<div class="tools">
+			<a class="btn btn-icon-toggle"><i class="fa fa-angle-down"></i></a>
+		</div>
+	</div>
+	<div id="collapseNine" class="collapse">
+		<div class="card-body p-a-0">
+			<div class="card m-b-0">
+				<div class="card-head">
+					<ul class="nav nav-tabs" data-toggle="tabs">
+						<li class="active"><a href="#qixue">奇穴</a></li>
+						<li><a href="#buff">增益气劲</a></li>
+					</ul>
+				</div><!--end .card-head -->
+				<div class="card-body tab-content">
+					<div class="tab-pane active" id="qixue">
+						<div class="row">
+							<label class="control-label col-md-4 p-x-0" ng-if="$root.menpai.name=='cangjian'">
+								<input icheck type="checkbox" ng-model="$root.zhongjian" ng-change="setZhongjian()">  重剑激活
+							</label>
+							<label class="control-label col-md-4 p-x-0" ng-repeat="qixue in qixueList">
+								<input icheck type="checkbox" ng-model="qixue.isCheck" ng-change="setBuff(qixue.id,qixue.isCheck)" >  {{qixue.name}}
+							</label>
+						</div>
+					</div>
+					<div class="tab-pane" id="buff">
+						<div class="row">
+							<div class="navpic col-md-3 active-buff" ng-repeat="buff in addedBuff" ng-if="buff.type!='Qixue'" ng-style="{background:'url(https://www.j3pz.com/icons/'+buff.icon+'.png) 0 0 no-repeat'}" ng-click="setBuff(buff.id,false)" title="{{buff.desc}}" data-toggle="tooltip"></div>
+							<div class="btn-group">
+								<button id="add-buff" type="button" class="btn btn-raised btn-default-bright dropdown-toggle" style="width:45px;height:45px;" title="添加气劲" data-toggle="dropdown">
+									<b><span class="md md-add" aria-hidden="true"></span></b>
+								</button>
+								<ul class="dropdown-menu animation-expand buffList" role="menu" aria-labelledby="add-buff">
+									<li class="dropdown-submenu" ng-repeat="class in types">
+										<a href tabindex="-1">&lt;{{class.name}}</a>
+										<ul class="dropdown-menu">
+											<li ng-repeat="buff in buffList[class.id]" tooltip="{{buff.desc}}" tooltip-placement="left" tooltip-append-to-body="true">
+												<a href ng-click="setBuff(buff.id,true)">{{buff.name}}</a>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div><!--end .card-body -->
+			</div><!--end .card -->
+		</div>
+	</div>
+</div>

@@ -1,0 +1,16 @@
+<!-- @require caseSettingCtrl.js -->
+<div class="card panel card-underline" ng-controller="CaseSettingsController">
+	<div class="card-head card-head-sm" data-toggle="collapse" data-parent="#accordionTwo" href="#collapseSix" data-target="#collapseSix">
+		<header>体型</header>
+		<div class="tools">
+			<a class="btn btn-icon-toggle"><i class="fa fa-angle-down"></i></a>
+		</div>
+	</div>
+	<div id="collapseSix" class="collapse">
+		<div class="card-body">
+			<div class="btn-group btn-group-justified">
+				<label class="btn" ng-repeat="option in tixingOptions"  ng-class="option.isSelected?'btn-primary-dark':'btn-primary'" ng-disabled="!option.isAvailable" ng-click="setTixing(option)">{{option.name}}</label> 
+			</div>
+		</div>
+	</div>
+</div>

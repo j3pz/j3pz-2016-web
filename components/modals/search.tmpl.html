@@ -1,0 +1,50 @@
+<!-- @require search.js -->
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="SearchModal" ng-controller="SearchCtrl" data-id="">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">选择其他装备</h4>
+			</div>
+			<div class="modal-body">
+
+				<div class="control-group">
+					<form class="form" role="form">
+						<div class="form-group floating-label">
+							<div class="input-group">
+								<div class="input-group-content">
+									<input type="text" class="form-control" id="equip-search-keyword" autocomplete="off" ng-model="equipName" ng-keypress="$event.which === 13 && search(equipName)">
+									<label for="equip-search-keyword">输入您想查找的装备名称</label>
+								</div>
+								<div class="input-group-btn">
+									<button class="btn btn-primary-dark btn-raised ink-reflect" type="button" ng-click="search(equipName)">搜索</button>
+								</div>
+							</div>
+						</div>
+					</form>
+					<div class="alert alert-callout alert-warning" role="alert">
+						<strong>警告:</strong> 跨门派选择门派套装后，套装特效实际不能激活，一切请以游戏为准
+					</div>
+					<div class="alert alert-callout alert-warning" role="alert">
+						<strong>警告:</strong> 网站为简化计算，不区分内外功，请确认所选择的装备不会造成此类计算错误后再做选择
+					</div>
+					<div id="searchList" class="row">
+						<div class="col-lg-6" ng-repeat="equip in searchEquip">
+							<div class="panel panel-default" ng-click="setEquip(equip.id)" style="cursor: pointer;">
+								<div class="panel-body row">
+									<div class="col-lg-1"></div>
+									<div class="navpic col-lg-2" ng-style="{background:'url(https://www.j3pz.com/icons/'+equip.icon+'.png) 0 0 no-repeat'}" tooltip-template="'../../templates/equipSearchTooltip.html'" ng-mouseenter="searchPreview(equip.id)" tooltip-placement="bottom" tooltip-class="customClass" tooltip-animation="false"></div>
+									<div class="col-lg-8">{{equip.name}}</div>
+									<div class="col-lg-1"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">关   闭</button>
+			</div>
+		</div>
+	</div>
+</div>
