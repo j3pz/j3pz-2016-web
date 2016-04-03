@@ -1,4 +1,4 @@
-var app = angular.module('J3pz', ['toastr','ui.select','ngDraggable','angular-loading-bar','cfp.hotkeys']);
+var app = angular.module('J3pz', ['toastr','ui.select','ngDraggable','angular-loading-bar','cfp.hotkeys','ui.bootstrap']);
 app.config(['toastrConfig',function(toastrConfig) {
 	angular.extend(toastrConfig, {
 		maxOpened: 5,

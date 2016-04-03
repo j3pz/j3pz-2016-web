@@ -1,0 +1,105 @@
+<script type="text/ng-template" id="equipTooltip.tmpl.html">
+	<div class="equipView column m-a-0" ng-if="$root.hoverEquip.data.name">
+		<!-- 装备名称 -->
+		<li class="equipName" ng-if='$root.hoverEquip.data.strengthen!=="8"'>
+			{{$root.hoverEquip.data.name.split("(")[0]}}
+			<span class="star" ng-repeat="n in [1,2,3,4,5,6,7,8]" ng-if="n<=$root.hoverEquip.jinglian.strengthen">★</span>
+			<span class="right">精炼等级:{{$root.hoverEquip.jinglian.strengthen}}/{{$root.hoverEquip.data.strengthen}}</span>
+		</li>
+		<li class="equipNameCheng" ng-if='$root.hoverEquip.data.strengthen==="8"'>
+			{{$root.hoverEquip.data.name.split("(")[0]}}
+			<span class="star" ng-repeat="n in [1,2,3,4,5,6,7,8]" ng-if="n<=$root.hoverEquip.jinglian.strengthen">★</span>
+			<span class="right">精炼等级:{{$root.hoverEquip.jinglian.strengthen}}/{{$root.hoverEquip.data.strengthen}}</span>
+		</li>
+		<!-- 装备类别 -->
+		<li class="basicInfo">{{$root.hoverEquip.typeParse}}</li>
+		<!-- 装备外防与内防 -->
+		<li class="basicInfo" ng-repeat="prefixName in basicInfoWithoutJL" ng-if="$root.hoverEquip.data[prefixName]" >
+			{{$root.hoverEquip.descList[prefixName]}}{{$root.hoverEquip.data[prefixName]}}
+		</li>
+		<!-- 装备基础属性 -->
+		<li class="basicInfo" ng-repeat="prefixName in basicInfoWithJL" ng-if="$root.hoverEquip.data[prefixName]" >
+			{{$root.hoverEquip.descList[prefixName]}}{{$root.hoverEquip.data[prefixName]}}
+			<span>(+{{$root.hoverEquip.jinglian[prefixName]}})</span>
+		</li>
+		<!-- 装备绿字属性（被洗炼） -->
+		<li class="plusInfo" ng-repeat-start="prefixName in plusInfo" ng-if="$root.hoverEquip.data[prefixName]&&$root.hoverEquip.xilian.num[prefixName]" ng-click="openNav('Xilian',$event,prefixName)">
+			{{$root.hoverEquip.descList[prefixName]}}{{$root.hoverEquip.data[prefixName]-$root.hoverEquip.xilian.num[prefixName]*-1}}
+			<span>(+{{$root.hoverEquip.jinglian[prefixName]}})</span><img src="/images/down.png" height="10" width="10" />
+		</li>
+		<!-- 装备绿字属性（无洗炼） -->
+		<li class="plusInfo" ng-repeat-end ng-if="$root.hoverEquip.data[prefixName]&&!$root.hoverEquip.xilian.num[prefixName]" ng-click="openNav('Xilian',$event,prefixName)">
+			{{$root.hoverEquip.descList[prefixName]}}{{$root.hoverEquip.data[prefixName]}}
+			<span>(+{{$root.hoverEquip.jinglian[prefixName]}})</span>
+		</li>
+		<!-- 装备绿字属性（洗炼目标） -->
+		<li class="plusInfo" ng-repeat="prefixName in plusInfo" ng-if="$root.hoverEquip.xilian.num[prefixName]>0">
+			{{$root.hoverEquip.descList[prefixName]}}{{$root.hoverEquip.xilian.num[prefixName]}}
+			<span>(+{{$root.hoverEquip.jinglian[prefixName]}})</span>
+			<span ng-style="{color:$root.xilianColorList[$root.hoverEquip.xilian.level]}">【<img src="/images/up.png" height="10" width="10" /> {{$root.xilianLevelDesc[$root.hoverEquip.xilian.level]}}品转化】</span>
+		</li>
+		<!-- 装备触发类特效 -->
+		<li class="score" ng-repeat="texiaoCommon in $root.hoverEquip.data.texiao.desc" ng-if="$root.hoverEquip.data.texiao.type==='Common'">
+			{{texiaoCommon}}
+		</li>
+		<!-- 装备镶嵌孔 -->
+		<li ng-repeat-start="n in [0,1,2]" ng-class="$root.hoverEquip.embed.stone[n].active?'plusInfo':'holeInactive'" ng-if="n<$root.hoverEquip.holes.number">
+			<img ng-src="{{'/images/' + $root.hoverEquip.embed.stone[n].typeId + '-' + $root.hoverEquip.embed.stone[n].level + '.jpg'}}" style="width:16px;height:16px;vertical-align:middle;">
+			镶嵌孔：{{$root.hoverEquip.newHoles.holeInfo[n].attrDesc}}
+			<span class="nostyle" ng-if="$root.hoverEquip.embed.stone[n].active">{{$root.hoverEquip.embed.stone[n].attr}}</span>
+			<span class="nostyle" ng-if="!$root.hoverEquip.embed.stone[n].active">?</span>
+		</li>
+		<li ng-repeat-end class="holeInactive" ng-if="$root.hoverEquip.holes.holeInfo[n].changed">
+			<img src="/images/tou.png" style="width:16px;height:16px;vertical-align:middle;">
+			镶嵌孔：{{$root.hoverEquip.holes.holeInfo[n].attrDesc}}?【原属性】
+		</li>
+		<!-- 五彩石镶嵌孔(未镶嵌) -->
+		<li class="holeInactive" ng-if="(attributeStone[0].level==0&&hoverType=='b_primaryWeapon')||(attributeStone[1].level==0&&hoverType=='c_primaryWeapon')">
+			<img src="/images/-1-1.jpg" style="width:16px;height:16px;vertical-align:middle;">
+			&lt;只能镶嵌五彩石&gt;
+		</li>
+		<!-- 五彩石镶嵌孔(已镶嵌) -->
+		<li ng-repeat="attribute in attributeStone[attributeStoneSelected].attributes" ng-if="((hoverType=='b_primaryWeapon'||hoverType=='c_primaryWeapon')&&((attributeStone[0].level!=0&&hoverType=='b_primaryWeapon')||(attributeStone[1].level!=0&&hoverType=='c_primaryWeapon')))&&attribute.number>0" ng-class="attribute.isActive?'plusInfo':'holeInactive'">
+			<img ng-if="attribute.isFirstChild" ng-src="{{'/images/'+attribute.type+'-'+attributeStone[attributeStoneSelected].level+'.jpg'}}" style="width:16px;height:16px;vertical-align:middle;"/>
+			<img ng-if="!attribute.isFirstChild" src="/images/tou.png" style="width:16px;height:16px;vertical-align:middle;">
+			{{attribute.desc}}
+		</li>
+		<!-- 装备使用类特效 -->
+		<li class="plusInfo" ng-repeat="texiaoUseable in $root.hoverEquip.data.texiao.desc" ng-if="$root.hoverEquip.data.texiao.type==='Useable'">
+			{{texiaoUseable}}
+		</li>
+		<!-- 装备套装汇总信息 -->
+		<li class="quality" ng-if="$root.hoverEquip.data.texiao&&$root.hoverEquip.data.texiao.type==='Collection'">
+			{{setController.collectionsList[setController.posSetMap[$root.hoverType]].name}}({{setController.collectionsList[setController.posSetMap[$root.hoverType]].activeNum}}/{{setController.collectionsList[setController.posSetMap[$root.hoverType]].allNum}})
+		</li>
+		<!-- 装备套装激活信息 -->
+		<li class="quality" ng-repeat-start="component in setController.collectionsList[setController.posSetMap[$root.hoverType]].components" ng-if="component.active">{{component.equipName}}</li>
+		<li class="holeInactive" ng-repeat-end ng-if="!component.active">{{component.equipName}}</li>
+		<br ng-if="$root.hoverEquip.data.texiao&&$root.hoverEquip.data.texiao.type==='Collection'">
+		<!-- 装备套装特效信息 -->
+		<li ng-class="setController.collectionsList[setController.posSetMap[$root.hoverType]].activeNum>=effect.conditionNum?'plusInfo':'holeInactive'" ng-repeat="effect in setController.collectionsList[setController.posSetMap[$root.hoverType]].effects">[{{effect.conditionNum}}]{{effect.desc}}</li>
+		<!-- 装备附魔 -->
+		<li class="enhance">{{$root.hoverEquip.enhance.desc}}</li>
+		<!-- 装备品质 -->
+		<li class="quality">
+			品质等级{{$root.hoverEquip.data.quality}}
+			<span>(+{{$root.hoverEquip.jinglian.quality}})</span>
+		</li>
+		<!-- 装备分数 -->
+		<li class="score">
+			装备分数{{$root.hoverEquip.data.score}}
+			<span>(+{{$root.hoverEquip.jinglian.score}}+{{$root.hoverEquip.embed.totalScore}})</span>
+		</li>
+		<!-- 装备推荐门票 -->
+		<li class="basicInfo">
+			推荐门派：{{$root.hoverEquip.getRecommend()}}
+		</li>
+		<!-- 装备来源 -->
+		<li class="basicInfo">
+			获取：{{$root.hoverEquip.data.dropSource}}
+		</li>
+		<li class="basicInfo">
+			{{$root.hoverEquip.data.prediction}}
+		</li>
+	</div>
+</script>

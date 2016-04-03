@@ -1,9 +1,11 @@
 <!--
 	@require equipNavCtrl.js 
 	@require equip-nav.css 
+	@require /js/libs/ui-bootstrap-tooltip/ui-bootstrap-custom-tpls-1.2.5.min.js
 -->
 <div class="row equipNav" ng-controller="EquipNavCtrl">
-	<div class='col-xs-2 navpic border' ng-repeat="nav in positionIconList" ng-click="navSelect(nav.type)" ng-class="focus==nav.type?'navpiccur':''" tooltip-template="'equipTooltip.tmpl.html'" ng-mouseenter="equipPreview(nav.type)" tooltip-placement="bottom" tooltip-class="customClass" tooltip-animation="false" tooltip-enable="equips[nav.type].data.name">
+	<div class='col-xs-2 navpic border' ng-repeat="nav in positionIconList" ng-click="navSelect(nav.type)" ng-class="focus==nav.type?'navpiccur':''" uib-tooltip-template="'equipTooltip.tmpl.html'" ng-mouseenter="equipPreview(nav.type)" tooltip-placement="bottom-left" tooltip-class="customClass" tooltip-animation="false" tooltip-enable="equips[nav.type].data.name">
 		<a href class='col-xs-2 navpic' ng-style="{background:'url('+nav.icon+') 0 0 no-repeat'}"></a>
 	</div>
+	<link rel="import" href="/components/templates/equipTooltip.tmpl.html?__inline">
 </div>
