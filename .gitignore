@@ -1,2 +1,5 @@
 /config.php
 /api
+/pay/*.pem
+/pay/log.txt
+/pay/alipay.config.php
