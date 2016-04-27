@@ -298,7 +298,7 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 			$scope.setEquipByObj(emptyEquip,$rootScope.focus);
 			return;
 		}
-		$http.get(config.apiBase+'getEquip.php?q='+id)
+		$http.get(config.apiBase+'equip/'+id)
 		.success(function(response){
 			if(response.err) {
 				toastr.error("载入装备失败，"+response.errReason);
@@ -315,7 +315,7 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 			$rootScope.equips[$rootScope.focus].enhance={};
 			return;
 		}
-		$http.get(config.apiBase+'getEnhance.php?q='+id)
+		$http.get(config.apiBase+'enhance/'+id)
 		.success(function(response){
 			if(response.err) {
 				toastr.error("载入附魔失败，"+response.errReason);
@@ -334,7 +334,7 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 	};
 	$scope.getBuffList = function(){
 		// 获取门派奇穴和可用Buff列表
-		$http.get(config.apiBase+'getBuffList.php?menpai='+$rootScope.menpai.name)
+		$http.get(config.apiBase+'buffs?school='+$rootScope.menpai.name)
 		.success(function(response){
 			$rootScope.buffController.buff=[];
 			if(response.err){

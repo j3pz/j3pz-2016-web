@@ -143,7 +143,7 @@ app.controller('ChangeEquipController',['$scope','$rootScope','$http','$sce','to
 		if(!$rootScope.equipLists[$rootScope.focus].isCached){
 			var menpai = $rootScope.menpai.name;
 			var focus = $rootScope.focus.split("_")[0];
-			$http.get(config.apiBase+'getEquipList.php?pos='+focus+'&menpai='+menpai)
+			$http.get(config.apiBase+'equips?position='+focus+'&school='+menpai)
 			.success(function(response){
 				if(response.err) {
 					toastr.error(response.errReason);

@@ -7,7 +7,7 @@ app.controller('SearchCtrl',['$scope','$http','$rootScope','toastr',function($sc
 	$scope.search = function(str) {
 		$scope.searchEquip = [];
 		var position = $rootScope.focus.split("_")[0];
-		var url = config.apiBase+'searchEquip.php?q='+position+'&str='+str;
+		var url = config.apiBase+'equips?position='+position+'&search=1'+'&keyword='+str;
 		url = encodeURI(url);
 		$http.get(url)
 		.success(function(response){
@@ -39,7 +39,7 @@ app.controller('SearchCtrl',['$scope','$http','$rootScope','toastr',function($sc
 	};
 	$scope.searchPreview = function(id){
 		$rootScope.searchEquipPreview = Equip.createNew();
-		$http.get(config.apiBase+'getEquip.php?q='+id)
+		$http.get(config.apiBase+'equip/'+id)
 		.success(function(response){
 			if(response.err) {
 				toastr.error("载入装备失败，"+response.errReason);

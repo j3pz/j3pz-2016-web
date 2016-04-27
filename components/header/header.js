@@ -29,7 +29,7 @@ app.controller('HeaderCtrl', ['$scope','$http','toastr','$rootScope','$httpParam
 		}
 	});
 	$scope.checkUpdate = function(forceOpen){
-		$http.get(config.apiBase+'checkVersion.php')
+		$http.get(config.apiBase+'update')
 		.success(function(response){
 			if(Number(response.version) > Number(localStorage.edition)||!localStorage.edition||forceOpen){
 				$rootScope.updateDesc = response.desc;
