@@ -27,3 +27,7 @@ fis.match('::packager', {
 		// allInOne: true
 	})
 });
+
+fis.match('/server.conf', {
+	release: '/config/server.conf'
+});
