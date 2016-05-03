@@ -16,7 +16,7 @@ app.controller('AttributeStoneController',['$scope','$rootScope','$http','Utils'
 	}
 	$scope.init = function(){
 		if(!$rootScope.attributeStoneLists[$rootScope.attributeStoneSelected][0].isLoad){
-			$http.get(config.apiBase+"getAttributeStone.php?q=0&id=0&menpai="+$rootScope.menpai.name)
+			$http.get(config.apiBase+"stones?q=0&id=0&school="+$rootScope.menpai.name)
 			.success(function(response){
 				if(response.err){
 					toastr.error("载入五彩石列表失败，请点击重选五彩石");
@@ -117,7 +117,7 @@ app.controller('AttributeStoneController',['$scope','$rootScope','$http','Utils'
 			$rootScope.attributeStone[$rootScope.attributeStoneSelected] = angular.copy(attrStone);
 			return;
 		}
-		var url = config.apiBase+"getAttributeStone.php?q="+request+"&id="+id+"&menpai="+$rootScope.menpai.name;
+		var url = config.apiBase+"stones?q="+request+"&id="+id+"&school="+$rootScope.menpai.name;
 		for (var i = 1; i <= id; i++) {
 			if(i!=id) url += "&at"+i+"="+$rootScope.attributeStoneLists[$rootScope.attributeStoneSelected][i-1].setAs;
 			else url += "&at"+i+"="+request;
