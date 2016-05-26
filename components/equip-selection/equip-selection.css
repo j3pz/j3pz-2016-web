@@ -1,0 +1,9 @@
+.ui-slider .ui-slider-range{
+	height:2px;
+}
+
+.btn i.pull-right,
+.btn .pull-left span{
+	line-height: 2.5em;
+	font-size: 16px;
+}

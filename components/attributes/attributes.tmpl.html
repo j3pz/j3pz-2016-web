@@ -1,0 +1,23 @@
+<!-- @require attributes.js -->
+<table class="table table-hover table-condensed" ng-controller="ResultCtrl">
+	<thead>
+		<tr>
+			<th ng-repeat="attiDesc in attriUp">{{attiDesc.name}}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr id="final" >
+			<th ng-repeat="attiDesc in attriUp">{{$root.results[attiDesc.value]}}<span ng-if="attiDesc.value=='acce'">({{$root.results.acceLevel}})</span><span ng-if="attiDesc.value=='overcomeRate'">%({{$root.results.overcome}})</span><a href ng-click="casePreview()" ng-if="attiDesc.name=='方案总览'">点此查看</a></th>
+		</tr>
+	</tbody>
+	<thead>
+		<tr>
+			<th ng-repeat="attiDesc in attriDown">{{attiDesc.name}}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr id="final" >
+			<th ng-repeat="attiDesc in attriDown">{{$root.results[attiDesc.value]}}<span ng-if="attiDesc.value=='acce'">({{$root.results.acceLevel}})</span><span ng-if="attiDesc.value=='overcomeRate'">%({{$root.results.overcome}})</span><a href ng-click="casePreview()" ng-if="attiDesc.name=='方案总览'">点此查看</a></th>
+		</tr>
+	</tbody>
+</table>

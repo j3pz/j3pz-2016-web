@@ -1,0 +1,24 @@
+.dropdown-submenu {
+	position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+	top: 0;
+	left: -100%;
+	margin-top: -6px;
+	margin-left: -1px;
+	-webkit-border-radius: 6px 0 6px 6px;
+	-moz-border-radius:6px 0 6px 6px;
+	border-radius: 6px 0 6px 6px;
+	overflow-x: hidden;
+	max-height: 300px;
+}
+.buffList {
+	top: 0;
+	left: 0;
+	margin-top: -1px;
+	margin-left: -1px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+	display: block;
+}

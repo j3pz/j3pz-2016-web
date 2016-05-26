@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="J3pz" ng-controller="InitCtrl" xmlns:wb="http://open.weibo.com/wb">
+	<head>
+		<title>剑网3全职业配装器</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="剑网3全职业配装器为剑网3玩家提供完善、准确的配装工具。">
+		<meta name="author" content="胖叔叔">
+		<meta name="keywords" content="剑网3,西山居,剑侠情缘,配装器,装备">
+		<link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css'/><!--ignore-->
+		<!-- 
+			@require '../css/theme/bootstrap.css'
+			@require '../css/theme/materialadmin.css'
+			@require '../css/theme/font-awesome.min.css'
+			@require '../css/theme/material-design-iconic-font.min.css'
+			@require '../css/theme/libs/toastr/toastr.css'
+			@require '../components/common/common.css' 
+		-->
+		<!-- STYLE_PLACEHOLDER -->
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="js/libs/utils/html5shiv.js"></script>
+		<script type="text/javascript" src="js/libs/utils/respond.min.js"></script>
+		<![endif]-->
+		<!-- Google 统计代码 -->
+		<script rel="text/javascript" src="../components/google-analystics/googleAnalystics.js?__inline"></script><!--ignore-->
+		<!-- 浏览器兼容性检查 -->
+		<script rel="text/javascript" src="../components/compatibility-check/compatibilityCheck.js?__inline"></script><!--ignore-->
+	</head>
+
+	<body class="menubar-hoverable header-fixed" ng-controller="PeizhuangCtrl">
+		<header id="header">
+			<!-- 导航栏 -->
+			<link rel="import" href="../components/header/header.tmpl.html?__inline">
+		</header>
+
+		<div class="offcanvas">
+		</div>
+		<div id="content">
+			<div class="container">
+				<div class="row" style="padding-top:15px;" >
+					<div id="nav" class="col-md-5" ng-cloak>
+						<!-- 装备位置栏 -->
+						<link rel="import" href="../components/equip-nav/equip-nav.tmpl.html?__inline">
+					</div>
+					<div class="col-md-7" ng-cloak>
+						<!-- 属性计算栏 -->
+						<link rel="import" href="../components/attributes/attributes.tmpl.html?__inline">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="col-sm-4 col-xs-12" ng-cloak>
+							<!-- 装备预览 -->
+							<link rel="import" href="../components/equip-preview/equip-preview.tmpl.html?__inline">
+						</div>
+						<div class="col-sm-4 col-xs-12" ng-cloak>
+							<div class="panel-group" id="accordionOne">
+								<!-- 装备选择 -->
+								<link rel="import" href="../components/equip-selection/select.tmpl.html?__inline">
+								<!-- 装备附魔 -->
+								<link rel="import" href="../components/equip-enhance/enhance.tmpl.html?__inline">
+								<!-- 装备镶嵌 -->
+								<link rel="import" href="../components/equip-embed/embed.tmpl.html?__inline">
+							</div>
+						</div>
+						<div class="col-sm-4 col-xs-12">
+							<div class="panel-group" id="accordionTwo" ng-cloak>
+								<!-- 五彩石选择 -->
+								<link rel="import" href="../components/attribute-stone/attribute-stone.tmpl.html?__inline">
+								<!-- 方案设置 -->
+								<link rel="import" href="../components/case-setting/case-setting.tmpl.html?__inline">
+								<!-- 增益气劲 -->
+								<link rel="import" href="../components/buff-ctrl/buff-ctrl.tmpl.html?__inline">
+
+								
+							</div>
+							<!-- 广告 -->
+							<link rel="import" href="../components/ad/ad.tmpl.html?__inline">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="modals">
+			<!-- 模态框:登录 -->
+			<link rel="import" href="../components/modals/login.tmpl.html?__inline">
+			<!-- 模态框:更新说明 -->
+			<link rel="import" href="../components/modals/update.tmpl.html?__inline">
+			<!-- 模态框:搜索装备 -->
+			<link rel="import" href="../components/modals/search.tmpl.html?__inline">
+			<!-- 模态框:方案总览 -->
+			<link rel="import" href="../components/case-preview/case-preview.tmpl.html?__inline">
+		</div>
+		<footer>
+			<!-- 底栏 -->
+			<link rel="import" href="../components/footer/footer.tmpl.html?__inline">
+		</footer>
+
+		<script src="../js/libs/jquery/jquery-1.11.2.min.js" data-framework></script>
+		<script src="../js/libs/bootstrap/bootstrap.min.js" data-framework></script>
+		<script src="../js/libs/angular/angular.min.js" data-framework></script>
+		<script src="../js/libs/angular/angular-aria.min.js" data-framework></script>
+		<script src="../js/libs/toastr/angular-toastr.tpls.min.js" data-framework></script>
+		<script src="../js/libs/hotkeys/hotkeys.min.js" data-framework></script>
+		<script src="../js/libs/loading-bar/loading-bar.min.js" data-framework></script>
+		<script src="../js/libs/weibo/wb.js?appkey=4055331331&debug=true" data-framework></script>
+		<script src="../js/core/source/App.min.js"></script>
+		<script src="build.js" data-framework></script>
+		<script src="initCtrl.js" data-framework></script>
+		<!-- @require /components/main-controller/mainCtrl.js -->
+		<!-- SCRIPT_PLACEHOLDER -->
+	</body>
+</html>

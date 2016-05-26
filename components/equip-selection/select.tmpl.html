@@ -1,0 +1,50 @@
+<!-- 
+	@require changeEquipCtrl.js 
+	@require /js/libs/jquery-ui/jquery-ui.min.js 
+	@require equip-selection.css
+-->
+<div class="card panel card-underline" ng-controller="ChangeEquipController">
+	<div class="card-head card-head-sm" data-toggle="collapse" data-parent="#accordionOne" href="#collapseOne" data-target="#collapseOne">
+		<header>装备选择</header>
+		<div class="tools">
+			<a class="btn btn-icon-toggle"><i class="fa fa-angle-down"></i></a>
+		</div>
+	</div>
+	<div id="collapseOne" class="collapse in">
+		<div class="card-body">
+			<div class="row">
+				<label class="control-label col-md-4" ng-repeat="item in filterItems"  ng-disabled="!available(item,$root.equipListfilter.attr)">
+					<input icheck type="checkbox" ng-model="ctrl.attr[item.index]" ng-click="toggle(item, $root.equipListfilter.attr)" >  {{item.text}}
+				</label>
+			</div>
+			<label for="quality">品质筛选 {{$root.equipListfilter.range[0]}}品-{{$root.equipListfilter.range[1]}}品</label>
+			<div class="row">
+				<div class="input-group col-xs-12">
+					<div class="input-group-content form-control-static">
+						<div id="quality-range"></div>
+					</div>
+				</div>
+			</div>
+			<br>
+			<ui-select ng-model="$root.equipLists[$root.focus].setAs" on-select="setEquip($root.equipLists[$root.focus].setAs.id)" theme="bootstrap" search-enabled="true" append-to-body="true">
+				<ui-select-match placeholder="您可以在这里输入装备名称进行搜索">{{$root.equipLists[$root.focus].setAs.name}}</ui-select-match>
+				<ui-select-choices repeat="equipItem in $root.equipLists[$root.focus].list | filter: $select.search | filter: checkFilter">
+					<!-- <div ng-bind-html="trustAsHtml((equipItem.name | highlight: $select.search),equipItem.quality)"></div>
+					<small ng-bind-html="generateAttr(equipItem.filter,equipItem.class)"></small> -->
+					<div ng-bind-html="simpleSelect((equipItem.name | highlight: $select.search),equipItem.filter)"></div>
+				</ui-select-choices>
+			</ui-select> 
+			<br>
+			<div class="btn-group btn-group-justified" role="group" aria-label="select-option">
+				<a class="btn ink-reaction btn-raised btn-default-bright" ng-click="setEquip(0)">脱下装备</a>
+				<a class="btn ink-reaction btn-raised btn-default-bright" ng-click="searchEquip()">搜索其他装备</a>
+				<div class="btn-group" role="group">
+					<a class="btn ink-reaction btn-raised btn-default-bright dropdown-toggle" id="source-filter" type="button"  data-toggle="dropdown">指定来源 <i class="fa fa-caret-down text-default-light"></i></a>
+					<ul class="dropdown-menu animation-expand" role="menu" aria-labelledby="source-filter" style="max-height: 250px;overflow-x: hidden;">
+						<li ng-repeat="sourceItem in sourceType"><a href ng-click="filterSource(sourceItem.id,$event)"><input icheck type="checkbox" ng-model="ctrl.sourceFilter[sourceItem.id]">  {{sourceItem.label}}</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

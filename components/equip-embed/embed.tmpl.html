@@ -1,0 +1,72 @@
+<!-- 
+	@require embedCtrl.js
+	@require embed.css 
+	@require /js/libs/ng-draggable/ngDraggable.js
+-->
+<div class="card panel card-underline" ng-controller="EmbedController">
+	<div class="card-head card-head-sm" data-toggle="collapse" data-parent="#accordionOne" href="#collapseFive" data-target="#collapseFive">
+		<header>镶嵌</header>
+		<div class="tools">
+			<a class="btn btn-icon-toggle"><i class="fa fa-angle-down"></i></a>
+		</div>
+	</div>
+	<div id="collapseFive" class="collapse">
+		<div class="card-body p-a-0">
+			<div class="m-a-2" ng-if="$root.equips[$root.focus].data['P_ID']>=11094">
+				<label class="">镶嵌孔</label>
+				<div class="row">
+					<div ng-repeat="n in [0,1,2]" ng-if="n<equips[$root.focus].holes.number" ng-click="empty(event,n)" class="col-md-2">
+						<img ng-src="{{'/images/' + equips[$root.focus].embed.stone[n].typeId + '-' + equips[$root.focus].embed.stone[n].level + '.jpg'}}" class="wuxing" ng-drop="true" ng-drop-success="onDrop($event,$data,n)">
+					</div>
+				</div>
+				<label class="">备选五行石</label>
+				<div class="row" style="padding:7px;">
+					<div class="wuxing wuxingStone col-md-2" ng-repeat="n in [1,2,3,4]" ng-style="{background:'url(/images/0-'+n+'.jpg) no-repeat','background-size': '40px 40px'}" ng-click="embedAStone(event,{level:n,type:0})" ng-drag="true" ng-drag-data="{level:n,type:0}">
+					</div>
+				</div>
+				<div class="row" style="padding:7px;">
+					<div class="wuxing wuxingStone col-md-2" ng-repeat="n in [5,6,7,8]" ng-style="{background:'url(/images/0-'+n+'.jpg) no-repeat','background-size': '40px 40px'}" ng-click="embedAStone(event,{level:n,type:0})" ng-drag="true" ng-drag-data="{level:n,type:0}">
+					</div>
+				</div>
+				<div style="padding:5px;">
+					<small>将五行石拖放到上方的镶嵌孔内完成镶嵌，或单击五行石按顺序镶嵌空的孔。点击镶嵌孔可以取消镶嵌</small>
+				</div>
+			</div>
+			<div class="card tabs-left style-default-light m-b-0" ng-show="$root.equips[$root.focus].data['P_ID']<11094">
+				<ul class="card-head nav nav-tabs" data-toggle="tabs">
+					<li class="active"><a href="#hole-embed">镶嵌</a></li>
+					<li class=""><a href="#hole-trans">淬炼</a></li>
+				</ul>
+				<div class="card-body tab-content style-default-bright">
+					<div id="hole-embed" class="tab-pane active">
+						<label class="">镶嵌孔</label>
+						<div class="row">
+							<div ng-repeat="n in [0,1,2]" ng-if="n<equips[$root.focus].holes.number" ng-click="empty(event,n)" class="col-md-2">
+								<img ng-src="{{'/images/' + equips[$root.focus].embed.stone[n].typeId + '-' + equips[$root.focus].embed.stone[n].level + '.jpg'}}" class="wuxing" ng-drop="true" ng-drop-success="onDrop($event,$data,n)">
+							</div>
+						</div>
+						<label class="">备选五行石</label>
+						<div class="row" style="padding:7px;">
+							<div class="wuxing wuxingStone col-md-2" ng-repeat="n in [1,2,3,4]" ng-style="{background:'url(/images/0-'+n+'.jpg) no-repeat','background-size': '40px 40px'}" ng-click="embedAStone(event,{level:n,type:0})" ng-drag="true" ng-drag-data="{level:n,type:0}">
+							</div>
+						</div>
+						<div class="row" style="padding:7px;">
+							<div class="wuxing wuxingStone col-md-2" ng-repeat="n in [5,6,7,8]" ng-style="{background:'url(/images/0-'+n+'.jpg) no-repeat','background-size': '40px 40px'}" ng-click="embedAStone(event,{level:n,type:0})" ng-drag="true" ng-drag-data="{level:n,type:0}">
+							</div>
+						</div>
+						<div style="padding:5px;">
+							<small>将五行石拖放到上方的镶嵌孔内完成镶嵌，或单击五行石按顺序镶嵌空的孔。点击镶嵌孔可以取消镶嵌</small>
+						</div>
+					</div>
+					<div id="hole-trans" class="tab-pane">
+						<div style="padding:5px;" class="row" ng-repeat="n in [0,1,2]" ng-if="n<equips[$root.focus].holes.number">
+							<div class="col-md-8 col-xs-12" style="padding-left:8px;padding-right:8px;">
+								<select class="form-control" ng-model="ctrl.holeAttr[n]" aria-label="holeAttrSelection_{{n}}" ng-change="changeAttr($event,n)" ng-options="attr.index as attr.desc for attr in holeChangeableAttrs[n]" style="padding: 6px 6px;font-size: 12px;"></select>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

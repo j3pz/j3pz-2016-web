@@ -1,0 +1,30 @@
+<!-- 
+	@require enhanceCtrl.js 
+	@require enhance.css
+-->
+<div class="card panel card-underline" ng-controller="EnhanceController">
+	<div class="card-head card-head-sm" data-toggle="collapse" data-parent="#accordionOne" href="#collapseTwo" data-target="#collapseTwo">
+		<header>精炼与附魔</header>
+		<div class="tools">
+			<a class="btn btn-icon-toggle"><i class="fa fa-angle-down"></i></a>
+		</div>
+	</div>
+	<div id="collapseTwo" class="collapse">
+		<div class="card-body">
+			<div id="jinglian">
+				<span class="md md-remove-circle-outline cancelStrengthen" ng-click="setStrengthen(0,true)" ng-mouseenter="setStrengthen(0,false)" ng-mouseleave="resetStrengthen()"></span>
+				<span class="md strengthenStars" ng-class="n<=$root.equips[$root.focus].jinglian.strengthen?'md-star':'md-star-outline'" ng-repeat="n in [1,2,3,4,5,6,7,8]" ng-if="n<=ctrl.maxV" ng-click="setStrengthen(n,true)" ng-mouseenter="setStrengthen(n,false)" ng-mouseleave="resetStrengthen()"></span>
+			</div><br>
+			<div id="enhanceList">
+				<div class="form">
+					<div class="form-group">
+						<select class="form-control" ng-model="$root.enhanceLists[$root.focus].setAs.id" ng-change="ok()">
+							<option value="0">选择附魔</option>
+							<option ng-repeat="enhanceItem in $root.enhanceLists[$root.focus].list" ng-value="{{enhanceItem.id}}" value="{{enhanceItem.id}}">{{enhanceItem.name}}</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

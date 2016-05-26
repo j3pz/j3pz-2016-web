@@ -1,0 +1,17 @@
+<!-- @require schoolList.js -->
+<div class="col-md-9 row" ng-controller="SchoolListCtrl">
+	<div class="col-md-3 col-xs-6" ng-repeat="school in schools">
+		<div class="panel panel-default" ng-mouseenter="school.hover=true;" ng-mouseleave="school.hover=false" >
+			<div class="panel-body">
+				<p class="jx3icon text-center" ng-class="school.icon" ng-style="{'color':school.color,'font-size':school.size+'px','margin':0}"></p>
+			</div>
+			<div class="panel-footer text-center xinfaList" ng-if="!school.hover" >{{school.name}}</div>
+			<div class="panel-footer xinfaList" ng-if="school.hover" aria-label="xinfa">
+				<div class="row">
+					<a class="col-xs-6 text-center" ng-href="{{'dps/' + school.xinfa1 +'/'}}">{{school.xinfaName1}}</a>
+					<a class="col-xs-6 text-center" ng-href="{{school.type2 + '/' + school.xinfa2 +'/'}}" ng-if="school.xinfa>1">{{school.xinfaName2}}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

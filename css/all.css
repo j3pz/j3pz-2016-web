@@ -1,0 +1,59 @@
+
+
+
+
+
+
+span.nostyle{
+	display: inline;
+	font-size:13px !important;
+	color:inherit !important;
+	letter-spacing:1px;
+}
+div.shareImg{
+	border:1px solid;
+	border-radius:6px;
+	-moz-border-radius:6px;
+}
+img.shareImg{
+	width: 894px;
+}
+span.issue-open{
+	font-size:16px;
+	color:#5CB85C;
+	letter-spacing:1px;
+}
+span.issue-closed{
+	font-size:16px;
+	color:#D9534F;
+	letter-spacing:1px;
+}
+span.issue-comment{
+	font-size:16px;
+	color:#222222;
+	letter-spacing:1px;
+}
+li.issue{
+	font-size:16px;
+}
+.comment{
+	min-height: 150px !important;
+}
+a.issueTitle{
+	color: #000000;
+	text-decoration: none;
+}
+p.price{
+	font-size: 14px;
+}
+.tooltip.customClass .tooltip-inner {
+	max-width: 350px;
+	min-width: 300px;
+	padding: 2px 2px;
+}
+.tooltip.customClass .tooltip-arrow {
+	display: none;
+}
+.equipNav >.tooltip{
+	margin-left: 100px;
+}

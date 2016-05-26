@@ -1,0 +1,23 @@
+<!-- @require casePreviewCtrl.js -->
+<div class="modal fade" id="casePreviewModal" tabindex="-1" role="dialog" aria-labelledby="LoginModal" ng-controller="CasePreviewController">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-body" style="padding:0px;">
+				<div class="shareImg" ng-if="loaded"><img ng-src="{{imgUrl}}" class="shareImg"/></div>
+				<div class="row" style="margin-top:16px;" ng-if="!loaded">
+					<div class="col-lg-2"></div>
+					<div class="col-lg-8">
+						<div class="progress">
+							<div class="progress-bar progress-bar-primary" style="width: 100%">正在生成图片</div>
+						</div>
+					</div>
+					<div class="col-lg-2"></div>
+				</div>
+			</div>
+			<!-- <div class="modal-footer">
+				<button type="button" class="btn btn-default" ng-click="close()">关   闭</button>
+				<button type="button" class="btn btn-primary" ng-click="saveCaseNow()">分   享</button>
+			</div> -->
+		</div>
+	</div>
+</div>
