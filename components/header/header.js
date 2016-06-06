@@ -14,7 +14,7 @@ app.controller('HeaderCtrl', ['$scope','$http','toastr','$rootScope','$httpParam
 		})
 		.success(function(response) {
 			if(response.err){
-				
+
 			}else{
 				$rootScope.isLogin = true;
 				$rootScope.user.name = response.name;
@@ -26,9 +26,9 @@ app.controller('HeaderCtrl', ['$scope','$http','toastr','$rootScope','$httpParam
 							$rootScope.$apply();
 						}
 					});
-					$rootScope.equipListfilter.range = response.preference.quality;
-					$rootScope.embedLevel = response.preference.magicStoneLevel;
-					$rootScope.strengthenLevel = response.preference.strengthen;
+					$rootScope.equipListfilter.range = response.prefer.quality;
+					$rootScope.embedLevel = response.prefer.magicStoneLevel;
+					$rootScope.strengthenLevel = response.prefer.strengthen;
 					$rootScope.saveList.isLoad = false;
 					$scope.$emit("saveCase");
 				}
