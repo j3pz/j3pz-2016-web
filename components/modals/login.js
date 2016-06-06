@@ -1,5 +1,5 @@
 /* @require /components/config/config.js */
-app.controller('LoginCtrl', ['$rootScope','$scope','$httpParamSerializerJQLike','toastr','$http','$interval', function($rootScope,$scope,$httpParamSerializerJQLike,toastr,$http,$interval){
+app.controller('LoginCtrl', ['$rootScope','$scope','toastr','$http','$interval', function($rootScope,$scope,toastr,$http,$interval){
 	$scope.login = function(){
 		$rootScope.user.isLoading = true;
 		$http({
