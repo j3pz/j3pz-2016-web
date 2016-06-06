@@ -4,30 +4,43 @@ app.controller('HeaderCtrl', ['$scope','$http','toastr','$rootScope','$httpParam
 	$rootScope.user = {
 		mail:"",
 		password:"",
-		name:""
+		name:"",
+		token:""
 	};
-	$http.post(config.apiBase+'loginCertificate.php')
-	.success(function(response) {
-		if(response.err||!response.isLogin){
-		}else{
-			$rootScope.isLogin = true;
-			$rootScope.user.name = response.name;
-			if($rootScope.isPz){
-				$("#quality-range").slider({range: true, min: 450, max: 1100, values: $rootScope.equipListfilter.range, step:5,
-					slide: function (event, ui) {
-						$rootScope.equipListfilter.range[0] = ui.values[0];
-						$rootScope.equipListfilter.range[1] = ui.values[1];
-						$rootScope.$apply();
-					}
-				});
-				$rootScope.equipListfilter.range = response.preference.quality;
-				$rootScope.embedLevel = response.preference.magicStoneLevel;
-				$rootScope.strengthenLevel = response.preference.strengthen;
-				$rootScope.saveList.isLoad = false;
-				$scope.$emit("saveCase");
+
+	function getUserInfo(token){
+		$http.get(config.apiBase+'auth',{
+			headers:{'Authorization': 'Bearer '+token}
+		})
+		.success(function(response) {
+			if(response.err){
+				
+			}else{
+				$rootScope.isLogin = true;
+				$rootScope.user.name = response.name;
+				if($rootScope.isPz){
+					$("#quality-range").slider({range: true, min: 450, max: 1100, values: $rootScope.equipListfilter.range, step:5,
+						slide: function (event, ui) {
+							$rootScope.equipListfilter.range[0] = ui.values[0];
+							$rootScope.equipListfilter.range[1] = ui.values[1];
+							$rootScope.$apply();
+						}
+					});
+					$rootScope.equipListfilter.range = response.preference.quality;
+					$rootScope.embedLevel = response.preference.magicStoneLevel;
+					$rootScope.strengthenLevel = response.preference.strengthen;
+					$rootScope.saveList.isLoad = false;
+					$scope.$emit("saveCase");
+				}
 			}
-		}
-	});
+		});
+	}
+
+	var token = localStorage.getItem('token');
+	if(!!token){
+		getUserInfo(token);
+	}
+		
 	$scope.checkUpdate = function(forceOpen){
 		$http.get(config.apiBase+'update')
 		.success(function(response){
