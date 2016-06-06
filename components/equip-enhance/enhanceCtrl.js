@@ -22,7 +22,7 @@ app.controller('EnhanceController',['$scope','$rootScope','toastr','$http',funct
 			var menpai = $rootScope.menpai.name;
 			var focus = $rootScope.focus.split("_")[0];
 			var focusId = $rootScope.focus;
-			$http.get(config.apiBase+'enhances?position='+focus+'&school='+menpai)
+			$http.get(config.apiBase+'enhance?position='+focus+'&school='+menpai)
 			.success(function(response){
 				if(response.err) {
 					toastr.error(response.errReason);

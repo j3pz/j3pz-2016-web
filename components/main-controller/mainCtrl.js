@@ -334,7 +334,7 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 	};
 	$scope.getBuffList = function(){
 		// 获取门派奇穴和可用Buff列表
-		$http.get(config.apiBase+'buffs?school='+$rootScope.menpai.name)
+		$http.get(config.apiBase+'buff?school='+$rootScope.menpai.name)
 		.success(function(response){
 			$rootScope.buffController.buff=[];
 			if(response.err){
