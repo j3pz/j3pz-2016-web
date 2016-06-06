@@ -359,7 +359,10 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 	$scope.getCaseList = function(){
 		if(!$rootScope.saveList.isLoad){
 			$rootScope.saveList.list = [];
-			$http.get(config.apiBase+'getSaveList.php')
+			var token = localStorage.getItem('token');
+			$http.get(config.apiBase+'user/case',{
+				headers:{'Authorization': 'Bearer '+token}
+			})
 			.success(function(response){
 				if(response.err){
 					toastr.error(response.errReason);
