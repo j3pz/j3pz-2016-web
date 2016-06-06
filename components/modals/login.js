@@ -3,16 +3,16 @@ app.controller('LoginCtrl', ['$rootScope','$scope','$httpParamSerializerJQLike',
 	$scope.login = function(){
 		$rootScope.user.isLoading = true;
 		$http({
-			url: config.apiBase+'loginCertificate.php',
+			url: config.apiBase+'auth',
 			method: 'POST',
-			data: $httpParamSerializerJQLike({email:$rootScope.user.mail, pswd:$rootScope.user.password, cookie:$rootScope.user.remember}),
+			data: {user:$rootScope.user.mail, pass:$rootScope.user.password},
 			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded'
+				'Content-Type': 'application/json'
 			}
 		})
 		.success(function(response) {
-			if(response.err||!response.isLogin){
-				toastr.error("登录失败, " + response.errReason);
+			if(response.err){
+				toastr.error("登录失败, " + response.msg);
 			}else{
 				$scope.loginSuccess(response);
 			}
@@ -28,6 +28,7 @@ app.controller('LoginCtrl', ['$rootScope','$scope','$httpParamSerializerJQLike',
 	$scope.loginSuccess = function(response){
 		$rootScope.isLogin = true;
 		$rootScope.user.name = response.name;
+		localStorage.setItem("token",response.token);
 		if($rootScope.isPz){
 			$("#quality-range").slider({range: true, min: 450, max: 1100, values: $rootScope.equipListfilter.range, step:5,
 				slide: function (event, ui) {
@@ -36,9 +37,9 @@ app.controller('LoginCtrl', ['$rootScope','$scope','$httpParamSerializerJQLike',
 					$rootScope.$apply();
 				}
 			});
-			$rootScope.equipListfilter.range = response.preference.quality;
-			$rootScope.embedLevel = response.preference.magicStoneLevel;
-			$rootScope.strengthenLevel = response.preference.strengthen;
+			$rootScope.equipListfilter.range = response.prefer.quality;
+			$rootScope.embedLevel = response.prefer.magicStoneLevel;
+			$rootScope.strengthenLevel = response.prefer.strengthen;
 			$rootScope.saveList.isLoad = false;
 			$scope.$emit("saveCase");
 		}
