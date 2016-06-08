@@ -31,3 +31,12 @@ fis.match('::packager', {
 fis.match('/server.conf', {
 	release: '/config/server.conf'
 });
+
+fis.set('project.ignore', 
+	[
+		'.git/**', 
+		'fis-conf.js', 
+		'j3pz-2016-web.sublime-project',
+		'j3pz-2016-web.sublime-workspace',
+	]
+);
