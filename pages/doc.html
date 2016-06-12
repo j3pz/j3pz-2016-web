@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="J3pzDoc"  xmlns:wb="http://open.weibo.com/wb">
+	<head>
+		<title>剑网3全职业配装器</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="剑网3全职业配装器为剑网3玩家提供完善、准确的配装工具。">
+		<meta name="author" content="胖叔叔">
+		<meta name="keywords" content="剑网3,西山居,剑侠情缘,配装器,装备">
+		<link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css'/><!--ignore-->
+		<!-- 
+			@require '../css/theme/bootstrap.css'
+			@require '../css/theme/materialadmin.css'
+			@require '../css/theme/font-awesome.min.css'
+			@require '../css/theme/material-design-iconic-font.min.css'
+			@require '../css/theme/libs/toastr/toastr.css'
+			@require '../css/theme/libs/rainbowJSON/rainbowJSON.css'
+			@require '../components/common/common.css' 
+			@require '../css/all.css' 
+		-->
+		<!-- STYLE_PLACEHOLDER -->
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="js/libs/utils/html5shiv.js"></script>
+		<script type="text/javascript" src="js/libs/utils/respond.min.js"></script>
+		<![endif]-->
+		<!-- Google 统计代码 -->
+		<script rel="text/javascript" src="../components/google-analystics/googleAnalystics.js?__inline"></script><!--ignore-->
+		<!-- 浏览器兼容性检查 -->
+		<script rel="text/javascript" src="../components/compatibility-check/compatibilityCheck.js?__inline"></script><!--ignore-->
+	</head>
+
+	<body class="menubar-first header-fixed menubar-pin" ng-controller="DocCtrl">
+		<header id="header">
+			<!-- 导航栏 -->
+			<link rel="import" href="../components/header/header.tmpl.html?__inline">
+		</header>
+
+		<div id="base">
+			<div id="content">
+				<section id="intro" ng-show="pageShow.intro">
+					<div class="section-body contain-lg">
+						<div class="row">
+							<div class="col-lg-12">
+								<h1 class="text-primary">剑网3 配装器开放平台</h1>
+							</div>
+							<div class="col-lg-8">
+								<article class="margin-bottom-xxl">
+									<p class="lead">
+										剑网3 配装器自 2013 年上线至今，积累了大量玩家，在剑网3 玩家群体中获得一致好评。玩家群体中也不乏优秀的开发者，也曾多次找到配装器的开发者寻求数据支持。为此，配装器决定开放部分游戏数据，作为对剑网3 第三方软件的支持。
+									</p>
+									<p class="lead">
+										剑网3 配装器开放平台目前仅开放<span class="text-primary-dark">装备</span>信息数据，其他数据或将在未来逐步开放。
+									</p>
+								</article>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-12">
+								<h2 class="text-primary">应用与授权</h2>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>应用</h4>
+							</div>
+							<div class="col-lg-12">
+								<article class="margin-bottom-xxl">
+									<p>
+										剑网3 配装器开放平台基于阿里云 API 网关进行统一管理与开发，开发者需要创建应用作为调用 API 的身份，每个应用有一对 AppKey 和 AppSecret 密钥对，用于请求时做加密签名，网关会对签名做验证。
+									</p>
+									<p>
+										剑网3 配装器目前支持两种方法建立应用。如果您拥有阿里云的账号，并可能需要使用阿里云 API 网关其他服务商提供的 API，建议您使用<a href="https://www.aliyun.com/product/apigateway" target="_blank"><span class="text-primary-dark">阿里云 API 网关</span></a>自行创建应用，并通过邮件向配装器开发者提交授权申请。如果您不想使用阿里云，您也可以直接向配装器开发者提交申请，开发者会为您分配一对 AppKey 和 AppSecret。
+									</p>
+									<p>
+										AppKey 用于标识您的身份，AppSecret 是用于加密签名字符串和服务器端验证签名字符串的密钥。调用 API 时您需要将 AppKey 和 AppSecret 加密签名放入请求参数，API 网关会通过对称加密来验证您的身份。详细加密签名的计算传递方式，请查看文档——请求签名。
+									</p>
+									<p>
+										AppKey 和 AppSecret 密钥对，具备对此应用的全部权限，需要妥善保管。如果发生泄漏，您可以向配装器开发者申请重置。
+									</p>
+								</article>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>授权</h4>
+							</div>
+							<div class="col-lg-12">
+								<article class="margin-bottom-xxl">
+									<p>
+										当您获得 AppKey 和 AppSecret 密钥对后，您需要向开发者申请具体需要使用的 API 列表，并详细说明使用场景。开发者将会根据情况对这个应用进行授权。
+									</p>
+									<p>
+										默认情况下，应用每小时仅能使用 500 次 API，如果您需要更多的限额，请联系开发者。
+									</p>
+								</article>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>提交申请</h4>
+							</div>
+							<div class="col-lg-12">
+								<article class="margin-bottom-xxl">
+									<p>
+										关于 API 的使用与申请，请直接通过邮件联系开发者：<code>service@j3pz.com</code>
+									</p>
+								</article>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section id="intro" ng-show="pageShow.equipList">
+					<div class="section-header">
+						<ol class="breadcrumb">
+							<li class="active">装备 / 装备列表</li>
+						</ol>
+					</div>
+					<div class="section-body contain-lg">
+						<div class="row">
+							<div class="col-lg-12">
+								<h1 class="text-primary">装备列表</h1>
+							</div>
+							<div class="col-lg-8">
+								<article class="margin-bottom-xxl">
+									<p class="lead">
+										该接口将返回指定位置的适用于某心法的装备列表。也可通过该接口获取符合某关键词的所有装备列表。
+									</p>
+								</article>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<h2 class="text-primary">请求</h2>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>请求方法与参数</h4>
+							</div>
+							<div class="col-lg-3 col-md-4">
+								<article class="margin-bottom-xxl">
+									<p>
+										对于装备列表的接口基于 HTTP 提供，请求方法为 <code>GET /equip</code>，主机名 <code>api.j3pz.com</code>。右表中列出了该请求所需要附带的几个 Query 参数。
+									</p>
+									<p>
+										其中，<span class="text-primary-dark">position</span> 与 <span class="text-primary-dark">school</span> 参数为必需参数，即在每次请求时，都需要附带这两个参数。
+									</p>
+									<p>
+										<span class="text-primary-dark">position</span> 参数表示装备位置，有效值为一个十六进制的数字，最小值为 0，最大值为 c。服务器将通过这个参数来了解应用想要获取的装备位置。其中 8 和 9 均代表戒指，完整对应表参见右下表格。
+									</p>
+									<p>
+										<span class="text-primary-dark">school</span> 参数表示心法名称，有效值为心法前两字的全拼。例如花间游心法时，此参数应该为 <span class="text-accent-dark">huajian</span>；云裳心经心法时，此参数应该为 <span class="text-accent-dark">yunchang</span>。服务器将根据此参数返回适合该心法的装备。
+									</p>
+								</article>
+							</div>
+							<div class="col-lg-offset-1 col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<table class="table">
+												<thead><tr><th>参数名</th><th>类型</th><th>必需</th><th>说明</th><th>示例</th></tr></thead>
+												<tbody>
+													<tr ng-repeat="param in queryParams.equipList">
+														<td>{{param.name}}</td>
+														<td>{{param.type}}</td>
+														<td>{{param.require?"是":"否"}}</td>
+														<td>{{param.desc}}</td>
+														<td>{{param.example}}</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<em class="text-caption">Query 参数表</em>
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<table class="table">
+												<thead><tr><th>标识数字</th><th>装备位置</th><th>标识数字</th><th>装备位置</th><th>标识数字</th><th>装备位置</th><th>标识数字</th><th>装备位置</th></tr></thead>
+												<tbody>
+													<tr><td>0</td><td>帽子</td><td>1</td><td>上衣</td><td>2</td><td>腰带</td><td>3</td><td>护腕</td></tr>
+													<tr><td>4</td><td>下装</td><td>5</td><td>鞋子</td><td>6</td><td>项链</td><td>7</td><td>腰坠</td></tr>
+													<tr><td>8/9</td><td>戒指</td><td>a</td><td>暗器</td><td>b</td><td>武器</td><td>c</td><td>重剑</td></tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<em class="text-caption">position - 装备位置 对应表</em>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<h2 class="text-primary">响应</h2>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>JSON 格式说明</h4>
+							</div>
+							<div class="col-lg-12">
+								<article class="margin-bottom-xxl">
+									<p>
+										服务器返回的内容为一个 JSON 对象，具有两个成员，分别是 data 和 errors。二者不会同时出现。
+									</p>
+									<p>
+										其中 <span class="text-primary-dark">errors</span> 为一个 JSON 数组，里面包含了一个或多个 Error 对象，来表示服务器遇到的错误。Error 对象包含三个成员，分别是 <span class="text-primary-dark">code</span>，<span class="text-primary-dark">title</span> 和 <span class="text-primary-dark">detail</span>。<span class="text-primary-dark">code</span> 为错误代码，目前为预留属性，待后续扩展。<span class="text-primary-dark">title</span> 表示错误类型，<span class="text-primary-dark">detail</span> 为错误的说明。
+									</p>
+									<p>
+										<span class="text-primary-dark">data</span> 为正常返回时的成员，内容为本次响应的数据，其可能是一个 JSON 对象，也可能是一个 JSON 数组。其具体格式在各个 API 中会分别说明。
+									</p>
+								</article>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>基于心法返回装备列表</h4>
+							</div>
+							<div class="col-lg-3 col-md-4">
+								<article class="margin-bottom-xxl">
+									<p>
+										在提交了位置、心法参数的情况下，服务器将根据所请求的心法返回当前版本对应的所有装备列表。返回为 JSON 格式,示例如右。其 <span class="text-primary-dark">data</span> 成员属性为一个 JSON 数组。
+									</p>
+									<p>
+										所有符合心法要求的装备会作为 <span class="text-primary-dark">data</span> 的元素一一列出。每个装备对象包含五个成员属性。其中 <span class="text-primary-dark">id</span> 表示该装备在配装器数据库中的唯一标识 id，<span class="text-primary-dark">quality</span> 为装备的品质等级，<span class="text-primary-dark">name</span> 为装备名称，<span class="text-primary-dark">class</span> 为装备的大致来源分类，<span class="text-primary-dark">filter</span> 为包含的属性列表，可用于装备的筛选。
+									</p>
+									<p>
+										<span class="text-primary-dark">filter</span> 成员为一个属性是否存在的数组，其中 0 表示属性不存在，1 表示属性存在。其顺序为："会心"，"破防"，"加速"，"命中"，"无双"，"化劲","治疗"，"外防"，"内防"，"闪避"，"招架"，"拆招"，"御劲"。
+									</p>
+									<p>
+										<span class="text-primary-dark">class</span> 表示装备的大致来源，分为"副本"，"声望"，"侠义"等，详细对应关系参考右下表格。
+									</p>
+								</article>
+							</div>
+							<div class="col-lg-offset-1 col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div id="equip-list-json" class="json-response"></div>
+										</div>
+									</div>
+								</div>
+								<em class="text-caption">装备列表响应</em>
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<table class="table">
+												<thead><tr><th>标识数字</th><th>装备来源</th><th>标识数字</th><th>装备来源</th><th>标识数字</th><th>装备来源</th><th>标识数字</th><th>装备来源</th></tr></thead>
+												<tbody>
+													<tr><td>0</td><td>5人副本</td><td>1</td><td>10人普通副本</td><td>2</td><td>25人英雄副本</td><td>3</td><td>声望</td></tr>
+													<tr><td>4</td><td>侠义</td><td>5</td><td>江湖贡献</td><td>6</td><td>活动</td><td>7</td><td>世界BOSS</td></tr>
+													<tr><td>8</td><td>挖宝</td><td>9</td><td>生活技能</td><td>10</td><td>名剑</td><td>11</td><td>威望·恶人谷</td></tr>
+													<tr><td>12</td><td>威望·浩气盟</td><td>13</td><td>任务</td></tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<em class="text-caption">class - 装备来源分类 对应表</em>
+							</div>
+						</div>
+					</div>
+
+
+				</section>
+
+				<footer>
+					<!-- 底栏 -->
+					<link rel="import" href="../components/footer/footer.tmpl.html?__inline">
+				</footer>
+			</div>
+			<div id="menubar" class="menubar-inverse">
+				<div class="menubar-fixed-panel">
+					<div>
+						<a class="btn btn-icon-toggle btn-default menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+							<i class="md md-menu"></i>
+						</a>
+					</div>
+					<div class="expanded">
+						<a href="#">
+							<span class="text-lg text-bold text-primary">剑网3&nbsp;配装器</span>
+						</a>
+					</div>
+				</div>
+				<div class="menubar-scroll-panel" style="height:">
+					<ul id="main-menu" class="gui-controls gui-controls-tree">
+						<li>
+							<a href="#" ng-click="pageSwitch('intro')">
+								<div class="gui-icon"><i class="md md-description"></i></div>
+								<span class="title">介绍</span>
+							</a>
+						</li>
+						<li class="gui-folder">
+							<a>
+								<div class="gui-icon"><i class="md md-view-carousel"></i></div>
+								<span class="title">API 列表</span>
+							</a>
+							<ul>
+								<li><a href="#" ng-click="pageSwitch('equipList')"><span class="title">装备列表</span></a></li>
+								<li><a href="#" ng-click="pageSwitch('search')"><span class="title">装备搜索</span></a></li>
+								<li><a href="#" ng-click="pageSwitch('equipInfo')"><span class="title">装备信息</span></a></li>
+							</ul>
+						</li>
+					</ul>
+					<div class="menubar-foot-panel">
+						<small class="no-linebreak hidden-folded">
+							<span class="opacity-75">Copyright &copy; 2013-2016</span> <strong><a href="https://www.j3pz.com/">剑网3配装器</a></strong>
+						</small>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="modals">
+			<!-- 模态框:登录 -->
+			<link rel="import" href="../components/modals/login.tmpl.html?__inline">
+			<!-- 模态框:更新说明 -->
+			<link rel="import" href="../components/modals/update.tmpl.html?__inline">
+		</div>
+
+		<script src="../js/libs/jquery/jquery-1.11.2.min.js" data-framework></script>
+		<script src="../js/libs/bootstrap/bootstrap.min.js" data-framework></script>
+		<script src="../js/libs/nanoscroller/jquery.nanoscroller.min.js" data-framework></script>
+		<script src="../js/libs/angular/angular.min.js" data-framework></script>
+		<script src="../js/libs/angular/angular-aria.min.js" data-framework></script>
+		<script src="../js/libs/icheck/icheck.min.js" data-framework></script>
+		<script src="../js/libs/ace-editor/ace.js" data-framework></script>
+		<script src="../js/libs/toastr/angular-toastr.tpls.min.js" data-framework></script>
+		<script src="../js/libs/weibo/wb.js?appkey=4055331331&debug=true" data-framework></script><!--ignore-->
+		<script src="../js/core/source/App.min.js"></script>
+		<script src="doc.js" data-framework></script>
+		<!-- SCRIPT_PLACEHOLDER -->
+	</body>
+</html>

@@ -2,8 +2,12 @@ fis.match('/pages/(**.html)',{
 	release: '/$1'
 });
 
-fis.match('/pages/build.html',{
-	release: 'build/build.html'
+fis.match('/pages/build.{html,js}',{
+	release: 'build/$1'
+});
+
+fis.match('/pages/doc.{html,js}',{
+	release: 'developer/$1'
 });
 
 fis.match('/components/*/(**.{jpg,png,gif,ico})',{
