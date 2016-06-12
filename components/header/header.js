@@ -13,9 +13,10 @@ app.controller('HeaderCtrl', ['$scope','$http','toastr','$rootScope','$httpParam
 			headers:{'Authorization': 'Bearer '+token}
 		})
 		.success(function(response) {
-			if(response.err){
-
+			if(response.errors){
+				console.log(response.errors[0].detail);
 			}else{
+				response = response.data;
 				$rootScope.isLogin = true;
 				$rootScope.user.name = response.name;
 				if($rootScope.isPz){

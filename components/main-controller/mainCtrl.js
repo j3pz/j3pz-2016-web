@@ -144,8 +144,8 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 		var toSave = $scope.getSaveObj(id,name,0);
 		$http.post(config.apiBase+'save.php', toSave)
 		.success(function(response) {
-			if(response.err){
-				toastr.error(response.errReason);
+			if(response.errors){
+				toastr.error(response.errors[0].detail);
 			}else{
 				toastr.success("保存方案成功");
 				if(id===0) $scope.$broadcast('saveCase');
@@ -159,9 +159,10 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 		var tempFocus = angular.copy($rootScope.focus);
 		$http.get(config.apiBase+'load.php?id='+id)
 		.success(function(response){
-			if(response.err) {
-				toastr.error(response.errReason);
+			if(response.errors) {
+				toastr.error(response.errors[0].detail);
 			}else{
+				response = response.data;
 				$rootScope.attributeStone = [Utils.transDBStoneToJsObj(response.attributestone[0]),Utils.transDBStoneToJsObj(response.attributestone[1])];
 				for (var i = 0; i < 2; i++) {
 					for (var j = 0; j < 4; j++) {
@@ -300,10 +301,10 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 		}
 		$http.get(config.apiBase+'equip/'+id)
 		.success(function(response){
-			if(response.err) {
-				toastr.error("载入装备失败，"+response.errReason);
+			if(response.errors) {
+				toastr.error("载入装备失败，"+response.errors[0].detail);
 			}else{
-				$scope.setEquipByObj(response,$rootScope.focus);
+				$scope.setEquipByObj(response.data,$rootScope.focus);
 			}
 		})
 		.error(function(){
@@ -317,11 +318,11 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 		}
 		$http.get(config.apiBase+'enhance/'+id)
 		.success(function(response){
-			if(response.err) {
-				toastr.error("载入附魔失败，"+response.errReason);
+			if(response.errors) {
+				toastr.error("载入附魔失败，"+response.errors[0].detail);
 			}else{
 				$rootScope.equips[$rootScope.focus].enhance={};
-				angular.forEach(response, function(value,key){
+				angular.forEach(response.data, function(value,key){
 					if(value!="0"&&value!=0){
 						this.setEnhance(key,value);
 					}
@@ -337,11 +338,11 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 		$http.get(config.apiBase+'buff?school='+$rootScope.menpai.name)
 		.success(function(response){
 			$rootScope.buffController.buff=[];
-			if(response.err){
-				toastr.error(response.errReason);
+			if(response.errors){
+				toastr.error(response.errors[0].detail);
 			}else{
-				for (var i = 0; i < response.length; i++) {
-					$rootScope.buffController.registerBuff(response[i]);
+				for (var i = 0; i < response.data.length; i++) {
+					$rootScope.buffController.registerBuff(response.data[i]);
 				}
 				$scope.$broadcast('initBuff');
 			}
@@ -364,9 +365,10 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 				headers:{'Authorization': 'Bearer '+token}
 			})
 			.success(function(response){
-				if(response.err){
-					toastr.error(response.errReason);
+				if(response.errors){
+					toastr.error(response.errors[0].detail);
 				}else{
+					response = response.data;
 					angular.forEach(response,function(value,key){
 						var savedCase = {
 							name:value.name,

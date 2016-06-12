@@ -21,6 +21,7 @@ app.controller('AttributeStoneController',['$scope','$rootScope','$http','Utils'
 				if(response.err){
 					toastr.error("载入五彩石列表失败，请点击重选五彩石");
 				}else{
+					response = response.data;
 					angular.forEach(response,function(value,key){
 						this.push(value)
 					},$rootScope.attributeStoneLists[0][0].attr);
@@ -125,9 +126,10 @@ app.controller('AttributeStoneController',['$scope','$rootScope','$http','Utils'
 		url = encodeURI(url);
 		$http.get(url)
 		.success(function(response){
-			if(response.err){
-				toastr.error("载入五彩石列表失败，请点击重选五彩石");
+			if(response.errors){
+				toastr.error(response.errors[0].detail);
 			}else{
+				response = response.data;
 				if(id<4){
 					$rootScope.attributeStoneLists[$rootScope.attributeStoneSelected][id].attr = [];
 					angular.forEach(response,function(value,key){

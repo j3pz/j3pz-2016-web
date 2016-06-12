@@ -11,9 +11,10 @@ app.controller('SearchCtrl',['$scope','$http','$rootScope','toastr',function($sc
 		url = encodeURI(url);
 		$http.get(url)
 		.success(function(response){
-			if(response.err) {
-				toastr.error(response.errReason);
+			if(response.errors) {
+				toastr.error(response.errors[0].detail);
 			}else{
+				response = response.data;
 				var n = response.length > 6?5:response.length-1;
 				var multipleItems = response.length > 6;
 				while(n>=0){

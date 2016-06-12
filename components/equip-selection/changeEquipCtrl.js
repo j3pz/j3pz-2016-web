@@ -145,9 +145,10 @@ app.controller('ChangeEquipController',['$scope','$rootScope','$http','$sce','to
 			var focus = $rootScope.focus.split("_")[0];
 			$http.get(config.apiBase+'equip?position='+focus+'&school='+menpai)
 			.success(function(response){
-				if(response.err) {
-					toastr.error(response.errReason);
+				if(response.errors) {
+					toastr.error(response.errors[0].detail);
 				}else{
+					response = response.data;
 					var qcList = [];
 					var commonList = [];
 					angular.forEach(response, function(value,key){

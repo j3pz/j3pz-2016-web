@@ -11,10 +11,10 @@ app.controller('LoginCtrl', ['$rootScope','$scope','toastr','$http','$interval',
 			}
 		})
 		.success(function(response) {
-			if(response.err){
-				toastr.error("登录失败, " + response.msg);
+			if(response.errors){
+				toastr.error("登录失败, " + response.errors[0].detail);
 			}else{
-				$scope.loginSuccess(response);
+				$scope.loginSuccess(response.data);
 			}
 		})
 		.error(function(response) {

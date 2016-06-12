@@ -24,9 +24,10 @@ app.controller('EnhanceController',['$scope','$rootScope','toastr','$http',funct
 			var focusId = $rootScope.focus;
 			$http.get(config.apiBase+'enhance?position='+focus+'&school='+menpai)
 			.success(function(response){
-				if(response.err) {
-					toastr.error(response.errReason);
+				if(response.errors) {
+					toastr.error(response.errors[0].detail);
 				}else{
+					response = response.data;
 					$rootScope.enhanceLists[focusId].list = [];
 					angular.forEach(response, function(value,key){
 						$rootScope.enhanceLists[focusId].list.push(value);
