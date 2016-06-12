@@ -11,6 +11,7 @@
 			@require '../css/theme/bootstrap.css'
 			@require '../css/theme/materialadmin.css'
 			@require '../components/common/common.css' 
+			@require '../css/all.css' 
 		-->
 		<!-- STYLE_PLACEHOLDER -->
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -20,114 +21,118 @@
 		<![endif]-->
 	</head>
 	<body class="menubar-hoverable header-fixed" ng-controller="RegFormCtrl">
-		<section class="section-account">
-			<div class="img-backdrop" style="background-image: url('images/banner.jpg')"></div>
-			<div class="spacer"></div>
-			<div class="card contain-sm m-t-2">
-				<div class="card-body">
-					<form name="regForm" class="form-horizontal" role="form" ng-cloak>
-						<div class="form-group">
-							<label class="col-lg-5 control-label">游戏ID（或你的昵称）</label>
-							<div class="col-lg-5">
-								<input type="text" class="form-control" name="username" ng-model="user.username" required minlength="2" maxlength="15" ng-blur="validatePassword()">
-								<div class="help-block" ng-messages="regForm.username.$error" ng-show="regForm.username.$touched||regForm.username.$dirty">
-									<div class="text-danger" ng-message="required">此项必须填写。</div>
-									<div class="text-danger" ng-message="minlength">字数必须超过2个字</div>
-									<div class="text-danger" ng-message="maxlength">字数必须少于15个字</div>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-lg-5 control-label">Email 地址（用于登录）</label>
-							<div class="col-lg-5">
-								<input type="email" class="form-control" name="email" ng-model="user.email" required ng-blur="validateMail()">
-								<div class="help-block text-danger" ng-messages="regForm.email.$error" ng-show="regForm.email.$touched||regForm.email.$dirty">
-									<div class="text-danger" ng-message="required">邮箱是登录凭证，必须填写。</div>
-									<div class="text-danger" ng-message="registed">该邮箱已被注册。</div>
-									<div class="text-danger" ng-message="email">邮箱格式有误。</div>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-lg-5 control-label">密码</label>
-							<div class="col-lg-5">
-								<input type="password" class="form-control" name="password" ng-model="user.password" required ng-blur="validatePassword()">
-								<div class="help-block text-danger" ng-messages="regForm.password.$error" ng-show="regForm.password.$touched||regForm.password.$dirty">
-									<div class="text-danger" ng-message="required">密码必须填写。</div>
-									<div class="text-danger" ng-message="usernamecheck">为保证安全，请使用与ID不同的密码。</div>
-									<div class="text-danger" ng-message="emailcheck">为保证安全，请使用与登录邮箱不同的密码。</div>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-lg-5 control-label">再次输入密码</label>
-							<div class="col-lg-5">
-								<input type="password" class="form-control" name="confirmPassword" ng-model="user.confirmPassword" required ng-blur="confirmPassword()">
-								<div class="help-block text-danger" ng-messages="regForm.confirmPassword.$error" ng-show="regForm.confirmPassword.$touched||regForm.confirmPassword.$dirty">
-									<div class="text-danger" ng-message="required">为避免密码输错，请重新输入进行验证。</div>
-									<div class="text-danger" ng-message="repeatnotmatch">两次输入密码不同，请确认是否有输入错误。</div>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-lg-5 control-label" id="captchaOperation">{{random[0]}} + {{random[1]}} =</label>
-							<div class="col-lg-5">
-								<input type="text" class="form-control" name="captcha" ng-model="user.captcha" ng-blur="validateCaptcha()">
-								<div class="help-block text-danger" ng-messages="regForm.captcha.$error" ng-show="regForm.captcha.$touched||regForm.captcha.$dirty">
-									<div class="text-danger" ng-message="required">为防止机器人恶意注册，请填写简单的验证答案。</div>
-									<div class="text-danger" ng-message="captchaErr">计算得不对哦？</div>
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-lg-5 control-label">
-								使用条款
-							</label>
-							<div class="col-lg-5 input-group">
-								<span class="input-group-addon">
-									<input icheck type="checkbox" name="terms" ng-model="user.terms" aria-label="Terms of Use" required>
-								</span>
-								<div class="input-group-content">
-									我已阅读并同意网站<a href="http://www.ziofat.me/terms-of-use.html" target="_blank">免责声明和隐私条款</a>
-								</div>
-							</div>
-							<div class="help-block" ng-show="(regForm.terms.$touched||regForm.terms.$dirty)&&regForm.terms.$invalid">
-								<div class="text-danger">如果要注册并使用本站提供的服务，请阅读并同意使用条款.</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-lg-5 control-label">
-								非金山账号
-							</label>
-							<div class="col-lg-5 input-group">
-								<span class="input-group-addon">
-									<input icheck type="checkbox" ng-model="user.noSamePw" name="noSamePw" aria-label="Not Same wite Kingsoft" required ng-change="validateCheckbox()"/>
-								</span>
-								<div class="input-group-content">
-									我没有使用与金山通行证相同的账户或密码
-								</div>
-							</div>
-							<div class="help-block" ng-show="(regForm.noSamePw.$touched||regForm.noSamePw.$dirty)&&regForm.noSamePw.$invalid">
-								<div class="text-danger">请确保使用与金山通行证不同的账户或密码，以避免产生帐号纠纷.</div>
-							</div>
-						</div>
-						<div class="row m-t-2">
-							<div class="col-xs-6 text-left">
-							<!-- @require 'components/icheck-directive/icheck.js' -->
-							</div>
-							<div class="col-xs-6 text-right">
-								<div class="form-group">
-									<div class="col-lg-9 col-lg-offset-3">
-										<button type="button" class="btn btn-primary" name="signup" value="注册" ng-disabled="regForm.$invalid" ng-click="reg($event)">注册</button>
-										<button type="button" class="btn btn-info" ng-click="clear()">重新填写</button>
+		<div id="content-no-header">
+			<section class="section-account">
+				<div class="img-backdrop" style="background-image: url('images/banner.jpg')"></div>
+				<div class="spacer"></div>
+				<div class="card contain-sm m-t-2">
+					<div class="card-body">
+						<form name="regForm" class="form-horizontal" role="form" ng-cloak>
+							<div class="form-group">
+								<label class="col-lg-5 control-label">游戏ID（或你的昵称）</label>
+								<div class="col-lg-5">
+									<input type="text" class="form-control" name="username" ng-model="user.username" required minlength="2" maxlength="15" ng-blur="validatePassword()">
+									<div class="help-block" ng-messages="regForm.username.$error" ng-show="regForm.username.$touched||regForm.username.$dirty">
+										<div class="text-danger" ng-message="required">此项必须填写。</div>
+										<div class="text-danger" ng-message="minlength">字数必须超过2个字</div>
+										<div class="text-danger" ng-message="maxlength">字数必须少于15个字</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</form>
+							<div class="form-group">
+								<label class="col-lg-5 control-label">Email 地址（用于登录）</label>
+								<div class="col-lg-5">
+									<input type="email" class="form-control" name="email" ng-model="user.email" required ng-blur="validateMail()">
+									<div class="help-block text-danger" ng-messages="regForm.email.$error" ng-show="regForm.email.$touched||regForm.email.$dirty">
+										<div class="text-danger" ng-message="required">邮箱是登录凭证，必须填写。</div>
+										<div class="text-danger" ng-message="registed">该邮箱已被注册。</div>
+										<div class="text-danger" ng-message="email">邮箱格式有误。</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-5 control-label">密码</label>
+								<div class="col-lg-5">
+									<input type="password" class="form-control" name="password" ng-model="user.password" required ng-blur="validatePassword()">
+									<div class="help-block text-danger" ng-messages="regForm.password.$error" ng-show="regForm.password.$touched||regForm.password.$dirty">
+										<div class="text-danger" ng-message="required">密码必须填写。</div>
+										<div class="text-danger" ng-message="usernamecheck">为保证安全，请使用与ID不同的密码。</div>
+										<div class="text-danger" ng-message="emailcheck">为保证安全，请使用与登录邮箱不同的密码。</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-5 control-label">再次输入密码</label>
+								<div class="col-lg-5">
+									<input type="password" class="form-control" name="confirmPassword" ng-model="user.confirmPassword" required ng-blur="confirmPassword()">
+									<div class="help-block text-danger" ng-messages="regForm.confirmPassword.$error" ng-show="regForm.confirmPassword.$touched||regForm.confirmPassword.$dirty">
+										<div class="text-danger" ng-message="required">为避免密码输错，请重新输入进行验证。</div>
+										<div class="text-danger" ng-message="repeatnotmatch">两次输入密码不同，请确认是否有输入错误。</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-5 control-label" id="captchaOperation">{{random[0]}} + {{random[1]}} =</label>
+								<div class="col-lg-5">
+									<input type="text" class="form-control" name="captcha" ng-model="user.captcha" ng-blur="validateCaptcha()">
+									<div class="help-block text-danger" ng-messages="regForm.captcha.$error" ng-show="regForm.captcha.$touched||regForm.captcha.$dirty">
+										<div class="text-danger" ng-message="required">为防止机器人恶意注册，请填写简单的验证答案。</div>
+										<div class="text-danger" ng-message="captchaErr">计算得不对哦？</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-5 control-label">
+									使用条款
+								</label>
+								<div class="col-lg-5 input-group">
+									<span class="input-group-addon">
+										<input icheck type="checkbox" name="terms" ng-model="user.terms" aria-label="Terms of Use" required>
+									</span>
+									<div class="input-group-content">
+										我已阅读并同意网站<a href="http://www.ziofat.me/terms-of-use.html" target="_blank">免责声明和隐私条款</a>
+									</div>
+								</div>
+								<div class="help-block" ng-show="(regForm.terms.$touched||regForm.terms.$dirty)&&regForm.terms.$invalid">
+									<div class="text-danger">如果要注册并使用本站提供的服务，请阅读并同意使用条款.</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-lg-5 control-label">
+									非金山账号
+								</label>
+								<div class="col-lg-5 input-group">
+									<span class="input-group-addon">
+										<input icheck type="checkbox" ng-model="user.noSamePw" name="noSamePw" aria-label="Not Same wite Kingsoft" required ng-change="validateCheckbox()"/>
+									</span>
+									<div class="input-group-content">
+										我没有使用与金山通行证相同的账户或密码
+									</div>
+								</div>
+								<div class="help-block" ng-show="(regForm.noSamePw.$touched||regForm.noSamePw.$dirty)&&regForm.noSamePw.$invalid">
+									<div class="text-danger">请确保使用与金山通行证不同的账户或密码，以避免产生帐号纠纷.</div>
+								</div>
+							</div>
+							<div class="row m-t-2">
+								<div class="col-xs-6 text-left">
+								<!-- @require 'components/icheck-directive/icheck.js' -->
+								</div>
+								<div class="col-xs-6 text-right">
+									<div class="form-group">
+										<div class="col-lg-9 col-lg-offset-3">
+											<button type="button" class="btn btn-primary" name="signup" value="注册" ng-disabled="regForm.$invalid" ng-click="reg($event)">注册</button>
+											<button type="button" class="btn btn-info" ng-click="clear()">重新填写</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
 				</div>
-			</div>
-		</section>
+			</section>
+			<div class="push"></div>
+		</div>
+		
 		<footer>
 			<!-- 底栏 -->
 			<link rel="import" href="../components/footer/footer.tmpl.html?__inline">

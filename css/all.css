@@ -1,9 +1,19 @@
-
-
-
-
-
-
+#content{
+	min-height: 100%;
+	height: auto !important;
+	margin: 0px auto -140px;
+}
+#content-no-header{
+	min-height: 100%;
+	height: auto !important;
+	margin: 0px auto -140px;
+}
+div.push{
+	height: 140px;
+}
+div.footer{
+	height: 140px;
+}
 span.nostyle{
 	display: inline;
 	font-size:13px !important;
