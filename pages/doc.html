@@ -14,7 +14,6 @@
 			@require '../css/theme/font-awesome.min.css'
 			@require '../css/theme/material-design-iconic-font.min.css'
 			@require '../css/theme/libs/toastr/toastr.css'
-			@require '../css/theme/libs/rainbowJSON/rainbowJSON.css'
 			@require '../components/common/common.css' 
 			@require '../css/all.css' 
 		-->
@@ -38,7 +37,7 @@
 
 		<div id="base">
 			<div id="content">
-				<section id="intro" ng-show="pageShow.intro">
+				<section id="intro" ng-show="pageShow.intro.show">
 					<div class="section-body contain-lg">
 						<div class="row">
 							<div class="col-lg-12">
@@ -114,7 +113,7 @@
 					</div>
 				</section>
 
-				<section id="intro" ng-show="pageShow.equipList">
+				<section id="equipList" ng-show="pageShow.equipList.show">
 					<div class="section-header">
 						<ol class="breadcrumb">
 							<li class="active">装备 / 装备列表</li>
@@ -128,7 +127,7 @@
 							<div class="col-lg-8">
 								<article class="margin-bottom-xxl">
 									<p class="lead">
-										该接口将返回指定位置的适用于某心法的装备列表。也可通过该接口获取符合某关键词的所有装备列表。
+										该接口将返回指定位置的适用于某心法的装备列表。
 									</p>
 								</article>
 							</div>
@@ -230,7 +229,7 @@
 							<div class="col-lg-3 col-md-4">
 								<article class="margin-bottom-xxl">
 									<p>
-										在提交了位置、心法参数的情况下，服务器将根据所请求的心法返回当前版本对应的所有装备列表。返回为 JSON 格式,示例如右。其 <span class="text-primary-dark">data</span> 成员属性为一个 JSON 数组。
+										在提交了位置、心法参数的情况下，服务器将根据所请求的心法返回当前版本对应的所有装备列表。返回为 JSON 格式，示例如右。其 <span class="text-primary-dark">data</span> 成员属性为一个 JSON 数组。该数组包含非常多的装备，右侧示例中省略了大部分，仅取 5 件作为例子。
 									</p>
 									<p>
 										所有符合心法要求的装备会作为 <span class="text-primary-dark">data</span> 的元素一一列出。每个装备对象包含五个成员属性。其中 <span class="text-primary-dark">id</span> 表示该装备在配装器数据库中的唯一标识 id，<span class="text-primary-dark">quality</span> 为装备的品质等级，<span class="text-primary-dark">name</span> 为装备名称，<span class="text-primary-dark">class</span> 为装备的大致来源分类，<span class="text-primary-dark">filter</span> 为包含的属性列表，可用于装备的筛选。
@@ -271,10 +270,358 @@
 							</div>
 						</div>
 					</div>
-
-
 				</section>
 
+				<section id="search" ng-show="pageShow.search.show">
+					<div class="section-header">
+						<ol class="breadcrumb">
+							<li class="active">装备 / 装备搜索</li>
+						</ol>
+					</div>
+					<div class="section-body contain-lg">
+						<div class="row">
+							<div class="col-lg-12">
+								<h1 class="text-primary">装备搜索</h1>
+							</div>
+							<div class="col-lg-8">
+								<article class="margin-bottom-xxl">
+									<p class="lead">
+										该接口将返回指定位置的符合搜索关键词的装备列表。
+									</p>
+								</article>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<h2 class="text-primary">请求</h2>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>请求方法与参数</h4>
+							</div>
+							<div class="col-lg-3 col-md-4">
+								<article class="margin-bottom-xxl">
+									<p>
+										对于装备列表的接口基于 HTTP 提供，请求方法为 <code>GET /search</code>，主机名 <code>api.j3pz.com</code>。右表中列出了该请求所需要附带的几个 Query 参数。
+									</p>
+									<p>
+										其中，<span class="text-primary-dark">position</span> 与 <span class="text-primary-dark">keyword</span> 参数为必需参数，即在每次请求时，都需要附带这两个参数。
+									</p>
+									<p>
+										<span class="text-primary-dark">position</span> 参数表示装备位置，有效值为一个十六进制的数字，最小值为 0，最大值为 c。服务器将通过这个参数来了解应用想要获取的装备位置。其中 8 和 9 均代表戒指，完整对应表参见右下表格。
+									</p>
+									<p>
+										<span class="text-primary-dark">keyword</span> 参数表示搜索关键词，关键词对应为装备名称，装备描述和属性均不纳入搜索范围。服务器服务器将忽略心法差异，根据此参数返回名称符合关键词的所有装备。
+									</p>
+								</article>
+							</div>
+							<div class="col-lg-offset-1 col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<table class="table">
+												<thead><tr><th>参数名</th><th>类型</th><th>必需</th><th>说明</th><th>示例</th></tr></thead>
+												<tbody>
+													<tr ng-repeat="param in queryParams.search">
+														<td>{{param.name}}</td>
+														<td>{{param.type}}</td>
+														<td>{{param.require?"是":"否"}}</td>
+														<td>{{param.desc}}</td>
+														<td>{{param.example}}</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<em class="text-caption">Query 参数表</em>
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<table class="table">
+												<thead><tr><th>标识数字</th><th>装备位置</th><th>标识数字</th><th>装备位置</th><th>标识数字</th><th>装备位置</th><th>标识数字</th><th>装备位置</th></tr></thead>
+												<tbody>
+													<tr><td>0</td><td>帽子</td><td>1</td><td>上衣</td><td>2</td><td>腰带</td><td>3</td><td>护腕</td></tr>
+													<tr><td>4</td><td>下装</td><td>5</td><td>鞋子</td><td>6</td><td>项链</td><td>7</td><td>腰坠</td></tr>
+													<tr><td>8/9</td><td>戒指</td><td>a</td><td>暗器</td><td>b</td><td>武器</td><td>c</td><td>重剑</td></tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<em class="text-caption">position - 装备位置 对应表</em>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<h2 class="text-primary">响应</h2>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>JSON 格式说明</h4>
+							</div>
+							<div class="col-lg-12">
+								<article class="margin-bottom-xxl">
+									<p>
+										服务器返回的内容为一个 JSON 对象，具有两个成员，分别是 data 和 errors。二者不会同时出现。
+									</p>
+									<p>
+										其中 <span class="text-primary-dark">errors</span> 为一个 JSON 数组，里面包含了一个或多个 Error 对象，来表示服务器遇到的错误。Error 对象包含三个成员，分别是 <span class="text-primary-dark">code</span>，<span class="text-primary-dark">title</span> 和 <span class="text-primary-dark">detail</span>。<span class="text-primary-dark">code</span> 为错误代码，目前为预留属性，待后续扩展。<span class="text-primary-dark">title</span> 表示错误类型，<span class="text-primary-dark">detail</span> 为错误的说明。
+									</p>
+									<p>
+										<span class="text-primary-dark">data</span> 为正常返回时的成员，内容为本次响应的数据，其可能是一个 JSON 对象，也可能是一个 JSON 数组。其具体格式在各个 API 中会分别说明。
+									</p>
+								</article>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>基于搜索关键词返回装备列表</h4>
+							</div>
+							<div class="col-lg-3 col-md-4">
+								<article class="margin-bottom-xxl">
+									<p>
+										在提交了位置、关键词参数的情况下，服务器将根据所请求的关键词返回当前版本对应的所有符合搜索要求的装备列表。返回为 JSON 格式，示例如右。其 <span class="text-primary-dark">data</span> 成员属性为一个 JSON 数组。
+									</p>
+									<p>
+										所有符合心法要求的装备会作为 <span class="text-primary-dark">data</span> 的元素一一列出。每个装备对象包含三个成员属性。其中 <span class="text-primary-dark">id</span> 表示该装备在配装器数据库中的唯一标识 id，<span class="text-primary-dark">name</span> 为装备名称，<span class="text-primary-dark">icon</span> 为装备的图标 id。
+									</p>
+								</article>
+							</div>
+							<div class="col-lg-offset-1 col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div id="search-json" class="json-response"></div>
+										</div>
+									</div>
+								</div>
+								<em class="text-caption">装备搜索响应</em>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section id="equipInfo" ng-show="pageShow.equipInfo.show">
+					<div class="section-header">
+						<ol class="breadcrumb">
+							<li class="active">装备 / 装备信息</li>
+						</ol>
+					</div>
+					<div class="section-body contain-lg">
+						<div class="row">
+							<div class="col-lg-12">
+								<h1 class="text-primary">装备信息</h1>
+							</div>
+							<div class="col-lg-8">
+								<article class="margin-bottom-xxl">
+									<p class="lead">
+										该接口将返回指定装备的详细信息。
+									</p>
+								</article>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<h2 class="text-primary">请求</h2>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>请求方法与参数</h4>
+							</div>
+							<div class="col-lg-12">
+								<article class="margin-bottom-xxl">
+									<p>
+										对于装备列表的接口基于 HTTP 提供，请求方法为 <code>GET /equip/{id}</code>，主机名 <code>api.j3pz.com</code>。其中 {id} 为 Path 动态参数，表示装备在数据库中的索引 ID，该 ID 可通过 <span class="text-primary-dark"><a ng-click="switchPage('equipList')">装备列表</a></span> 或 <span class="text-primary-dark" ng-click="switchPage('search')"><a>装备搜索</a></span> API 获得。
+									</p>
+									<p>
+										该接口没有任何 Query 参数。服务器将根据所请求的资源 ID，返回对应的装备详情。
+									</p>
+								</article>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<h2 class="text-primary">响应</h2>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>JSON 格式说明</h4>
+							</div>
+							<div class="col-lg-12">
+								<article class="margin-bottom-xxl">
+									<p>
+										服务器返回的内容为一个 JSON 对象，具有两个成员，分别是 data 和 errors。二者不会同时出现。
+									</p>
+									<p>
+										其中 <span class="text-primary-dark">errors</span> 为一个 JSON 数组，里面包含了一个或多个 Error 对象，来表示服务器遇到的错误。Error 对象包含三个成员，分别是 <span class="text-primary-dark">code</span>，<span class="text-primary-dark">title</span> 和 <span class="text-primary-dark">detail</span>。<span class="text-primary-dark">code</span> 为错误代码，目前为预留属性，待后续扩展。<span class="text-primary-dark">title</span> 表示错误类型，<span class="text-primary-dark">detail</span> 为错误的说明。
+									</p>
+									<p>
+										<span class="text-primary-dark">data</span> 为正常返回时的成员，内容为本次响应的数据，其可能是一个 JSON 对象，也可能是一个 JSON 数组。其具体格式在各个 API 中会分别说明。
+									</p>
+								</article>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>基于装备索引 ID 返回装备详情</h4>
+							</div>
+							<div class="col-lg-3 col-md-4">
+								<article class="margin-bottom-xxl">
+									<p>
+										在正确提交请求的情况下，服务器将根据所请求的装备 ID 返回对应的装备名称、属性、品质等级、特效等信息。返回为 JSON 格式，示例如右。其 <span class="text-primary-dark">data</span> 成员属性为一个 JSON 对象。
+									</p>
+									<p>
+										ID 对应的装备会作为 <span class="text-primary-dark">data</span> 的值。对象包含多个属性，分别描述装备的各项信息，详细对应表列在右下方。
+									</p>
+									<p>
+										其中 <span class="text-primary-dark">menpai</span> 的值为该装备适用的门派，通用装备为 <code>0</code>，精简装备为 <code>1</code>。其他门派对应关系请参考右下表格。<span class="text-primary-dark">xinfa</span> 的值为该装备适用的心法，例如 <code>2</code> 表示元气， <code>6</code> 表示治疗，因此当一件装备其 <span class="text-primary-dark">menpai</span> 值为 0，<span class="text-primary-dark">xinfa</span> 值为 2 时，就表示通用元气装备；若其 <span class="text-primary-dark">menpai</span> 值为 2 （表示万花），<span class="text-primary-dark">xinfa</span> 值为 6 时，就表示万花治疗（离经易道）装备。
+									</p>
+									<p>
+										其中 <span class="text-primary-dark">xiangqian</span> 的值为该装备五行石镶嵌的信息，为一个字符串。其格式为：镶嵌孔数量 (1位数字) + 第一个镶嵌孔五行石类别 (1位字母) + 第一个镶嵌孔属性 (2位数字) + 第二个镶嵌孔五行石类别 (1位字母) + 第二个镶嵌孔属性 (2位数字) + ...。例如：<code>3D00C23E41</code>，分解为 3-D-00-C-23-E-41，意思是：3(三个镶嵌孔)-D(金/土)-00(根骨)-C(木/火)-23(混元会心)-E(土/火)-41(治疗成效)。
+									</p>
+									<p>
+										由于官方已将五行石类别统一，因此在目前实际情况下，五行石类别将均为 D (金/土)。但当应用请求部分老版本装备时，由于数据库并未更新这部分装备，因此其五行石类别可能会出现 A 到 E 五个值，忽略即可。镶嵌孔属性对应表请参考下表。
+									</p>
+									<p>
+										<span class="text-primary-dark">texiao</span> 为装备的特效属性，其值为一个 JSON 对象或一个数字。当该装备没有特效时，其值为 0，反之则为一个特效对象。特效对象包含多个成员属性，其中必然携带的两个成员属性分别是 <span class="text-primary-dark">id</span> 表示特效 ID，<span class="text-primary-dark">type</span> 表示特效类别。
+									</p>
+									<p>
+										<span class="text-primary-dark">type</span> 表示特效的类别，其可能的值有三个，分别是 <span class="text-accent-dark">Common</span> 表示装备类特效（即装备该装备即可生效的特效），<span class="text-accent-dark">Useable</span> 表示使用类特效（即特效腰坠类需要使用物品才能生效的特效），<span class="text-accent-dark">Collection</span> 表示套装类特效，将在后文详述。
+									</p>
+									<p>
+										当 <span class="text-primary-dark">type</span> 的值为 <span class="text-accent-dark">Common</span> 或 <span class="text-accent-dark">Useable</span> 时，特效对象会包含另一个成员属性 <span class="text-primary-dark">desc</span>，用于表示特效描述，形式是一个数组，该装备的每个特效作为其元素。通常情况下，一件装备仅有一个特效，而部分装备例如橙武则包含多个特效属性。
+									</p>
+									<p>
+										当 <span class="text-primary-dark">type</span> 的值为 <span class="text-accent-dark">Collection</span> 时，特效对象会包含另外三个成员属性，其中 <span class="text-primary-dark">name</span> 表示套装的名称；<span class="text-primary-dark">effects</span> 用于表示套装的特效内容，为一个数组，包含多个特效等级；<span class="text-primary-dark">components</span> 用于表示此套装的生效部位，也是一个数组，包含多个套装组件对象。右侧同样给出了一个示例。
+									</p>
+									<p>
+										<span class="text-primary-dark">effects</span> 的元素为特效等级，包含两个成员属性，分别是 <span class="text-primary-dark">conditionNum</span> 表示特效生效所需要的组件数， <span class="text-primary-dark">desc</span> 表示特效描述。
+									</p>
+									<p>
+										当 <span class="text-primary-dark">components</span> 的元素为套装组件，包含两个成员属性，其中 <span class="text-primary-dark">positionId</span> 表示组件装备的位置，其对应表参看右侧表格，由于历史原因，此对应表与装备列表和装备搜索两个 API 中所使用的位置对应表不同，有可能会在下个版本中统一。<span class="text-primary-dark">equipName</span> 用于表示套装组件的名称。
+									</p>
+								</article>
+							</div>
+							<div class="col-lg-offset-1 col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div id="equip-info-json" class="json-response"></div>
+										</div>
+									</div>
+								</div>
+								<em class="text-caption">装备详情响应示例</em>
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<table class="table">
+												<thead><tr><th>成员属性</th><th>属性名称</th><th>成员属性</th><th>属性名称</th><th>成员属性</th><th>属性名称</th><th>成员属性</th><th>属性名称</th></tr></thead>
+												<tbody>
+													<tr><td>P_ID</td><td>装备 ID</td><td>uiID</td><td>类别 ID</td><td>iconID</td><td>图标 ID</td><td>name</td><td>名称</td></tr>
+													<tr><td>menpai</td><td>门派</td><td>xinfa</td><td>心法类别</td><td>type</td><td>装备类型</td><td>quality</td><td>品质等级</td></tr>
+													<tr><td>score</td><td>装备分数</td><td>body</td><td>体质</td><td>spirit</td><td>根骨</td><td>strength</td><td>力道</td></tr>
+													<tr><td>agility</td><td>身法</td><td>spunk</td><td>元气</td><td>basicPhysicsShield</td><td>基础外防</td><td>basicMagicShield</td><td>基础内防</td></tr>
+													<tr><td>physicsShield</td><td>外功防御</td><td>magicShield</td><td>内功防御</td><td>dodge</td><td>闪避</td><td>parryBase</td><td>拆招</td></tr>
+													<tr><td>parryValue</td><td>招架</td><td>toughness</td><td>御劲</td><td>attack</td><td>攻击</td><td>heal</td><td>治疗</td></tr>
+													<tr><td>crit</td><td>会心</td><td>critEffect</td><td>会效</td><td>overcome</td><td>破防</td><td>acce</td><td>加速</td></tr>
+													<tr><td>hit</td><td>命中</td><td>strain</td><td>无双</td><td>huajing</td><td>化劲</td><td>threat</td><td>威胁</td></tr>
+													<tr><td>texiao</td><td>特效</td><td>xiangqian</td><td>镶嵌</td><td>strengthen</td><td>最大精炼</td><td>dropSource</td><td>来源</td></tr>
+													<tr><td>xinfatype</td><td>可选门派</td>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<em class="text-caption">属性对应表</em>
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<table class="table">
+												<thead><tr><th>门派 ID</th><th>说明</th><th>门派 ID</th><th>说明</th><th>门派 ID</th><th>说明</th><th>门派 ID</th><th>说明</th></tr></thead>
+												<tbody>
+													<tr><td>0</td><td>通用门派</td><td>1</td><td>精简装备</td><td>2</td><td>万花</td><td>3</td><td>少林</td></tr>
+													<tr><td>4</td><td>唐门</td><td>5</td><td>明教</td><td>6</td><td>七秀</td><td>7</td><td>五毒</td></tr>
+													<tr><td>8</td><td>纯阳</td><td>9</td><td>天策</td><td>10</td><td>丐帮</td><td>11</td><td>藏剑</td></tr>
+													<tr><td>12</td><td>苍云</td><td>13</td><td>长歌</td></tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<em class="text-caption">menpai - 门派对应表</em>
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<table class="table">
+												<thead><tr><th>心法 ID</th><th>说明</th><th>心法 ID</th><th>说明</th><th>心法 ID</th><th>说明</th><th>心法 ID</th><th>说明</th></tr></thead>
+												<tbody>
+													<tr><td>0</td><td>内功精简</td><td>1</td><td>外功精简</td><td>2</td><td>元气</td><td>3</td><td>根骨</td></tr>
+													<tr><td>4</td><td>力道</td><td>5</td><td>身法</td><td>6</td><td>治疗</td><td>7</td><td>防御</td></tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<em class="text-caption">xinfa - 心法类别对应表</em>
+								
+							</div>
+							<div class="col-lg-4">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div id="texiao-json" class="json-response"></div>
+										</div>
+									</div>
+								</div>
+								<em class="text-caption">套装特效示例</em>
+							</div>
+							<div class="col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<table class="table">
+												<thead><tr><th>属性 ID</th><th>说明</th><th>属性 ID</th><th>说明</th><th>属性 ID</th><th>说明</th><th>属性 ID</th><th>说明</th></tr></thead>
+												<tbody>
+													<tr><td>00</td><td>根骨</td><td>01</td><td>元气</td><td>02</td><td>力道</td><td>03</td><td>体质</td></tr>
+													<tr><td>04</td><td>身法</td><td>05</td><td>气回</td><td>06</td><td>外功会心</td><td>07</td><td>阴性会心</td></tr>
+													<tr><td>08</td><td>外功攻击</td><td>09</td><td>外功命中</td><td>10</td><td>内功会心</td><td>11</td><td>无双</td></tr>
+													<tr><td>12</td><td>阳性破防</td><td>13</td><td>混元破防</td><td>14</td><td>阴性破防</td><td>15</td><td>阴性攻击</td></tr>
+													<tr><td>16</td><td>混元攻击</td><td>17</td><td>阳性会心</td><td>18</td><td>外功破防</td><td>19</td><td>阳性攻击</td></tr>
+													<tr><td>20</td><td>内功命中</td><td>21</td><td>外功会效</td><td>22</td><td>毒性攻击</td><td>23</td><td>混元会心</td></tr>
+													<tr><td>24</td><td>混元会效</td><td>25</td><td>阴性会效</td><td>26</td><td>阳性会效</td><td>27</td><td>内功破防</td></tr>
+													<tr><td>28</td><td>毒性破防</td><td>29</td><td>毒性会心</td><td>30</td><td>毒性会效</td><td>31</td><td>内功会效</td></tr>
+													<tr><td>32</td><td>阴阳破防</td><td>33</td><td>阴阳攻击</td><td>34</td><td>阴阳会效</td><td>35</td><td>阴阳会心</td></tr>
+													<tr><td>36</td><td>全命中</td><td>37</td><td>全会心</td><td>38</td><td>全会效</td><td>39</td><td>气血</td></tr>
+													<tr><td>40</td><td>内功攻击</td><td>41</td><td>治疗成效</td><td>42</td><td>外防</td><td>43</td><td>内防</td></tr>
+													<tr><td>44</td><td>拆招</td><td>45</td><td>闪避</td><td>46</td><td>招架</td><td>47</td><td>威胁</td></tr>
+													<tr><td>48</td><td>内回</td><td>49</td><td>内力</td><td>50</td><td>混元命中</td><td>51</td><td>加速</td></tr>
+													<tr><td>52</td><td>化劲</td><td>53</td><td>阳性命中</td><td>54</td><td>阴性命中</td><td>55</td><td>御劲</td></tr>
+													<tr><td>56</td><td>阴阳命中</td><td>57</td><td>毒性命中</td></tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<em class="text-caption">镶嵌孔属性对应表</em>
+							</div>
+						</div>
+					</div>
+				</section>
 				<footer>
 					<!-- 底栏 -->
 					<link rel="import" href="../components/footer/footer.tmpl.html?__inline">
