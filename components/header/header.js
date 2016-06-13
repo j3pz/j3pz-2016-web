@@ -49,7 +49,7 @@ app.controller('HeaderCtrl', ['$scope','$http','toastr','$rootScope','$httpParam
 				console.log(response.errors[0].detail);
 			}
 			if(Number(response.data.version) > Number(localStorage.edition)||!localStorage.edition||forceOpen){
-				$rootScope.updateDesc = response.desc;
+				$rootScope.updateDesc = response.data.desc;
 				$("#updateModal").modal();
 			}
 			try{localStorage.edition=response.data.version;}catch(e){console.error(e);}
