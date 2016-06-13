@@ -622,6 +622,167 @@
 						</div>
 					</div>
 				</section>
+
+				<section id="intro" ng-show="pageShow.sign.show">
+					<div class="section-header">
+						<ol class="breadcrumb">
+							<li class="active">签名加密</li>
+						</ol>
+					</div>
+					<div class="section-body contain-lg">
+						<div class="row">
+							<div class="col-lg-12">
+								<h2 class="text-primary">签名算法</h2>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>域名</h4>
+							</div>
+							<div class="col-lg-12">
+								<article class="margin-bottom-xxl">
+									<p>
+										剑网3 配装器所开放的 API 均通过 <code>http://api.j3pz.com</code> 提供。应用在调用 API 的时候，需要按此格式进行请求：<code>http://api.j3pz.com/[Path]</code>
+									</p>
+								</article>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>Headers</h4>
+							</div>
+							<div class="col-lg-3 col-md-4">
+								<article class="margin-bottom-xxl">
+									<p>
+										在调用 API 时，除了各 API 所要求的 Query，Path 参数外，应用应当在请求中同时附带右表中列出的 Header 参数。
+									</p>
+								</article>
+							</div>
+
+							<div class="col-lg-offset-1 col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<table class="table">
+												<thead><tr><th>参数名</th><th>必需</th><th>说明</th><th>示例</th></tr></thead>
+												<tbody>
+													<tr ng-repeat="param in queryParams.sign">
+														<td>{{param.name}}</td>
+														<td>{{param.require?"是":"否"}}</td>
+														<td>{{param.desc}}</td>
+														<td>{{param.example}}</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<em class="text-caption">Headers 参数表</em>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>组织参与签名计算的字符串</h4>
+							</div>
+							<div class="col-lg-3 col-md-4">
+								<article class="margin-bottom-xxl">
+									<p>
+										首先，应用需要构造参与签名的字符串。将 HTTPMethod，Accept，Content-MD5，Content-Type，Date，Headers 和 URI 用 <code>\n</code> 组合在一起，构成字符串。可参考右边代码示例。
+									</p>
+									<p>
+										HTTPMethod 为全大写 Accept、Content-MD5、Content-Type、Date 如果为空也需要添加换行符 <code>\n</code>，Headers 如果为空不需要添加 <code>\n</code>，不为空的 Headers 中包含了 <code>\n</code>，详见下面组织 Headers 的描述。URI 为 Path 和 Query 的字符串，不包含主机名。
+									</p>
+								</article>
+							</div>
+							<div class="col-lg-offset-1 col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div id="example-string-to-sign" class="js-code"></div>
+										</div>
+									</div>
+								</div>
+								<em class="text-caption">Headers 参数表</em>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>组织 Headers</h4>
+							</div>
+							<div class="col-lg-3 col-md-4">
+								<article class="margin-bottom-xxl">
+									<p>
+										Headers 指所有参与签名计算的 Header 的 Key、Value，这里要注意参与签名计算的 Header 是不包含 X-Ca-Signature、X-Ca-Signature-Headers 的。
+									</p>
+									<p>
+										先对所有参与签名计算的 Header 的 Key 按照字典排序，然后按照如下方式拼接：
+									</p>
+								</article>
+							</div>
+							<div class="col-lg-offset-1 col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div id="example-headers" class="js-code"></div>
+										</div>
+									</div>
+								</div>
+								<em class="text-caption">Headers 组织</em>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>URL</h4>
+							</div>
+							<div class="col-lg-3 col-md-4">
+								<article class="margin-bottom-xxl">
+									<p>
+										Url 指 Path + Query + Body 中 Form 参数，组织方法：对 Query + Form 参数按照字典对 Key 进行排序后按照右侧方法拼接，如果 Query 或 Form 参数为空，则 Url = Path，不需要添加 "?"
+									</p>
+									<p>
+										需要注意的是，如果参数中存在中文，且有进行 url encoding 的必要的话，需要先对含有中文的 url 进行签名后，再对 url 进行 encoding。
+									</p>
+									<p>
+										注意这里 Query 或 Form 参数的 Value 可能有多个，多个的时候只取第一个 Value 参与签名计算。
+									</p>
+								</article>
+							</div>
+							<div class="col-lg-offset-1 col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div id="example-url" class="js-code"></div>
+										</div>
+									</div>
+								</div>
+								<em class="text-caption">URL 组织</em>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>签名</h4>
+							</div>
+							<div class="col-lg-12">
+								<article class="margin-bottom-xxl">
+									<p>
+										使用 HMAC-SHA256 算法对构造好的字符串进行签名，签名密钥为 AppSecret，并将结果输出为 Base64 编码格式。
+									</p>
+									<p>
+										将计算的签名放到请求的 Header 中，Key 为：X-Ca-Signature。将所有参与加签的 Header 的 Key 使用英文逗号分割放到请求的 Header 中，不必区分顺序，Key 为：X-Ca-Signature-Headers。
+									</p>
+									<p>
+										这里有一个基于 Node.js 开发的例子，欢迎查看：<a href="https://github.com/ziofat/j3pz-api-node-demo" target="_blank">https://github.com/ziofat/j3pz-api-node-demo</a>
+									</p>
+								</article>
+							</div>
+						</div>
+					</div>
+				</section>
 				<footer>
 					<!-- 底栏 -->
 					<link rel="import" href="../components/footer/footer.tmpl.html?__inline">
@@ -658,6 +819,12 @@
 								<li><a href="#" ng-click="pageSwitch('search')"><span class="title">装备搜索</span></a></li>
 								<li><a href="#" ng-click="pageSwitch('equipInfo')"><span class="title">装备信息</span></a></li>
 							</ul>
+						</li>
+						<li>
+							<a href="#" ng-click="pageSwitch('sign')">
+								<div class="gui-icon"><i class="md md-lock"></i></div>
+								<span class="title">签名加密</span>
+							</a>
 						</li>
 					</ul>
 					<div class="menubar-foot-panel">
