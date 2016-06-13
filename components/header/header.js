@@ -45,11 +45,14 @@ app.controller('HeaderCtrl', ['$scope','$http','toastr','$rootScope','$httpParam
 	$scope.checkUpdate = function(forceOpen){
 		$http.get(config.apiBase+'update')
 		.success(function(response){
-			if(Number(response.version) > Number(localStorage.edition)||!localStorage.edition||forceOpen){
+			if(response.errors){
+				console.log(response.errors[0].detail);
+			}
+			if(Number(response.data.version) > Number(localStorage.edition)||!localStorage.edition||forceOpen){
 				$rootScope.updateDesc = response.desc;
 				$("#updateModal").modal();
 			}
-			try{localStorage.edition=response.version;}catch(e){}
+			try{localStorage.edition=response.data.version;}catch(e){console.error(e);}
 		});
 	};
 	$scope.getUpdateDesc = function(text){
