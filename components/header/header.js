@@ -61,8 +61,9 @@ app.controller('HeaderCtrl', ['$scope','$http','toastr','$rootScope','$httpParam
 	$scope.checkUpdate();
 	
 	$scope.logout = function(){
-		$http.get(config.apiBase+'logout.php');
+		// $http.get(config.apiBase+'logout.php');
 		$rootScope.isLogin = false;
+		 localStorage.removeItem("token");
 		$rootScope.user = {
 			mail:"",
 			password:"",
