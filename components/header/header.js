@@ -9,7 +9,7 @@ app.controller('HeaderCtrl', ['$scope','$http','toastr','$rootScope','$httpParam
 	};
 
 	function getUserInfo(token){
-		$http.get(config.apiBase+'auth',{
+		$http.get(config.apiBase+'user',{
 			headers:{'Authorization': 'Bearer '+token}
 		})
 		.success(function(response) {
