@@ -157,7 +157,10 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 	};
 	$scope.loadCase = function(id){
 		var tempFocus = angular.copy($rootScope.focus);
-		$http.get(config.apiBase+'load.php?id='+id)
+		var token = localStorage.getItem('token');
+		$http.get(config.apiBase+'user/case/'+id,{
+			headers:{'Authorization': 'Bearer '+token}
+		})
 		.success(function(response){
 			if(response.errors) {
 				toastr.error(response.errors[0].detail);
@@ -184,9 +187,9 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 					$rootScope.equipLists[$rootScope.focus].setAs.name = response.equips[$rootScope.focus].equip.name;
 					$rootScope.enhanceLists[$rootScope.focus].setAs.id = response.equips[$rootScope.focus].enhance.P_ID;
 					$scope.setEquipByObj(response.equips[$rootScope.focus].equip,$rootScope.focus);
-					$rootScope.equips[$rootScope.focus].xilian.level = response.equips[$rootScope.focus].xilian.level;
-					$rootScope.equips[$rootScope.focus].xilian.ratio = response.equips[$rootScope.focus].xilian.ratio;
-					var xilianRes = Utils.xilian(response.equips[$rootScope.focus].xilian.origin,response.equips[$rootScope.focus].xilian.target,response.equips[$rootScope.focus].xilian.level,response.equips[$rootScope.focus].xilian.ratio);
+					// $rootScope.equips[$rootScope.focus].xilian.level = response.equips[$rootScope.focus].xilian.level;
+					// $rootScope.equips[$rootScope.focus].xilian.ratio = response.equips[$rootScope.focus].xilian.ratio;
+					// var xilianRes = Utils.xilian(response.equips[$rootScope.focus].xilian.origin,response.equips[$rootScope.focus].xilian.target,response.equips[$rootScope.focus].xilian.level,response.equips[$rootScope.focus].xilian.ratio);
 					$rootScope.equips[$rootScope.focus].setStrengthen(response.equips[$rootScope.focus].strengthen);
 					$rootScope.equips[$rootScope.focus].enhance={};
 					angular.forEach(response.equips[$rootScope.focus].enhance, function(value,key){
@@ -195,8 +198,8 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 						}
 					} ,$rootScope.equips[$rootScope.focus]);
 					for (var j = 0; j < $rootScope.equips[$rootScope.focus].holes.number; j++) {
-						Utils.changeColor(j,response.equips[$rootScope.focus].cuilianColour[j]);
-						Utils.changeAttr(j,response.equips[$rootScope.focus].cuilianAttr[j]);
+						// Utils.changeColor(j,response.equips[$rootScope.focus].cuilianColour[j]);
+						// Utils.changeAttr(j,response.equips[$rootScope.focus].cuilianAttr[j]);
 						var loadStone = response.equips[$rootScope.focus].holeIn[j]=="-1"?{img:"-1-6",level:6,type:-1}:stones[parseInt(response.equips[$rootScope.focus].holeLevel[j])+1][response.equips[$rootScope.focus].holeIn[j]];
 						Utils.onDrop(loadStone,j);
 					}
