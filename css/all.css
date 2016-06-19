@@ -82,6 +82,3 @@ p.price{
 .tooltip.customClass .tooltip-arrow {
 	display: none;
 }
-.equipNav >.tooltip{
-	margin-left: 100px;
-}
