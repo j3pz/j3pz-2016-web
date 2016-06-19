@@ -21,6 +21,11 @@ app.controller('EquipNavCtrl', ['$rootScope','$scope','hotkeys', function($rootS
 		$scope.$emit('navSelect');
 	};
 
+	$scope.equipPreview = function(type){
+		$rootScope.hoverType = type;
+		$rootScope.hoverEquip = $rootScope.equips[type];
+	};
+
 	// 快捷键绑定
 	hotkeys.add({
 		combo: 'q',

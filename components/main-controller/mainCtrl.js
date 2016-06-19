@@ -356,10 +356,7 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 		$rootScope.toSave = $scope.getSaveObj(0,0,1);
 		$("#casePreviewModal").modal('show');
 	};
-	$scope.equipPreview = function(type){
-		$rootScope.hoverType = type;
-		$rootScope.hoverEquip = $rootScope.equips[type];
-	};
+	
 	$scope.getCaseList = function(){
 		if(!$rootScope.saveList.isLoad){
 			$rootScope.saveList.list = [];
