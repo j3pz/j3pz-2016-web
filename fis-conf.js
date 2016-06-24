@@ -3,7 +3,7 @@ fis.match('/pages/(**.html)',{
 });
 
 fis.match('/pages/build.html',{
-	release: 'build/build.html'
+	release: 'build/index.html'
 });
 
 fis.match('/pages/doc.html',{
