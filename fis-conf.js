@@ -1,3 +1,9 @@
+fis.match('*', {
+	deploy: fis.plugin('local-deliver', {
+		to: '../apiv2-node/public'
+	})
+})
+
 fis.match('/pages/(**.html)',{
 	release: '/$1'
 });
@@ -39,6 +45,8 @@ fis.match('/server.conf', {
 fis.set('project.ignore', 
 	[
 		'.git/**', 
+		'api/**',
+		'apiv2-node/**',
 		'fis-conf.js', 
 		'j3pz-2016-web.sublime-project',
 		'j3pz-2016-web.sublime-workspace',
