@@ -1,6 +1,6 @@
 fis.match('*', {
 	deploy: fis.plugin('local-deliver', {
-		to: '../apiv2-node/public'
+		to: 'F:\\workspace\\apiv2-node\\public'
 	})
 })
 
@@ -34,7 +34,7 @@ fis.match('*.tmpl.html',{
 
 fis.match('::packager', {
 	postpackager: fis.plugin('loader', {
-		allInOne: true
+		allInOne: false
 	})
 });
 
