@@ -16,7 +16,7 @@ app.controller('AttributeStoneController',['$scope','$rootScope','$http','Utils'
 	}
 	$scope.init = function(){
 		if(!$rootScope.attributeStoneLists[$rootScope.attributeStoneSelected][0].isLoad){
-			$http.get(config.apiBase+"stones?q=0&id=0&school="+$rootScope.menpai.name)
+			$http.get(config.apiBase+"stone?school="+$rootScope.menpai.name)
 			.success(function(response){
 				if(response.err){
 					toastr.error("载入五彩石列表失败，请点击重选五彩石");
@@ -118,10 +118,15 @@ app.controller('AttributeStoneController',['$scope','$rootScope','$http','Utils'
 			$rootScope.attributeStone[$rootScope.attributeStoneSelected] = angular.copy(attrStone);
 			return;
 		}
-		var url = config.apiBase+"stones?q="+request+"&id="+id+"&school="+$rootScope.menpai.name;
-		for (var i = 1; i <= id; i++) {
-			if(i!=id) url += "&at"+i+"="+$rootScope.attributeStoneLists[$rootScope.attributeStoneSelected][i-1].setAs;
-			else url += "&at"+i+"="+request;
+		var url = "";
+		if(id<4){
+			url = config.apiBase+"stone?school="+$rootScope.menpai.name+"&q=";
+			for (var i = 1; i <= id; i++) {
+				if(i!=id) url += $rootScope.attributeStoneLists[$rootScope.attributeStoneSelected][i-1].setAs+";";
+				else url += request;
+			}
+		}else{
+			url = config.apiBase+"stone/"+request.id;
 		}
 		url = encodeURI(url);
 		$http.get(url)
@@ -132,9 +137,9 @@ app.controller('AttributeStoneController',['$scope','$rootScope','$http','Utils'
 				response = response.data;
 				if(id<4){
 					$rootScope.attributeStoneLists[$rootScope.attributeStoneSelected][id].attr = [];
-					angular.forEach(response,function(value,key){
-						this.push(value)
-					},$rootScope.attributeStoneLists[$rootScope.attributeStoneSelected][id].attr);
+					for (var i = 0; i < response.length; i++) {
+						$rootScope.attributeStoneLists[$rootScope.attributeStoneSelected][id].attr.push(response[i]);
+					}
 					$rootScope.attributeStoneLists[$rootScope.attributeStoneSelected][id].isLoad = true;
 				}else if(id==4){
 					attrStone = Utils.transDBStoneToJsObj(response)

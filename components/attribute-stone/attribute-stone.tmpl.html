@@ -18,8 +18,11 @@
 				</ul>
 				<div class="card-body tab-content style-default-bright">
 					<div class="tab-pane active form" id="stone-select">
-							<select class="form-control" ng-model="$root.attributeStoneLists[attributeStoneSelected][n].setAs" ng-change="setAttributeStone(n)" style="margin-bottom:8px" ng-options="attribute for attribute in $root.attributeStoneLists[attributeStoneSelected][n].attr" id="stone-select{{n}}" ng-repeat="n in [0,1,2,3]">
+							<select class="form-control" ng-model="$root.attributeStoneLists[attributeStoneSelected][n].setAs" ng-change="setAttributeStone(n)" style="margin-bottom:8px" ng-options="attribute for attribute in $root.attributeStoneLists[attributeStoneSelected][n].attr" id="stone-select{{n}}" ng-repeat="n in [0,1,2]">
 								<option value="">{{placeHolder[n]}}</option>
+							</select>
+							<select class="form-control" ng-model="$root.attributeStoneLists[attributeStoneSelected][3].setAs" ng-change="setAttributeStone(3)" style="margin-bottom:8px" ng-options="attribute.name for attribute in $root.attributeStoneLists[attributeStoneSelected][3].attr track by attribute.id" id="stone-select3">
+								<option value="">{{placeHolder[3]}}</option>
 							</select>
 						<div class="btn-group btn-group-justified">
 							<label class="btn btn-raised btn-default-bright ink-reaction" ng-click="setAttributeStone(-1)">重选五彩石</label>
