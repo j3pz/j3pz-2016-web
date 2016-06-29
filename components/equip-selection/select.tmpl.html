@@ -13,7 +13,7 @@
 	<div id="collapseOne" class="collapse in">
 		<div class="card-body">
 			<div class="row">
-				<label class="control-label col-md-4" ng-repeat="item in filterItems"  ng-disabled="!available(item,$root.equipListfilter.attr)">
+				<label class="control-label col-md-4" ng-repeat="item in filterItems" >
 					<input icheck type="checkbox" ng-model="ctrl.attr[item.index]" ng-click="toggle(item, $root.equipListfilter.attr)" >  {{item.text}}
 				</label>
 			</div>

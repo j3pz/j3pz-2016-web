@@ -14,7 +14,7 @@ app.controller('InitCtrl', ['$scope','$rootScope','$location','CollectionControl
 	$rootScope.enhanceLists = {};	// 初始化附魔列表
 	$rootScope.isModalOpen = false;	
 	$rootScope.equipListfilter = {};
-	$rootScope.equipListfilter.attr = [0,0,0,0,0,0,0,0,0,0,0,0,0];
+	$rootScope.equipListfilter.attr = [0,0,0,0,0,0,0,0,0,0,0,0];
 	$rootScope.equipListfilter.range = [750,1100];
 	$rootScope.embedLevel = 6;
 	$rootScope.strengthenLevel = 6;

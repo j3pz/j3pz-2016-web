@@ -58,8 +58,9 @@ app.controller('ChangeEquipController',['$scope','$rootScope','$http','$sce','to
 		{id:12,label:"威望·浩气盟"},
 		{id:13,label:"任务"}
 	];
-	$scope.itemText = ["会心","破防","加速","命中","无双","PVP","治疗","外防","内防","闪避","招架","拆招","御劲"];
-	$scope.ctrl.sourceFilter = [false,false,false,false,false,false,false,false,false,false,false,false];
+	$scope.itemText = ["会心","破防","加速","命中","无双","PVP","治疗","外防","内防","闪避","招架","御劲"];
+	$scope.itemFilterKey = ["crit","overcome","acce","hit","strain","huajing","heal","physicsShield","magicShield","dodge","parryBase","toughness"];
+	$scope.ctrl.sourceFilter = [false,false,false,false,false,false,false,false,false,false,false];
 	$scope.filterSource = function (id,$event){
 		$event.preventDefault();
 		$event.stopPropagation();
@@ -152,6 +153,12 @@ app.controller('ChangeEquipController',['$scope','$rootScope','$http','$sce','to
 					var qcList = [];
 					var commonList = [];
 					angular.forEach(response, function(value,key){
+						var filterArray = [0,0,0,0,0,0,0,0,0,0,0,0];
+						for (var i = 0; i < value.filter.length; i++) {
+							var idx = $scope.itemFilterKey.indexOf(value.filter[i]);
+							filterArray[idx] = 1;
+						}
+						value.filter = filterArray;
 						if(value.name.indexOf("无渊")===0){
 							qcList.push(value);
 						}else{
