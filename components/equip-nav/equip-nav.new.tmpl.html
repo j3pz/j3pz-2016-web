@@ -8,9 +8,9 @@
 </div>
 <div class="menubar-scroll-panel" ng-controller="EquipNavCtrl" style="height:" ng-cloak>
 	<ul id="main-menu" class="gui-controls">
-		<li ng-repeat="nav in positionIconList" ng-class="nav.type==$root.focus?'active':''">
+		<li ng-repeat="nav in positionIconList" ng-class="nav.type==$root.focus?'active':''" >
 			<a href="#" ng-click="navSelect(nav.type)">
-				<div class="gui-icon"><img ng-src="{{nav.icon}}" class="nav-icon"></div>
+				<div class="gui-icon" uib-tooltip-template="'equipTooltip.tmpl.html'" ng-mouseenter="equipPreview(nav.type)" tooltip-placement="auto right" tooltip-class="customClass" tooltip-animation="false" tooltip-enable="equips[nav.type].data.name" tooltip-append-to-body="true"><img ng-src="{{nav.icon}}" class="nav-icon"></div>
 				<span class="title">{{equips[nav.type].data.name?equips[nav.type].data.name:nav.typeName}}</span>
 			</a>
 		</li>
@@ -21,5 +21,5 @@
 			<a href="http://www.miitbeian.gov.cn/" target="_blank">滇ICP备14005270号-1</a>
 		</small>
 	</div>
-	
+	<link rel="import" href="/components/templates/equipTooltip.tmpl.html?__inline">
 </div>
