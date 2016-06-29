@@ -269,7 +269,7 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 
 		for (var i = 0; i < $rootScope.positionIconList.length; i++) {
 			if($rootScope.positionIconList[i].type==focusId){
-				$rootScope.positionIconList[i].icon = 'https://www.j3pz.com/icons/'+$rootScope.equips[focusId].data.iconID+'.png';
+				$rootScope.positionIconList[i].icon = '../../icons/'+$rootScope.equips[focusId].data.iconID+'.png';
 				break;
 			}
 		}

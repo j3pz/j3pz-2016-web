@@ -3,7 +3,7 @@ app.controller('LoginCtrl', ['$rootScope','$scope','toastr','$http','$interval',
 	$scope.login = function(){
 		$rootScope.user.isLoading = true;
 		$http({
-			url: config.apiBase+'auth',
+			url: config.apiBase+'user/auth',
 			method: 'POST',
 			data: {user:$rootScope.user.mail, pass:$rootScope.user.password},
 			headers: {
