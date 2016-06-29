@@ -384,7 +384,13 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 	$scope.$on('saveCase', function(e){
 		$scope.getCaseList();
 	});
-	
+	$scope.navSelect = function(id){
+		$rootScope.focus = id;
+		$scope.$broadcast('openEquipSelection');
+		$scope.$broadcast('openEnhance');
+		$scope.$broadcast('openXilian');
+		$scope.$broadcast('openEmbed');
+	};
 	$rootScope.$watch('equips',Utils.calculate,true);
 	$rootScope.$watch('role',Utils.calculate,true);
 	$rootScope.$watch('setController',Utils.calculate,true);
