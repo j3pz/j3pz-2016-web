@@ -8,7 +8,7 @@
 </div>
 <div class="menubar-scroll-panel" ng-controller="EquipNavCtrl" style="height:" ng-cloak>
 	<ul id="main-menu" class="gui-controls">
-		<li ng-repeat="nav in positionIconList">
+		<li ng-repeat="nav in positionIconList" ng-class="nav.type==$root.focus?'active':''">
 			<a href="#" ng-click="navSelect(nav.type)">
 				<div class="gui-icon"><img ng-src="{{nav.icon}}" class="nav-icon"></div>
 				<span class="title">{{equips[nav.type].data.name?equips[nav.type].data.name:nav.typeName}}</span>
