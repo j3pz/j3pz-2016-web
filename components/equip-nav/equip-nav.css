@@ -18,3 +18,8 @@
 .gui-icon{
 	border-radius:0px;
 }
+.menubar-inverse .gui-controls a.expanded .gui-icon, .menubar-inverse .gui-controls li.active .gui-icon, .menubar-inverse .gui-controls li.active .gui-icon:hover {
+    background-color: #151518;
+    border-color: #151518;
+    color: #64b5f6;
+}
