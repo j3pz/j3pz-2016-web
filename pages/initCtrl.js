@@ -15,7 +15,7 @@ app.controller('InitCtrl', ['$scope','$rootScope','$location','CollectionControl
 	$rootScope.isModalOpen = false;	
 	$rootScope.equipListfilter = {};
 	$rootScope.equipListfilter.attr = [0,0,0,0,0,0,0,0,0,0,0,0];
-	$rootScope.equipListfilter.range = [750,1100];
+	$rootScope.equipListfilter.range = config.defaultValues.qualityRange;
 	$rootScope.embedLevel = 6;
 	$rootScope.strengthenLevel = 6;
 	$rootScope.menpai = {
