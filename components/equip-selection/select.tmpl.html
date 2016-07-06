@@ -1,10 +1,8 @@
 <!-- 
 	@require changeEquipCtrl.js 
-	@require /js/libs/jquery-ui/jquery-ui.min.js 
 	@require equip-selection.css
-	@require /js/libs/bootstrap-slider/bootstrap-slider.min.js
-	@require /js/libs/bootstrap-slider/angular-slider.min.js
-	@require /css/theme/libs/bootstrap-slider/bootstrap-slider.min.css
+	@require /js/libs/bootstrap-slider/bootstrap-slider.js
+	@require /css/theme/libs/bootstrap-slider/bootstrap-slider.css
 
 -->
 <div class="card panel card-underline" ng-controller="ChangeEquipController">
@@ -22,8 +20,9 @@
 				</label>
 			</div>
 			<label for="quality">品质筛选 {{$root.equipListfilter.range[0]}}品-{{$root.equipListfilter.range[1]}}品</label>
-			<slider ng-model="$root.equipListfilter.range" min="450" step="5" max="1100" value="$root.equipListfilter.range" range="true" slider-tooltip="hide"></slider>
-			<br>
+			<!-- <slider ng-model="$root.equipListfilter.range" min="450" step="5" max="1100" value="$root.equipListfilter.range" range="true" slider-tooltip="hide"></slider> -->
+			<div><input class="slider-input" type="text" style="width:100%" /></div>
+			<!-- <br> -->
 			<ui-select ng-model="$root.equipLists[$root.focus].setAs" on-select="setEquip($root.equipLists[$root.focus].setAs.id)" theme="bootstrap" search-enabled="true" append-to-body="true">
 				<ui-select-match placeholder="您可以在这里输入装备名称进行搜索">{{$root.equipLists[$root.focus].setAs.name}}</ui-select-match>
 				<ui-select-choices repeat="equipItem in $root.equipLists[$root.focus].list | filter: $select.search | filter: checkFilter">

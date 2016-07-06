@@ -4,13 +4,18 @@
  * @require /js/libs/ui-select/select.min.js
  */
 app.controller('ChangeEquipController',['$scope','$rootScope','$http','$sce','toastr',function($scope,$rootScope,$http,$sce,toastr){
-	$("#quality-range").slider({range: true, min: 450, max: 1100, values: $rootScope.equipListfilter.range, step:5,
-		slide: function (event, ui) {
-			$rootScope.equipListfilter.range[0] = ui.values[0];
-			$rootScope.equipListfilter.range[1] = ui.values[1];
+	var qualitySlider = $("input.slider-input").slider({range: true, min: 450, max: 1100, values: $rootScope.equipListfilter.range, step:5,tooltip:"hide"});
+	qualitySlider.on('slide', function (event) {
+			$rootScope.equipListfilter.range[0] = event.value[0];
+			$rootScope.equipListfilter.range[1] = event.value[1];
 			$rootScope.$apply();
 		}
-	});
+	);
+
+	$rootScope.$watch('isLogin', function(newValue) {
+		if(newValue) qualitySlider.slider('setValue', $rootScope.equipListfilter.range);
+		else qualitySlider.slider('setValue', config.defaultValues.qualityRange);
+	}, false);
 
 	var filterItemsDps = [
 		{"text":"会心","index":0},

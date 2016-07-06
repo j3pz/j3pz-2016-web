@@ -20,13 +20,6 @@ app.controller('HeaderCtrl', ['$scope','$http','toastr','$rootScope','$httpParam
 				$rootScope.isLogin = true;
 				$rootScope.user.name = response.name;
 				if($rootScope.isPz){
-					$("#quality-range").slider({range: true, min: 450, max: 1100, values: $rootScope.equipListfilter.range, step:5,
-						slide: function (event, ui) {
-							$rootScope.equipListfilter.range[0] = ui.values[0];
-							$rootScope.equipListfilter.range[1] = ui.values[1];
-							$rootScope.$apply();
-						}
-					});
 					$rootScope.equipListfilter.range = response.prefer.quality;
 					$rootScope.embedLevel = response.prefer.magicStoneLevel;
 					$rootScope.strengthenLevel = response.prefer.strengthen;
