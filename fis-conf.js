@@ -1,3 +1,17 @@
+fis.set('project.ignore', 
+	[
+		'.git/**', 
+		'api/**',
+		'libs/**',
+		'pay/**',
+		'apiv2-node/**',
+		'icons/',
+		'fis-conf.js', 
+		'j3pz-2016-web.sublime-project',
+		'j3pz-2016-web.sublime-workspace',
+	]
+);
+
 fis.match('*', {
 	deploy: fis.plugin('local-deliver', {
 		to: 'F:\\workspace\\apiv2-node\\public'
@@ -41,15 +55,3 @@ fis.match('::packager', {
 fis.match('/server.conf', {
 	release: '/config/server.conf'
 });
-
-fis.set('project.ignore', 
-	[
-		'.git/**', 
-		'api/**',
-		'apiv2-node/**',
-		'icons/',
-		'fis-conf.js', 
-		'j3pz-2016-web.sublime-project',
-		'j3pz-2016-web.sublime-workspace',
-	]
-);
