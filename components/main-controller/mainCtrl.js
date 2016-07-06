@@ -168,10 +168,11 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 				response = response.data;
 				$rootScope.attributeStone = [Utils.transDBStoneToJsObj(response.attributestone[0]),Utils.transDBStoneToJsObj(response.attributestone[1])];
 				for (var i = 0; i < 2; i++) {
+					if(!response.attributestone[i].level) continue;
 					for (var j = 0; j < 4; j++) {
 						$rootScope.attributeStoneLists[i][j].isSet = j==3?$rootScope.attributeStoneLists[i][2].isSet:response.attributestone[i].attr[j].attribute!==null;
 						$rootScope.attributeStoneLists[i][j].setAs = j==3?response.attributestone[i].name:response.attributestone[i].attr[j].attribute;
-						if(i===0)$scope.$broadcast('setAttributeStone',j);
+						if(i===0&&j!=3)$scope.$broadcast('setAttributeStone',j);
 					}
 				}
 				var tixingOptions = [
