@@ -30,7 +30,9 @@ app.controller('RegFormCtrl', ['$scope','$http','$httpParamSerializerJQLike','$w
 		var validateData = {email:$scope.user.email};
 		$http.post(config.apiBase+'user/hasUser', validateData)
 		.success(function(response){
-			var registed = response.valid;
+			var registed = false;
+			if(response.errors) registed = false;
+			else registed = response.data.valid;
 			$scope.regForm.email.$setValidity("registed", registed);
 		});
 		$scope.validatePassword();
@@ -58,15 +60,12 @@ app.controller('RegFormCtrl', ['$scope','$http','$httpParamSerializerJQLike','$w
 				password:$scope.user.password,
 				username:$scope.user.username
 			};
-			$http({
-				url: 'api/reg.php',
-				method: 'POST',
-				data: $httpParamSerializerJQLike(regData),
-				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-			}).success(function(response){
-				if(response.err){
-					toastr.error(response.errReason);
+			$http.post(config.apiBase+'user/', regData)
+			.success(function(response){
+				if(response.errors){
+					toastr.error(response.errors[0].detail);
 				}else{
+					localStorage.setItem("token",response.data.token);
 					$window.location.href = 'index.html';
 				}
 			}).error(function(){
