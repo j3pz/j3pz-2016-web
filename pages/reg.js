@@ -1,3 +1,4 @@
+/* @require /components/config/config.js */
 var app = angular.module('J3Reg', ['ngMessages']);
 
 app.controller('RegFormCtrl', ['$scope','$http','$httpParamSerializerJQLike','$window', function($scope,$http,$httpParamSerializerJQLike,$window){
@@ -27,12 +28,8 @@ app.controller('RegFormCtrl', ['$scope','$http','$httpParamSerializerJQLike','$w
 	};
 	$scope.validateMail = function(){
 		var validateData = {email:$scope.user.email};
-		$http({
-			url: 'api/validateMail.php',
-			method: 'POST',
-			data: $httpParamSerializerJQLike(validateData),
-			headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-		}).success(function(response){
+		$http.post(config.apiBase+'user/hasUser', validateData)
+		.success(function(response){
 			var registed = response.valid;
 			$scope.regForm.email.$setValidity("registed", registed);
 		});
