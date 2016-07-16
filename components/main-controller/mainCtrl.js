@@ -95,13 +95,22 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 			};
 			if(mode==1){
 				equip.filter = "";
-				if($rootScope.equips[positions[i]].getData("physicsShield")>$rootScope.equips[positions[i]].getData("magicShield")) equip.filter += "外防,";
-				else if($rootScope.equips[positions[i]].getData("physicsShield")<$rootScope.equips[positions[i]].getData("magicShield")) equip.filter += "内防,";
-				if($rootScope.equips[positions[i]].getData('heal')>0&&$rootScope.equips[positions[i]].getData('crit')===0&&$rootScope.equips[positions[i]].getData('acce')===0) equip.filter = "治疗,";
+				var physicsShield = $rootScope.equips[positions[i]].getData("physicsShield");
+				var magicShield = $rootScope.equips[positions[i]].getData("magicShield");
+				var dodge = $rootScope.equips[positions[i]].getData("dodge");
+				var parryBase = $rootScope.equips[positions[i]].getData("parryBase");
+				var maxFilter = Math.max(physicsShield,magicShield,dodge,parryBase,1);
+
+				if(maxFilter==physicsShield) equip.filter += "外防,";
+				else if(maxFilter==magicShield) equip.filter += "内防,";
+				else if(maxFilter==dodge) equip.filter += "闪避,";
+				else if(maxFilter==parryBase) equip.filter += "招架,";
+				if($rootScope.equips[positions[i]].getData('heal')>0&&$rootScope.equips[positions[i]].getData('crit')==0&&$rootScope.equips[positions[i]].getData('acce')==0) equip.filter = "治疗,"
 				for (var j = 0; j < attributeCheckList.length; j++) {
 					if($rootScope.equips[positions[i]].getData(attributeCheckList[j])>0) equip.filter += attributeCheckListText[j]+",";
 				}
 				equip.quality = $rootScope.equips[positions[i]].getData("quality");
+				equip.source = $rootScope.equips[positions[i]].getData("dropSource");
 			}
 			for (var j = 0; j < $rootScope.equips[positions[i]].holes.number; j++) {
 				var embed = {
