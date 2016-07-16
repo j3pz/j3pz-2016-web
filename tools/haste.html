@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="J3Haste"  xmlns:wb="http://open.weibo.com/wb">
+	<head>
+		<title>剑网3全职业配装器 - 加速宝典</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="剑网3全职业配装器为剑网3玩家提供完善、准确的配装工具。">
+		<meta name="author" content="胖叔叔">
+		<meta name="keywords" content="剑网3,西山居,剑侠情缘,配装器,装备,加速宝典">
+		<!--
+			@require '../css/theme/bootstrap.css'
+			@require '../css/theme/materialadmin.css'
+			@require '../css/theme/font-awesome.min.css'
+			@require '../css/theme/material-design-iconic-font.min.css'
+			@require '../css/theme/libs/toastr/toastr.css'
+			@require '../components/common/common.css'
+			@require '../css/all.css'
+		-->
+		<!-- STYLE_PLACEHOLDER -->
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="js/libs/utils/html5shiv.js"></script>
+		<script type="text/javascript" src="js/libs/utils/respond.min.js"></script>
+		<![endif]-->
+		<!-- Google 统计代码 -->
+		<script rel="text/javascript" src="../components/google-analystics/googleAnalystics.js?__inline"></script><!--ignore-->
+		<!-- 浏览器兼容性检查 -->
+		<script rel="text/javascript" src="../components/compatibility-check/compatibilityCheck.js?__inline"></script><!--ignore-->
+	</head>
+
+	<body class="header-fixed menubar-pin full-content">
+		<header id="header">
+			<!-- 导航栏 -->
+			<link rel="import" href="../components/header/header.tmpl.html?__inline">
+		</header>
+
+		<div id="base">
+			<div id="content" ng-controller="HasteCtrl" ng-cloak>
+				<section style="padding:0;overflow-x:hidden;">
+					<div class="section-body content">
+						<div class="rows table-like">
+							<div class="col-md-3">
+								<div class="card style-default-bright">
+									<div class="card-body">
+										<label class="text-primary-dark" for="extra">时间设定</label><br>
+										<form class="form">
+											<div class="form-group floating-label m-b-5">
+												<input type="text" class="form-control input-sm" ng-model="oriTime" id="oriTime" ng-change="calc()">
+												<label for="oriTime">技能时间</label>
+											</div>
+											<div class="form-group floating-label m-b-5">
+												<input type="text" class="form-control input-sm" ng-model="x" id="x" ng-change="calc()">
+												<label for="x">跳数</label>
+											</div>
+										</form>
+										<small>技能时间表示技能正读条时间，或持续性伤害技能的每跳时间，或引导读条的每跳时间</small>
+										<small>跳数表示相应技能跳数，正读条为 1 跳，引导读条为造成伤害的次数。</small>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="card style-default-bright">
+									<div class="card-body">
+										<label class="text-primary-dark" for="extra">额外加速奇穴</label><br>
+										<form>
+											<div class="radio radio-styled"><label ng-click="extra='none'">
+												<input type="radio" ng-model="extra" value="none"><span>无</span>
+											</label></div>
+											<div class="radio radio-styled"><label ng-click="extra='mengge'">
+												<input type="radio" ng-model="extra" value="mengge"><span>梦歌【万花】</span>
+											</label></div>
+											<div class="radio radio-styled"><label ng-click="extra='zhenshang'">
+												<input type="radio" ng-model="extra" value="zhenshang"><span>枕上【七秀】</span>
+											</label></div>
+											<div class="radio radio-styled"><label ng-click="extra='dushou'">
+												<input type="radio" ng-model="extra" value="dushou"><span>毒手【五毒】</span>
+											</label></div>
+											<div class="radio radio-styled"><label ng-click="extra='jujing'">
+												<input type="radio" ng-model="extra" value="jujing"><span>聚精凝神【唐门】</span>
+											</label></div>
+											<div class="radio radio-styled"><label ng-click="extra='yuepo'">
+												<input type="radio" ng-model="extra" value="yuepo"><span>月破【明教】</span>
+											</label></div>
+											<div class="radio radio-styled"><label ng-click="extra='miaojing'">
+												<input type="radio" ng-model="extra" value="miaojing"><span>妙镜惊寂【明教】</span>
+											</label></div>
+											<div class="radio radio-styled"><label ng-click="extra='taiji'">
+												<input type="radio" ng-model="extra" value="taiji"><span>太极无极【纯阳】</span>
+											</label></div>
+											<div class="radio radio-styled"><label ng-click="extra='qinxin'">
+												<input type="radio" ng-model="extra" value="qinxin"><span>沁心/凝绝【长歌】</span>
+											</label></div>
+											<div class="radio radio-styled"><label ng-click="extra='rufeng'">
+												<input type="radio" ng-model="extra" value="rufeng"><span>如风【藏剑】</span>
+											</label></div>
+										</form>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="card style-default-bright">
+									<div class="card-body">
+										<table class="table table-hover">
+											<thead class="text-md">
+												<tr><td>实际读条时间</td><td>所需加速率</td><td>所需加速等级</td></tr>
+											</thead>
+											<tbody id="table" class="text-sm">
+												<tr ng-repeat="result in results" ng-cloak>
+													<td>{{result.newtime}}</td>
+													<td>{{result.hastepercentage}}</td>
+													<td>{{result.hasteLevel}}</td>
+												</tr>
+											</tbody>
+										</table>
+										<small>本加速宝典基于<a href="http://tieba.baidu.com/p/2715174815?see_lz=1" target="_blank">楚玄枫</a>，<a href="http://www.jx3pve.com/thread-5242-1-1.html" target="_blank">泠落</a>，南宫临风对加速的理论研究成果进行构建</small>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="push"></div>
+					</div>
+					<!-- 底栏 -->
+					<footer>
+						<link rel="import" href="../components/footer/footer.tmpl.html?__inline">
+					</footer>
+				</section>
+			</div>
+			<div id="menubar" class="menubar-inverse">
+				<link rel="import" href="../components/tools-menu/toolsMenu.tmpl.html?__inline">
+			</div>
+		</div>
+		<div id="modals">
+			<!-- 模态框:登录 -->
+			<link rel="import" href="../components/modals/login.tmpl.html?__inline">
+			<!-- 模态框:更新说明 -->
+			<link rel="import" href="../components/modals/update.tmpl.html?__inline">
+		</div>
+
+
+		<script src="../js/libs/jquery/jquery-1.11.2.min.js" data-framework></script>
+		<script src="../js/libs/bootstrap/bootstrap.min.js" data-framework></script>
+		<script src="../js/libs/angular/angular.min.js" data-framework></script>
+		<script src="../js/libs/angular/angular-aria.min.js" data-framework></script>
+		<script src="../js/libs/icheck/icheck.min.js" data-framework></script>
+		<script src="../js/libs/toastr/angular-toastr.tpls.min.js" data-framework></script>
+		<script src="../js/libs/weibo/wb.js?appkey=4055331331&debug=true" data-framework></script><!--ignore-->
+		<script src="../js/core/source/App.min.js"></script>
+		<script src="haste.js" data-framework></script>
+		<!-- SCRIPT_PLACEHOLDER -->
+	</body>
+</html>

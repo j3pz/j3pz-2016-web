@@ -1,12 +1,12 @@
-fis.set('project.ignore', 
+fis.set('project.ignore',
 	[
-		'.git/**', 
+		'.git/**',
 		'api/**',
 		'libs/**',
 		'pay/**',
 		'apiv2-node/**',
 		'icons/',
-		'fis-conf.js', 
+		'fis-conf.js',
 		'j3pz-2016-web.sublime-project',
 		'j3pz-2016-web.sublime-workspace',
 	]
@@ -28,6 +28,10 @@ fis.match('/pages/build.html',{
 
 fis.match('/pages/doc.html',{
 	release: 'developer/index.html'
+});
+
+fis.match('/tools/(*)(.{html,js})',{
+	release: '/tools/$1/index$2'
 });
 
 fis.match('/components/*/(**.{jpg,png,gif,ico})',{
