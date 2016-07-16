@@ -30,7 +30,7 @@ div.push{
 	height: 140px;
 }
 div.footer{
-	height: 140px;
+	height: auto;
 }
 span.nostyle{
 	display: inline;
@@ -87,4 +87,7 @@ p.price{
 }
 .form-control{
 	font-size: 14px;
+}
+div.section-body{
+	display: table;
 }
