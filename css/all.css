@@ -1,14 +1,14 @@
-#content{
+.content{
 	min-height: 100%;
 	height: auto !important;
 	margin: 0px auto -140px;
 }
-#content-no-header{
+.content-no-header{
 	min-height: 100%;
 	height: auto !important;
 	margin: 0px auto -140px;
 }
-.json-response { 
+.json-response {
     position: absolute;
     top: 0;
     right: 0;
