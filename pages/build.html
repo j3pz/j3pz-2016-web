@@ -28,7 +28,7 @@
 		<script rel="text/javascript" src="../components/compatibility-check/compatibilityCheck.js?__inline"></script><!--ignore-->
 	</head>
 
-	<body class="header-fixed menubar-pin" ng-controller="PeizhuangCtrl">
+	<body class="header-fixed menubar-pin full-content" ng-controller="PeizhuangCtrl">
 		<header id="header">
 			<!-- 导航栏 -->
 			<link rel="import" href="../components/header/header.tmpl.html?__inline">
@@ -37,53 +37,64 @@
 
 		<div id="base">
 			<div id="content">
-				<div class="content">
-					<div class="row" style="padding: 0 8px;">
-						<div class="col-sm-4 col-xs-12" style="padding-top:15px;padding-left: 24px" ng-cloak>
-							<!-- 装备预览 -->
-							<link rel="import" href="../components/equip-preview/equip-preview.tmpl.html?__inline">
-							<!-- 广告 -->
-							<div class="hidden-xs">
-								<link rel="import" href="../components/ad/ad.tmpl.html?__inline">
+				<section style="padding:0;overflow-x:hidden;">
+					<div class="section-body content" style="margin-top:0">
+						<div class="loading" ng-cloak>
+							<div class="sk-folding-cube">
+								<div class="sk-cube1 sk-cube"></div>
+								<div class="sk-cube2 sk-cube"></div>
+								<div class="sk-cube4 sk-cube"></div>
+								<div class="sk-cube3 sk-cube"></div>
 							</div>
+							<p class="text-normal" style="text-align: center;">配装器正在载入中...</p>
 						</div>
-						<div class="col-sm-8" style="padding-top:15px;">
-							<div class="row hidden-xs" ng-cloak style="padding:0 24px;">
-								<!-- 属性计算栏 -->
-								<link rel="import" href="../components/attributes/attributes.tmpl.html?__inline">
+						<div class="row" style="margin:0">
+							<div class="col-sm-4 col-xs-12" style="padding-top:15px;padding-left: 24px" ng-cloak>
+								<!-- 装备预览 -->
+								<link rel="import" href="../components/equip-preview/equip-preview.tmpl.html?__inline">
+								<!-- 广告 -->
+								<div class="hidden-xs">
+									<link rel="import" href="../components/ad/ad.tmpl.html?__inline">
+								</div>
 							</div>
-							<div class="row">
-								<div class="col-sm-12">
-									<div class="col-sm-6 col-xs-12" ng-cloak>
-										<div class="panel-group" id="accordionOne">
-											<!-- 装备选择 -->
-											<link rel="import" href="../components/equip-selection/select.tmpl.html?__inline">
-											<!-- 装备附魔 -->
-											<link rel="import" href="../components/equip-enhance/enhance.tmpl.html?__inline">
-											<!-- 装备镶嵌 -->
-											<link rel="import" href="../components/equip-embed/embed.tmpl.html?__inline">
+							<div class="col-sm-8" style="padding-top:15px;">
+								<div class="row hidden-xs" ng-cloak style="padding:0 24px;">
+									<!-- 属性计算栏 -->
+									<link rel="import" href="../components/attributes/attributes.tmpl.html?__inline">
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="col-sm-6 col-xs-12" ng-cloak>
+											<div class="panel-group" id="accordionOne">
+												<!-- 装备选择 -->
+												<link rel="import" href="../components/equip-selection/select.tmpl.html?__inline">
+												<!-- 装备附魔 -->
+												<link rel="import" href="../components/equip-enhance/enhance.tmpl.html?__inline">
+												<!-- 装备镶嵌 -->
+												<link rel="import" href="../components/equip-embed/embed.tmpl.html?__inline">
+											</div>
 										</div>
-									</div>
-									<div class="col-sm-6 col-xs-12">
-										<div class="panel-group" id="accordionTwo" ng-cloak>
-											<!-- 五彩石选择 -->
-											<link rel="import" href="../components/attribute-stone/attribute-stone.tmpl.html?__inline">
-											<!-- 方案设置 -->
-											<link rel="import" href="../components/case-setting/case-setting.tmpl.html?__inline">
-											<!-- 增益气劲 -->
-											<link rel="import" href="../components/buff-ctrl/buff-ctrl.tmpl.html?__inline">
+										<div class="col-sm-6 col-xs-12">
+											<div class="panel-group" id="accordionTwo" ng-cloak>
+												<!-- 五彩石选择 -->
+												<link rel="import" href="../components/attribute-stone/attribute-stone.tmpl.html?__inline">
+												<!-- 方案设置 -->
+												<link rel="import" href="../components/case-setting/case-setting.tmpl.html?__inline">
+												<!-- 增益气劲 -->
+												<link rel="import" href="../components/buff-ctrl/buff-ctrl.tmpl.html?__inline">
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						<div class="push"></div>
 					</div>
-					<div class="push"></div>
-				</div>
-				<!-- 底栏 -->
-				<footer>
-					<link rel="import" href="../components/footer/footer.tmpl.html?__inline">
-				</footer>
+					<!-- 底栏 -->
+					<footer ng-cloak>
+						<link rel="import" href="../components/footer/footer.tmpl.html?__inline">
+					</footer>
+				</section>
 			</div>
 			<div id="menubar" class="menubar-inverse">
 				<!-- 模态框:登录 -->
