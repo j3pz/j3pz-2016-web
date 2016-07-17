@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="J3Prediction"  xmlns:wb="http://open.weibo.com/wb">
+	<head>
+		<title>剑网3全职业配装器 - 瑰石查询</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="剑网3全职业配装器为剑网3玩家提供完善、准确的配装工具。">
+		<meta name="author" content="胖叔叔">
+		<meta name="keywords" content="剑网3,西山居,剑侠情缘,配装器,装备,加速宝典">
+		<!--
+			@require '../css/theme/bootstrap.css'
+			@require '../css/theme/materialadmin.css'
+			@require '../css/theme/font-awesome.min.css'
+			@require '../css/theme/material-design-iconic-font.min.css'
+			@require '../css/theme/libs/toastr/toastr.css'
+			@require '../components/common/common.css'
+			@require '../css/all.css'
+		-->
+		<!-- STYLE_PLACEHOLDER -->
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="js/libs/utils/html5shiv.js"></script>
+		<script type="text/javascript" src="js/libs/utils/respond.min.js"></script>
+		<![endif]-->
+		<!-- Google 统计代码 -->
+		<script rel="text/javascript" src="../components/google-analystics/googleAnalystics.js?__inline"></script><!--ignore-->
+		<!-- 浏览器兼容性检查 -->
+		<script rel="text/javascript" src="../components/compatibility-check/compatibilityCheck.js?__inline"></script><!--ignore-->
+	</head>
+
+	<body class="header-fixed menubar-pin full-content">
+		<header id="header">
+			<!-- 导航栏 -->
+			<link rel="import" href="../components/header/header.tmpl.html?__inline">
+		</header>
+
+		<div id="base">
+			<div id="content" ng-controller="GuishiCtrl" ng-cloak>
+				<section style="padding:0;overflow-x:hidden;">
+					<div class="section-body content">
+						<div class="rows table-like">
+							<div class="col-md-3">
+								<div class="card style-default-bright">
+									<div class="card-body no-padding">
+										<ul class="list divider-full-bleed">
+											<li class="tile" ng-repeat="instance in data" ng-click="chooseInstance($index)" ng-class="instance.id == currentInstance.id?'active':''">
+												<a class="tile-content ink-reaction">
+													<div class="tile-icon">
+														<i class="fa fa-th-large"></i>
+													</div>
+													<div class="tile-text">
+														{{instance.fullname}}
+													</div>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+
+								<div class="card style-default-bright">
+									<div class="card-body no-padding">
+										<ul class="list divider-full-bleed">
+											<li class="tile" ng-repeat="boss in currentInstance.boss" ng-click="chooseBoss($index)" ng-class="boss == currentBoss?'active':''">
+												<a class="tile-content ink-reaction">
+													<div class="tile-icon">
+														<i class="fa fa-user-secret"></i>
+													</div>
+													<div class="tile-text">
+														{{boss}}
+													</div>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-9">
+								<div class="card style-default-bright">
+									<div class="card-body">
+										<!-- @require /components/equip-preview/equip-preview.css -->
+										<div ng-repeat="guishi in stoneList" ng-show="guishi.name.length>0" class="col-sm-6 col-xs-12">
+											<div class="equipView guishi" style="margin: 4px auto;">
+												<li class="equipName">{{guishi.name}}</li>
+												<li class="plusInfo">使用：在{{guishi.name|limitTo:guishi.name.indexOf('·')}}秘境使用，首领{{guishi.boss}}可额外掉落如下装备。</li>
+												<li class="equipName" ng-if="guishi.equip1!==undefined&&guishi.equip1.indexOf('玄晶')<0">
+													<span class="nostyle"
+														uib-tooltip-template="'guishiEquip.tmpl.html'"
+														ng-mouseenter="searchPreview(guishi.equip1)"
+														tooltip-placement="auto"
+														tooltip-class="customClass"
+														tooltip-animation="false"
+														tooltip-append-to-body="true">{{guishi.equip1}}
+													</span>
+												</li>
+												<li class="equipName" ng-if="guishi.equip2!==undefined">
+													<span class="nostyle"
+														uib-tooltip-template="'guishiEquip.tmpl.html'"
+														ng-mouseenter="searchPreview(guishi.equip1)"
+														tooltip-placement="auto"
+														tooltip-class="customClass"
+														tooltip-animation="false"
+														tooltip-append-to-body="true">{{guishi.equip2}}
+													</span>
+												</li>
+												<li class="equipNameCheng" ng-if="guishi.equip1.indexOf('玄晶')>=0">{{guishi.equip1}}</li>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<link rel="import" href="/components/templates/guishiEquip.tmpl.html?__inline">
+						<div class="push"></div>
+					</div>
+					<!-- 底栏 -->
+					<footer>
+						<link rel="import" href="../components/footer/footer.tmpl.html?__inline">
+					</footer>
+				</section>
+			</div>
+			<div id="menubar" class="menubar-inverse">
+				<link rel="import" href="../components/tools-menu/toolsMenu.tmpl.html?__inline">
+			</div>
+		</div>
+		<div id="modals">
+			<!-- 模态框:登录 -->
+			<link rel="import" href="../components/modals/login.tmpl.html?__inline">
+			<!-- 模态框:更新说明 -->
+			<link rel="import" href="../components/modals/update.tmpl.html?__inline">
+		</div>
+
+
+		<script src="../js/libs/jquery/jquery-1.11.2.min.js" data-framework></script>
+		<script src="../js/libs/bootstrap/bootstrap.min.js" data-framework></script>
+		<script src="../js/libs/angular/angular.min.js" data-framework></script>
+		<script src="../js/libs/angular/angular-aria.min.js" data-framework></script>
+		<script src="../js/libs/icheck/icheck.min.js" data-framework></script>
+		<script src="../js/libs/ui-bootstrap-tooltip/ui-bootstrap-custom-tpls-1.2.5.min.js" data-framework></script>
+		<script src="../js/libs/toastr/angular-toastr.tpls.min.js" data-framework></script>
+		<script src="../js/libs/weibo/wb.js?appkey=4055331331&debug=true" data-framework></script><!--ignore-->
+		<script src="../js/core/source/App.min.js"></script>
+		<script src="prediction.js" data-framework></script>
+		<!-- SCRIPT_PLACEHOLDER -->
+	</body>
+</html>

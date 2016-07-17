@@ -8,6 +8,9 @@
 	height: auto !important;
 	margin: 0px auto -140px;
 }
+.list .tile.active{
+	color:#64b5f6;
+}
 .json-response {
     position: absolute;
     top: 0;

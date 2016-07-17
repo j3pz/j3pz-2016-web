@@ -1,0 +1,69 @@
+<script type="text/ng-template" id="guishiEquip.tmpl.html">
+	<div class="equipView column m-a-0" ng-if="searchEquipPreview.data.name">
+		<!-- 装备名称 -->
+		<li class="equipName" ng-if='searchEquipPreview.data.strengthen!=="8"'>
+			{{searchEquipPreview.data.name.split("(")[0]}}
+			<span class="star" ng-repeat="n in [1,2,3,4,5,6,7,8]" ng-if="n<=searchEquipPreview.jinglian.strengthen">★</span>
+			<span class="right">精炼等级:0/{{searchEquipPreview.data.strengthen}}</span>
+		</li>
+		<li class="equipNameCheng" ng-if='searchEquipPreview.data.strengthen==="8"'>
+			{{searchEquipPreview.data.name.split("(")[0]}}
+			<span class="star" ng-repeat="n in [1,2,3,4,5,6,7,8]" ng-if="n<=searchEquipPreview.jinglian.strengthen">★</span>
+			<span class="right">精炼等级:0/{{searchEquipPreview.data.strengthen}}</span>
+		</li>
+		<!-- 装备类别 -->
+		<li class="basicInfo">{{searchEquipPreview.typeParse}}</li>
+		<!-- 装备外防与内防 -->
+		<li class="basicInfo" ng-repeat="prefixName in basicInfoWithoutJL" ng-if="searchEquipPreview.data[prefixName]" >
+			{{searchEquipPreview.descList[prefixName]}}{{searchEquipPreview.data[prefixName]}}
+		</li>
+		<!-- 装备基础属性 -->
+		<li class="basicInfo" ng-repeat="prefixName in basicInfoWithJL" ng-if="searchEquipPreview.data[prefixName]" >
+			{{searchEquipPreview.descList[prefixName]}}{{searchEquipPreview.data[prefixName]}}
+			<span>(+{{searchEquipPreview.jinglian[prefixName]}})</span>
+		</li>
+		<!-- 装备绿字属性（无洗炼） -->
+		<li class="plusInfo" ng-repeat="prefixName in plusInfo" ng-if="searchEquipPreview.data[prefixName]&&!searchEquipPreview.xilian.num[prefixName]">
+			{{searchEquipPreview.descList[prefixName]}}{{searchEquipPreview.data[prefixName]}}
+			<span>(+{{searchEquipPreview.jinglian[prefixName]}})</span>
+		</li>
+		<!-- 装备触发类特效 -->
+		<li class="score" ng-repeat="texiaoCommon in searchEquipPreview.data.texiao.desc" ng-if="searchEquipPreview.data.texiao.type==='Common'">
+			{{texiaoCommon}}
+		</li>
+		<!-- 装备镶嵌孔 -->
+		<li ng-repeat="n in [0,1,2]" ng-class="searchEquipPreview.embed.stone[n].active?'plusInfo':'holeInactive'" ng-if="n<searchEquipPreview.holes.number">
+			<img ng-src="{{'/images/' + searchEquipPreview.embed.stone[n].typeId + '-' + searchEquipPreview.embed.stone[n].level + '.jpg'}}" style="width:16px;height:16px;vertical-align:middle;">
+			镶嵌孔：{{searchEquipPreview.newHoles.holeInfo[n].attrDesc}}
+			<span class="nostyle" ng-if="searchEquipPreview.embed.stone[n].active">{{searchEquipPreview.embed.stone[n].attr}}</span>
+			<span class="nostyle" ng-if="!searchEquipPreview.embed.stone[n].active">?</span>
+		</li>
+		<!-- 五彩石镶嵌孔(未镶嵌) -->
+		<li class="holeInactive" ng-if="(attributeStone[0].level==0&&hoverType=='b_primaryWeapon')||(attributeStone[1].level==0&&hoverType=='c_primaryWeapon')">
+			<img src="/images/-1-1.jpg" style="width:16px;height:16px;vertical-align:middle;">
+			&lt;只能镶嵌五彩石&gt;
+		</li>
+		<!-- 装备使用类特效 -->
+		<li class="plusInfo" ng-repeat="texiaoUseable in searchEquipPreview.data.texiao.desc" ng-if="searchEquipPreview.data.texiao.type==='Useable'">
+			{{texiaoUseable}}
+		</li>
+		<!-- 装备品质 -->
+		<li class="quality">
+			品质等级{{searchEquipPreview.data.quality}}
+			<span>(+{{searchEquipPreview.jinglian.quality}})</span>
+		</li>
+		<!-- 装备分数 -->
+		<li class="score">
+			装备分数{{searchEquipPreview.data.score}}
+			<span>(+{{searchEquipPreview.jinglian.score}}+{{searchEquipPreview.embed.totalScore}})</span>
+		</li>
+		<!-- 装备推荐门派 -->
+		<li class="basicInfo">
+			推荐门派：{{searchEquipPreview.getRecommend()}}
+		</li>
+		<!-- 装备来源 -->
+		<li class="basicInfo">
+			获取：{{searchEquipPreview.data.dropSource}}
+		</li>
+	</div>
+</script>
