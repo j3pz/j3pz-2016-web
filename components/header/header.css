@@ -45,6 +45,10 @@
 	font-size: 26px;
 }
 
+.multi-column-dropdown a.tile-content{
+	width: 100%;
+}
+
 @media (max-width: 767px) {
 	.dropdown-menu.multi-column {
 		min-width: 240px !important;
