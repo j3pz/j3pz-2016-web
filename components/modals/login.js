@@ -30,11 +30,19 @@ app.controller('LoginCtrl', ['$rootScope','$scope','toastr','$http','$interval',
 		$rootScope.user.name = response.name;
 		localStorage.setItem("token",response.token);
 		if($rootScope.isPz){
-			$rootScope.equipListfilter.range = response.prefer.quality;
+			$rootScope.equipListfilter.range = [Number(response.prefer.quality[0]),Number(response.prefer.quality[1])];
 			$rootScope.embedLevel = response.prefer.magicStoneLevel;
 			$rootScope.strengthenLevel = response.prefer.strengthen;
 			$rootScope.saveList.isLoad = false;
-			$scope.$emit("saveCase");
+			$rootScope.saveList.list = [];
+			angular.forEach(response.cases,function(value,key){
+				var savedCase = {
+					name:value.name,
+					id:value.id
+				};
+				this.push(savedCase);
+			},$rootScope.saveList.list);
+			$rootScope.saveList.isLoad = true;
 		}
 	}
 	$scope.weiboLogin = function(){

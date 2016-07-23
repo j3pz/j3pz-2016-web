@@ -20,11 +20,19 @@ app.controller('HeaderCtrl', ['$scope','$http','toastr','$rootScope','$httpParam
 				$rootScope.isLogin = true;
 				$rootScope.user.name = response.name;
 				if($rootScope.isPz){
-					$rootScope.equipListfilter.range = response.prefer.quality;
+					$rootScope.equipListfilter.range = [Number(response.prefer.quality[0]),Number(response.prefer.quality[1])];
 					$rootScope.embedLevel = response.prefer.magicStoneLevel;
 					$rootScope.strengthenLevel = response.prefer.strengthen;
 					$rootScope.saveList.isLoad = false;
-					$scope.$emit("saveCase");
+					$rootScope.saveList.list = [];
+					angular.forEach(response.cases,function(value,key){
+						var savedCase = {
+							name:value.name,
+							id:value.id
+						};
+						this.push(savedCase);
+					},$rootScope.saveList.list);
+					$rootScope.saveList.isLoad = true;
 				}
 			}
 		});
@@ -34,7 +42,7 @@ app.controller('HeaderCtrl', ['$scope','$http','toastr','$rootScope','$httpParam
 	if(!!token){
 		getUserInfo(token);
 	}
-		
+
 	$scope.checkUpdate = function(forceOpen){
 		$http.get(config.apiBase+'update')
 		.success(function(response){
@@ -52,7 +60,7 @@ app.controller('HeaderCtrl', ['$scope','$http','toastr','$rootScope','$httpParam
 		return $sce.trustAsHtml(text);
 	};
 	$scope.checkUpdate();
-	
+
 	$scope.logout = function(){
 		// $http.get(config.apiBase+'logout.php');
 		$rootScope.isLogin = false;
@@ -79,13 +87,13 @@ app.controller('HeaderCtrl', ['$scope','$http','toastr','$rootScope','$httpParam
 					'Content-Type': 'application/x-www-form-urlencoded'
 				}
 			})
-			.success(function(response){ 
-				if(response=="noreg"){ 
+			.success(function(response){
+				if(response=="noreg"){
 					toastr.warning('该邮箱没有注册');
-				}else{ 
-					toastr.success(response); 
+				}else{
+					toastr.success(response);
 				}
-			}); 
+			});
 		},function() {
 			console.log('Reset Password Cancelled');
 		});
