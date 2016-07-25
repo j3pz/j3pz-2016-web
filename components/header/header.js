@@ -5,7 +5,7 @@ app.controller('HeaderCtrl', ['$scope','$http','toastr','$rootScope','$httpParam
 		mail:"",
 		password:"",
 		name:"",
-		token:""
+		maxSave:0
 	};
 
 	function getUserInfo(token){
@@ -19,6 +19,7 @@ app.controller('HeaderCtrl', ['$scope','$http','toastr','$rootScope','$httpParam
 				response = response.data;
 				$rootScope.isLogin = true;
 				$rootScope.user.name = response.name;
+				$rootScope.user.maxSave = response.maxSave;
 				if($rootScope.isPz){
 					$rootScope.equipListfilter.range = [Number(response.prefer.quality[0]),Number(response.prefer.quality[1])];
 					$rootScope.embedLevel = response.prefer.magicStoneLevel;
@@ -64,7 +65,7 @@ app.controller('HeaderCtrl', ['$scope','$http','toastr','$rootScope','$httpParam
 	$scope.logout = function(){
 		// $http.get(config.apiBase+'logout.php');
 		$rootScope.isLogin = false;
-		 localStorage.removeItem("token");
+		localStorage.removeItem("token");
 		$rootScope.user = {
 			mail:"",
 			password:"",

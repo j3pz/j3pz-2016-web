@@ -28,6 +28,7 @@ app.controller('LoginCtrl', ['$rootScope','$scope','toastr','$http','$interval',
 	$scope.loginSuccess = function(response){
 		$rootScope.isLogin = true;
 		$rootScope.user.name = response.name;
+		$rootScope.user.maxSave = response.maxSave;
 		localStorage.setItem("token",response.token);
 		if($rootScope.isPz){
 			$rootScope.equipListfilter.range = [Number(response.prefer.quality[0]),Number(response.prefer.quality[1])];
@@ -44,7 +45,7 @@ app.controller('LoginCtrl', ['$rootScope','$scope','toastr','$http','$interval',
 			},$rootScope.saveList.list);
 			$rootScope.saveList.isLoad = true;
 		}
-	}
+	};
 	$scope.weiboLogin = function(){
 		WB2.login(function() {
 			$('#loginModal').modal('hide');
