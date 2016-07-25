@@ -1,0 +1,30 @@
+<!--
+	@require priceCtrl.js
+	@require price.css
+-->
+<div class="section-body" ng-controller="PriceCtrl">
+	<div class="well well-sm">
+		<span ng-if="!isLogin">尚未登录</span>
+		<span ng-if="isLogin">目前可保存{{user.maxSave}}套方案</span>
+	</div>
+	<div class="row">
+		<div class="col-sm-3" ng-repeat="item in itemList">
+			<div class="thumbnail" ng-cloak>
+				<a href data-toggle="modal" data-target="#purchaseModal" data-item="{{item.id}}">
+					<img ng-src="../images/{{item.image}}">
+				</a>
+				<div class="caption">
+					<h4 class="pull-right">￥{{item.price}}</h4>
+					<h4><a href data-toggle="modal" data-target="#purchaseModal" data-item="{{item.id}}">{{item.name}}</a></h4>
+					<p class="price">{{item.desc}}</p>
+				</div>
+				<div class="ratings">
+					<p class="pull-right">￥{{item.each}}/个配装位</p>
+					<p class="price">推荐：
+						<i class="md" ng-class="n<=item.rate?'md-star':'md-star-outline'" ng-repeat="n in [1,2,3,4,5]"></i>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

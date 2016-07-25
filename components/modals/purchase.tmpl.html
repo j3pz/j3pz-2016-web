@@ -1,0 +1,36 @@
+<!-- @require purchase.js -->
+<div class="modal fade" id="purchaseModal" tabindex="-1" role="dialog" aria-labelledby="Update" ng-controller="PurchaseCtrl">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">订单确认</h4>
+			</div>
+			<div class="modal-body">
+				<table class="table table-hover">
+					<tbody>
+						<tr><th>生效账户</th><th>{{isLogin?$root.user.name:'您没有登录'}}</th></tr>
+						<tr><th>订购产品</th><th><span class="item">{{item.name}}</span></th></tr>
+						<tr><th>需要支付</th><th><span class="price">{{item.price}}</span></th></tr>
+					</tbody>
+				</table>
+				<div class="alert alert-callout alert-info" role="alert">
+					当您点击下方确认购买后，您将会跳转到支付宝网站进行支付
+				</div>
+				<div class="alert alert-callout alert-warning" role="alert" ng-if="!isLogin">
+					<strong>警告:</strong> 您需要登录后才能进行购买
+				</div>
+				<div class="alert alert-callout alert-warning" role="alert" ng-if="isLogin&&!canBuy&&item.id!='10'">
+					<strong>警告:</strong> 您的账号不满足购买条件（购买后的最大方案数不能超过60套）
+				</div>
+				<div class="alert alert-callout alert-warning" role="alert" ng-if="isLogin&&!canBuy&&item.id=='10'">
+					<strong>警告:</strong> 您的账号不满足购买条件（只有当前最大方案数为3的用户方能购买）
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-disabled="!canBuy||!isLogin" ng-click="buy(item.id)">确认购买</button>
+			</div>
+		</div>
+	</div>
+</div>

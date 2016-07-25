@@ -16,7 +16,7 @@ fis.match('*', {
 	deploy: fis.plugin('local-deliver', {
 		to: 'F:\\workspace\\apiv2-node\\public'
 	})
-})
+});
 
 fis.match('/pages/(**.html)',{
 	release: '/$1'
@@ -28,6 +28,10 @@ fis.match('/pages/build.html',{
 
 fis.match('/pages/doc.html',{
 	release: 'developer/index.html'
+});
+
+fis.match('/pages/upgrade.html',{
+	release: 'upgrade/index.html'
 });
 
 fis.match('/tools/(*)(.{html,js})',{

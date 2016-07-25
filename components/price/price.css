@@ -1,0 +1,26 @@
+.thumbnail img {
+    width: 100%;
+}
+
+.ratings {
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #ff6e40;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.item {
+    border-radius: 4px;
+}
+
+.caption {
+    height: 110px;
+    overflow: hidden;
+}
+
+.caption h4 {
+    white-space: nowrap;
+}
