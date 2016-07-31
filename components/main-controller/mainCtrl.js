@@ -18,26 +18,15 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 		$scope.$broadcast('openEmbed');
 	});
 	$scope.saveNewCase = function(event){
-		var isSetName = false;
-		var modalInstance = $modal.open({
-			animation:true,
-			templateUrl: '../../templates/setNewCase.html',
-			controller: 'SetCaseNameController',
-			size:'sm'
-		});
-
-		modalInstance.result.then(function (newName) {
-			var name = newName;
-			if(name&&name!==''){
-				isSetName = true;
-				$scope.saveCase(0,name,event);
-				$rootScope.saveList.isLoad = false;
-			}else{
-				$scope.saveNewCase(event);
-			}
-		}, function () {
-			console.log('Save new case cancelled');
-		});
+		$("#newCaseModal").modal();
+	};
+	$scope.setName = function(name){
+		if(name&&name!==''){
+			$scope.saveCase(0,name);
+			$rootScope.saveList.isLoad = false;
+		}else{
+			$scope.saveNewCase();
+		}
 	};
 	$scope.saveCaseConfirm = function(id,name,event){
 		if(id!==0){
@@ -55,15 +44,16 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 		var attributeCheckList = ["dodge","parryBase","crit","overcome","acce","hit","strain","toughness"];
 		var attributeCheckListText = ["闪避","招架","会心","破防","加速","命中","无双","御劲"];
 		var toSave = {
-			saveid:id,
 			name:name,
-			equips:[],
-			attributeStone:[],
-			tixing:i==4?0:i,
-			menpai:$rootScope.menpai.name,
-			result:$rootScope.results
+			school:$rootScope.menpai.name,
+			save:{
+				equips:{},
+				stones:[$rootScope.attributeStoneLists[i][3].setAs],
+				tixing:i==4?0:i,
+				buff:[]
+			},
+			attribute:$rootScope.results
 		};
-		toSave.buff=[];
 		for (i = 0; i < $rootScope.buffController.buff.length; i++) {
 			var buff = $rootScope.buffController.buff[i];
 			if($rootScope.buffController.activeBuff[buff.id].isCheck){
@@ -76,22 +66,15 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 				}else{
 					saveBuff = buff.id;
 				}
-				toSave.buff.push(saveBuff);
+				toSave.save.buff.push(saveBuff);
 			}
 		}
 		for (i = 0; i < positions.length; i++) {
 			var equip = {
-				id:$rootScope.equips[positions[i]].getData(modeType),
+				equipId:$rootScope.equips[positions[i]].getData(modeType),
 				strengthen:$rootScope.equips[positions[i]].getJinglian('strengthen'),
-				enhance:$rootScope.equips[positions[i]].getEnhance(modeType),
-				embed:[],
-				holes:[],
-				magicChange:{
-					level:$rootScope.equips[positions[i]].xilian.level,
-					origin:$rootScope.equips[positions[i]].xilian.origin?$rootScope.equips[positions[i]].xilian.origin.key:0,
-					target:$rootScope.equips[positions[i]].xilian.target?$rootScope.equips[positions[i]].xilian.target.key:0,
-					ratio:$rootScope.equips[positions[i]].xilian.ratio
-				}
+				enhanceId:$rootScope.equips[positions[i]].getEnhance(modeType),
+				embed:[]
 			};
 			if(mode==1){
 				equip.filter = "";
@@ -118,46 +101,38 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 					level:$rootScope.equips[positions[i]].embed.stone[j].level
 				};
 				equip.embed.push(embed);
-				if(mode==1){
-					var hole = $rootScope.equips[positions[i]].newHoles.holeInfo[j];
-					if(hole.changed){
-						var change = {
-							id:j,
-							oriAttr:$rootScope.equips[positions[i]].holes.holeInfo[j].attrPrefix,
-							tarAttr:hole.attrPrefix,
-							oriType:$rootScope.equips[positions[i]].holes.holeInfo[j].typeId,
-							tarType:hole.typeId
-						};
-						equip.holes.push(change);
-					}
-				}else{
-					var hole = {
-						typeId:$rootScope.equips[positions[i]].newHoles.holeInfo[j].typeId,
-						attrId:$rootScope.equips[positions[i]].newHoles.holeInfo[j].attrId
-					};
-					equip.holes.push(hole);
-				}
 			}
-			toSave.equips.push(equip);
+			toSave.save.equips[positions[i]] = equip;
 		}
-		for (var i = 0; i < 2; i++) {
-			var stoneOptions = [];
-			for (var j = 0; j < 4; j++) {
-				stoneOptions.push($rootScope.attributeStoneLists[i][j].isSet?$rootScope.attributeStoneLists[i][j].setAs:0);
-			}
-			toSave.attributeStone.push(stoneOptions);
+		if($rootScope.attributeStoneLists[1][3].isSet){
+			var stoneOptions = $rootScope.attributeStoneLists[1][3].setAs;
+			toSave.save.stones.push(stoneOptions);
 		}
 		return toSave;
 	};
 	$scope.saveCase = function(id,name){
 		var toSave = $scope.getSaveObj(id,name,0);
-		$http.post(config.apiBase+'save.php', toSave)
-		.success(function(response) {
+		var token = localStorage.getItem('token');
+		var method = "";
+		var url = "";
+		if (id==0) {
+			method = "POST";
+			url = config.apiBase+'user/case/';
+		}else{
+			method = "PUT";
+			url = config.apiBase+'user/case/'+id;
+		}
+		$http({
+			url:url,
+			method:method,
+			data:toSave,
+			headers:{'Authorization': 'Bearer '+token}
+		}).success(function(response) {
 			if(response.errors){
 				toastr.error(response.errors[0].detail);
 			}else{
 				toastr.success("保存方案成功");
-				if(id===0) $scope.$broadcast('saveCase');
+				if(id==0) $scope.$broadcast('saveCase');
 			}
 		})
 		.error(function(response) {
@@ -289,7 +264,7 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 		var v = $rootScope.equips[focusId].getData('strengthen')<$rootScope.strengthenLevel?$rootScope.equips[focusId].getData('strengthen'):$rootScope.strengthenLevel;
 		if($rootScope.strengthenLevel==6&&$rootScope.equips[focusId].getData('strengthen')>6) v = $rootScope.equips[focusId].getData('strengthen');
 		$rootScope.equips[focusId].setStrengthen(v);
-		
+
 		for (var i = 0; i < $rootScope.equips[focusId].holes.number; i++) {
 			if($rootScope.equips[focusId].embed.stone[i].typeId<0){
 				var defalutStone = {img:"0-6",level:$rootScope.embedLevel,type:0};
@@ -366,7 +341,7 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 		$rootScope.toSave = $scope.getSaveObj(0,0,1);
 		$("#casePreviewModal").modal('show');
 	};
-	
+
 	$scope.getCaseList = function(){
 		if(!$rootScope.saveList.isLoad){
 			$rootScope.saveList.list = [];
@@ -382,7 +357,7 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 					angular.forEach(response,function(value,key){
 						var savedCase = {
 							name:value.name,
-							id:value.saveid
+							id:value.id
 						};
 						this.push(savedCase);
 					},$rootScope.saveList.list);
@@ -412,14 +387,14 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 	$rootScope.$watch('attributeStoneSelected',Utils.calculate);
 
 	// 是否为分享链接
-	var path = $location.absUrl();	
+	var path = $location.absUrl();
 	var pathHash = path.split("#");
 	angular.element(document).ready(function () {
 		if(pathHash[1]){
 			$scope.loadCase(pathHash[1].split("/")[1]);
 		}
 	});
-	
+
 	hotkeys.add({
 		combo: 'p',
 		description: '查看装备总览',
@@ -462,4 +437,3 @@ app.controller('PeizhuangCtrl', ['$scope','$rootScope','$location','Utils','toas
 		}
 	});
 }]);
-

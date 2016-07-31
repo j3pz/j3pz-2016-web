@@ -1,0 +1,21 @@
+<div class="modal fade" id="newCaseModal" tabindex="-1" role="dialog" aria-labelledby="case">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">保存新方案</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form" role="form">
+					<div class="form-group">
+						<input type="text" class="form-control" name="caseName" type="text" ng-model="caseName">
+						<label for="email">方案名称</label>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" ng-click="setName(caseName)" data-dismiss="modal">确   定</button>
+			</div>
+		</div>
+	</div>
+</div>
