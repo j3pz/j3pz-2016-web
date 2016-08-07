@@ -18,6 +18,10 @@
 	margin-top: -1px;
 	margin-left: -1px;
 }
+.bufficon{
+	width: 45px;
+	height: 45px;
+}
 
 .dropdown-submenu:hover>.dropdown-menu {
 	display: block;

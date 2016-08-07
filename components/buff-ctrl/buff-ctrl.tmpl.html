@@ -31,7 +31,7 @@
 					</div>
 					<div class="tab-pane" id="buff">
 						<div class="row">
-							<div class="navpic col-md-3 active-buff" ng-repeat="buff in addedBuff" ng-if="buff.type!='Qixue'" ng-style="{background:'url(/icons/'+buff.icon+'.png) 0 0 no-repeat'}" ng-click="setBuff(buff.id,false)" title="{{buff.desc}}" data-toggle="tooltip"></div>
+							<div class="bufficon col-md-3 active-buff" ng-repeat="buff in addedBuff" ng-if="buff.type!='Qixue'" ng-style="{background:'url(/icons/'+buff.icon+'.png) 0/45px no-repeat'}" ng-click="setBuff(buff.id,false)" title="{{buff.desc}}" data-toggle="tooltip"></div>
 							<div class="btn-group">
 								<button id="add-buff" type="button" class="btn btn-raised btn-default-bright dropdown-toggle" style="width:45px;height:45px;" title="添加气劲" data-toggle="dropdown">
 									<b><span class="md md-add" aria-hidden="true"></span></b>
