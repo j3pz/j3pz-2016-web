@@ -20,6 +20,7 @@ app.controller('HeaderCtrl', ['$scope','$http','toastr','$rootScope','$httpParam
 				$rootScope.isLogin = true;
 				$rootScope.user.name = response.name;
 				$rootScope.user.maxSave = response.maxSave;
+				$rootScope.user.saved = response.cases.length;
 				if($rootScope.isPz){
 					$rootScope.equipListfilter.range = [Number(response.prefer.quality[0]),Number(response.prefer.quality[1])];
 					$rootScope.embedLevel = response.prefer.magicStoneLevel;
@@ -29,7 +30,8 @@ app.controller('HeaderCtrl', ['$scope','$http','toastr','$rootScope','$httpParam
 					angular.forEach(response.cases,function(value,key){
 						var savedCase = {
 							name:value.name,
-							id:value.id
+							id:value.id,
+							school:value.school
 						};
 						this.push(savedCase);
 					},$rootScope.saveList.list);

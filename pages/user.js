@@ -1,0 +1,136 @@
+var app = angular.module('J3pzUser', ['toastr']);
+
+app.controller('UserCtrl', ['$scope','$rootScope','$http','toastr', function($scope,$rootScope,$http,toastr){
+	$scope.listShow = "user";
+	$scope.panelShow = "";
+
+	var schoolMap = {
+		huajian: '花间游',
+		yijin: '易筋经',
+		tianluo: '天罗诡道',
+		fenying: '焚影圣诀',
+		bingxin: '冰心诀',
+		dujing: '毒经',
+		zixia: '紫霞功',
+		mowen: '莫问',
+		jingyu: '惊羽诀',
+		aoxue: '傲血战意',
+		xiaochen: '笑尘诀',
+		taixu: '太虚剑意',
+		cangjian: '藏剑',
+		fenshan: '分山劲',
+		lijing: '离经易道',
+		yunchang: '云裳心经',
+		butian: '补天诀',
+		xiangzhi: '相知',
+		xisui: '洗髓经',
+		mingzun: '明尊琉璃体',
+		tielao: '铁牢律',
+		tiegu: '铁骨衣',
+	}
+
+	$scope.getCaseList = function(){
+		$scope.caseList = [];
+		var token = localStorage.getItem('token');
+		$http.get(config.apiBase+'user/case',{
+			headers:{'Authorization': 'Bearer '+token}
+		})
+		.success(function(response){
+			if(response.errors){
+				toastr.error(response.errors[0].detail);
+			}else{
+				response = response.data;
+				angular.forEach(response,function(value,key){
+					var savedCase = {
+						name:value.name,
+						id:value.id,
+						school:schoolMap[value.school],
+						isEditing:false,
+						newName: value.name
+					};
+					this.push(savedCase);
+				},$scope.caseList);
+			}
+		});
+	}
+
+	$scope.switchList = function(name){
+		$scope.listShow = name;
+		if(name=='case'){
+			$scope.getCaseList();
+		}
+	}
+
+	$scope.switchPanel = function(name){
+		$scope.panelShow = name;
+	}
+
+	$scope.changePass = function(change){
+		if(change.newPass == "" || change.oldPass == ""){
+			toastr.error("密码不能为空");
+		}else if(change.newPass == change.confirm){
+			var token = localStorage.getItem('token');
+			$http.put(config.apiBase+'user/password', change, {
+				headers:{'Authorization': 'Bearer '+token}
+			}).success(function(response) {
+				if(response.errors){
+					toastr.error("更改失败, "+response.errors[0].detail);
+				}else{
+					toastr.success("更改成功");
+				}
+			})
+			.error(function(response) {
+				toastr.error("更改失败, 网络连接不正常");
+			});
+		}else{
+			toastr.error("两次输入密码不一致");
+		}
+	}
+
+	$scope.editCaseName = function(savedCase){
+		var newName = savedCase.newName;
+		var csid = savedCase.id;
+		if(newName == savedCase.name){
+			savedCase.isEditing = false;
+			return;
+		}
+		var token = localStorage.getItem('token');
+		$http.put(config.apiBase+'user/case/'+csid+'/name', {name:newName}, {
+			headers:{'Authorization': 'Bearer '+token}
+		}).success(function(response) {
+			if(response.errors){
+				toastr.error("更改失败, "+response.errors[0].detail);
+			}else{
+				toastr.success("更改成功");
+				savedCase.name = newName;
+			}
+		})
+		.error(function(response) {
+			toastr.error("更改失败, 网络连接不正常");
+		})
+		.finally(function(){
+			savedCase.isEditing = false;
+		});
+	}
+	$scope.keyup = function(e,savedCase){
+		if(e.keyCode==13) $scope.editCaseName(savedCase);
+	}
+
+	$scope.deleteCase = function(savedCase){
+		var csid = savedCase.id;
+		var token = localStorage.getItem('token');
+		$http.delete(config.apiBase+'user/case/'+csid, {
+			headers:{'Authorization': 'Bearer '+token}
+		}).success(function(response) {
+			if(response.errors){
+				toastr.error("删除失败, "+response.errors[0].detail);
+			}else{
+				toastr.success("删除成功");
+				$scope.getCaseList();
+			}
+		})
+		.error(function(response) {
+			toastr.error("删除失败, 网络连接不正常");
+		});
+	}
+}]);

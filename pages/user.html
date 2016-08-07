@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="J3pzUser"  xmlns:wb="http://open.weibo.com/wb">
+	<head>
+		<title>剑网3全职业配装器 - 用户控制台</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="剑网3全职业配装器为剑网3玩家提供完善、准确的配装工具。">
+		<meta name="author" content="胖叔叔">
+		<meta name="keywords" content="剑网3,西山居,剑侠情缘,配装器,装备">
+		<!--
+			@require '../css/theme/bootstrap.css'
+			@require '../css/theme/materialadmin.css'
+			@require '../css/theme/font-awesome.min.css'
+			@require '../css/theme/material-design-iconic-font.min.css'
+			@require '../css/theme/libs/toastr/toastr.css'
+			@require '../components/common/common.css'
+			@require '../css/all.css'
+		-->
+		<!-- STYLE_PLACEHOLDER -->
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="js/libs/utils/html5shiv.js"></script>
+		<script type="text/javascript" src="js/libs/utils/respond.min.js"></script>
+		<![endif]-->
+		<!-- Google 统计代码 -->
+		<script rel="text/javascript" src="../components/google-analystics/googleAnalystics.js?__inline"></script><!--ignore-->
+		<!-- 浏览器兼容性检查 -->
+		<script rel="text/javascript" src="../components/compatibility-check/compatibilityCheck.js?__inline"></script><!--ignore-->
+	</head>
+
+	<body class="menubar-hoverable header-fixed">
+		<header id="header">
+			<!-- 导航栏 -->
+			<link rel="import" href="../components/header/header.tmpl.html?__inline">
+		</header>
+
+		<div class="offcanvas">
+		</div>
+		<div id="content" class="content">
+			<section ng-cloak style="margin-top: 16px;">
+				<div class="row" ng-controller="UserCtrl">
+					<div class="col-sm-3 hidden-xs">
+						<div class="card">
+							<div class="card-body no-padding">
+								<ul class="list divider-full-bleed">
+									<li class="tile">
+										<a href="" class="tile-content ink-reaction" ng-click="switchList('user')">
+											<div class="tile-icon">
+												<i class="fa fa-user"></i>
+											</div>
+											<div class="tile-text">账户设置</div>
+										</a>
+									</li>
+									<li class="tile">
+										<a href="" class="tile-content ink-reaction" ng-click="switchList('case')">
+											<div class="tile-icon">
+												<i class="md md-description"></i>
+											</div>
+											<div class="tile-text">方案设置</div>
+										</a>
+									</li>
+									<li class="tile">
+										<a href="" class="tile-content ink-reaction" ng-click="switchList('preference')">
+											<div class="tile-icon">
+												<i class="fa fa-sliders"></i>
+											</div>
+											<div class="tile-text">偏好设置</div>
+										</a>
+									</li>
+									<li class="tile">
+										<a href="" class="tile-content ink-reaction" ng-click="switchList('order')">
+											<div class="tile-icon">
+												<i class="fa fa-cny"></i>
+											</div>
+											<div class="tile-text">订单查看</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-9">
+						<div ng-if="listShow=='user'" class="card">
+							<div class="card-body">
+								<div class="hbox-xs">
+									<div class="hbox-column width-2">
+										<img class="img-circle img-responsive pull-left" src="/images/default_avatar.png" alt="">
+									</div>
+									<div class="hbox-column v-top">
+										<div class="clearfix">
+											<div class="col-lg-12 margin-bottom-lg">
+												<span class="text-lg text-medium" ng-click="showNameEdit()">{{$root.user.name}}</span>
+											</div>
+										</div>
+										<div class="clearfix opacity-75">
+											<div class="col-md-5">
+												<span class="glyphicon glyphicon-asterisk text-sm"></span> <a href="" ng-click="switchPanel('pass')">修改密码</a>
+											</div>
+											<div class="col-md-7">
+												<span class="fa fa-weibo text-sm"></span> <a href="" ng-click="bindWeibo()">绑定微博</a>
+											</div>
+										</div>
+										<div class="clearfix">
+											<div class="col-lg-12">
+												<span class="opacity-75"><span class="fa fa-tasks text-sm"></span> 已保存 {{$root.user.saved}}/{{$root.user.maxSave}} 套方案，<a href="/upgrade/" target="_blank">购买额外保存位</a></span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div ng-if="panelShow=='pass'">
+									<div class="col-sm-5 form-group" style="margin-top:16px">
+										<form class="form" role="form">
+											<div class="form-group">
+												<input type="password" class="form-control" name="oldPass" type="password" ng-model="change.oldPass">
+												<label for="oldPass">原密码</label>
+											</div>
+											<div class="form-group">
+												<input type="password" class="form-control" name="newPass" type="password" ng-model="change.newPass">
+												<label for="oldPass">新密码</label>
+											</div>
+											<div class="form-group">
+												<input type="password" class="form-control" name="confirm" type="password" ng-model="change.confirm">
+												<label for="confirm">确认密码</label>
+											</div>
+										</form>
+										<button class="btn btn-accent btn-raised ink-reaction" ng-click="changePass(change)">提交</button>
+										<button class="btn btn-accent btn-raised ink-reaction" ng-click="switchPanel('close')">关闭</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div ng-if="listShow=='case'" class="card">
+							<div class="card-body">
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th>方案名</th>
+											<th>心法</th>
+											<th class="text-right">操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="case in caseList">
+											<td>
+												<span class="nostyle" ng-if="!case.isEditing" ng-click="case.isEditing=true">{{case.name}}</span>
+												<input ng-if="case.isEditing" ng-model="case.newName" ng-blur="editCaseName(case)" ng-keyup="keyup($event,case)" autofocus style="width:100px">
+												<button ng-if="case.isEditing" ng-click="editCaseName(case)" type="button" class="btn btn-icon-toggle"><i class="md md-save"></i></button>
+											</td>
+											<td>{{case.school}}</td>
+											<td class="text-right">
+												<button type="button" class="btn btn-icon-toggle" ng-click="case.isEditing=true"><i class="md md-edit"></i></button>
+												<button type="button" class="btn btn-icon-toggle" ><i class="md md-share"></i></button>
+												<button type="button" class="btn btn-icon-toggle" ng-click="deleteCase(case)"><i class="md md-delete"></i></button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<div class="push"></div>
+		</div>
+
+		<div id="modals">
+			<!-- 模态框:登录 -->
+			<link rel="import" href="../components/modals/login.tmpl.html?__inline">
+			<!-- 模态框:更新说明 -->
+			<link rel="import" href="../components/modals/update.tmpl.html?__inline">
+		</div>
+		<footer>
+			<!-- 底栏 -->
+			<link rel="import" href="../components/footer/footer.tmpl.html?__inline">
+		</footer>
+
+		<script src="../js/libs/jquery/jquery-1.11.2.min.js" data-framework></script>
+		<script src="../js/libs/bootstrap/bootstrap.min.js" data-framework></script>
+		<script src="../js/libs/angular/angular.min.js" data-framework></script>
+		<script src="../js/libs/angular/angular-aria.min.js" data-framework></script>
+		<script src="../js/libs/icheck/icheck.min.js" data-framework></script>
+		<script src="../js/libs/toastr/angular-toastr.tpls.min.js" data-framework></script>
+		<script src="../js/libs/weibo/wb.js?appkey=4055331331&debug=true" data-framework></script><!--ignore-->
+		<script src="../js/core/source/App.min.js"></script>
+		<script src="user.js" data-framework></script>
+		<!-- SCRIPT_PLACEHOLDER -->
+	</body>
+</html>

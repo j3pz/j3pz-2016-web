@@ -34,6 +34,10 @@ fis.match('/pages/upgrade.html',{
 	release: 'upgrade/index.html'
 });
 
+fis.match('/pages/user.html',{
+	release: 'user/index.html'
+});
+
 fis.match('/tools/(*)(.{html,js})',{
 	release: '/tools/$1/index$2'
 });
