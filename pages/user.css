@@ -1,0 +1,23 @@
+.embed-stone{
+	display: inline-table;
+	margin: 5px 2px;
+	padding:0px;
+	border:3px solid;
+	border-radius:2px;
+	-moz-border-radius:8px;
+	border-color: rgba(255,255,255,0);
+}
+.embed-stone:hover{
+	border:3px solid;
+	border-radius:8px;
+	-moz-border-radius:8px;
+	border-color: rgb(255, 0, 255);
+	padding:0px;
+}
+.embed-stone.active{
+	border:3px solid;
+	border-radius:8px;
+	-moz-border-radius:8px;
+	border-color: rgb(255, 0, 255);
+	padding:0px;
+}

@@ -1,8 +1,15 @@
+/*
+ * @require /components/config/config.js
+ */
+
 var app = angular.module('J3pzUser', ['toastr']);
 
 app.controller('UserCtrl', ['$scope','$rootScope','$http','toastr', function($scope,$rootScope,$http,toastr){
 	$scope.listShow = "user";
 	$scope.panelShow = "";
+
+	$scope.strengthenDesc = ["不精炼","精炼一级","精炼二级","精炼三级","精炼四级","精炼五级","满精炼"];
+	$scope.magicStoneLevelDesc = ["","一级","二级","三级","四级","五级","六级","七级","八级"];
 
 	var schoolMap = {
 		huajian: '花间游',
@@ -58,6 +65,9 @@ app.controller('UserCtrl', ['$scope','$rootScope','$http','toastr', function($sc
 		$scope.listShow = name;
 		if(name=='case'){
 			$scope.getCaseList();
+		}
+		if(name=='preference'){
+			$scope.getPreference();
 		}
 	}
 
@@ -132,5 +142,69 @@ app.controller('UserCtrl', ['$scope','$rootScope','$http','toastr', function($sc
 		.error(function(response) {
 			toastr.error("删除失败, 网络连接不正常");
 		});
+	}
+
+	$scope.getPreference = function(){
+		$scope.preference = {};
+		var token = localStorage.getItem('token');
+		$http.get(config.apiBase+'user',{
+			headers:{'Authorization': 'Bearer '+token}
+		})
+		.success(function(response) {
+			if(response.errors){
+				console.log(response.errors[0].detail);
+			}else{
+				response = response.data;
+				$scope.preference.range = [Number(response.prefer.quality[0]),Number(response.prefer.quality[1])];
+				$scope.preference.embedLevel = response.prefer.magicStoneLevel;
+				$scope.preference.strengthenLevel = response.prefer.strengthen;
+				var qualitySlider = $("input.slider-input").slider({
+					range: true,
+					min: 450, 
+					max: 1100,
+					values: $scope.preference.range,
+					step:5,
+					tooltip:"hide"
+				});
+				qualitySlider.slider('setValue', $scope.preference.range);
+				qualitySlider.on('slide', function (event) {
+					$scope.preference.range[0] = event.value[0];
+					$scope.preference.range[1] = event.value[1];
+					$scope.$apply();
+				});
+				qualitySlider.on('slideStop', function (event) {
+					$scope.changePreference({quality:event.value})
+				});
+			}
+		});
+	}
+
+	$scope.changePreference = function(change){
+		var token = localStorage.getItem('token');
+		$http.put(config.apiBase+'user/preference', change, {
+			headers:{'Authorization': 'Bearer '+token}
+		}).success(function(response) {
+			if(response.errors){
+				toastr.error("设置失败, "+response.errors[0].detail);
+			}else{
+				toastr.success("设置成功");
+			}
+		})
+		.error(function(response) {
+			toastr.error("设置失败, 网络连接不正常");
+		});
+	}
+
+	$scope.setStrengthen = function(n,isHover){
+		$scope.strengthenHover = n;
+		if(!isHover){
+			$scope.preference.strengthen = n;
+			$scope.changePreference({strengthen:n})
+		}
+	}
+
+	$scope.setEmbedLevel = function(n){
+		$scope.preference.embedLevel = n;
+		$scope.changePreference({embedLevel:n});
 	}
 }]);

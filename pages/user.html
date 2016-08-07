@@ -13,7 +13,9 @@
 			@require '../css/theme/font-awesome.min.css'
 			@require '../css/theme/material-design-iconic-font.min.css'
 			@require '../css/theme/libs/toastr/toastr.css'
+			@require '../css/theme/libs/bootstrap-slider/bootstrap-slider.css'
 			@require '../components/common/common.css'
+			@require 'user.css'
 			@require '../css/all.css'
 		-->
 		<!-- STYLE_PLACEHOLDER -->
@@ -80,7 +82,7 @@
 						</div>
 					</div>
 					<div class="col-sm-9">
-						<div ng-if="listShow=='user'" class="card">
+						<div ng-show="listShow=='user'" class="card">
 							<div class="card-body">
 								<div class="hbox-xs">
 									<div class="hbox-column width-2">
@@ -108,6 +110,7 @@
 									</div>
 								</div>
 								<div ng-if="panelShow=='pass'">
+									<hr class="ruler-lg">
 									<div class="col-sm-5 form-group" style="margin-top:16px">
 										<form class="form" role="form">
 											<div class="form-group">
@@ -129,7 +132,7 @@
 								</div>
 							</div>
 						</div>
-						<div ng-if="listShow=='case'" class="card">
+						<div ng-show="listShow=='case'" class="card">
 							<div class="card-body">
 								<table class="table table-hover">
 									<thead>
@@ -157,6 +160,32 @@
 								</table>
 							</div>
 						</div>
+
+						<div ng-show="listShow=='preference'" class="card">
+							<div class="card-body">
+								筛选品级：{{preference.range[0]+" - "+preference.range[1]}}</span>
+								<div class="row">
+									<div class="col-sm-6">
+										<div><input class="slider-input" type="text" style="width:100%" /></div>
+									</div>
+								</div>
+								<hr class="ruler-lg">
+								自动精炼等级：{{strengthenDesc[preference.strengthen]}}</span>
+								<div class="row">
+									<div class="col-sm-6">
+										<span class="glyphicon glyphicon-remove-circle cancelStrengthen" ng-click="setStrengthen(0,false)" ng-mouseenter="setStrengthen(0,true)" ng-mouseleave="setStrengthen(preference.strengthen,true)"></span>
+										<span class="glyphicon strengthenStars" ng-class="n<=strengthenHover?'glyphicon-star':'glyphicon-star-empty'" ng-repeat="n in [1,2,3,4,5,6]" ng-click="setStrengthen(n,false)" ng-mouseenter="setStrengthen(n,true)" ng-mouseleave="setStrengthen(preference.strengthen,true)"></span>
+									</div>
+								</div>
+								<hr class="ruler-lg">
+								自动镶嵌五行石等级：{{magicStoneLevelDesc[$root.preference.magicStoneLevel]}}<span class="right"><a href>修改五行石镶嵌等级</a></span>
+								<div class="row">
+									<div class="col-sm-6">
+										<img ng-src="/images/0-{{n}}.jpg" class="embed-stone" ng-class="n==preference.embedLevel?'active':''" ng-repeat="n in [1,2,3,4,5,6,7,8]" ng-click="setEmbedLevel(n)">
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -178,7 +207,7 @@
 		<script src="../js/libs/bootstrap/bootstrap.min.js" data-framework></script>
 		<script src="../js/libs/angular/angular.min.js" data-framework></script>
 		<script src="../js/libs/angular/angular-aria.min.js" data-framework></script>
-		<script src="../js/libs/icheck/icheck.min.js" data-framework></script>
+		<script src="../js/libs/bootstrap-slider/bootstrap-slider.js" data-framework></script>
 		<script src="../js/libs/toastr/angular-toastr.tpls.min.js" data-framework></script>
 		<script src="../js/libs/weibo/wb.js?appkey=4055331331&debug=true" data-framework></script><!--ignore-->
 		<script src="../js/core/source/App.min.js"></script>
