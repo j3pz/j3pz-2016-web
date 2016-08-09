@@ -157,7 +157,8 @@ app.controller('UserCtrl', ['$scope','$rootScope','$http','toastr', function($sc
 				response = response.data;
 				$scope.preference.range = [Number(response.prefer.quality[0]),Number(response.prefer.quality[1])];
 				$scope.preference.embedLevel = response.prefer.magicStoneLevel;
-				$scope.preference.strengthenLevel = response.prefer.strengthen;
+				$scope.preference.strengthen = response.prefer.strengthen;
+				$scope.strengthenHover = response.prefer.strengthen;
 				var qualitySlider = $("input.slider-input").slider({
 					range: true,
 					min: 450, 
@@ -173,7 +174,10 @@ app.controller('UserCtrl', ['$scope','$rootScope','$http','toastr', function($sc
 					$scope.$apply();
 				});
 				qualitySlider.on('slideStop', function (event) {
-					$scope.changePreference({quality:event.value})
+					$scope.changePreference({
+						target:'quality',
+						quality:event.value
+					});
 				});
 			}
 		});
@@ -199,12 +203,18 @@ app.controller('UserCtrl', ['$scope','$rootScope','$http','toastr', function($sc
 		$scope.strengthenHover = n;
 		if(!isHover){
 			$scope.preference.strengthen = n;
-			$scope.changePreference({strengthen:n})
+			$scope.changePreference({
+				target:'strengthen',
+				strengthen:n
+			});
 		}
 	}
 
 	$scope.setEmbedLevel = function(n){
 		$scope.preference.embedLevel = n;
-		$scope.changePreference({embedLevel:n});
+		$scope.changePreference({
+			target:'magicStoneLevel',
+			magicStoneLevel:n
+		});
 	}
 }]);
