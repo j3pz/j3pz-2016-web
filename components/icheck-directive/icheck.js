@@ -7,10 +7,10 @@ app.directive('icheck', ['$timeout', '$parse', function($timeout, $parse) {
 	return {
 		require: 'ngModel',
 		link: function($scope, element, $attrs, ngModel) {
-			$scope.safeApply = function(fn){
+			$scope.safeApply = function(fn) {
 				var phase = this.$root.$$phase;
-				if(phase == '$apply' || phase == '$digest') {
-					if(fn && (typeof(fn) === 'function')) {
+				if (phase == '$apply' || phase == '$digest') {
+					if (fn && (typeof (fn) === 'function')) {
 						fn();
 					}
 				} else {
@@ -20,13 +20,13 @@ app.directive('icheck', ['$timeout', '$parse', function($timeout, $parse) {
 			return $timeout(function() {
 				var value;
 				value = $attrs['value'];
-				$scope.$watch($attrs['ngModel'], function(newValue){
+				$scope.$watch($attrs['ngModel'], function(newValue) {
 					$(element).icheck('updated');
-				})
-				$scope.$watch($attrs['ngDisabled'], function(newValue){
-					if(newValue==true) $(element).icheck('disabled');
-					else if(newValue==false) $(element).icheck('enabled');
-				})
+				});
+				$scope.$watch($attrs['ngDisabled'], function(newValue) {
+					if (newValue == true) $(element).icheck('disabled');
+					else if (newValue == false) $(element).icheck('enabled');
+				});
 
 				return $(element).icheck({
 					checkboxClass: 'icheckbox_square-blue',

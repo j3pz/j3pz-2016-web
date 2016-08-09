@@ -178,7 +178,7 @@
 									</div>
 								</div>
 								<hr class="ruler-lg">
-								自动镶嵌五行石等级：{{magicStoneLevelDesc[$root.preference.magicStoneLevel]}}</span>
+								自动镶嵌五行石等级：{{magicStoneLevelDesc[preference.embedLevel]}}</span>
 								<div class="row">
 									<div class="col-sm-6">
 										<img ng-src="/images/0-{{n}}.jpg" class="embed-stone" ng-class="n==preference.embedLevel?'active':''" ng-repeat="n in [1,2,3,4,5,6,7,8]" ng-click="setEmbedLevel(n)">

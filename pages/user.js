@@ -4,12 +4,12 @@
 
 var app = angular.module('J3pzUser', ['toastr']);
 
-app.controller('UserCtrl', ['$scope','$rootScope','$http','toastr', function($scope,$rootScope,$http,toastr){
-	$scope.listShow = "user";
-	$scope.panelShow = "";
+app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', function($scope, $rootScope, $http, toastr) {
+	$scope.listShow = 'user';
+	$scope.panelShow = '';
 
-	$scope.strengthenDesc = ["不精炼","精炼一级","精炼二级","精炼三级","精炼四级","精炼五级","满精炼"];
-	$scope.magicStoneLevelDesc = ["","一级","二级","三级","四级","五级","六级","七级","八级"];
+	$scope.strengthenDesc = ['不精炼', '精炼一级', '精炼二级', '精炼三级', '精炼四级', '精炼五级', '满精炼'];
+	$scope.magicStoneLevelDesc = ['', '一级', '二级', '三级', '四级', '五级', '六级', '七级', '八级'];
 
 	var schoolMap = {
 		huajian: '花间游',
@@ -33,188 +33,188 @@ app.controller('UserCtrl', ['$scope','$rootScope','$http','toastr', function($sc
 		xisui: '洗髓经',
 		mingzun: '明尊琉璃体',
 		tielao: '铁牢律',
-		tiegu: '铁骨衣',
-	}
+		tiegu: '铁骨衣'
+	};
 
-	$scope.getCaseList = function(){
+	$scope.getCaseList = function() {
 		$scope.caseList = [];
 		var token = localStorage.getItem('token');
-		$http.get(config.apiBase+'user/case',{
-			headers:{'Authorization': 'Bearer '+token}
+		$http.get(config.apiBase + 'user/case', {
+			headers: {'Authorization': 'Bearer ' + token}
 		})
-		.success(function(response){
-			if(response.errors){
+		.success(function(response) {
+			if (response.errors) {
 				toastr.error(response.errors[0].detail);
-			}else{
+			} else {
 				response = response.data;
-				angular.forEach(response,function(value,key){
+				angular.forEach(response, function(value, key) {
 					var savedCase = {
-						name:value.name,
-						id:value.id,
-						school:schoolMap[value.school],
-						isEditing:false,
+						name: value.name,
+						id: value.id,
+						school: schoolMap[value.school],
+						isEditing: false,
 						newName: value.name
 					};
 					this.push(savedCase);
-				},$scope.caseList);
+				}, $scope.caseList);
 			}
 		});
-	}
+	};
 
-	$scope.switchList = function(name){
+	$scope.switchList = function(name) {
 		$scope.listShow = name;
-		if(name=='case'){
+		if (name == 'case') {
 			$scope.getCaseList();
 		}
-		if(name=='preference'){
+		if (name == 'preference') {
 			$scope.getPreference();
 		}
-	}
+	};
 
-	$scope.switchPanel = function(name){
+	$scope.switchPanel = function(name) {
 		$scope.panelShow = name;
-	}
+	};
 
-	$scope.changePass = function(change){
-		if(change.newPass == "" || change.oldPass == ""){
-			toastr.error("密码不能为空");
-		}else if(change.newPass == change.confirm){
+	$scope.changePass = function(change) {
+		if (change.newPass == '' || change.oldPass == '') {
+			toastr.error('密码不能为空');
+		} else if (change.newPass == change.confirm) {
 			var token = localStorage.getItem('token');
-			$http.put(config.apiBase+'user/password', change, {
-				headers:{'Authorization': 'Bearer '+token}
+			$http.put(config.apiBase + 'user/password', change, {
+				headers: {'Authorization': 'Bearer ' + token}
 			}).success(function(response) {
-				if(response.errors){
-					toastr.error("更改失败, "+response.errors[0].detail);
-				}else{
-					toastr.success("更改成功");
+				if (response.errors) {
+					toastr.error('更改失败, ' + response.errors[0].detail);
+				} else {
+					toastr.success('更改成功');
 				}
 			})
 			.error(function(response) {
-				toastr.error("更改失败, 网络连接不正常");
+				toastr.error('更改失败, 网络连接不正常');
 			});
-		}else{
-			toastr.error("两次输入密码不一致");
+		} else {
+			toastr.error('两次输入密码不一致');
 		}
-	}
+	};
 
-	$scope.editCaseName = function(savedCase){
+	$scope.editCaseName = function(savedCase) {
 		var newName = savedCase.newName;
 		var csid = savedCase.id;
-		if(newName == savedCase.name){
+		if (newName == savedCase.name) {
 			savedCase.isEditing = false;
 			return;
 		}
 		var token = localStorage.getItem('token');
-		$http.put(config.apiBase+'user/case/'+csid+'/name', {name:newName}, {
-			headers:{'Authorization': 'Bearer '+token}
+		$http.put(config.apiBase + 'user/case/' + csid + '/name', {name: newName}, {
+			headers: {'Authorization': 'Bearer ' + token}
 		}).success(function(response) {
-			if(response.errors){
-				toastr.error("更改失败, "+response.errors[0].detail);
-			}else{
-				toastr.success("更改成功");
+			if (response.errors) {
+				toastr.error('更改失败, ' + response.errors[0].detail);
+			} else {
+				toastr.success('更改成功');
 				savedCase.name = newName;
 			}
 		})
 		.error(function(response) {
-			toastr.error("更改失败, 网络连接不正常");
+			toastr.error('更改失败, 网络连接不正常');
 		})
-		.finally(function(){
+		.finally(function() {
 			savedCase.isEditing = false;
 		});
-	}
-	$scope.keyup = function(e,savedCase){
-		if(e.keyCode==13) $scope.editCaseName(savedCase);
-	}
+	};
+	$scope.keyup = function(e, savedCase) {
+		if (e.keyCode == 13) $scope.editCaseName(savedCase);
+	};
 
-	$scope.deleteCase = function(savedCase){
+	$scope.deleteCase = function(savedCase) {
 		var csid = savedCase.id;
 		var token = localStorage.getItem('token');
-		$http.delete(config.apiBase+'user/case/'+csid, {
-			headers:{'Authorization': 'Bearer '+token}
+		$http.delete(config.apiBase + 'user/case/' + csid, {
+			headers: {'Authorization': 'Bearer ' + token}
 		}).success(function(response) {
-			if(response.errors){
-				toastr.error("删除失败, "+response.errors[0].detail);
-			}else{
-				toastr.success("删除成功");
+			if (response.errors) {
+				toastr.error('删除失败, ' + response.errors[0].detail);
+			} else {
+				toastr.success('删除成功');
 				$scope.getCaseList();
 			}
 		})
 		.error(function(response) {
-			toastr.error("删除失败, 网络连接不正常");
+			toastr.error('删除失败, 网络连接不正常');
 		});
-	}
+	};
 
-	$scope.getPreference = function(){
+	$scope.getPreference = function() {
 		$scope.preference = {};
 		var token = localStorage.getItem('token');
-		$http.get(config.apiBase+'user',{
-			headers:{'Authorization': 'Bearer '+token}
+		$http.get(config.apiBase + 'user', {
+			headers: {'Authorization': 'Bearer ' + token}
 		})
 		.success(function(response) {
-			if(response.errors){
+			if (response.errors) {
 				console.log(response.errors[0].detail);
-			}else{
+			} else {
 				response = response.data;
-				$scope.preference.range = [Number(response.prefer.quality[0]),Number(response.prefer.quality[1])];
+				$scope.preference.range = [Number(response.prefer.quality[0]), Number(response.prefer.quality[1])];
 				$scope.preference.embedLevel = response.prefer.magicStoneLevel;
 				$scope.preference.strengthen = response.prefer.strengthen;
 				$scope.strengthenHover = response.prefer.strengthen;
-				var qualitySlider = $("input.slider-input").slider({
+				var qualitySlider = $('input.slider-input').slider({
 					range: true,
-					min: 450, 
+					min: 450,
 					max: 1100,
 					values: $scope.preference.range,
-					step:5,
-					tooltip:"hide"
+					step: 5,
+					tooltip: 'hide'
 				});
 				qualitySlider.slider('setValue', $scope.preference.range);
-				qualitySlider.on('slide', function (event) {
+				qualitySlider.on('slide', function(event) {
 					$scope.preference.range[0] = event.value[0];
 					$scope.preference.range[1] = event.value[1];
 					$scope.$apply();
 				});
-				qualitySlider.on('slideStop', function (event) {
+				qualitySlider.on('slideStop', function(event) {
 					$scope.changePreference({
-						target:'quality',
-						quality:event.value
+						target: 'quality',
+						quality: event.value
 					});
 				});
 			}
 		});
-	}
+	};
 
-	$scope.changePreference = function(change){
+	$scope.changePreference = function(change) {
 		var token = localStorage.getItem('token');
-		$http.put(config.apiBase+'user/preference', change, {
-			headers:{'Authorization': 'Bearer '+token}
+		$http.put(config.apiBase + 'user/preference', change, {
+			headers: {'Authorization': 'Bearer ' + token}
 		}).success(function(response) {
-			if(response.errors){
-				toastr.error("设置失败, "+response.errors[0].detail);
-			}else{
-				toastr.success("设置成功");
+			if (response.errors) {
+				toastr.error('设置失败, ' + response.errors[0].detail);
+			} else {
+				toastr.success('设置成功');
 			}
 		})
 		.error(function(response) {
-			toastr.error("设置失败, 网络连接不正常");
+			toastr.error('设置失败, 网络连接不正常');
 		});
-	}
+	};
 
-	$scope.setStrengthen = function(n,isHover){
+	$scope.setStrengthen = function(n, isHover) {
 		$scope.strengthenHover = n;
-		if(!isHover){
+		if (!isHover) {
 			$scope.preference.strengthen = n;
 			$scope.changePreference({
-				target:'strengthen',
-				strengthen:n
+				target: 'strengthen',
+				strengthen: n
 			});
 		}
-	}
+	};
 
-	$scope.setEmbedLevel = function(n){
+	$scope.setEmbedLevel = function(n) {
 		$scope.preference.embedLevel = n;
 		$scope.changePreference({
-			target:'magicStoneLevel',
-			magicStoneLevel:n
+			target: 'magicStoneLevel',
+			magicStoneLevel: n
 		});
-	}
+	};
 }]);

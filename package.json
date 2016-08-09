@@ -1,0 +1,25 @@
+{
+  "name": "j3pz-web",
+  "version": "1.0.0",
+  "description": "剑网3配装器前端代码仓库",
+  "main": "fis-conf.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ziofat/j3pz-2016-web.git"
+  },
+  "keywords": [
+    "剑网3"
+  ],
+  "author": "ziofat",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ziofat/j3pz-2016-web/issues"
+  },
+  "homepage": "https://github.com/ziofat/j3pz-2016-web#readme",
+  "devDependencies": {
+    "eslint": "^3.2.2"
+  }
+}

@@ -1,8 +1,8 @@
 /* @require /components/config/config.js */
 var Buff = {
-	createNew:function(buffData) {
+	createNew: function(buffData) {
 		var buff = {};
-		var buffTypeList = ["Qixue","OrdinaryBuff","InfightBuff","Food"];
+		var buffTypeList = ['Qixue', 'OrdinaryBuff', 'InfightBuff', 'Food'];
 		/* 数据 */
 		buff.id = buffData.id;
 		buff.dataPercent = buffData.dataP;
@@ -16,10 +16,10 @@ var Buff = {
 		buff.conflict = buffData.conflict;
 		buff.getData = function(prefix) {
 			// 获取数据
-			if(prefix in buff.data) return buff.data[prefix];
-			else return 0;
+			if (prefix in buff.data) return buff.data[prefix];
+			return 0;
 		};
-		buff.setData = function(prefix,value) {
+		buff.setData = function(prefix, value) {
 			// 设置数据
 			buff.data[prefix] = value;
 		};

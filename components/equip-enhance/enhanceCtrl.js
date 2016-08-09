@@ -1,46 +1,46 @@
 /* @require /components/config/config.js */
-app.controller('EnhanceController',['$scope','$rootScope','toastr','$http',function($scope,$rootScope,toastr,$http){
+app.controller('EnhanceController', ['$scope', '$rootScope', 'toastr', '$http', function($scope, $rootScope, toastr, $http) {
 	$scope.ctrl = {};
 	$scope.ctrl.enhanceId = 0;
-	$scope.init = function(){
+	$scope.init = function() {
 		$scope.ctrl.v = $rootScope.equips[$rootScope.focus].jinglian.strengthen;
 		$scope.ctrl.maxV = $rootScope.equips[$rootScope.focus].data.strengthen;
-	}
-	$scope.ok = function(){
+	};
+	$scope.ok = function() {
 		$scope.ctrl.enhanceId = $rootScope.enhanceLists[$rootScope.focus].setAs.id;
-		$scope.$emit('setEnhance',$scope.ctrl.enhanceId);
-	}
-	$scope.setStrengthen = function(x,isClick){
-		if(isClick) $scope.ctrl.v = x;
+		$scope.$emit('setEnhance', $scope.ctrl.enhanceId);
+	};
+	$scope.setStrengthen = function(x, isClick) {
+		if (isClick) $scope.ctrl.v = x;
 		$rootScope.equips[$rootScope.focus].setStrengthen(x);
-	}
-	$scope.resetStrengthen = function(){
-		$scope.setStrengthen($scope.ctrl.v,true);
-	}
-	$scope.getEnhanceList = function(){
-		if(!$rootScope.enhanceLists[$rootScope.focus].isCached){
+	};
+	$scope.resetStrengthen = function() {
+		$scope.setStrengthen($scope.ctrl.v, true);
+	};
+	$scope.getEnhanceList = function() {
+		if (!$rootScope.enhanceLists[$rootScope.focus].isCached) {
 			var menpai = $rootScope.menpai.name;
-			var focus = $rootScope.focus.split("_")[0];
+			var focus = $rootScope.focus.split('_')[0];
 			var focusId = $rootScope.focus;
-			$http.get(config.apiBase+'enhance?position='+focus+'&school='+menpai)
-			.success(function(response){
-				if(response.errors) {
+			$http.get(config.apiBase + 'enhance?position=' + focus + '&school=' + menpai)
+			.success(function(response) {
+				if (response.errors) {
 					toastr.error(response.errors[0].detail);
-				}else{
+				} else {
 					response = response.data;
 					$rootScope.enhanceLists[focusId].list = [];
-					angular.forEach(response, function(value,key){
+					angular.forEach(response, function(value, key) {
 						$rootScope.enhanceLists[focusId].list.push(value);
 					});
 					$rootScope.enhanceLists[focusId].isCached = true;
 				}
 			})
-			.error(function(){
-				toastr.error("载入附魔列表失败,请重试");
+			.error(function() {
+				toastr.error('载入附魔列表失败,请重试');
 			});
 		}
 	};
-	$scope.$on('openEnhance',function(e){
+	$scope.$on('openEnhance', function(e) {
 		$scope.getEnhanceList();
 		$scope.init();
 	});
