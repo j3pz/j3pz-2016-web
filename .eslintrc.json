@@ -7,7 +7,8 @@
 		"app": false,
 		"config": false,
 		"angular": false,
-		"$": false
+		"$": false,
+		"fis": false
 	},
 	"env": {
 		"browser": true,
