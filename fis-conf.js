@@ -13,14 +13,17 @@ fis.set('project.ignore',
 	]
 );
 
-fis.match('*', {
-	// deploy: fis.plugin('local-deliver', {
-	// 	to: 'F:\\workspace\\apiv2-node\\public'
-	// })
+fis.media('hz-test').match('*', {
 	deploy: fis.plugin('http-push', {
 		receiver: 'http://121.41.87.72:8999/receiver',
 		// 远端目录
 		to: '/alidata/www/j3pz/public/'
+	})
+});
+
+fis.media('local').match('*', {
+	deploy: fis.plugin('local-deliver', {
+		to: 'F:\\workspace\\apiv2-node\\public'
 	})
 });
 
