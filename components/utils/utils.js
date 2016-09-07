@@ -593,7 +593,7 @@ app.service('Utils', ['$rootScope', function($rootScope) {
 		$rootScope.results.physicsShield = $rootScope.results.physicsShield.toFixed(2) - -1 * buffFinalValue.physicsShield.toFixed(2);
 		// 御劲
 		$rootScope.results.toughness = Math.floor((results.toughness + buffBaseValue.toughness) * (1 + buffPercentValue.toughness / 100));
-		$rootScope.results.toughness = $rootScope.results.toughness / ($rootScope.results.toughness + 4143.92) * 100;
+		$rootScope.results.toughness = $rootScope.results.toughness / 4143.92 * 100;
 		$rootScope.results.toughness = $rootScope.results.toughness.toFixed(2) - -1 * buffFinalValue.toughness.toFixed(2);
 		// 化劲
 		$rootScope.results.huajing = Math.floor((results.huajing + 244 + buffBaseValue.huajing) * (1 + buffPercentValue.huajing / 100));
