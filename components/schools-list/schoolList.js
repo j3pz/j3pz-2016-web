@@ -12,6 +12,7 @@ app.controller('SchoolListCtrl', ['$scope', function($scope) {
 		{name: '丐帮', icon: 'jx3icon-gb', xinfa: 1, type2: 'dps',	xinfa1: 'xiaochen',	xinfa2: '',			xinfaName1: '笑尘诀',	xinfaName2: '',			color: '#783A18', size: 64, hover: false},
 		{name: '藏剑', icon: 'jx3icon-cj', xinfa: 2, type2: 'dps',	xinfa1: 'cangjian',	xinfa2: 'cangjian',	xinfaName1: '问水决',	xinfaName2: '山居剑意',	color: '#E4B906', size: 64, hover: false},
 		{name: '苍云', icon: 'jx3icon-sd', xinfa: 2, type2: 't',	xinfa1: 'fenshan',	xinfa2: 'tiegu',		xinfaName1: '分山劲',	xinfaName2: '铁骨衣',	color: '#565656', size: 64, hover: false},
-		{name: '长歌', icon: 'jx3icon-cg', xinfa: 2, type2: 'hps',	xinfa1: 'mowen',		xinfa2: 'xiangzhi',	xinfaName1: '莫问',		xinfaName2: '相知',		color: '#44919F', size: 64, hover: false}
+		{name: '长歌', icon: 'jx3icon-cg', xinfa: 2, type2: 'hps',	xinfa1: 'mowen',		xinfa2: 'xiangzhi',	xinfaName1: '莫问',		xinfaName2: '相知',		color: '#44919F', size: 64, hover: false},
+		{name: '霸刀', icon: 'jx3icon-bd', xinfa: 1, type2: 'dps',	xinfa1: 'badao',		xinfa2: '',	xinfaName1: '北傲诀',		xinfaName2: '',		color: '#5064E8', size: 64, hover: false}
 	];
 }]);
