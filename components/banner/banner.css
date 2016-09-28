@@ -1,3 +1,4 @@
 .img-backdrop{
-	background-image: url('banner.jpg')
+	background-image: url('banner.jpg');
+	background-position: 0 0;
 }
