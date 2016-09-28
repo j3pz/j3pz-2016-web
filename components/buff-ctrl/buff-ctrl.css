@@ -18,11 +18,22 @@
 	margin-top: -1px;
 	margin-left: -1px;
 }
-.bufficon{
+.buff-icon{
 	width: 45px;
 	height: 45px;
 }
 
+.buff-title{
+	font-size: 11px;
+}
+
 .dropdown-submenu:hover>.dropdown-menu {
 	display: block;
+}
+
+.buff-setting-list {
+	margin-top: 8px;
+}
+.buff-setting-list > .row > .buff-icon{
+	display: inline-block;
 }

@@ -19,8 +19,8 @@
 				<div class="card-body tab-content style-default-bright">
 					<div class="tab-pane active" id="buff">
 						<div class="row">
-							<div class="bufficon col-md-3 active-buff" ng-repeat="buff in addedBuff" ng-if="buff.type!='Qixue'" ng-style="{background:'url(/icons/'+buff.icon+'.png) 0/45px no-repeat'}" ng-click="setBuff(buff.id,false)" title="{{buff.desc}}" data-toggle="tooltip" data-container="body"></div>
-							<button id="add-buff" type="button" class="btn btn-raised btn-default-bright dropdown-toggle" style="width:45px;height:45px;" title="添加气劲" data-toggle="dropdown" data-container="body">
+							<div class="buff-icon col-md-3 active-buff" ng-repeat="buff in addedBuff" ng-if="buff.type!='Qixue'" ng-style="{background:'url(/icons/'+buff.icon+'.png) 0/45px no-repeat'}" ng-click="setBuff(buff.id,false)" title="{{buff.desc}}" data-toggle="tooltip" data-container="body"></div>
+							<button id="add-buff" type="button" class="btn btn-raised btn-default-bright dropdown-toggle" style="width:45px;height:45px;" title="添加气劲" data-toggle="dropdown" data-container="body" ng-click="openBuffModal()">
 								<b><span class="md md-add" aria-hidden="true"></span></b>
 							</button>
 						</div>
@@ -36,7 +36,9 @@
 						</div>
 					</div>
 					
-				</div><!--end .card-body -->
+				</div>
+				<!-- 模态框:保存新方案命名 -->
+				<link rel="import" href="../components/modals/buffList.tmpl.html?__inline">
 			</div><!--end .card -->
 		</div>
 	</div>

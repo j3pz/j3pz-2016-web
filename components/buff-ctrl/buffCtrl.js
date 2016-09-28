@@ -5,6 +5,9 @@ app.controller('BuffController', ['$rootScope', '$scope', 'Utils', function($roo
 		{id: 'InfightBuff', name: '战时增益气劲'},
 		{id: 'Food', name: '小药'}
 	];
+	$scope.openBuffModal = function() {
+		$('#buffModal').modal();
+	};
 	$scope.init = function() {
 		$scope.qixueList = [];
 		$scope.buffList = {
@@ -15,10 +18,12 @@ app.controller('BuffController', ['$rootScope', '$scope', 'Utils', function($roo
 		$scope.addedBuff = [];
 		for (var i = 0; i < $rootScope.buffController.buff.length; i++) {
 			$rootScope.buffController.buff[i].isCheck = $rootScope.buffController.checkActive($rootScope.buffController.buff[i].id);
-			if ($rootScope.buffController.buff[i].isCheck && $rootScope.buffController.buff[i].type != 'Qixue') $scope.addedBuff.push($rootScope.buffController.buff[i]);
-			if ($rootScope.buffController.buff[i].type == 'Qixue')
+			if ($rootScope.buffController.buff[i].isCheck && $rootScope.buffController.buff[i].type != 'Qixue') {
+				$scope.addedBuff.push($rootScope.buffController.buff[i]);
+			}
+			if ($rootScope.buffController.buff[i].type == 'Qixue') {
 				$scope.qixueList.push($rootScope.buffController.buff[i]);
-			else {
+			} else {
 				$scope.buffList[$rootScope.buffController.buff[i].type].push($rootScope.buffController.buff[i]);
 			}
 		}
