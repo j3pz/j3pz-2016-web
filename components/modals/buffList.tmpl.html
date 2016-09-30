@@ -1,0 +1,57 @@
+<!-- @require buffList.js -->
+<div class="modal fade" id="buffModal" tabindex="-1" role="dialog" aria-labelledby="BuffModal" ng-controller="BuffCtrl" data-id="">
+	<div class="modal-dialog modal-md">
+		<!-- <div class="modal-content"> -->
+			<div class="card card-underline">
+				<div class="card-head">
+					<header>增益气劲选择</header>
+					<ul class="nav nav-tabs pull-right" data-toggle="tabs">
+						<li class="active"><a href="#ordinary">普通气劲</a></li>
+						<li><a href="#infight">战时气劲</a></li>
+						<li><a href="#food">小吃小药</a></li>
+						<li><a href="#formation">小队阵法</a></li>
+					</ul>
+				</div>
+				<div class="card-body tab-content">
+					<div class="tab-pane active" id="ordinary">
+						<div class="row">
+							<div class="col-xs-2" ng-repeat="buff in buffList.OrdinaryBuff" title="{{buff.desc}}" data-toggle="tooltip" data-container="body" ng-click="setBuff(buff.id,true)">
+								<div class="buff-icon" ng-style="{background:'url(/icons/'+buff.icon+'.png) 0/45px no-repeat'}"></div>
+								<div class="buff-title">{{buff.name}}</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane" id="infight">
+						<div class="row">
+							<div class="col-xs-2" ng-repeat="buff in buffList.InfightBuff" title="{{buff.desc}}" data-toggle="tooltip" data-container="body" ng-click="setBuff(buff.id,true)">
+								<div class="buff-icon" ng-style="{background:'url(/icons/'+buff.icon+'.png) 0/45px no-repeat'}"></div>
+								<div class="buff-title">{{buff.name}}</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane" id="food">
+						<div class="row">
+							<div class="col-xs-2" ng-repeat="buff in buffList.Food" title="{{buff.desc}}" data-toggle="tooltip" data-container="body" ng-click="setBuff(buff.id,true)">
+								<div class="buff-icon" ng-style="{background:'url(/icons/'+buff.icon+'.png) 0/45px no-repeat'}"></div>
+								<div class="buff-title">{{buff.name}}</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane" id="formation">
+						<!-- <div class="buff-icon" ng-repeat="buff in buffList[3]" ng-style="{background:'url(/icons/'+buff.icon+'.png) 0/45px no-repeat'}" title="{{buff.desc}}" data-toggle="tooltip" data-container="body" ng-click="setBuff(buff.id,true)"></div> -->
+					</div>
+					<div class="well buff-setting-list">
+						<div class="row">
+							<div class="buff-icon active-buff" ng-repeat="buff in addedBuff" ng-if="buff.type!='Qixue'" ng-style="{background:'url(/icons/'+buff.icon+'.png) 0/45px no-repeat'}" ng-click="setBuff(buff.id,false)" title="{{buff.desc}}" data-toggle="tooltip" data-container="body"></div>
+						</div>
+					</div>
+				</div>
+				<div class="card-actionbar">
+					<div class="card-actionbar-row">
+						<button type="button" class="btn ink-reaction btn-raised btn-primary" data-dismiss="modal">完成</button>
+					</div>
+				</div>
+			</div>
+		<!-- </div> -->
+	</div>
+</div>
