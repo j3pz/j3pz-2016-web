@@ -7,6 +7,7 @@ fis.set('project.ignore',
 		'apiv2-node/**',
 		'node_modules',
 		'icons/',
+		'css/fonts/',
 		'fis-conf.js',
 		'j3pz-2016-web.sublime-project',
 		'j3pz-2016-web.sublime-workspace'
@@ -45,6 +46,10 @@ fis.match('/pages/upgrade.html', {
 
 fis.match('/pages/user.html', {
 	release: 'user/index.html'
+});
+
+fis.match('/pages/reset.html', {
+	release: 'reset/index.html'
 });
 
 fis.match('/tools/(*)(.{html,js})', {
