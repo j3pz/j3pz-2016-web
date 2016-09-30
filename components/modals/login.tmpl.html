@@ -15,18 +15,25 @@
 								<input type="text" class="form-control" name="email" type="text" ng-model="user.mail">
 								<label for="email">邮箱</label>
 							</div>
-							<div class="form-group">
+							<div class="form-group" ng-show="notReset">
 								<input type="password" class="form-control" name="pswd" type="password" ng-model="user.password">
 								<label for="pswd">密码</label>
-								<p class="help-block"><a href="#">忘记密码?</a></p>
+								<p class="help-block"><a href ng-click="notReset = false">忘记密码?</a></p>
 							</div>
 							<br>
-							<div class="row">
-								<div class="col-xs-6 text-left">
-
-								</div>
+							<div class="row" ng-show="notReset">
+								<div class="col-xs-6 text-left"></div>
 								<div class="col-xs-6 text-right">
 									<button class="btn btn-accent btn-raised ink-reaction" ng-click="login(user)" data-loading-text="登录中...">登录</button>
+								</div>
+							</div>
+							<div class="row" ng-show="!notReset">
+								<div class="col-xs-6 text-left">
+									<small>请确认您在邮箱项中填入了正确的邮箱后，点击右侧重置按钮。如果邮箱正确，您将会收到一封密码重置邮件。</small>
+								</div>
+								<div class="col-xs-6 text-right">
+									<button class="btn btn-accent btn-raised ink-reaction" ng-click="notReset = true">返回登录</button>
+									<button class="btn btn-accent btn-raised ink-reaction" ng-click="resetPass()">重置</button>
 								</div>
 							</div>
 						</form>

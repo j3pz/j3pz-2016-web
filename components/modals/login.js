@@ -68,4 +68,23 @@ app.controller('LoginCtrl', ['$rootScope', '$scope', 'toastr', '$http', '$interv
 		});
 	};
 	$scope.weiboOauthData = {};
+
+	$scope.notReset = true;
+
+	$scope.resetPass = function() {
+		$http({
+			url: config.apiBase + 'user/reset',
+			method: 'POST',
+			data: {email: $rootScope.user.mail},
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+		.success(function(response) {
+			toastr.info('邮件发送成功');
+		})
+		.error(function(response) {
+			toastr.error(response.errors[0].detail);
+		});
+	};
 }]);
