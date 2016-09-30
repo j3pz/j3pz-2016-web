@@ -1,4 +1,5 @@
-app.controller('PurchaseCtrl', ['$scope', '$rootScope', function($scope, $rootScope) {
+app.controller('PurchaseCtrl', ['$scope', '$rootScope', '$http', 'toastr',
+	function($scope, $rootScope, $http, toastr) {
 	$scope.itemList = {
 		'1': {id: 1, price: '8.00', name: '1 格配装位', desc: '适用于所有用户，购买后配装位置加一', rate: 3, each: '8', image: 'shop1.png', condition: '<60'},
 		'2': {id: 2, price: '15.00', name: '2 格配装位', desc: '适用于所有用户，购买后配装位置加二', rate: 4, each: '7.5', image: 'shop2.png', condition: '<59'},
@@ -14,4 +15,19 @@ app.controller('PurchaseCtrl', ['$scope', '$rootScope', function($scope, $rootSc
 		}
 		$scope.$apply();
 	});
+	$scope.buy = function(itemId) {
+		var token = localStorage.getItem('token');
+		$http.post(config.apiBase + 'user/order', {
+			item: itemId
+		}, {
+			headers: {'Authorization': 'Bearer ' + token}
+		})
+		.success(function(response) {
+			$('#purchaseModal').modal('hide');
+			window.location.href = response.data.url;
+		})
+		.error(function(response) {
+			toastr.error(response.errors[0].details);
+		});
+	};
 }]);
