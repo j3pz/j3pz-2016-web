@@ -174,6 +174,17 @@ var menpaiList = {
 		'basePhysicsShield': 25,
 		'tixingOption': [1, 1, 1, 1]
 	},
+	'beiao': {
+		'name': 'beiao',
+		'type': 'strength',
+		'baseHPlus': 1.2,
+		'baseAttack': 320,
+		'baseHit': 71,
+		'basePhysicsShield': 30,
+		'baseAttackPlus': 1.55,
+		'baseOvercomePlus': 0.19,
+		'tixingOption': [1, 1, 1, 1]
+	},
 	'fenshan': {
 		'name': 'fenshan',
 		'type': 'agility',
