@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="J3pzReset"  xmlns:wb="http://open.weibo.com/wb">
+	<head>
+		<title>剑网3全职业配装器 - 密码重置</title>
+		<meta charset="utf-8">
+		<base href="/">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="剑网3全职业配装器为剑网3玩家提供完善、准确的配装工具。">
+		<meta name="author" content="胖叔叔">
+		<meta name="keywords" content="剑网3,西山居,剑侠情缘,配装器,装备">
+		<!--
+			@require '../css/theme/bootstrap.css'
+			@require '../css/theme/materialadmin.css'
+			@require '../css/theme/font-awesome.min.css'
+			@require '../css/theme/material-design-iconic-font.min.css'
+			@require '../css/theme/libs/toastr/toastr.css'
+			@require '../components/common/common.css'
+			@require '../css/all.css'
+		-->
+		<!-- STYLE_PLACEHOLDER -->
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="js/libs/utils/html5shiv.js"></script>
+		<script type="text/javascript" src="js/libs/utils/respond.min.js"></script>
+		<![endif]-->
+		<!-- Google 统计代码 -->
+		<script rel="text/javascript" src="../components/google-analystics/googleAnalystics.js?__inline"></script><!--ignore-->
+		<!-- 浏览器兼容性检查 -->
+		<script rel="text/javascript" src="../components/compatibility-check/compatibilityCheck.js?__inline"></script><!--ignore-->
+	</head>
+
+	<body class="menubar-hoverable header-fixed">
+		<header id="header">
+			<!-- 导航栏 -->
+			<link rel="import" href="../components/header/header.tmpl.html?__inline">
+		</header>
+
+		<div class="offcanvas">
+		</div>
+		<div id="content" class="content">
+			<section ng-cloak>
+				<div class="section-body">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-12">
+								<h1 class="text-primary">剑网3 配装器</h1>
+							</div>
+							<div class="col-lg-8">
+								<article class="margin-bottom-xxl">
+									<p class="lead">
+										剑网3配装器是由玩家胖叔叔开发，用于剑网3游戏配装的游戏辅助工具。侠士可在选定心法后，针对该心法选择装备，并对装备进行精炼、镶嵌、洗炼、淬炼等各项操作，完美模拟游戏角色的配装过程，并计算出游戏角色的预期属性。
+									</p>
+									<p class="lead">
+										剑网3配装器于2013年10月开始设计，并得到了万花谷诸多有识之士的建议和帮助。于2013年10月27日正式上线。
+									</p>
+								</article>
+							</div>
+						</div>
+						<h2 class="text-light text-center">配装器大事记</h2>
+						<br>
+						<ul class="timeline collapse-md">
+							<li class="timeline-inverted">
+								<div class="timeline-circ circ-xl style-primary-gradient"><span class="fa fa-calendar"></span></div>
+								<div class="timeline-entry">
+									<div class="card style-default-light">
+										<div class="card-body small-padding">
+											<span class="text-medium">配装器上线<span class="text-primary">三周年</span>。</span><br>
+											<span class="opacity-50">
+												2016 年 10 月 27 日
+											</span>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-circ"></div>
+								<div class="timeline-entry">
+									<div class="card style-default-light">
+										<div class="card-body small-padding">
+											<p>
+												<span class="text-medium">配装器 <span class="text-primary">3.0 版本</span> 上线，全新界面，支持霸刀。</span><br>
+												<span class="opacity-50">
+													2016 年 10 月 17 日
+												</span>
+											</p>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="timeline-inverted">
+								<div class="timeline-circ style-default-dark"></div>
+								<div class="timeline-entry">
+									<div class="card style-default-dark">
+										<div class="card-body small-padding">
+											<span class="text-medium">新产品 <a class="text-primary" href="https://www.j3pz.com/dpsSim">万花输出循环模拟器</a> 问世</span><br>
+											<span class="opacity-50">
+												2015 年 12 月 31 日
+											</span>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-circ circ-xl style-primary-gradient"><span class="fa fa-calendar"></span></div>
+								<div class="timeline-entry">
+									<div class="card style-default-light">
+										<div class="card-body small-padding">
+											<span class="text-medium">配装器上线<span class="text-primary">两周年</span>，支持长歌门。</span><br>
+											<span class="opacity-50">
+												2015 年 10 月 26 日
+											</span>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="timeline-inverted">
+								<div class="timeline-circ circ-lg"><span class="glyphicon glyphicon-phone"></span></div>
+								<div class="timeline-entry">
+									<div class="card style-default-light">
+										<div class="card-body small-padding">
+											<span class="text-medium">配装器 <span class="text-primary">2.1 版本</span> 上线，支持手机配装、增益气劲等诸多功能</span><br>
+											<span class="opacity-50">
+												2015 年 8 月 28 日
+											</span>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-circ circ-lg style-primary-gradient"><span class="md md-people"></span></div>
+								<div class="timeline-entry">
+									<div class="card style-default-light">
+										<div class="card-body small-padding">
+											<span class="text-medium">配装器月活跃用户数突破 <span class="text-primary">200, 000</span>。</span><br>
+											<span class="opacity-50">
+												2015 年 6 月 24 日
+											</span>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="timeline-inverted">
+								<div class="timeline-circ circ-lg"><span class="md md-people"></span></div>
+								<div class="timeline-entry">
+									<div class="card style-default-light">
+										<div class="card-body small-padding">
+											<span class="text-medium">配装器日活跃用户数突破 <span class="text-primary">20, 000</span>。</span><br>
+											<span class="opacity-50">
+												2015 年 4 月 28 日
+											</span>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-circ circ-lg style-primary-gradient"><span class="md md-people"></span></div>
+								<div class="timeline-entry">
+									<div class="card style-default-light">
+										<div class="card-body small-padding">
+											<span class="text-medium">配装器月活跃用户数突破 <span class="text-primary">100, 000</span>。</span><br>
+											<span class="opacity-50">
+												2014 年 12 月 8 日
+											</span>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="timeline-inverted">
+								<div class="timeline-circ circ-lg"><span class="md md-people"></span></div>
+								<div class="timeline-entry">
+									<div class="card style-default-light">
+										<div class="card-body small-padding">
+											<span class="text-medium">配装器日活跃用户数突破 <span class="text-primary">10, 000</span>。</span><br>
+											<span class="opacity-50">
+												2014 年 12 月 1 日
+											</span>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-circ"></div>
+								<div class="timeline-entry">
+									<div class="card style-default-light">
+										<div class="card-body small-padding">
+											<span class="text-medium">配装器启用新域名 <span class="text-primary">j3pz.com</span></span><br>
+											<span class="opacity-50">
+												2014 年 9 月 24 日
+											</span>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="timeline-inverted">
+								<div class="timeline-circ circ-lg style-default-dark"><span class="glyphicon glyphicon-plus-sign"></span></div>
+								<div class="timeline-entry">
+									<div class="card style-default-dark">
+										<div class="card-body small-padding">
+											<span class="text-medium">配装器 <span class="text-primary">2.0 版本</span> 上线，采用了更现代的界面，更丰富的交互手法，支持套装特效。</span><br>
+											<span class="opacity-50">
+												2014 年 8 月 9 日
+											</span>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-circ circ-lg"><span class="md md-people"></span></div>
+								<div class="timeline-entry">
+									<div class="card style-default-light">
+										<div class="card-body small-padding">
+											<span class="text-medium">配装器日活跃用户数突破 <span class="text-primary">5, 000</span>。</span><br>
+											<span class="opacity-50">
+												2014 年 5 月 15 日
+											</span>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="timeline-inverted">
+								<div class="timeline-circ circ-lg"><span class="md md-people"></span></div>
+								<div class="timeline-entry">
+									<div class="card style-default-light">
+										<div class="card-body small-padding">
+											<span class="text-medium">配装器月活跃用户数突破 <span class="text-primary">50, 000</span>。</span><br>
+											<span class="opacity-50">
+												2014 年 5 月 1 日
+											</span>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-circ circ-xl style-primary-gradient"><span class="glyphicon glyphicon-plus-sign"></span></div>
+								<div class="timeline-entry">
+									<div class="card style-default-light">
+										<div class="card-body small-padding">
+											<span class="text-medium">配装器正式支持防御心法，完成<span class="text-primary">全职业</span>支持。</span><br>
+											<span class="opacity-50">
+												2014 年 2 月 20 日
+											</span>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="timeline-inverted">
+								<div class="timeline-circ"></div>
+								<div class="timeline-entry">
+									<div class="card style-default-light">
+										<div class="card-body small-padding">
+											<span class="text-medium">配装器支持<span class="text-primary">治疗</span>心法。</span><br>
+											<span class="opacity-50">
+												2013 年 11 月 28 日
+											</span>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<div class="timeline-circ"></div>
+								<div class="timeline-entry">
+									<div class="card style-default-light">
+										<div class="card-body small-padding">
+											<span class="text-medium">配装器支持<span class="text-primary">外功</span>心法。</span><br>
+											<span class="opacity-50">
+												2013 年 11 月 12 日
+											</span>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="timeline-inverted">
+								<div class="timeline-circ circ-xl"><span class="glyphicon glyphicon-plus-sign"></span></div>
+								<div class="timeline-entry">
+									<div class="card style-default-light">
+										<div class="card-body small-padding">
+											<span class="text-medium">配装器 <span class="text-primary">1.0 版本</span>正式上线，支持四大元气心法。</span><br>
+											<span class="opacity-50">
+												2013 年 10 月 27 日
+											</span>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+			<div class="push"></div>
+		</div>
+
+		<div id="modals">
+			<!-- 模态框:登录 -->
+			<link rel="import" href="../components/modals/login.tmpl.html?__inline">
+			<!-- 模态框:更新说明 -->
+			<link rel="import" href="../components/modals/update.tmpl.html?__inline">
+		</div>
+		<footer>
+			<!-- 底栏 -->
+			<link rel="import" href="../components/footer/footer.tmpl.html?__inline">
+		</footer>
+
+		<script src="../js/libs/jquery/jquery-1.11.2.min.js" data-framework></script>
+		<script src="../js/libs/bootstrap/bootstrap.min.js" data-framework></script>
+		<script src="../js/libs/angular/angular.min.js" data-framework></script>
+		<script src="../js/libs/angular/angular-aria.min.js" data-framework></script>
+		<script src="../js/libs/icheck/icheck.min.js" data-framework></script>
+		<script src="../js/libs/toastr/angular-toastr.tpls.min.js" data-framework></script>
+		<script src="../js/libs/weibo/wb.js?appkey=4055331331&debug=true" data-framework></script><!--ignore-->
+		<script src="../js/core/source/App.min.js"></script>
+		<script src="reset.js" data-framework></script>
+		<!-- SCRIPT_PLACEHOLDER -->
+	</body>
+</html>
