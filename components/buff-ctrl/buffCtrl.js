@@ -65,6 +65,7 @@ app.controller('BuffController', ['$rootScope', '$scope', 'Utils', function($roo
 			}
 			$scope.addedBuff.push(buff);
 		} else {
+			$('.tooltip').tooltip('destroy');
 			for (var i = 0; i < $scope.addedBuff.length; i++) {
 				if ($scope.addedBuff[i].id == id) {
 					$scope.addedBuff.splice(i, 1);
