@@ -1,7 +1,7 @@
 /* @require /components/config/config.js */
-var app = angular.module('J3Reg', ['ngMessages']);
+var app = angular.module('J3Reg', ['ngMessages','toastr']);
 
-app.controller('RegFormCtrl', ['$scope', '$http', '$httpParamSerializerJQLike', '$window', function($scope, $http, $httpParamSerializerJQLike, $window) {
+app.controller('RegFormCtrl', ['$scope', '$http', '$httpParamSerializerJQLike', '$window', 'toastr', function($scope, $http, $httpParamSerializerJQLike, $window, toastr) {
 	$scope.user = {
 		username: '',
 		email: '',
