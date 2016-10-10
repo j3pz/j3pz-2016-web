@@ -1,4 +1,6 @@
-/* @require /components/config/config.js */
+/* @require /components/config/config.js 
+   @require /js/libs/js-cookie/js.cookie-2.1.3.min.js
+*/
 app.controller('HeaderCtrl', ['$scope', '$http', 'toastr', '$rootScope', '$httpParamSerializerJQLike', '$sce', function($scope, $http, toastr, $rootScope, $httpParamSerializerJQLike, $sce) {
 	$rootScope.isLogin = false;
 	$rootScope.user = {
@@ -42,7 +44,11 @@ app.controller('HeaderCtrl', ['$scope', '$http', 'toastr', '$rootScope', '$httpP
 	}
 
 	var token = localStorage.getItem('token');
-	if (!!token) {
+	var cookie = Cookies.get('token');
+	if (!token || !cookie) {
+		localStorage.removeItem('token');
+		Cookies.remove('token');
+	} else {
 		getUserInfo(token);
 	}
 
@@ -65,40 +71,13 @@ app.controller('HeaderCtrl', ['$scope', '$http', 'toastr', '$rootScope', '$httpP
 	$scope.checkUpdate();
 
 	$scope.logout = function() {
-		// $http.get(config.apiBase+'logout.php');
 		$rootScope.isLogin = false;
 		localStorage.removeItem('token');
+		Cookies.remove('token');
 		$rootScope.user = {
 			mail: '',
 			password: '',
 			name: ''
 		};
-	};
-	$scope.forgetPass = function() {
-		var modalInstance = $modal.open({
-			animation: true,
-			templateUrl: 'templates/reset.html',
-			controller: 'ModalInstanceCtrl'
-		});
-
-		modalInstance.result.then(function(email) {
-			$http({
-				url: config.apiBase + 'sendMail.php',
-				method: 'POST',
-				data: $httpParamSerializerJQLike({mail: email}),
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded'
-				}
-			})
-			.success(function(response) {
-				if (response == 'noreg') {
-					toastr.warning('该邮箱没有注册');
-				} else {
-					toastr.success(response);
-				}
-			});
-		}, function() {
-			console.log('Reset Password Cancelled');
-		});
 	};
 }]);
