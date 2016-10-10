@@ -149,34 +149,31 @@ app.controller('ChangeEquipController', ['$scope', '$rootScope', '$http', '$sce'
 		if (!$rootScope.equipLists[$rootScope.focus].isCached) {
 			var menpai = $rootScope.menpai.name;
 			var focus = $rootScope.focus.split('_')[0];
+			var focusId = $rootScope.focus;
 			$http.get(config.apiBase + 'equip?position=' + focus + '&school=' + menpai)
 			.success(function(response) {
-				if (response.errors) {
-					toastr.error(response.errors[0].detail);
-				} else {
-					response = response.data;
-					var qcList = [];
-					var commonList = [];
-					angular.forEach(response, function(value, key) {
-						var filterArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-						for (var i = 0; i < value.filter.length; i++) {
-							var idx = $scope.itemFilterKey.indexOf(value.filter[i]);
-							filterArray[idx] = 1;
-						}
-						value.filter = filterArray;
-						if (value.name.indexOf('无渊') === 0) {
-							qcList.push(value);
-						} else {
-							commonList.push(value);
-						}
-					});
-					$rootScope.equipLists[$rootScope.focus].list = commonList.concat(qcList);
-					$rootScope.equipLists[$rootScope.focus].isCached = true;
-				}
+				response = response.data;
+				var qcList = [];
+				var commonList = [];
+				angular.forEach(response, function(value, key) {
+					var filterArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+					for (var i = 0; i < value.filter.length; i++) {
+						var idx = $scope.itemFilterKey.indexOf(value.filter[i]);
+						filterArray[idx] = 1;
+					}
+					value.filter = filterArray;
+					if (value.name.indexOf('无渊') === 0) {
+						qcList.push(value);
+					} else {
+						commonList.push(value);
+					}
+				});
+				$rootScope.equipLists[focusId].list = commonList.concat(qcList);
+				$rootScope.equipLists[focusId].isCached = true;
 				$scope.filter();
 			})
-			.error(function() {
-				toastr.error('载入装备列表失败,请重试');
+			.error(function(response) {
+				toastr.error('载入装备列表失败，' + response.errors[0].detail);
 			});
 		}
 	};

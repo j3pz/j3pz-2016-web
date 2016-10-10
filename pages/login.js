@@ -12,12 +12,8 @@ app.controller('LoginCtrl', ['$scope', 'toastr', '$http', '$interval', '$locatio
 			}
 		})
 		.success(function(response) {
-			if (response.errors) {
-				toastr.error('登录失败, ' + response.errors[0].detail);
-			} else {
-				toastr.info('登录成功，正在跳转');
-				$scope.loginSuccess(response.data);
-			}
+			toastr.info('登录成功，正在跳转');
+			$scope.loginSuccess(response.data);
 		})
 		.error(function(response) {
 			toastr.error('登录失败' + response.errors[0].detail);

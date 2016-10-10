@@ -33,7 +33,8 @@ app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', function(
 		xisui: '洗髓经',
 		mingzun: '明尊琉璃体',
 		tielao: '铁牢律',
-		tiegu: '铁骨衣'
+		tiegu: '铁骨衣',
+		beiao: '北傲诀'
 	};
 
 	$scope.getCaseList = function() {
@@ -43,21 +44,20 @@ app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', function(
 			headers: {'Authorization': 'Bearer ' + token}
 		})
 		.success(function(response) {
-			if (response.errors) {
-				toastr.error(response.errors[0].detail);
-			} else {
-				response = response.data;
-				angular.forEach(response, function(value, key) {
-					var savedCase = {
-						name: value.name,
-						id: value.id,
-						school: schoolMap[value.school],
-						isEditing: false,
-						newName: value.name
-					};
-					this.push(savedCase);
-				}, $scope.caseList);
-			}
+			response = response.data;
+			angular.forEach(response, function(value, key) {
+				var savedCase = {
+					name: value.name,
+					id: value.id,
+					school: schoolMap[value.school],
+					isEditing: false,
+					newName: value.name
+				};
+				this.push(savedCase);
+			}, $scope.caseList);
+		})
+		.error(function(response) {
+			toastr.error(response.errors[0].detail);
 		});
 	};
 
@@ -83,14 +83,10 @@ app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', function(
 			$http.put(config.apiBase + 'user/password', change, {
 				headers: {'Authorization': 'Bearer ' + token}
 			}).success(function(response) {
-				if (response.errors) {
-					toastr.error('更改失败, ' + response.errors[0].detail);
-				} else {
-					toastr.success('更改成功');
-				}
+				toastr.success('更改成功');
 			})
 			.error(function(response) {
-				toastr.error('更改失败, 网络连接不正常');
+				toastr.error('更改失败, ' + response.errors[0].detail);
 			});
 		} else {
 			toastr.error('两次输入密码不一致');
@@ -108,15 +104,11 @@ app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', function(
 		$http.put(config.apiBase + 'user/case/' + csid + '/name', {name: newName}, {
 			headers: {'Authorization': 'Bearer ' + token}
 		}).success(function(response) {
-			if (response.errors) {
-				toastr.error('更改失败, ' + response.errors[0].detail);
-			} else {
-				toastr.success('更改成功');
-				savedCase.name = newName;
-			}
+			toastr.success('更改成功');
+			savedCase.name = newName;
 		})
 		.error(function(response) {
-			toastr.error('更改失败, 网络连接不正常');
+			toastr.error('更改失败, ' + response.errors[0].detail);
 		})
 		.finally(function() {
 			savedCase.isEditing = false;
@@ -132,15 +124,11 @@ app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', function(
 		$http.delete(config.apiBase + 'user/case/' + csid, {
 			headers: {'Authorization': 'Bearer ' + token}
 		}).success(function(response) {
-			if (response.errors) {
-				toastr.error('删除失败, ' + response.errors[0].detail);
-			} else {
-				toastr.success('删除成功');
-				$scope.getCaseList();
-			}
+			toastr.success('删除成功');
+			$scope.getCaseList();
 		})
 		.error(function(response) {
-			toastr.error('删除失败, 网络连接不正常');
+			toastr.error('删除失败, ' + response.errors[0].detail);
 		});
 	};
 
@@ -151,35 +139,31 @@ app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', function(
 			headers: {'Authorization': 'Bearer ' + token}
 		})
 		.success(function(response) {
-			if (response.errors) {
-				console.log(response.errors[0].detail);
-			} else {
-				response = response.data;
-				$scope.preference.range = [Number(response.prefer.quality[0]), Number(response.prefer.quality[1])];
-				$scope.preference.embedLevel = response.prefer.magicStoneLevel;
-				$scope.preference.strengthen = response.prefer.strengthen;
-				$scope.strengthenHover = response.prefer.strengthen;
-				var qualitySlider = $('input.slider-input').slider({
-					range: true,
-					min: 450,
-					max: 1100,
-					values: $scope.preference.range,
-					step: 5,
-					tooltip: 'hide'
+			response = response.data;
+			$scope.preference.range = [Number(response.prefer.quality[0]), Number(response.prefer.quality[1])];
+			$scope.preference.embedLevel = response.prefer.magicStoneLevel;
+			$scope.preference.strengthen = response.prefer.strengthen;
+			$scope.strengthenHover = response.prefer.strengthen;
+			var qualitySlider = $('input.slider-input').slider({
+				range: true,
+				min: 450,
+				max: 1100,
+				values: $scope.preference.range,
+				step: 5,
+				tooltip: 'hide'
+			});
+			qualitySlider.slider('setValue', $scope.preference.range);
+			qualitySlider.on('slide', function(event) {
+				$scope.preference.range[0] = event.value[0];
+				$scope.preference.range[1] = event.value[1];
+				$scope.$apply();
+			});
+			qualitySlider.on('slideStop', function(event) {
+				$scope.changePreference({
+					target: 'quality',
+					quality: event.value
 				});
-				qualitySlider.slider('setValue', $scope.preference.range);
-				qualitySlider.on('slide', function(event) {
-					$scope.preference.range[0] = event.value[0];
-					$scope.preference.range[1] = event.value[1];
-					$scope.$apply();
-				});
-				qualitySlider.on('slideStop', function(event) {
-					$scope.changePreference({
-						target: 'quality',
-						quality: event.value
-					});
-				});
-			}
+			});
 		});
 	};
 
@@ -188,14 +172,10 @@ app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', function(
 		$http.put(config.apiBase + 'user/preference', change, {
 			headers: {'Authorization': 'Bearer ' + token}
 		}).success(function(response) {
-			if (response.errors) {
-				toastr.error('设置失败, ' + response.errors[0].detail);
-			} else {
-				toastr.success('设置成功');
-			}
+			toastr.success('设置成功');
 		})
 		.error(function(response) {
-			toastr.error('设置失败, 网络连接不正常');
+			toastr.error('设置失败, ' + response.errors[0].detail);
 		});
 	};
 

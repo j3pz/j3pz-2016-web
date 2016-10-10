@@ -128,15 +128,11 @@ app.controller('PeizhuangCtrl', ['$scope', '$rootScope', '$location', 'Utils', '
 			data: toSave,
 			headers: {'Authorization': 'Bearer ' + token}
 		}).success(function(response) {
-			if (response.errors) {
-				toastr.error(response.errors[0].detail);
-			} else {
-				toastr.success('保存方案成功');
-				if (id == 0) $scope.$broadcast('saveCase');
-			}
+			toastr.success('保存方案成功');
+			if (id == 0) $scope.$broadcast('saveCase');
 		})
 		.error(function(response) {
-			toastr.error('保存方案失败，请重试');
+			toastr.error('保存方案失败，' + response.errors[0].detail);
 		});
 	};
 	$scope.loadCase = function(id) {
@@ -146,64 +142,60 @@ app.controller('PeizhuangCtrl', ['$scope', '$rootScope', '$location', 'Utils', '
 			headers: {'Authorization': 'Bearer ' + token}
 		})
 		.success(function(response) {
-			if (response.errors) {
-				toastr.error(response.errors[0].detail);
-			} else {
-				response = response.data;
-				$rootScope.attributeStone = [Utils.transDBStoneToJsObj(response.attributestone[0]), Utils.transDBStoneToJsObj(response.attributestone[1])];
-				for (var i = 0; i < 2; i++) {
-					if (!response.attributestone[i].level) continue;
-					for (var j = 0; j < 4; j++) {
-						$rootScope.attributeStoneLists[i][j].isSet = j == 3 ? $rootScope.attributeStoneLists[i][2].isSet : response.attributestone[i].attr[j].attribute !== null;
-						$rootScope.attributeStoneLists[i][j].setAs = j == 3 ? response.attributestone[i].name : response.attributestone[i].attr[j].attribute;
-						if (i === 0 && j != 3)$scope.$broadcast('setAttributeStone', j);
-					}
+			response = response.data;
+			$rootScope.attributeStone = [Utils.transDBStoneToJsObj(response.attributestone[0]), Utils.transDBStoneToJsObj(response.attributestone[1])];
+			for (var i = 0; i < 2; i++) {
+				if (!response.attributestone[i].level) continue;
+				for (var j = 0; j < 4; j++) {
+					$rootScope.attributeStoneLists[i][j].isSet = j == 3 ? $rootScope.attributeStoneLists[i][2].isSet : response.attributestone[i].attr[j].attribute !== null;
+					$rootScope.attributeStoneLists[i][j].setAs = j == 3 ? response.attributestone[i].name : response.attributestone[i].attr[j].attribute;
+					if (i === 0 && j != 3)$scope.$broadcast('setAttributeStone', j);
 				}
-				var tixingOptions = [
-					{name: '成男', body: 33, spunk: 32, spirit: 33, strength: 32, agility: 33},
-					{name: '成女', body: 33, spunk: 32, spirit: 33, strength: 32, agility: 33},
-					{name: '萝莉', body: 33, spunk: 32, spirit: 33, strength: 32, agility: 33},
-					{name: '正太', body: 33, spunk: 32, spirit: 33, strength: 32, agility: 33}
-				];
-				$rootScope.role = tixingOptions[parseInt(response.tixing)];
-				$scope.$broadcast('setTixing', $rootScope.role);
-				for (var i = 0; i < positions.length; i++) {
-					$rootScope.focus = positions[i];
-					$rootScope.equipLists[$rootScope.focus].setAs.name = response.equips[$rootScope.focus].equip.name;
-					$rootScope.enhanceLists[$rootScope.focus].setAs.id = response.equips[$rootScope.focus].enhance.P_ID;
-					$scope.setEquipByObj(response.equips[$rootScope.focus].equip, $rootScope.focus);
-					// $rootScope.equips[$rootScope.focus].xilian.level = response.equips[$rootScope.focus].xilian.level;
-					// $rootScope.equips[$rootScope.focus].xilian.ratio = response.equips[$rootScope.focus].xilian.ratio;
-					// var xilianRes = Utils.xilian(response.equips[$rootScope.focus].xilian.origin,response.equips[$rootScope.focus].xilian.target,response.equips[$rootScope.focus].xilian.level,response.equips[$rootScope.focus].xilian.ratio);
-					$rootScope.equips[$rootScope.focus].setStrengthen(response.equips[$rootScope.focus].strengthen);
-					$rootScope.equips[$rootScope.focus].enhance = {};
-					angular.forEach(response.equips[$rootScope.focus].enhance, function(value, key) {
-						if (value != '0' && value != 0) {
-							this.setEnhance(key, value);
-						}
-					}, $rootScope.equips[$rootScope.focus]);
-					for (var j = 0; j < $rootScope.equips[$rootScope.focus].holes.number; j++) {
-						// Utils.changeColor(j,response.equips[$rootScope.focus].cuilianColour[j]);
-						// Utils.changeAttr(j,response.equips[$rootScope.focus].cuilianAttr[j]);
-						var loadStone = response.equips[$rootScope.focus].holeIn[j] == '-1' ? {img: '-1-6', level: 6, type: -1} : stones[parseInt(response.equips[$rootScope.focus].holeLevel[j]) + 1][response.equips[$rootScope.focus].holeIn[j]];
-						Utils.onDrop(loadStone, j);
-					}
-				}
-				$scope.navSelect(tempFocus);
-				angular.forEach($rootScope.buffController.activeBuff, function(value, key) {
-					value.isCheck = false;
-					$rootScope.buffController.buff[value.index].isCheck = false;
-				});
-				for (var i = 0; i < response.buff.length; i++) {
-					if (response.buff[i] === '') continue;
-					$rootScope.buffController.activeBuff[response.buff[i]].isCheck = true;
-					$rootScope.buffController.buff[$rootScope.buffController.activeBuff[response.buff[i]].index].isCheck = true;
-				}
-				$scope.$broadcast('initBuff');
 			}
+			var tixingOptions = [
+				{name: '成男', body: 33, spunk: 32, spirit: 33, strength: 32, agility: 33},
+				{name: '成女', body: 33, spunk: 32, spirit: 33, strength: 32, agility: 33},
+				{name: '萝莉', body: 33, spunk: 32, spirit: 33, strength: 32, agility: 33},
+				{name: '正太', body: 33, spunk: 32, spirit: 33, strength: 32, agility: 33}
+			];
+			$rootScope.role = tixingOptions[parseInt(response.tixing)];
+			$scope.$broadcast('setTixing', $rootScope.role);
+			for (var i = 0; i < positions.length; i++) {
+				$rootScope.focus = positions[i];
+				$rootScope.equipLists[$rootScope.focus].setAs.name = response.equips[$rootScope.focus].equip.name;
+				$rootScope.enhanceLists[$rootScope.focus].setAs.id = response.equips[$rootScope.focus].enhance.P_ID;
+				$scope.setEquipByObj(response.equips[$rootScope.focus].equip, $rootScope.focus);
+				// $rootScope.equips[$rootScope.focus].xilian.level = response.equips[$rootScope.focus].xilian.level;
+				// $rootScope.equips[$rootScope.focus].xilian.ratio = response.equips[$rootScope.focus].xilian.ratio;
+				// var xilianRes = Utils.xilian(response.equips[$rootScope.focus].xilian.origin,response.equips[$rootScope.focus].xilian.target,response.equips[$rootScope.focus].xilian.level,response.equips[$rootScope.focus].xilian.ratio);
+				$rootScope.equips[$rootScope.focus].setStrengthen(response.equips[$rootScope.focus].strengthen);
+				$rootScope.equips[$rootScope.focus].enhance = {};
+				angular.forEach(response.equips[$rootScope.focus].enhance, function(value, key) {
+					if (value != '0' && value != 0) {
+						this.setEnhance(key, value);
+					}
+				}, $rootScope.equips[$rootScope.focus]);
+				for (var j = 0; j < $rootScope.equips[$rootScope.focus].holes.number; j++) {
+					// Utils.changeColor(j,response.equips[$rootScope.focus].cuilianColour[j]);
+					// Utils.changeAttr(j,response.equips[$rootScope.focus].cuilianAttr[j]);
+					var loadStone = response.equips[$rootScope.focus].holeIn[j] == '-1' ? {img: '-1-6', level: 6, type: -1} : stones[parseInt(response.equips[$rootScope.focus].holeLevel[j]) + 1][response.equips[$rootScope.focus].holeIn[j]];
+					Utils.onDrop(loadStone, j);
+				}
+			}
+			$scope.navSelect(tempFocus);
+			angular.forEach($rootScope.buffController.activeBuff, function(value, key) {
+				value.isCheck = false;
+				$rootScope.buffController.buff[value.index].isCheck = false;
+			});
+			for (var i = 0; i < response.buff.length; i++) {
+				if (response.buff[i] === '') continue;
+				$rootScope.buffController.activeBuff[response.buff[i]].isCheck = true;
+				$rootScope.buffController.buff[$rootScope.buffController.activeBuff[response.buff[i]].index].isCheck = true;
+			}
+			$scope.$broadcast('initBuff');
 		})
-		.error(function() {
-			toastr.error('载入方案失败,请重试');
+		.error(function(response) {
+			toastr.error('载入方案失败，' + response.errors[0].detail);
 		});
 	};
 	$scope.setEquipByObj = function(equipObj, focusId) {
@@ -289,14 +281,10 @@ app.controller('PeizhuangCtrl', ['$scope', '$rootScope', '$location', 'Utils', '
 		}
 		$http.get(config.apiBase + 'equip/' + id)
 		.success(function(response) {
-			if (response.errors) {
-				toastr.error('载入装备失败，' + response.errors[0].detail);
-			} else {
-				$scope.setEquipByObj(response.data, $rootScope.focus);
-			}
+			$scope.setEquipByObj(response.data, $rootScope.focus);
 		})
-		.error(function() {
-			toastr.error('载入装备失败,请重试');
+		.error(function(response) {
+			toastr.error('载入装备失败，' + response.errors[0].detail);
 		});
 	};
 	$scope.getEnhance = function(id) {
@@ -306,19 +294,15 @@ app.controller('PeizhuangCtrl', ['$scope', '$rootScope', '$location', 'Utils', '
 		}
 		$http.get(config.apiBase + 'enhance/' + id)
 		.success(function(response) {
-			if (response.errors) {
-				toastr.error('载入附魔失败，' + response.errors[0].detail);
-			} else {
-				$rootScope.equips[$rootScope.focus].enhance = {};
-				angular.forEach(response.data, function(value, key) {
-					if (value != '0' && value != 0) {
-						this.setEnhance(key, value);
-					}
-				}, $rootScope.equips[$rootScope.focus]);
-			}
+			$rootScope.equips[$rootScope.focus].enhance = {};
+			angular.forEach(response.data, function(value, key) {
+				if (value != '0' && value != 0) {
+					this.setEnhance(key, value);
+				}
+			}, $rootScope.equips[$rootScope.focus]);
 		})
-		.error(function() {
-			toastr.error('载入附魔失败');
+		.error(function(response) {
+			toastr.error('载入附魔失败，' + response.errors[0].detail);
 		});
 	};
 	$scope.getBuffList = function() {
@@ -326,14 +310,13 @@ app.controller('PeizhuangCtrl', ['$scope', '$rootScope', '$location', 'Utils', '
 		$http.get(config.apiBase + 'buff?school=' + $rootScope.menpai.name)
 		.success(function(response) {
 			$rootScope.buffController.buff = [];
-			if (response.errors) {
-				toastr.error(response.errors[0].detail);
-			} else {
-				for (var i = 0; i < response.data.length; i++) {
-					$rootScope.buffController.registerBuff(response.data[i]);
-				}
-				$scope.$broadcast('initBuff');
+			for (var i = 0; i < response.data.length; i++) {
+				$rootScope.buffController.registerBuff(response.data[i]);
 			}
+			$scope.$broadcast('initBuff');
+		})
+		.error(function(response) {
+			toastr.error('载入增益气劲失败，' + response.errors[0].detail);
 		});
 	};
 	$scope.getBuffList();
@@ -350,19 +333,18 @@ app.controller('PeizhuangCtrl', ['$scope', '$rootScope', '$location', 'Utils', '
 				headers: {'Authorization': 'Bearer ' + token}
 			})
 			.success(function(response) {
-				if (response.errors) {
-					toastr.error(response.errors[0].detail);
-				} else {
-					response = response.data;
-					angular.forEach(response, function(value, key) {
-						var savedCase = {
-							name: value.name,
-							id: value.id
-						};
-						this.push(savedCase);
-					}, $rootScope.saveList.list);
-					$rootScope.saveList.isLoad = true;
-				}
+				response = response.data;
+				angular.forEach(response, function(value, key) {
+					var savedCase = {
+						name: value.name,
+						id: value.id
+					};
+					this.push(savedCase);
+				}, $rootScope.saveList.list);
+				$rootScope.saveList.isLoad = true;
+			})
+			.error(function(response) {
+				toastr.error('载入方案列表失败，' + response.errors[0].detail);
 			});
 		}
 	};

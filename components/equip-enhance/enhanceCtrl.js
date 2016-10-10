@@ -24,19 +24,15 @@ app.controller('EnhanceController', ['$scope', '$rootScope', 'toastr', '$http', 
 			var focusId = $rootScope.focus;
 			$http.get(config.apiBase + 'enhance?position=' + focus + '&school=' + menpai)
 			.success(function(response) {
-				if (response.errors) {
-					toastr.error(response.errors[0].detail);
-				} else {
-					response = response.data;
-					$rootScope.enhanceLists[focusId].list = [];
-					angular.forEach(response, function(value, key) {
-						$rootScope.enhanceLists[focusId].list.push(value);
-					});
-					$rootScope.enhanceLists[focusId].isCached = true;
-				}
+				response = response.data;
+				$rootScope.enhanceLists[focusId].list = [];
+				angular.forEach(response, function(value, key) {
+					$rootScope.enhanceLists[focusId].list.push(value);
+				});
+				$rootScope.enhanceLists[focusId].isCached = true;
 			})
-			.error(function() {
-				toastr.error('载入附魔列表失败,请重试');
+			.error(function(response) {
+				toastr.error('载入附魔列表失败，' + response.errors[0].detail);
 			});
 		}
 	};

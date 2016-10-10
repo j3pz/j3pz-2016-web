@@ -18,22 +18,18 @@ app.controller('AttributeStoneController', ['$scope', '$rootScope', '$http', 'Ut
 		if (!$rootScope.attributeStoneLists[$rootScope.attributeStoneSelected][0].isLoad) {
 			$http.get(config.apiBase + 'stone?school=' + $rootScope.menpai.name)
 			.success(function(response) {
-				if (response.err) {
-					toastr.error('载入五彩石列表失败，请点击重选五彩石');
-				} else {
-					response = response.data;
-					angular.forEach(response, function(value, key) {
-						this.push(value);
-					}, $rootScope.attributeStoneLists[0][0].attr);
-					$rootScope.attributeStoneLists[0][0].isLoad = true;
-					angular.forEach(response, function(value, key) {
-						this.push(value);
-					}, $rootScope.attributeStoneLists[1][0].attr);
-					$rootScope.attributeStoneLists[1][0].isLoad = true;
-				}
+				response = response.data;
+				angular.forEach(response, function(value, key) {
+					this.push(value);
+				}, $rootScope.attributeStoneLists[0][0].attr);
+				$rootScope.attributeStoneLists[0][0].isLoad = true;
+				angular.forEach(response, function(value, key) {
+					this.push(value);
+				}, $rootScope.attributeStoneLists[1][0].attr);
+				$rootScope.attributeStoneLists[1][0].isLoad = true;
 			})
-			.error(function() {
-				toastr.error('载入五彩石列表失败，请点击重选五彩石');
+			.error(function(response) {
+				toastr.error('载入五彩石列表失败，' + response.errors[0].detail + '，请点击重选五彩石');
 			});
 		}
 		$scope.activationStatsShow = {
@@ -151,8 +147,8 @@ app.controller('AttributeStoneController', ['$scope', '$rootScope', '$http', 'Ut
 				}
 			}
 		})
-		.error(function() {
-			toastr.error('载入五彩石列表失败，请点击重选五彩石');
+		.error(function(response) {
+			toastr.error('载入五彩石列表失败，' + response.errors[0].detail + '，请点击重选五彩石');
 		});
 	};
 	$scope.$on('setAttributeStone', function(e, id) {

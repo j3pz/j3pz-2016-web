@@ -11,14 +11,10 @@ app.controller('LoginCtrl', ['$rootScope', '$scope', 'toastr', '$http', '$interv
 			}
 		})
 		.success(function(response) {
-			if (response.errors) {
-				toastr.error('登录失败, ' + response.errors[0].detail);
-			} else {
-				$scope.loginSuccess(response.data);
-			}
+			$scope.loginSuccess(response.data);
 		})
 		.error(function(response) {
-			toastr.error('连接失败');
+			toastr.error('登录失败, ' + response.errors[0].detail);
 		})
 		.finally(function() {
 			$('#loginModal').modal('hide');

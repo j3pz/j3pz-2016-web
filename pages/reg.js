@@ -1,7 +1,7 @@
 /* @require /components/config/config.js */
-var app = angular.module('J3Reg', ['ngMessages','toastr']);
+var app = angular.module('J3Reg', ['ngMessages', 'toastr']);
 
-app.controller('RegFormCtrl', ['$scope', '$http', '$httpParamSerializerJQLike', '$window', 'toastr', function($scope, $http, $httpParamSerializerJQLike, $window, toastr) {
+app.controller('RegFormCtrl', ['$scope', '$http', '$window', 'toastr', function($scope, $http, $window, toastr) {
 	$scope.user = {
 		username: '',
 		email: '',
@@ -34,6 +34,9 @@ app.controller('RegFormCtrl', ['$scope', '$http', '$httpParamSerializerJQLike', 
 			if (response.errors) registed = false;
 			else registed = response.data.valid;
 			$scope.regForm.email.$setValidity('registed', registed);
+		})
+		.error(function(response) {
+			$scope.regForm.email.$setValidity('registed', false);
 		});
 		$scope.validatePassword();
 	};
@@ -62,14 +65,10 @@ app.controller('RegFormCtrl', ['$scope', '$http', '$httpParamSerializerJQLike', 
 			};
 			$http.post(config.apiBase + 'user/', regData)
 			.success(function(response) {
-				if (response.errors) {
-					toastr.error(response.errors[0].detail);
-				} else {
-					localStorage.setItem('token', response.data.token);
-					$window.location.href = 'index.html';
-				}
+				localStorage.setItem('token', response.data.token);
+				$window.location.href = '/';
 			}).error(function() {
-				toastr.error('注册失败，网络连接异常');
+				toastr.error('注册失败，' + response.errors[0].detail);
 			});
 		}
 	};
