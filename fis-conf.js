@@ -1,13 +1,11 @@
 fis.set('project.ignore',
 	[
 		'.git/**',
-		'api/**',
-		'libs/**',
-		'pay/**',
-		'apiv2-node/**',
-		'node_modules',
-		'icons/',
-		'css/fonts/',
+		'node_modules/**',
+		'icons/**',
+		'css/fonts/**',
+		'css/theme/**',
+		'js/**',
 		'fis-conf.js',
 		'j3pz-2016-web.sublime-project',
 		'j3pz-2016-web.sublime-workspace'
@@ -50,6 +48,22 @@ fis.match('/pages/user.html', {
 
 fis.match('/pages/reset.html', {
 	release: 'reset/index.html'
+});
+
+fis.match('/pages/login.html', {
+	release: 'login/index.html'
+});
+
+fis.match('/pages/about.html', {
+	release: 'about/index.html'
+});
+
+fis.match('/pages/credit.html', {
+	release: 'credit/index.html'
+});
+
+fis.match('/pages/policy.html', {
+	release: 'policy/index.html'
 });
 
 fis.match('/tools/(*)(.{html,js})', {
