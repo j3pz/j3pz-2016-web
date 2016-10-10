@@ -232,31 +232,6 @@
 	</div>
 	<div class="headerbar-right" ng-if="$root.isLogin" ng-cloak>
 		<ul class="header-nav header-nav-options">
-			<li class="hidden-xs dropdown case-opt" title="消息">
-				<a href="javascript:void(0);" class="btn btn-icon-toggle btn-default" data-toggle="dropdown">
-					<i class="md md-notifications"></i><sup class="badge style-danger">4</sup>
-				</a>
-				<ul class="dropdown-menu animation-expand">
-					<li class="dropdown-header">Today's messages</li>
-					<li>
-						<a class="alert alert-callout alert-warning" href="javascript:void(0);">
-							<img class="pull-right img-circle dropdown-avatar" src="default_avatar.png" alt="" />
-							<strong>Alex Anistor</strong><br/>
-							<small>Testing functionality...</small>
-						</a>
-					</li>
-					<li>
-						<a class="alert alert-callout alert-info" href="javascript:void(0);">
-							<img class="pull-right img-circle dropdown-avatar" src="default_avatar.png" alt="" />
-							<strong>Alicia Adell</strong><br/>
-							<small>Reviewing last changes...</small>
-						</a>
-					</li>
-					<li class="dropdown-header">Options</li>
-					<li><a href="">View all messages <span class="pull-right"><i class="fa fa-arrow-right"></i></span></a></li>
-					<li><a href="">Mark as read <span class="pull-right"><i class="fa fa-arrow-right"></i></span></a></li>
-				</ul><!--end .dropdown-menu -->
-			</li>
 			<li ng-show="$root.isPz" class="hidden-xs dropdown case-opt" title="保存配装">
 				<a href="javascript:void(0);" class="btn btn-icon-toggle btn-default" data-toggle="dropdown">
 					<i class="md md-save"></i>
@@ -287,7 +262,6 @@
 					<img src="default_avatar.png" alt="">
 					<span class="profile-info">
 						{{$root.user.name}}
-						<!-- <small>电信五区-幽月轮</small> -->
 					</span>
 				</a>
 				<ul class="dropdown-menu animation-dock">
@@ -309,7 +283,7 @@
 				</a>
 			</li>
 			<li>
-				<a class="btn btn-flat btn-default" href="/reg.html">
+				<a class="btn btn-flat btn-default" href="/register/">
 					注册
 				</a>
 			</li>

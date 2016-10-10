@@ -50,6 +50,10 @@ fis.match('/pages/reset.html', {
 	release: 'reset/index.html'
 });
 
+fis.match('/pages/reg.html', {
+	release: 'register/index.html'
+});
+
 fis.match('/pages/login.html', {
 	release: 'login/index.html'
 });
