@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-cn" ng-app="J3Login" xmlns:wb="http://open.weibo.com/wb">
+	<head>
+		<title>剑网3 全职业配装器|用户登录</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="配装器用户注册">
+		<meta name="author" content="胖叔叔">
+		<!--
+			@require '../css/theme/bootstrap.css'
+			@require '../css/theme/materialadmin.css'
+			@require '../components/common/common.css'
+			@require '../css/theme/libs/toastr/toastr.css'
+			@require '../css/all.css'
+		-->
+		<!-- STYLE_PLACEHOLDER -->
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="js/libs/utils/html5shiv.js"></script>
+		<script type="text/javascript" src="js/libs/utils/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body class="menubar-hoverable header-fixed" ng-controller="LoginCtrl">
+		<div class="content-no-header">
+			<section class="section-account">
+				<div class="img-backdrop" style="background-image: url('/images/banner.jpg')"></div>
+				<div class="spacer"></div>
+				<div class="card contain-sm m-t-2">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-sm-6">
+								<br>
+								<span class="text-lg text-bold text-accent">剑网3配装器 用户登录</span>
+								<br><br>
+								<form class="form" role="form">
+									<div class="form-group">
+										<input type="text" class="form-control" name="email" type="text" ng-model="user.mail">
+										<label for="email">邮箱</label>
+									</div>
+									<div class="form-group" ng-show="notReset">
+										<input type="password" class="form-control" name="pswd" type="password" ng-model="user.password">
+										<label for="pswd">密码</label>
+										<p class="help-block"><a href ng-click="notReset = false">忘记密码?</a></p>
+									</div>
+									<br>
+									<div class="row" ng-show="notReset">
+										<div class="col-xs-6 text-left"></div>
+										<div class="col-xs-6 text-right">
+											<button class="btn btn-accent btn-raised ink-reaction" ng-click="login(user)" data-loading-text="登录中...">登录</button>
+										</div>
+									</div>
+									<div class="row" ng-show="!notReset">
+										<div class="col-xs-6 text-left">
+											<small>请确认您在邮箱项中填入了正确的邮箱后，点击右侧重置按钮。如果邮箱正确，您将会收到一封密码重置邮件。</small>
+										</div>
+										<div class="col-xs-6 text-right">
+											<button class="btn btn-accent btn-raised ink-reaction" ng-click="notReset = true">返回登录</button>
+											<button class="btn btn-accent btn-raised ink-reaction" ng-click="resetPass()">重置</button>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="col-sm-5 col-sm-offset-1 text-center">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<br><br>
+								<h3 class="text-light">
+									还没有账号?
+								</h3>
+								<a class="btn btn-block btn-raised btn-accent ink-reaction" href="/register">点此注册</a>
+								<br><br>
+								<h3 class="text-light">
+									或者
+								</h3>
+								<p>
+									<a href="#" class="btn btn-block btn-raised btn-primary ink-reaction" ng-click="weiboLogin()"><i class="fa fa-weibo pull-left"></i>使用微博登录</a>
+								</p>
+								<p>
+									<a href="#" class="btn btn-block btn-raised btn-primary ink-reaction"><i class="fa fa-qq pull-left"></i>使用QQ登录</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<div class="push"></div>
+		</div>
+
+		<footer>
+			<!-- 底栏 -->
+			<link rel="import" href="../components/footer/footer.tmpl.html?__inline">
+		</footer>
+		<script src="../js/libs/jquery/jquery-1.11.2.min.js" data-framework></script>
+		<script src="../js/libs/bootstrap/bootstrap.min.js" data-framework></script>
+		<script src="../js/libs/angular/angular.min.js" data-framework></script>
+		<script src="../js/libs/angular/angular-aria.min.js" data-framework></script>
+		<script src="../js/libs/toastr/angular-toastr.tpls.min.js" data-framework></script>
+		<script src="../js/core/source/App.min.js"></script>
+		<script src="../js/libs/weibo/wb.js?appkey=2432778641&debug=true" data-framework></script><!--ignore-->
+		<script src="login.js" data-framework></script>
+		<!-- SCRIPT_PLACEHOLDER -->
+	</body>
+</html>
