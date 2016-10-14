@@ -4,9 +4,10 @@
 
 var app = angular.module('J3pzUser', ['toastr']);
 
-app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', function($scope, $rootScope, $http, toastr) {
+app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', '$location', function($scope, $rootScope, $http, toastr, $location) {
 	$scope.listShow = 'user';
 	$scope.panelShow = '';
+	
 
 	$scope.strengthenDesc = ['不精炼', '精炼一级', '精炼二级', '精炼三级', '精炼四级', '精炼五级', '满精炼'];
 	$scope.magicStoneLevelDesc = ['', '一级', '二级', '三级', '四级', '五级', '六级', '七级', '八级'];
@@ -59,16 +60,6 @@ app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', function(
 		.error(function(response) {
 			toastr.error(response.errors[0].detail);
 		});
-	};
-
-	$scope.switchList = function(name) {
-		$scope.listShow = name;
-		if (name == 'case') {
-			$scope.getCaseList();
-		}
-		if (name == 'preference') {
-			$scope.getPreference();
-		}
 	};
 
 	$scope.switchPanel = function(name) {
@@ -197,4 +188,21 @@ app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', function(
 			magicStoneLevel: n
 		});
 	};
+
+	$scope.switchList = function(name) {
+		$scope.listShow = name;
+		if (name == 'case') {
+			$scope.getCaseList();
+		}
+		if (name == 'preference') {
+			$scope.getPreference();
+		}
+	};
+
+	var panel = $location.path();
+	if(panel!=''){
+		var pathArr = panel.split('/');
+		var tab = pathArr[pathArr.length - 1];
+		$scope.switchList(tab);
+	}
 }]);

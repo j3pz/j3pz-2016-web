@@ -251,7 +251,7 @@
 					<li class="dropdown-header">读取配装</li>
 					<li ng-repeat="case in saveList.list" ng-click="loadCase(case.id)"><a href>{{case.name}}</a></li>
 					<li class="divider"></li>
-					<li><a href="../../user.html#/cases">方案设置</a></li>
+					<li><a href="/user/#!/case">方案设置</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -267,8 +267,8 @@
 				<ul class="dropdown-menu animation-dock">
 					<li class="dropdown-header">设置</li>
 					<li><a href="/user/">个人资料</a></li>
-					<li><a href="/user/preference">偏好设置</a></li>
-					<li><a href="/user/cases">方案设置</a></li>
+					<li><a href="/user/#!/preference">偏好设置</a></li>
+					<li><a href="/user/#!/case">方案设置</a></li>
 					<li class="divider"></li>
 					<li><a href ng-click="logout()"><i class="fa fa-fw fa-power-off text-danger"></i> 退出</a></li>
 				</ul>
