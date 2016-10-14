@@ -7,7 +7,8 @@ var app = angular.module('J3pzUser', ['toastr']);
 app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', '$location', function($scope, $rootScope, $http, toastr, $location) {
 	$scope.listShow = 'user';
 	$scope.panelShow = '';
-	
+
+	$rootScope.isUser = true;
 
 	$scope.strengthenDesc = ['不精炼', '精炼一级', '精炼二级', '精炼三级', '精炼四级', '精炼五级', '满精炼'];
 	$scope.magicStoneLevelDesc = ['', '一级', '二级', '三级', '四级', '五级', '六级', '七级', '八级'];
@@ -37,6 +38,19 @@ app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', '$locatio
 		tiegu: '铁骨衣',
 		beiao: '北傲诀'
 	};
+
+	$scope.sendActivateMail = function() {
+		var token = localStorage.getItem('token');
+		$http.get(config.apiBase + 'user/activate', {
+			headers: {'Authorization': 'Bearer ' + token}
+		})
+		.success(function(response) {
+			toastr.info('邮件发送成功');
+		})
+		.error(function(response) {
+			toastr.error(response.errors[0].detail);
+		});
+	}
 
 	$scope.getCaseList = function() {
 		$scope.caseList = [];

@@ -98,8 +98,8 @@
 											<div class="col-md-5">
 												<span class="glyphicon glyphicon-asterisk text-sm"></span> <a href="" ng-click="switchPanel('pass')">修改密码</a>
 											</div>
-											<div class="col-md-7">
-												<span class="fa fa-weibo text-sm"></span> <a href="" ng-click="bindWeibo()">绑定微博</a>
+											<div class="col-md-7" ng-if="!$root.jwt.act">
+												<span class="fa fa-envelope text-sm"></span> <a href ng-click="sendActivateMail()">账户激活</a>
 											</div>
 										</div>
 										<div class="clearfix">

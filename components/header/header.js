@@ -10,6 +10,14 @@ app.controller('HeaderCtrl', ['$scope', '$http', 'toastr', '$rootScope', '$sce',
 		maxSave: 0
 	};
 
+	$scope.getJwtInfo = function(){
+		var jwt = localStorage.getItem('token');
+		if(jwt){
+			var payload = atob(jwt.split('.')[1]);
+			$rootScope.jwt = JSON.parse(payload);
+		}
+	}
+
 	function getUserInfo(token) {
 		$http.get(config.apiBase + 'user', {
 			headers: {'Authorization': 'Bearer ' + token}
@@ -36,6 +44,7 @@ app.controller('HeaderCtrl', ['$scope', '$http', 'toastr', '$rootScope', '$sce',
 				}, $rootScope.saveList.list);
 				$rootScope.saveList.isLoad = true;
 			}
+			$scope.getJwtInfo();
 		});
 	}
 
