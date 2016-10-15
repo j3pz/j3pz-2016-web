@@ -92,7 +92,7 @@ fis.match('*.tmpl.html', {
 
 fis.match('::packager', {
 	postpackager: fis.plugin('loader', {
-		allInOne: false
+		allInOne: true
 	})
 });
 
