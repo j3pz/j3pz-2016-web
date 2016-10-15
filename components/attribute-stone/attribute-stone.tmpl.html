@@ -32,8 +32,15 @@
 						<small>一键镶嵌的五行石等级与个人设置中的默认五行石等级一致</small>
 					</div>
 					<div class="tab-pane column" id="stone-active">
-						<li class="wucai5"><b>五行石：{{$root.stoneStats[5].number}}/{{activationStatsShow.needNum[5]}}颗</b></li>
-						<li class="wucai5"><b>五行石：{{$root.stoneStats[5].level}}/{{activationStatsShow.needLevel[5]}}级</b></li>
+						<p class="text-meduim text-primary-dark">第一属性</p>
+						<li class="wucai5">五行石：{{$root.stoneStats[5].number}}/{{$root.attributeStone[$root.attributeStoneSelected].attributes[0].needMagicStoneNumber}}颗</li>
+						<li class="wucai5">五行石：{{$root.stoneStats[5].level}}/{{$root.attributeStone[$root.attributeStoneSelected].attributes[0].needMagicStoneLevel}}级</li>
+						<p class="text-meduim text-primary-dark">第二属性</p>
+						<li class="wucai5">五行石：{{$root.stoneStats[5].number}}/{{$root.attributeStone[$root.attributeStoneSelected].attributes[1].needMagicStoneNumber}}颗</li>
+						<li class="wucai5">五行石：{{$root.stoneStats[5].level}}/{{$root.attributeStone[$root.attributeStoneSelected].attributes[1].needMagicStoneLevel}}级</li>
+						<p class="text-meduim text-primary-dark">第三属性</p>
+						<li class="wucai5">五行石：{{$root.stoneStats[5].number}}/{{$root.attributeStone[$root.attributeStoneSelected].attributes[2].needMagicStoneNumber}}颗</li>
+						<li class="wucai5">五行石：{{$root.stoneStats[5].level}}/{{$root.attributeStone[$root.attributeStoneSelected].attributes[2].needMagicStoneLevel}}级</li>
 					</div>
 				</div>
 			</div>

@@ -10,9 +10,8 @@ app.controller('AttributeStoneController', ['$scope', '$rootScope', '$http', 'Ut
 		desc: ['金', '木', '水', '火', '土', '总']
 	};
 	$scope.activationStatsShow = {
-		needType: [0, 0, 0, 0, 0, 0],
-		needNum: [0, 0, 0, 0, 0, 0],
-		needLevel: [0, 0, 0, 0, 0, 0]
+		needNum: [0, 0, 0],
+		needLevel: [0, 0, 0]
 	};
 	$scope.init = function() {
 		if (!$rootScope.attributeStoneLists[$rootScope.attributeStoneSelected][0].isLoad) {
@@ -33,19 +32,16 @@ app.controller('AttributeStoneController', ['$scope', '$rootScope', '$http', 'Ut
 			});
 		}
 		$scope.activationStatsShow = {
-			needType: [0, 0, 0, 0, 0, 0],
-			needNum: [0, 0, 0, 0, 0, 0],
-			needLevel: [0, 0, 0, 0, 0, 0]
+			needNum: [0, 0, 0],
+			needLevel: [0, 0, 0]
 		};
 		if ($rootScope.attributeStone[$rootScope.attributeStoneSelected].level > 0) {
 			var attributes = $rootScope.attributeStone[$rootScope.attributeStoneSelected].attributes;
 			for (var i = 0; i < 3; i++) {
-				$scope.activationStats.needType[i] = attributes[i].needMagicStoneType;
-				$scope.activationStatsShow.needType[attributes[i].needMagicStoneType] = 1;
 				$scope.activationStats.needNum[i] = attributes[i].needMagicStoneNumber;
-				$scope.activationStatsShow.needNum[attributes[i].needMagicStoneType] = attributes[i].needMagicStoneNumber;
+				$scope.activationStatsShow.needNum[i] = attributes[i].needMagicStoneNumber;
 				$scope.activationStats.needLevel[i] = attributes[i].needMagicStoneLevel;
-				$scope.activationStatsShow.needLevel[attributes[i].needMagicStoneType] = attributes[i].needMagicStoneLevel;
+				$scope.activationStatsShow.needLevel[i] = attributes[i].needMagicStoneLevel;
 			}
 		}
 		$scope.update();
