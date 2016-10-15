@@ -156,105 +156,16 @@ app.controller('AttributeStoneController', ['$scope', '$rootScope', '$http', 'Ut
 	});
 
 	$scope.autoEmbed = function() {
-		function activeTest() {  // 测试是否激活五彩石
-			var isActive = true;
-			for (var i = 0; i < 3; i++) {
-				isActive = isActive && $rootScope.attributeStone[$rootScope.attributeStoneSelected].attributes[i].isActive;
-			}
-			return isActive;
-		}
-		function blankHoleTest() {
-			for (var i = 0; i < positions.length; i++) {
-				for (var j = 0; j < $rootScope.equips[positions[i]].holes.number; j++) {
-					if ($rootScope.equips[positions[i]].embed.stone[j].typeId < 0) {
-						return true; // 存在未镶嵌的孔
-					}
-				}
-			}
-			return false;
-		}
-		function junkHoleTest(attrId) {
-			if ($rootScope.menpai.type == 't') {
-				return attrId == '47';
-			} else {
-				return attrId == '05' || attrId == '39';
+		var tempFocus = $rootScope.focus;
+		var maxLevel = $rootScope.embedLevel;
+		// 若首次自动镶嵌失败，尝试清空所有五行石进行镶嵌
+		for (var i = 0; i < positions.length; i++) {
+			$rootScope.focus = positions[i];
+			for (var j = 0; j < $rootScope.equips[positions[i]].holes.number; j++) {
+				var stone = {type: 0, level: maxLevel};
+				Utils.onDrop(stone, j);
 			}
 		}
-		if ($rootScope.attributeStone[$rootScope.attributeStoneSelected].level < 4) {
-			toastr.error('请先选择五彩石！');
-			return;
-		} else {
-			// 开始循环
-			var tempFocus = $rootScope.focus;
-			var limit = 5; // 最大循环次数，避免激活失败后多次重复尝试
-			var runtime = 0;
-			var maxLevel = $rootScope.embedLevel;
-			var needType = $scope.activationStats.needType;
-			var needNum = $scope.activationStats.needNum;
-			var needLevel = $scope.activationStats.needLevel;
-			if (maxLevel < 4) maxLevel = 4;
-			while ((!activeTest() || blankHoleTest()) && limit--) {
-				// 若首次自动镶嵌失败，尝试清空所有五行石进行镶嵌
-				if (runtime == 2) {
-					for (var i = 0; i < positions.length; i++) {
-						$rootScope.focus = positions[i];
-						for (var j = 0; j < $rootScope.equips[positions[i]].holes.number; j++) {
-							var stone = {type: -1, level: 6};
-							Utils.onDrop(stone, j);
-						}
-					}
-				}
-				for (var i = 0; i < positions.length; i++) {
-					$rootScope.focus = positions[i];
-					for (var j = 0; j < $rootScope.equips[positions[i]].holes.number; j++) {
-						var holeInfo = $rootScope.equips[positions[i]].newHoles.holeInfo[j];
-						var embed = $rootScope.equips[positions[i]].embed.stone[j];
-						// 获取当前孔属性
-						var avaType = holeInfo.avaStone;
-						// 首次循环对所有输出孔进行镶嵌
-						if (runtime == 0 || runtime == 2) {
-							var isJunkHole = true;
-							if (!junkHoleTest(holeInfo.attrId)) {
-								isJunkHole = false;
-								// 如果等级不够进行升级
-								if (embed.level < maxLevel) {
-									var stone = {type: 0, level: maxLevel};
-									Utils.onDrop(stone, j);
-								}
-								// 如果未镶嵌但有等级进行重置
-								if (embed.typeId == -1 && embed.level > 0) {
-									var stone = {type: embed.typeId, level: maxLevel};
-									Utils.onDrop(stone, j);
-								}
-							}
-							// 如果属性不合适进行调整
-							if (!embed.active) {
-								// 属性是否五彩石激活相关
-								var stone = {type: 0, level: isJunkHole && maxLevel > 6 ? 6 : maxLevel};
-								Utils.onDrop(stone, j);
-							}
-						}
-						if (runtime == 1 || runtime == 3) {
-							// 对废孔进行调整
-							if (junkHoleTest(holeInfo.attrId)) {
-								var stone = stone = {type: 0, level: maxLevel > 6 ? 6 : maxLevel};
-								Utils.onDrop(stone, j);
-							}
-						}
-
-						if (activeTest() && !blankHoleTest()) {
-							break;
-						}
-					}
-				}
-				runtime++;
-				if (runtime >= 4) {
-					toastr.error('自动镶嵌失败，请重新尝试，若仍未能激活成功，请手动调整');
-					break;
-				}
-			}
-			$rootScope.focus = tempFocus;
-			runtime = 0;
-		}
+		$rootScope.focus = tempFocus;
 	};
 }]);
