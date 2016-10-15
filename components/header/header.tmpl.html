@@ -259,7 +259,7 @@
 		<ul class="header-nav header-nav-profile">
 			<li class="dropdown">
 				<a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
-					<img src="default_avatar.png" alt="">
+					<img ng-src="{{$root.user.picture?$root.user.picture:'/images/default_avatar.png'}}" src="" alt="">
 					<span class="profile-info">
 						{{$root.user.name}}
 					</span>

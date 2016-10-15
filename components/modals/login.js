@@ -26,6 +26,7 @@ app.controller('LoginCtrl', ['$rootScope', '$scope', 'toastr', '$http', '$interv
 		$rootScope.user.name = response.name;
 		$rootScope.user.maxSave = response.maxSave;
 		$rootScope.user.saved = response.cases.length;
+		$rootScope.user.picture = response.picture;
 		localStorage.setItem('token', response.token);
 		if ($rootScope.isPz) {
 			$rootScope.equipListfilter.range = [Number(response.prefer.quality[0]), Number(response.prefer.quality[1])];

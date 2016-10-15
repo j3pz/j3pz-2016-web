@@ -29,7 +29,7 @@ app.controller('LoginCtrl', ['$scope', 'toastr', '$http', '$interval', '$locatio
 			}, 3000);
 		} else {
 			setTimeout(function(){
-				window.location.href = 'http://test.j3pz.com';
+				window.location.href = '/';
 			}, 3000);
 		}
 	};

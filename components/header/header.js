@@ -28,6 +28,7 @@ app.controller('HeaderCtrl', ['$scope', '$http', 'toastr', '$rootScope', '$sce',
 			$rootScope.user.name = response.name;
 			$rootScope.user.maxSave = response.maxSave;
 			$rootScope.user.saved = response.cases.length;
+			$rootScope.user.picture = response.picture;
 			if ($rootScope.isPz) {
 				$rootScope.equipListfilter.range = [Number(response.prefer.quality[0]), Number(response.prefer.quality[1])];
 				$rootScope.embedLevel = response.prefer.magicStoneLevel;
