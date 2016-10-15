@@ -12,6 +12,11 @@ app.controller('CasePreviewController', ['$rootScope', '$scope', '$http', 'toast
 			toastr.error('载入图片失败，' + response.errors[0].detail);
 		});
 	};
+
+	$scope.getOriginal = function() {
+		$scope.imgUrl = $scope.imgUrl.replace('preview', 'original');
+	};
+
 	$('#casePreviewModal').on('shown.bs.modal', function(e) {
 		$scope.loadImg();
 	});

@@ -3,7 +3,7 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-body" style="padding:0px;">
-				<div class="shareImg" ng-if="loaded"><img ng-src="{{imgUrl}}" class="shareImg"/></div>
+				<div class="shareImg" ng-if="loaded" ng-dblclick="getOriginal()"><img ng-src="{{imgUrl}}" class="shareImg"/></div>
 				<div class="row" style="margin-top:16px;" ng-if="!loaded">
 					<div class="col-lg-2"></div>
 					<div class="col-lg-8">
