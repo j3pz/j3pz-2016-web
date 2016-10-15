@@ -381,41 +381,21 @@ app.controller('PeizhuangCtrl', ['$scope', '$rootScope', '$location', 'Utils', '
 		combo: 'p',
 		description: '查看装备总览',
 		callback: function() {
-			if (!!$modalStack.getTop()) $modalStack.dismissAll();
-			else $scope.casePreview();
+			$scope.casePreview();
 		}
 	});
 	hotkeys.add({
 		combo: 'shift+f',
 		description: '搜索其他装备',
 		callback: function() {
-			if (!!$modalStack.getTop()) $modalStack.dismissAll();
-			else $scope.$broadcast('searchEquip');
+			$scope.$broadcast('searchEquip');
 		}
 	});
 	hotkeys.add({
 		combo: 'shift+c',
-		description: '查看所有属性',
+		description: '查看所有p属性',
 		callback: function() {
-			if (!!$modalStack.getTop()) {
-				$modalStack.dismissAll();
-				return;
-			}
-			var modalInstance = $modal.open({
-				animation: true,
-				templateUrl: '../../templates/allResults.html',
-				controller: 'ResultsShowController',
-				size: 'lg',
-				resolve: {
-					result: function() {return $rootScope.results;}
-				}
-			});
-
-			modalInstance.result.then(function() {
-				console.log('Finish Share');
-			}, function() {
-				console.log('Share Case cancelled');
-			});
+			$('#resultsModal').modal();
 		}
 	});
 }]);
