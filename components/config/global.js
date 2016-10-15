@@ -762,9 +762,9 @@ var tixingOptions = [
 function analysisPre(xinfatype) {
 	str = Number(xinfatype);
 	str = str.toString(2);
-	str = addZero(str, 22);
+	str = addZero(str, 23);
 	var avaMenpai = str.split('');
-	var preArr = new Array('', '');
+	var preArr = ['', ''];
 	var xinfaList = [
 		// 元气
 		['混元性内功', '万花(花间游)'],
@@ -780,6 +780,7 @@ function analysisPre(xinfatype) {
 		['外功', '唐门(惊羽诀)'],
 		['外功', '天策(傲血战意)'],
 		['外功', '丐帮'],
+		['外功', '霸刀'],
 		// 身法
 		['外功', '纯阳(太虚剑意)'],
 		['外功', '藏剑(均可)'],
@@ -813,16 +814,16 @@ function analysisPre(xinfatype) {
 		switch (firstHit) {
 		case 0: preArr = ['内功', '全']; break;	// 元气
 		case 4: preArr = ['内功', '内功']; break;	// 根骨
-		case 7: preArr = ['外功', '外功']; break;	// 力道
-		case 10: preArr = ['外功', '外功']; break;// 身法
-		case 13: preArr = ['内功', '内功']; break;// 治疗
-		case 16: preArr = ['全', '全']; break;	// 防御
+		case 8: preArr = ['外功', '外功']; break;	// 力道
+		case 12: preArr = ['外功', '外功']; break;// 身法
+		case 15: preArr = ['内功', '内功']; break;// 治疗
+		case 19: preArr = ['全', '全']; break;	// 防御
 		}
 	}
 	if (sum >= 6) {			// 精简装备
 		switch (firstHit) {
 		case 0: preArr = ['内功', '全']; rec = ['内功通用']; break;	// 内功精简
-		case 7: preArr = ['外功', '外功']; rec = ['外功通用']; break;// 外功精简
+		case 8: preArr = ['外功', '外功']; rec = ['外功通用']; break;// 外功精简
 		}
 	}
 	preArr[2] = rec;
