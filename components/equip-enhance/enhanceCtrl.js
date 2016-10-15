@@ -17,6 +17,13 @@ app.controller('EnhanceController', ['$scope', '$rootScope', 'toastr', '$http', 
 	$scope.resetStrengthen = function() {
 		$scope.setStrengthen($scope.ctrl.v, true);
 	};
+	$scope.applyAllStrengthen = function() {
+		var strengthenLevel = $scope.ctrl.v;
+		for (var i = 0; i < equipId_focusId_map.length; i++) {
+			var focusId = equipId_focusId_map[i];
+			$rootScope.equips[focusId].setStrengthen(strengthenLevel);
+		}
+	};
 	$scope.getEnhanceList = function() {
 		if (!$rootScope.enhanceLists[$rootScope.focus].isCached) {
 			var menpai = $rootScope.menpai.name;

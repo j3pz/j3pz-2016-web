@@ -14,6 +14,7 @@
 			<div id="jinglian">
 				<span class="md md-remove-circle-outline cancelStrengthen" ng-click="setStrengthen(0,true)" ng-mouseenter="setStrengthen(0,false)" ng-mouseleave="resetStrengthen()"></span>
 				<span class="md strengthenStars" ng-class="n<=$root.equips[$root.focus].jinglian.strengthen?'md-star':'md-star-outline'" ng-repeat="n in [1,2,3,4,5,6,7,8]" ng-if="n<=ctrl.maxV" ng-click="setStrengthen(n,true)" ng-mouseenter="setStrengthen(n,false)" ng-mouseleave="resetStrengthen()"></span>
+				<button class="btn ink-reaction btn-raised btn-default-bright btn-sm" ng-click="applyAllStrengthen()">精炼所有装备</button>
 			</div><br>
 			<div id="enhanceList">
 				<div class="form">
