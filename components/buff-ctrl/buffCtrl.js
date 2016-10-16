@@ -35,15 +35,15 @@ app.controller('BuffController', ['$rootScope', '$scope', 'Utils', function($roo
 	$scope.setZhongjian = function() {
 		$rootScope.attributeStoneSelected = $rootScope.zhongjian ? 1 : 0;
 		if ($rootScope.zhongjian) {
-			$rootScope.positionIconList[4].type = 'c_primaryWeapon';
-			$rootScope.positionIconList[4].icon = $rootScope.equips['c_primaryWeapon'].data.iconID > 0 ? 'https://www.j3pz.com/icons/' + $rootScope.equips['c_primaryWeapon'].data.iconID + '.png' : '../../images/pl_12.png';
+			$rootScope.positionIconList[11].type = 'c_primaryWeapon';
+			$rootScope.positionIconList[11].icon = $rootScope.equips['c_primaryWeapon'].data.iconID > 0 ? 'https://www.j3pz.com/icons/' + $rootScope.equips['c_primaryWeapon'].data.iconID + '.png' : '../../images/pl_12.png';
 			$scope.navSelect('c_primaryWeapon');
 		} else {
-			$rootScope.positionIconList[4].type = 'b_primaryWeapon';
-			$rootScope.positionIconList[4].icon = $rootScope.equips['b_primaryWeapon'].data.iconID > 0 ? 'https://www.j3pz.com/icons/' + $rootScope.equips['b_primaryWeapon'].data.iconID + '.png' : '../../images/pl_11.png';
+			$rootScope.positionIconList[11].type = 'b_primaryWeapon';
+			$rootScope.positionIconList[11].icon = $rootScope.equips['b_primaryWeapon'].data.iconID > 0 ? 'https://www.j3pz.com/icons/' + $rootScope.equips['b_primaryWeapon'].data.iconID + '.png' : '../../images/pl_11.png';
 			$scope.navSelect('b_primaryWeapon');
 		}
-		if ($rootScope.focus == 'b_primaryWeapon' && $rootScope.zhongjian)$rootScope.focus = 'c_primaryWeapon';
+		if ($rootScope.focus == 'b_primaryWeapon' && $rootScope.zhongjian) $rootScope.focus = 'c_primaryWeapon';
 		else if ($rootScope.focus == 'c_primaryWeapon' && !$rootScope.zhongjian) $rootScope.focus = 'b_primaryWeapon';
 		Utils.attributeStoneActivation();
 	};
