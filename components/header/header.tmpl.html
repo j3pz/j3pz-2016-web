@@ -12,6 +12,11 @@
 					</a>
 				</div>
 			</li>
+			<li ng-if="$root.isPz">
+				<a class="btn btn-icon-toggle menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+					<i class="fa fa-bars"></i>
+				</a>
+			</li>
 			<li class="hidden-xs">
 				<a href="#" class="btn btn-flat btn-default" ng-click="checkUpdate(true)">
 					更新说明
@@ -232,7 +237,7 @@
 	</div>
 	<div class="headerbar-right" ng-if="$root.isLogin" ng-cloak>
 		<ul class="header-nav header-nav-options">
-			<li ng-show="$root.isPz" class="hidden-xs dropdown case-opt" title="保存配装">
+			<li ng-show="$root.isPz" class="dropdown case-opt" title="保存配装">
 				<a href="javascript:void(0);" class="btn btn-icon-toggle btn-default" data-toggle="dropdown">
 					<i class="md md-save"></i>
 				</a>
@@ -243,7 +248,7 @@
 					<li ng-click="saveNewCase($event)"><a href>保存一套新方案</a></li>
 				</ul>
 			</li>
-			<li ng-show="$root.isPz" class="hidden-xs dropdown case-opt" title="读取配装">
+			<li ng-show="$root.isPz" class="dropdown case-opt" title="读取配装">
 				<a href="javascript:void(0);" class="btn btn-icon-toggle btn-default" data-toggle="dropdown">
 					<i class="md md-folder-open"></i>
 				</a>
