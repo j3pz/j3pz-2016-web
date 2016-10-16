@@ -264,7 +264,7 @@ app.controller('PeizhuangCtrl', ['$scope', '$rootScope', '$location', 'Utils', '
 			}
 		}
 		if ($rootScope.equips[focusId].data.texiao && $rootScope.equips[focusId].data.texiao.type == 'Collection') {
-			var set = Collection.createNew($rootScope.equips[focusId].data);
+			var set = Collection.createNew($rootScope.equips[focusId].data, focusId);
 			var setIndex = $rootScope.setController.registerSet(set);
 			$rootScope.setController.collectionsList[setIndex].takeOn($rootScope.equips[focusId]);
 			$rootScope.setController.posSetMap[focusId] = setIndex;

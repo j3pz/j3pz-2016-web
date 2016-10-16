@@ -1,10 +1,13 @@
 /* @require /components/config/config.js */
 var Collection = {
-	createNew: function(equipData) {
+	createNew: function(equipData, focusId) {
 		var collection = {};
 		collection.setId = equipData.texiao.id; // 套装id
 		collection.components = equipData.texiao.components; // 套装组件列表
 		for (var i = 0; i < collection.components.length; i++) {
+			if (equipData.type == 2) {
+				equipData.type = focusId == '8_ring_1' ? 2 : 3;
+			}
 			collection.components[i].active = collection.components[i].positionId == equipData.type;
 		}
 		collection.name = equipData.texiao.name; // 套装名称
