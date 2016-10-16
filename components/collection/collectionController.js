@@ -41,6 +41,11 @@ app.factory('CollectionController', function() {
 				controller.posSetMap[positions[j]] = -1;
 			}
 		}
+		for (var k = 0; k < 12; k++) {
+			if (controller.posSetMap[positions[k]] > index) {
+				controller.posSetMap[positions[k]] -= 1;
+			}
+		}
 	};
 	controller.getCollection = function(index) {
 		return controller.collectionsList[index];
