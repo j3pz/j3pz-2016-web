@@ -61,11 +61,11 @@ app.controller('HeaderCtrl', ['$scope', '$http', 'toastr', '$rootScope', '$sce',
 	$scope.checkUpdate = function(forceOpen) {
 		$http.get(config.apiBase + 'update')
 		.success(function(response) {
-			if (Number(response.data.version) > Number(localStorage.edition) || !localStorage.edition || forceOpen) {
+			if (Number(response.data.edition) > Number(localStorage.edition) || !localStorage.edition || forceOpen) {
 				$rootScope.updateDesc = response.data.desc;
 				$('#updateModal').modal();
 			}
-			try {localStorage.edition = response.data.version;} catch (e) {console.error(e);}
+			try {localStorage.edition = response.data.edition;} catch (e) {console.error(e);}
 		});
 	};
 	$scope.getUpdateDesc = function(text) {
