@@ -14,7 +14,7 @@ app.controller('CasePreviewController', ['$rootScope', '$scope', '$http', 'toast
 	};
 
 	$scope.getOriginal = function() {
-		$scope.imgUrl = $scope.imgUrl.replace('preview', 'original');
+		// $scope.imgUrl = $scope.imgUrl.replace('preview', 'original');
 	};
 
 	$('#casePreviewModal').on('shown.bs.modal', function(e) {
