@@ -3,7 +3,8 @@ app.controller('BuffController', ['$rootScope', '$scope', 'Utils', function($roo
 	$scope.types = [
 		{id: 'OrdinaryBuff', name: '普通增益气劲'},
 		{id: 'InfightBuff', name: '战时增益气劲'},
-		{id: 'Food', name: '小药'}
+		{id: 'Food', name: '小药'},
+		{id: 'Formation', name: '小队阵法'}
 	];
 	$scope.openBuffModal = function() {
 		$('#buffModal').modal();
@@ -13,7 +14,8 @@ app.controller('BuffController', ['$rootScope', '$scope', 'Utils', function($roo
 		$scope.buffList = {
 			'OrdinaryBuff': [],
 			'InfightBuff': [],
-			'Food': []
+			'Food': [],
+			'Formation': []
 		};
 		$scope.addedBuff = [];
 		for (var i = 0; i < $rootScope.buffController.buff.length; i++) {

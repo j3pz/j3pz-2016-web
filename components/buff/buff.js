@@ -2,7 +2,7 @@
 var Buff = {
 	createNew: function(buffData) {
 		var buff = {};
-		var buffTypeList = ['Qixue', 'OrdinaryBuff', 'InfightBuff', 'Food'];
+		var buffTypeList = ['Qixue', 'OrdinaryBuff', 'InfightBuff', 'Food', 'Formation'];
 		/* 数据 */
 		buff.id = buffData.id;
 		buff.dataPercent = buffData.dataP;

@@ -38,7 +38,12 @@
 						</div>
 					</div>
 					<div class="tab-pane" id="formation">
-						<!-- <div class="buff-icon" ng-repeat="buff in buffList[3]" ng-style="{background:'url(/icons/'+buff.icon+'.png) 0/45px no-repeat'}" title="{{buff.desc}}" data-toggle="tooltip" data-container="body" ng-click="setBuff(buff.id,true)"></div> -->
+						<div class="row">
+							<div class="col-xs-2" ng-repeat="buff in buffList.Formation" title="{{buff.desc}}" data-toggle="tooltip" data-container="body" ng-click="setBuff(buff.id,true)">
+								<div class="buff-icon" ng-style="{background:'url(/icons/'+buff.icon+'.png) 0/45px no-repeat'}"></div>
+								<div class="buff-title">{{buff.name}}</div>
+							</div>
+						</div>
 					</div>
 					<div class="well buff-setting-list">
 						<div class="row">
