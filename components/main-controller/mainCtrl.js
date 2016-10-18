@@ -48,7 +48,7 @@ app.controller('PeizhuangCtrl', ['$scope', '$rootScope', '$location', 'Utils', '
 			school: $rootScope.menpai.name,
 			save: {
 				equips: {},
-				stones: [$rootScope.attributeStoneLists[i][3].setAs],
+				stones: [$rootScope.attributeStoneLists[0][3].setAs],
 				tixing: i == 4 ? 0 : i,
 				buff: []
 			},
@@ -104,7 +104,7 @@ app.controller('PeizhuangCtrl', ['$scope', '$rootScope', '$location', 'Utils', '
 			}
 			toSave.save.equips[positions[i]] = equip;
 		}
-		if ($rootScope.attributeStoneLists[1][3].isSet) {
+		if ($rootScope.attributeStone[1].score > 0) {
 			var stoneOptions = $rootScope.attributeStoneLists[1][3].setAs;
 			toSave.save.stones.push(stoneOptions);
 		}
@@ -148,8 +148,8 @@ app.controller('PeizhuangCtrl', ['$scope', '$rootScope', '$location', 'Utils', '
 				if (!response.attributestone[i].level) continue;
 				for (var j = 0; j < 4; j++) {
 					$rootScope.attributeStoneLists[i][j].isSet = j == 3 ? $rootScope.attributeStoneLists[i][2].isSet : response.attributestone[i].attr[j].attribute !== null;
-					$rootScope.attributeStoneLists[i][j].setAs = j == 3 ? response.attributestone[i].name : response.attributestone[i].attr[j].attribute;
-					if (i === 0 && j != 3)$scope.$broadcast('setAttributeStone', j);
+					$rootScope.attributeStoneLists[i][j].setAs = j == 3 ? { name:response.attributestone[i].name } : response.attributestone[i].attr[j].attribute;
+					if (i === 0 && j != 3) $scope.$broadcast('getAttributeStoneList', j);
 				}
 			}
 			var tixingOptions = [

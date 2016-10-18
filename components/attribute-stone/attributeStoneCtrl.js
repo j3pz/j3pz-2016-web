@@ -164,4 +164,47 @@ app.controller('AttributeStoneController', ['$scope', '$rootScope', '$http', 'Ut
 		}
 		$rootScope.focus = tempFocus;
 	};
+
+	$scope.$on('getAttributeStoneList', function(e, id) {
+		$scope.getAttributeStoneList(id);
+	});
+
+	$scope.getAttributeStoneList = function(id) {
+		var url = '';
+		var request = $rootScope.attributeStoneLists[$rootScope.attributeStoneSelected][id].setAs;
+		if (id < 3) {
+			url = config.apiBase + 'stone?school=' + $rootScope.menpai.name + '&q=';
+			for (var i = 0; i <= id; i++) {
+				if (i != id) url += $rootScope.attributeStoneLists[$rootScope.attributeStoneSelected][i].setAs + ';';
+				else url += request;
+			}
+		} else {
+			return;
+		}
+		url = encodeURI(url);
+		$http.get(url)
+		.success(function(response) {
+			if (response.errors) {
+				toastr.error(response.errors[0].detail);
+			} else {
+				response = response.data;
+				$rootScope.attributeStoneLists[$rootScope.attributeStoneSelected][id + 1].attr = [];
+				for (var i = 0; i < response.length; i++) {
+					$rootScope.attributeStoneLists[$rootScope.attributeStoneSelected][id + 1].attr.push(response[i]);
+				}
+				$rootScope.attributeStoneLists[$rootScope.attributeStoneSelected][id + 1].isLoad = true;
+				if (id == 2) {
+					var list = $rootScope.attributeStoneLists[$rootScope.attributeStoneSelected][id + 1].attr;
+					for (var j = 0; j < list.length; j++) {
+						if (list[j].name == $rootScope.attributeStoneLists[$rootScope.attributeStoneSelected][id + 1].setAs.name) {
+							$rootScope.attributeStoneLists[$rootScope.attributeStoneSelected][id + 1].setAs.id = list[j].id;
+						}
+					}
+				}
+			}
+		})
+		.error(function(response) {
+			toastr.error('载入五彩石列表失败，' + response.errors[0].detail + '，请点击重选五彩石');
+		});
+	};
 }]);
