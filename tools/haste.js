@@ -15,12 +15,14 @@ app.controller('HasteCtrl', ['$scope', function($scope){
 		mengge:{name:"梦歌",value:50},
 		zhenshang:{name:"枕上",value:50},
 		dushou:{name:"毒手",value:102},
+		bingsi:{name:"冰丝",value:60},
 		jujing:{name:"聚精凝神",value:205},
 		yuepo:{name:"辉耀红尘",value:52},
 		taiji:{name:"太极无极",value:60},
 		qinxin:{name:"沁心",value:51},
 		miaojing:{name:"法镜",value:105},
-		rufeng:{name:"如风",value:51}
+		rufeng:{name:"如风",value:51},
+		fengyi:{name:"风倚",value:51}
 	};
 
 	$scope.results = [{newtime:$scope.oriTime,hastepercentage:0,hasteLevel:0}];
