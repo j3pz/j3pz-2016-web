@@ -74,16 +74,32 @@ fis.match('/tools/(*)(.{html,js})', {
 	release: '/tools/$1/index$2'
 });
 
+fis.match('/acacia/(*)(.{html,js})', {
+	release: '/acacia/$1/index$2'
+});
+
 fis.match('/components/*/(**.{jpg,png,gif,ico})', {
-	release: '/images/$1'
+	release: '/images/$1',
+	useHash: true
 });
 
 fis.match('/components/*/imgs/(**.{jpg,png,gif,ico})', {
-	release: '/images/$1'
+	release: '/images/$1',
+	useHash: true
 });
 
 fis.match('components/**/*.{js,css}', {
 	isMod: true
+});
+
+fis.match('*.js', {
+	optimizer: fis.plugin('uglify-js'),
+	useHash: true
+});
+
+fis.match('*.css', {
+	optimizer: fis.plugin('clean-css'),
+	useHash: true
 });
 
 fis.match('*.tmpl.html', {
