@@ -18,7 +18,11 @@ app.controller('PeizhuangCtrl', ['$scope', '$rootScope', '$location', 'Utils', '
 		$scope.$broadcast('openEmbed');
 	});
 	$scope.saveNewCase = function(event) {
-		$('#newCaseModal').modal();
+		if ($rootScope.user.saved >= $rootScope.user.maxSave) {
+			$('#freeLimitModal').modal();
+		} else {
+			$('#newCaseModal').modal();
+		}
 	};
 	$scope.setName = function(name) {
 		if (name && name !== '') {
@@ -148,7 +152,7 @@ app.controller('PeizhuangCtrl', ['$scope', '$rootScope', '$location', 'Utils', '
 				if (!response.attributestone[i].level) continue;
 				for (var j = 0; j < 4; j++) {
 					$rootScope.attributeStoneLists[i][j].isSet = j == 3 ? $rootScope.attributeStoneLists[i][2].isSet : response.attributestone[i].attr[j].attribute !== null;
-					$rootScope.attributeStoneLists[i][j].setAs = j == 3 ? { name:response.attributestone[i].name } : response.attributestone[i].attr[j].attribute;
+					$rootScope.attributeStoneLists[i][j].setAs = j == 3 ? { name: response.attributestone[i].name } : response.attributestone[i].attr[j].attribute;
 					if (i === 0 && j != 3) $scope.$broadcast('getAttributeStoneList', j);
 				}
 			}

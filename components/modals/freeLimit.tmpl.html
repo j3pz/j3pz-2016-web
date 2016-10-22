@@ -1,0 +1,17 @@
+<div class="modal fade" id="freeLimitModal" tabindex="-1" role="dialog" aria-labelledby="limit">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">个人保存上限</h4>
+			</div>
+			<div class="modal-body">
+				<p ng-if="$root.user.maxSave <= 3">玩家您好，配装器为每位用户提供免费的 3 套方案保存位置。如果您需要更多的保存位置，请点击<a href="/upgrade/" target="_blank">这里</a>购买，感谢您的支持。</p>
+				<p ng-if="$root.user.maxSave > 3">玩家您好，目前您已保存 {{$root.user.maxSave}} 套方案，已达到最大保存限制。如果您需要更多的保存位置，请点击<a href="/upgrade/" target="_blank">这里</a>购买，感谢您的支持。</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">确   定</button>
+			</div>
+		</div>
+	</div>
+</div>
