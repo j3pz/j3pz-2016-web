@@ -1,9 +1,9 @@
 /*! =======================================================
-                      VERSION  7.1.1              
+                      VERSION  9.3.0              
 ========================================================= */
 "use strict";
 
-function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 /*! =========================================================
  * bootstrap-slider.js
@@ -36,14 +36,11 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
  * v1.0.1
  * MIT license
  */
+var windowIsDefined = (typeof window === "undefined" ? "undefined" : _typeof(window)) === "object";
 
 (function (factory) {
 	if (typeof define === "function" && define.amd) {
-		try {
-			define(["jquery"], factory);
-		} catch (err) {
-			define([], factory);
-		}
+		define(["jquery"], factory);
 	} else if ((typeof module === "undefined" ? "undefined" : _typeof(module)) === "object" && module.exports) {
 		var jQuery;
 		try {
@@ -56,6 +53,21 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 		window.Slider = factory(window.jQuery);
 	}
 })(function ($) {
+	// Constants
+	var NAMESPACE_MAIN = 'slider';
+	var NAMESPACE_ALTERNATE = 'bootstrapSlider';
+
+	// Polyfill console methods
+	if (windowIsDefined && !window.console) {
+		window.console = {};
+	}
+	if (windowIsDefined && !window.console.log) {
+		window.console.log = function () {};
+	}
+	if (windowIsDefined && !window.console.warn) {
+		window.console.warn = function () {};
+	}
+
 	// Reference to Slider constructor
 	var Slider;
 
@@ -298,7 +310,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 		/*************************************************
   						CONSTRUCTOR
   	**************************************************/
-		Slider = function (element, options) {
+		Slider = function Slider(element, options) {
 			createNewSlider.call(this, element, options);
 			return this;
 		};
@@ -307,7 +319,7 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
 			/*
    	The internal state object is used to store data about the current 'state' of slider.
-   		This includes values such as the `value`, `enabled`, etc...
+   	This includes values such as the `value`, `enabled`, etc...
    */
 			this._state = {
 				value: null,
@@ -318,6 +330,10 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 				inDrag: false,
 				over: false
 			};
+
+			// The objects used to store the reference to the tick methods if ticks_tooltip is on
+			this.ticksCallbackMap = {};
+			this.handleCallbackMap = {};
 
 			if (typeof element === "string") {
 				this.element = document.querySelector(element);
@@ -421,6 +437,19 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 				sliderTrack.appendChild(sliderTrackSelection);
 				sliderTrack.appendChild(sliderTrackHigh);
 
+				/* Create highlight range elements */
+				this.rangeHighlightElements = [];
+				if (Array.isArray(this.options.rangeHighlights) && this.options.rangeHighlights.length > 0) {
+					for (var j = 0; j < this.options.rangeHighlights.length; j++) {
+
+						var rangeHighlightElement = document.createElement("div");
+						rangeHighlightElement.className = "slider-rangeHighlight slider-selection";
+
+						this.rangeHighlightElements.push(rangeHighlightElement);
+						sliderTrack.appendChild(rangeHighlightElement);
+					}
+				}
+
 				/* Add aria-labelledby to handle's */
 				var isLabelledbyArray = Array.isArray(this.options.labelledby);
 				if (isLabelledbyArray && this.options.labelledby[0]) {
@@ -437,19 +466,28 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 				/* Create ticks */
 				this.ticks = [];
 				if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
+					this.ticksContainer = document.createElement('div');
+					this.ticksContainer.className = 'slider-tick-container';
+
 					for (i = 0; i < this.options.ticks.length; i++) {
 						var tick = document.createElement('div');
 						tick.className = 'slider-tick';
+						if (this.options.ticks_tooltip) {
+							var tickListenerReference = this._addTickListener();
+							var enterCallback = tickListenerReference.addMouseEnter(this, tick, i);
+							var leaveCallback = tickListenerReference.addMouseLeave(this, tick);
 
+							this.ticksCallbackMap[i] = {
+								mouseEnter: enterCallback,
+								mouseLeave: leaveCallback
+							};
+						}
 						this.ticks.push(tick);
-						sliderTrack.appendChild(tick);
+						this.ticksContainer.appendChild(tick);
 					}
 
 					sliderTrackSelection.className += " tick-slider-selection";
 				}
-
-				sliderTrack.appendChild(sliderMinHandle);
-				sliderTrack.appendChild(sliderMaxHandle);
 
 				this.tickLabels = [];
 				if (Array.isArray(this.options.ticks_labels) && this.options.ticks_labels.length > 0) {
@@ -504,6 +542,12 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 				if (this.tickLabelContainer) {
 					this.sliderElem.appendChild(this.tickLabelContainer);
 				}
+				if (this.ticksContainer) {
+					this.sliderElem.appendChild(this.ticksContainer);
+				}
+
+				this.sliderElem.appendChild(sliderMinHandle);
+				this.sliderElem.appendChild(sliderMaxHandle);
 
 				/* Append slider element to parent container, right before the original <input> element */
 				parent.insertBefore(this.sliderElem, this.element);
@@ -680,8 +724,26 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 				this.showTooltip = this._showTooltip.bind(this);
 				this.hideTooltip = this._hideTooltip.bind(this);
 
-				this.sliderElem.addEventListener("mouseenter", this.showTooltip, false);
-				this.sliderElem.addEventListener("mouseleave", this.hideTooltip, false);
+				if (this.options.ticks_tooltip) {
+					var callbackHandle = this._addTickListener();
+					//create handle1 listeners and store references in map
+					var mouseEnter = callbackHandle.addMouseEnter(this, this.handle1);
+					var mouseLeave = callbackHandle.addMouseLeave(this, this.handle1);
+					this.handleCallbackMap.handle1 = {
+						mouseEnter: mouseEnter,
+						mouseLeave: mouseLeave
+					};
+					//create handle2 listeners and store references in map
+					mouseEnter = callbackHandle.addMouseEnter(this, this.handle2);
+					mouseLeave = callbackHandle.addMouseLeave(this, this.handle2);
+					this.handleCallbackMap.handle2 = {
+						mouseEnter: mouseEnter,
+						mouseLeave: mouseLeave
+					};
+				} else {
+					this.sliderElem.addEventListener("mouseenter", this.showTooltip, false);
+					this.sliderElem.addEventListener("mouseleave", this.hideTooltip, false);
+				}
 
 				this.handle1.addEventListener("focus", this.showTooltip, false);
 				this.handle1.addEventListener("blur", this.hideTooltip, false);
@@ -734,10 +796,12 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 				ticks_positions: [],
 				ticks_labels: [],
 				ticks_snap_bounds: 0,
+				ticks_tooltip: false,
 				scale: 'linear',
 				focus: false,
 				tooltip_position: null,
-				labelledby: null
+				labelledby: null,
+				rangeHighlights: []
 			},
 
 			getElement: function getElement() {
@@ -902,12 +966,28 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
    				HELPERS
    	- Any method that is not part of the public interface.
    - Place it underneath this comment block and write its signature like so:
-   	  					_fnName : function() {...}
+   		_fnName : function() {...}
    	********************************/
 			_removeSliderEventHandlers: function _removeSliderEventHandlers() {
 				// Remove keydown event listeners
 				this.handle1.removeEventListener("keydown", this.handle1Keydown, false);
 				this.handle2.removeEventListener("keydown", this.handle2Keydown, false);
+
+				//remove the listeners from the ticks and handles if they had their own listeners
+				if (this.options.ticks_tooltip) {
+					var ticks = this.ticksContainer.getElementsByClassName('slider-tick');
+					for (var i = 0; i < ticks.length; i++) {
+						ticks[i].removeEventListener('mouseenter', this.ticksCallbackMap[i].mouseEnter, false);
+						ticks[i].removeEventListener('mouseleave', this.ticksCallbackMap[i].mouseLeave, false);
+					}
+					this.handle1.removeEventListener('mouseenter', this.handleCallbackMap.handle1.mouseEnter, false);
+					this.handle2.removeEventListener('mouseenter', this.handleCallbackMap.handle2.mouseEnter, false);
+					this.handle1.removeEventListener('mouseleave', this.handleCallbackMap.handle1.mouseLeave, false);
+					this.handle2.removeEventListener('mouseleave', this.handleCallbackMap.handle2.mouseLeave, false);
+				}
+
+				this.handleCallbackMap = null;
+				this.ticksCallbackMap = null;
 
 				if (this.showTooltip) {
 					this.handle1.removeEventListener("focus", this.showTooltip, false);
@@ -976,6 +1056,49 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 				}
 				this._state.over = false;
 			},
+			_setToolTipOnMouseOver: function _setToolTipOnMouseOver(tempState) {
+				var formattedTooltipVal = this.options.formatter(!tempState ? this._state.value[0] : tempState.value[0]);
+				var positionPercentages = !tempState ? getPositionPercentages(this._state, this.options.reversed) : getPositionPercentages(tempState, this.options.reversed);
+				this._setText(this.tooltipInner, formattedTooltipVal);
+
+				this.tooltip.style[this.stylePos] = positionPercentages[0] + '%';
+				if (this.options.orientation === 'vertical') {
+					this._css(this.tooltip, 'margin-top', -this.tooltip.offsetHeight / 2 + 'px');
+				} else {
+					this._css(this.tooltip, 'margin-left', -this.tooltip.offsetWidth / 2 + 'px');
+				}
+
+				function getPositionPercentages(state, reversed) {
+					if (reversed) {
+						return [100 - state.percentage[0], this.options.range ? 100 - state.percentage[1] : state.percentage[1]];
+					}
+					return [state.percentage[0], state.percentage[1]];
+				}
+			},
+			_addTickListener: function _addTickListener() {
+				return {
+					addMouseEnter: function addMouseEnter(reference, tick, index) {
+						var enter = function enter() {
+							var tempState = reference._state;
+							var idString = index >= 0 ? index : this.attributes['aria-valuenow'].value;
+							var hoverIndex = parseInt(idString, 10);
+							tempState.value[0] = hoverIndex;
+							tempState.percentage[0] = reference.options.ticks_positions[hoverIndex];
+							reference._setToolTipOnMouseOver(tempState);
+							reference._showTooltip();
+						};
+						tick.addEventListener("mouseenter", enter, false);
+						return enter;
+					},
+					addMouseLeave: function addMouseLeave(reference, tick) {
+						var leave = function leave() {
+							reference._hideTooltip();
+						};
+						tick.addEventListener("mouseleave", leave, false);
+						return leave;
+					}
+				};
+			},
 			_layout: function _layout() {
 				var positionPercentages;
 
@@ -990,6 +1113,34 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 
 				this.handle2.style[this.stylePos] = positionPercentages[1] + '%';
 				this.handle2.setAttribute('aria-valuenow', this._state.value[1]);
+
+				/* Position highlight range elements */
+				if (this.rangeHighlightElements.length > 0 && Array.isArray(this.options.rangeHighlights) && this.options.rangeHighlights.length > 0) {
+					for (var _i = 0; _i < this.options.rangeHighlights.length; _i++) {
+						var startPercent = this._toPercentage(this.options.rangeHighlights[_i].start);
+						var endPercent = this._toPercentage(this.options.rangeHighlights[_i].end);
+
+						if (this.options.reversed) {
+							var sp = 100 - endPercent;
+							endPercent = 100 - startPercent;
+							startPercent = sp;
+						}
+
+						var currentRange = this._createHighlightRange(startPercent, endPercent);
+
+						if (currentRange) {
+							if (this.options.orientation === 'vertical') {
+								this.rangeHighlightElements[_i].style.top = currentRange.start + "%";
+								this.rangeHighlightElements[_i].style.height = currentRange.size + "%";
+							} else {
+								this.rangeHighlightElements[_i].style.left = currentRange.start + "%";
+								this.rangeHighlightElements[_i].style.width = currentRange.size + "%";
+							}
+						} else {
+							this.rangeHighlightElements[_i].style.display = "none";
+						}
+					}
+				}
 
 				/* Position ticks and labels */
 				if (Array.isArray(this.options.ticks) && this.options.ticks.length > 0) {
@@ -1152,6 +1303,22 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 							this.tooltip_max.style.top = this.tooltip_min.style.top;
 						}
 					}
+				}
+			},
+			_createHighlightRange: function _createHighlightRange(start, end) {
+				if (this._isHighlightRange(start, end)) {
+					if (start > end) {
+						return { 'start': end, 'size': start - end };
+					}
+					return { 'start': start, 'size': end - start };
+				}
+				return null;
+			},
+			_isHighlightRange: function _isHighlightRange(start, end) {
+				if (0 <= start && start <= 100 && 0 <= end && end <= 100) {
+					return true;
+				} else {
+					return false;
 				}
 			},
 			_resize: function _resize(ev) {
@@ -1579,20 +1746,20 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
 				if (this.options.orientation === 'vertical') {
 					var tooltipPos = this.options.tooltip_position || 'right';
 					var oppositeSide = tooltipPos === 'left' ? 'right' : 'left';
-					tooltips.forEach((function (tooltip) {
+					tooltips.forEach(function (tooltip) {
 						this._addClass(tooltip, tooltipPos);
 						tooltip.style[oppositeSide] = '100%';
-					}).bind(this));
+					}.bind(this));
 				} else if (this.options.tooltip_position === 'bottom') {
-					tooltips.forEach((function (tooltip) {
+					tooltips.forEach(function (tooltip) {
 						this._addClass(tooltip, 'bottom');
 						tooltip.style.top = 22 + 'px';
-					}).bind(this));
+					}.bind(this));
 				} else {
-					tooltips.forEach((function (tooltip) {
+					tooltips.forEach(function (tooltip) {
 						this._addClass(tooltip, 'top');
 						tooltip.style.top = -this.tooltip.outerHeight - 14 + 'px';
-					}).bind(this));
+					}.bind(this));
 				}
 			}
 		};
@@ -1601,13 +1768,25 @@ function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.const
   		Attach to global namespace
   	*********************************/
 		if ($) {
-			var namespace = $.fn.slider ? 'bootstrapSlider' : 'slider';
-			$.bridget(namespace, Slider);
+			(function () {
+				var autoRegisterNamespace = void 0;
 
-			// Auto-Register data-provide="slider" Elements
-			$(function () {
-				$("input[data-provide=slider]")[namespace]();
-			});
+				if (!$.fn.slider) {
+					$.bridget(NAMESPACE_MAIN, Slider);
+					autoRegisterNamespace = NAMESPACE_MAIN;
+				} else {
+					if (windowIsDefined) {
+						window.console.warn("bootstrap-slider.js - WARNING: $.fn.slider namespace is already bound. Use the $.fn.bootstrapSlider namespace instead.");
+					}
+					autoRegisterNamespace = NAMESPACE_ALTERNATE;
+				}
+				$.bridget(NAMESPACE_ALTERNATE, Slider);
+
+				// Auto-Register data-provide="slider" Elements
+				$(function () {
+					$("input[data-provide=slider]")[autoRegisterNamespace]();
+				});
+			})();
 		}
 	})($);
 
