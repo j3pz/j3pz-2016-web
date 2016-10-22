@@ -4,13 +4,22 @@
  * @require /js/libs/ui-select/select.min.js
  */
 app.controller('ChangeEquipController', ['$scope', '$rootScope', '$http', '$sce', 'toastr', function($scope, $rootScope, $http, $sce, toastr) {
-	var qualitySlider = $('input.slider-input').slider({range: true, min: 450, max: 1200, values: $rootScope.equipListfilter.range, step: 5, tooltip: 'hide'});
+	var qualitySlider = $('input.slider-input').slider({
+		range: true,
+		min: 450,
+		max: 1200,
+		values: $rootScope.equipListfilter.range,
+		step: 5,
+		tooltip: 'hide',
+		ticks: [450, 900, 1200],
+		ticks_positions: [0, 25, 100],
+		ticks_snap_bounds: 20
+	});
 	qualitySlider.on('slide', function(event) {
 		$rootScope.equipListfilter.range[0] = event.value[0];
 		$rootScope.equipListfilter.range[1] = event.value[1];
 		$rootScope.$apply();
-	}
-	);
+	});
 
 	$rootScope.$watch('isLogin', function(newValue) {
 		if (newValue) qualitySlider.slider('setValue', $rootScope.equipListfilter.range);
@@ -37,7 +46,7 @@ app.controller('ChangeEquipController', ['$scope', '$rootScope', '$http', '$sce'
 		{'text': '闪避', 'index': 9},
 		{'text': '招架', 'index': 10},
 		// {"text":"拆招","index":11},
-		{'text': '御劲', 'index': 12},
+		{'text': '御劲', 'index': 11},
 		{'text': '加速', 'index': 2},
 		{'text': '命中', 'index': 3},
 		{'text': '无双', 'index': 4}
@@ -65,7 +74,7 @@ app.controller('ChangeEquipController', ['$scope', '$rootScope', '$http', '$sce'
 	];
 	$scope.itemText = ['会心', '破防', '加速', '命中', '无双', 'PVP', '治疗', '外防', '内防', '闪避', '招架', '御劲'];
 	$scope.itemFilterKey = ['crit', 'overcome', 'acce', 'hit', 'strain', 'huajing', 'heal', 'physicsShield', 'magicShield', 'dodge', 'parryBase', 'toughness'];
-	$scope.ctrl.sourceFilter = [false, false, false, false, false, false, false, false, false, false, false];
+	$scope.ctrl.sourceFilter = [false, false, false, false, false, false, false, false, false, false, false, false];
 	$scope.filterSource = function(id, $event) {
 		$event.preventDefault();
 		$event.stopPropagation();
@@ -132,12 +141,12 @@ app.controller('ChangeEquipController', ['$scope', '$rootScope', '$http', '$sce'
 	$scope.simpleSelect = function(value, attr) {
 		var html = '<b>' + value + "</b><span class='right nostyle'>";
 		for (var i = 0; i < attr.length; i++) {
-			if ($rootScope.menpai.type == 't' && (i < 7 || i == 11)) continue;
+			if ($rootScope.menpai.type == 't' && (i < 7)) continue;
 			if ($rootScope.equipListfilter.attr[5] > 0 && i == 5) continue;
 			if (attr[i] > 0) html += $scope.itemText[i] + ' ';
 		}
 		if ($rootScope.menpai.type == 't') {
-			for (i = 2; i < 5; i++) {
+			for (i = 2; i < 4; i++) {
 				if (attr[i] > 0) html += $scope.itemText[i] + ' ';
 			}
 		}
@@ -159,7 +168,9 @@ app.controller('ChangeEquipController', ['$scope', '$rootScope', '$http', '$sce'
 					var filterArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 					for (var i = 0; i < value.filter.length; i++) {
 						var idx = $scope.itemFilterKey.indexOf(value.filter[i]);
-						filterArray[idx] = 1;
+						if (idx >= 0) {
+							filterArray[idx] = 1;
+						}
 					}
 					value.filter = filterArray;
 					if (value.name.indexOf('无渊') === 0) {
