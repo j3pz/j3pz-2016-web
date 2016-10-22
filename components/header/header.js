@@ -1,4 +1,4 @@
-/* @require /components/config/config.js 
+/* @require /components/config/config.js
    @require /js/libs/js-cookie/js.cookie-2.1.3.min.js
 */
 app.controller('HeaderCtrl', ['$scope', '$http', 'toastr', '$rootScope', '$sce', function($scope, $http, toastr, $rootScope, $sce) {
@@ -10,13 +10,16 @@ app.controller('HeaderCtrl', ['$scope', '$http', 'toastr', '$rootScope', '$sce',
 		maxSave: 0
 	};
 
-	$scope.getJwtInfo = function(){
+	$scope.getJwtInfo = function() {
 		var jwt = localStorage.getItem('token');
-		if(jwt){
+		if (jwt) {
 			var payload = atob(jwt.split('.')[1]);
 			$rootScope.jwt = JSON.parse(payload);
+			if (!$rootScope.jwt.act) {
+				toastr.warning('该账户尚未验证邮箱，请尽快到右上角个人中心激活账户以使用全部功能');
+			}
 		}
-	}
+	};
 
 	function getUserInfo(token) {
 		$http.get(config.apiBase + 'user', {

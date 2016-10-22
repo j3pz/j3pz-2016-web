@@ -21,6 +21,17 @@ app.controller('LoginCtrl', ['$rootScope', '$scope', 'toastr', '$http', '$interv
 		});
 	};
 
+	$scope.getJwtInfo = function() {
+		var jwt = localStorage.getItem('token');
+		if (jwt) {
+			var payload = atob(jwt.split('.')[1]);
+			$rootScope.jwt = JSON.parse(payload);
+			if (!$rootScope.jwt.act) {
+				toastr.warning('该账户尚未验证邮箱，请尽快到右上角个人中心激活账户以使用全部功能');
+			}
+		}
+	};
+
 	$scope.loginSuccess = function(response) {
 		$rootScope.isLogin = true;
 		$rootScope.user.name = response.name;
@@ -43,6 +54,7 @@ app.controller('LoginCtrl', ['$rootScope', '$scope', 'toastr', '$http', '$interv
 			}, $rootScope.saveList.list);
 			$rootScope.saveList.isLoad = true;
 		}
+		$scope.getJwtInfo();
 	};
 	$scope.weiboLogin = function() {
 		WB2.login(function() {
