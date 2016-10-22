@@ -94,7 +94,7 @@ var Equip = {
 			equip.jinglian = {};
 			var jinglianList = ['quality', 'score', 'body', 'spirit', 'strength', 'agility', 'spunk', 'physicsShield', 'magicShield', 'dodge', 'parryBase', 'parryValue', 'toughness', 'attack', 'heal', 'crit', 'critEffect', 'overcome', 'acce', 'hit', 'strain', 'huajing', 'threat'];
 			var cof = [0, 0.005, 0.013, 0.024, 0.038, 0.055, 0.075, 0.098, 0.124];
-			equip.jinglian.strengthen = v;
+			equip.jinglian.strengthen = Math.min(v, equip.data.strengthen);
 			angular.forEach(equip.data, function(value, key) {
 				if ($.inArray(key, jinglianList) >= 0) {
 					var originalData = value;
