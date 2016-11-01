@@ -112,6 +112,12 @@ fis.match('::packager', {
 	})
 });
 
+fis.match('**.html', {
+	optimizer: fis.plugin('htmlminify', {
+		ignoreCustomFragments: [/{{.*?}}/]
+	})
+});
+
 fis.match('/server.conf', {
 	release: '/config/server.conf'
 });
