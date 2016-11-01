@@ -12,11 +12,9 @@ fis.set('project.ignore',
 	]
 );
 
-fis.media('hz-test').match('*', {
-	deploy: fis.plugin('http-push', {
-		receiver: 'http://121.41.87.72:8999/receiver',
-		// 远端目录
-		to: '/alidata/www/j3pz/public/'
+fis.media('server').match('*', {
+	deploy: fis.plugin('local-deliver', {
+		to: '/www/j3pz/public'
 	})
 });
 
@@ -109,6 +107,12 @@ fis.match('*.tmpl.html', {
 fis.match('::packager', {
 	postpackager: fis.plugin('loader', {
 		allInOne: true
+	})
+});
+
+fis.match('**.html', {
+	optimizer: fis.plugin('htmlminify', {
+		ignoreCustomFragments: [/{{.*?}}/]
 	})
 });
 
