@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="css/hjdps.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>情怀DPS计算器</title>
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?7fced7977524db62642bbc157e3c91b7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<!-- Google 统计代码 -->
+<script rel="text/javascript" src="../components/google-analystics/googleAnalystics.js?__inline"></script><!--ignore-->
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="nav-wrapper purple">
+                <ul class="">
+                    <li class="active"><a href="javascript:void(0)">花间游</a></li>
+                    <li><a href="javascript:void(0)">冰心诀</a></li>
+                    <div class="valign-wrapper" style="height:64px;float: right;vertical-align: middle">
+                    <button data-target="modal1" class="btn modal-trigger btnModal btn05">关于</button>
+                    <a class="btn tooltipped btn01 " data-position="bottom" data-delay="50" data-tooltip="属性清零">重置属性</a>
+                    <a class="btn tooltipped btn02" data-position="bottom" data-delay="50" data-tooltip="仅对当前浏览器有效">保存基础属性</a>
+                    <!--<a class="btn tooltipped btn03" data-position="bottom" data-delay="50" data-tooltip="仅对当前浏览器有效">保存实战增益</a>-->
+               </div>
+                </ul>
+            </div>
+        </nav>
+    </header>
+      <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>说明</h4>
+      <p style="font-size: 0.9rem;line-height: 1.6rem">此计算器为花间游DPS计算器EXCEL版的的网页版本，EXCEL版不再更新，当然了，网页版除非是数据方面的微调，否则也不再更新。
+          如花间在循环上有较大改变，则会下线。<br>
+    B为延迟档；A-为大众档；A+为不考虑延迟和手速党，即最佳档；S为欧党<br>
+    对比属性高低请使用A-党，因为计算延迟使用了GCD判定，所以不考虑延迟和手速的A+，对加速收益的预估不如A-更适合大众<br>
+    其余各种说明都可以见我以往计算器的帖子，恕我不再粘贴一次。<br>
+    此计算器结果不作为技术贴的唯一论据，谢谢合作<br>
+    实战属性请按F12在console里找<br>
+    此页面浏览器需求同配装器一致<br>
+    p.s. 照着W3C第一次写网页，所以布局代码稀烂，可能有各种BUG（已知：大屏幕下部分文字错位但是我不知道怎么改233），有问题和建议都可以联系我QQ或者<a href="http://weibo.com/p/1005053830052730">微博</a><br>
+    我2014年第一次写配装器和计算器的时候就设想过不限制更新的配装和DPS预期，感谢白玄笑，野木轩，楚炫枫，胖叔叔等，以及万花谷的诸位<br>
+    感谢剑网3让我学到了不少，虽然花间现在很情怀……
+        <p style="float: right">BY 万花谷 泠落</p>
+    </p>
+    </div>
+
+  </div>
+    <main>
+        <div>
+            <div class="row">
+                <div class="col l2 m6 s12">
+                    <ul class="collapsible col l12 m12 s12 dpscard1" data-collapsible="expandable">
+                        <li class="active col l12 m12 s12" style="width: 100% " id="li01">
+                            <div class="collapsible-header active div01">
+                                <i class="mdi-image-filter-drama"></i>自身属性
+                                </div>
+                            <div class="collapsible-body" style="display: block;">
+                                <div class="input-field col l6 m6 s6">
+                                    <input value="1000" type="text" class="validate" data-attributes="yuanQi">
+                                    <label class="active">元气</label>
+                                </div>
+                                <div class="input-field col l6 m6 s6">
+                                    <input value="5500" type="text" class="validate" data-attributes="gongJi">
+                                    <label class="active">攻击力</label>
+                                </div>
+                                <div class="input-field col l6 m6 s6">
+                                    <input value="107" type="text" class="validate" data-attributes="mingZhong">
+                                    <label class="active">命中</label>
+                                </div>
+                                <div class="input-field col l6 m6 s6">
+                                    <input value="20" type="text" class="validate" data-attributes="huiXin">
+                                    <label class="active">会心</label>
+                                </div>
+                                <div class="input-field col l6 m6 s6">
+                                    <input value="200" type="text" class="validate" data-attributes="huiXiao">
+                                    <label class="active">会心效果</label>
+                                </div>
+                                <div class="input-field col l6 m6 s6">
+                                    <input value="8.6" type="text" class="validate" data-attributes="jiaSu">
+                                    <label class="active">加速</label>
+                                </div>
+                                <div class="input-field col l6 m6 s6">
+                                    <input value="1600" type="text" class="validate" data-attributes="poFang">
+                                    <label class="active">最终破防</label>
+                                </div>
+                                <div class="input-field col l6 m6 s6">
+                                    <input value="33" type="text" class="validate" data-attributes="wuShuang">
+                                    <label class="active">无双</label>
+                                </div>
+                        </li>
+                    </ul>
+                    </div>
+                    <div class="col l3 m6 s12">
+                        <ul class="collapsible col l12 m12 s12 dpscard1 effects" data-collapsible="expandable">
+                            <li class="active col l12 m12 s12" style="width: 100%" id="li02">
+                                <div class="collapsible-header active"><i class="mdi-image-filter-drama"></i>站桩BUFF</div>
+
+                                <div class="collapsible-body" style="display: block;">
+                                    <div class="col l6 m6 s12">
+                                        <div class="select-wrapper col l12 m12 s12 colPadding" data-buff="water">
+                                            <select class="initialized input-field col s12">
+                                        <option value="0">水特效</option>
+                                        <option value="1">水·灭虚</option>
+                                        <option value="2">水·激流</option>
+                                        <option value="3">水·痛切</option>
+                                        <option value="4">水·无双</option>
+                                        <option value="5">水·锐眼</option>
+                                        <option value="6">水·急速</option>                                                
+                                    </select>
+                                        </div>
+                                        <div class="select-wrapper col l12 m12 s12 colPadding" data-buff="thunder">
+                                            <select class="initialized input-field col s12">
+                                        <option value="0">雷特效</option>
+                                        <option value="1">雷·灭气</option>
+                                    </select></div>
+                                        <div class="select-wrapper col l12 m12 s12 colPadding" data-buff="wind">
+                                            <select class="initialized input-field col s12">
+                                        <option value="0">风特效</option>
+                                        <option value="1">风·灭虚</option>
+                                        <option value="2">风·灭气</option>
+                                    </select>
+                                        </div>
+                                        <div class="select-wrapper col l12 m12 s12 colPadding" data-skill="ymYungong">
+                                            <select class="initialized input-field col s12" disabled>
+                                        <option value="0">阳明运功-0.25</option>
+                                        <option value="1">阳明运功-0.125</option>
+                                        <option value="2">阳明运功秘籍</option>
+                                    </select>
+                                        </div>
+                                        <div class="select-wrapper col l12 m12 s12 colPadding" data-skill="ymShanghai">
+                                            <select class="initialized input-field col s12">
+                                        <option value="0">阳明伤害秘籍</option>
+                                        <option value="1">阳明伤害4%</option>
+                                        <option value="2">阳明伤害7%</option>
+                                    </select>
+                                        </div>
+                                        <div class="select-wrapper col l12 m12 s12 colPadding" data-skill="ymHuixin">
+                                            <select class="initialized input-field col s12">
+                                        <option value="0">阳明会心秘籍</option>
+                                        <option value="1">阳明会心3%</option>
+                                        <option value="2">阳明会心5%</option>
+                                    </select>
+                                        </div>
+                                    </div>
+                                    <div class="col l6 m6 s12" style="padding-top: 15px">
+                                        <div class="col l12 m12 s12 effects-check">
+                                            <input type="checkbox" id="tzNuchi" checked="checked" />
+                                            <label for="tzNuchi" style="font-size: 0.8rem">套装特效[怒叱]</label>
+                                        </div>
+                                        <div class="col l12 m12 s12 effects-check">
+                                            <input type="checkbox" id="tzZhaoshi" checked="checked" />
+                                            <label for="tzZhaoshi" style="font-size: 0.8rem">套装特效[招式]</label>
+                                        </div>
+                                        <div class="col l12 m12 s12 effects-check">
+                                            <input type="checkbox" id="smallCw" />
+                                            <label for="smallCw" style="font-size: 0.8rem">紫萝怨·意</label>
+                                        </div>
+                                        <div class="col l12 m12 s12 effects-check">
+                                            <input type="checkbox" id="bigCw" />
+                                            <label for="bigCw" style="font-size: 0.8rem">墨颠</label>
+                                        </div>
+                                        <div class="col l12 m12 s12 effects-check">
+                                            <input type="checkbox" id="ziYou" checked="checked" />
+                                            <label for="ziYou" style="font-size: 0.8rem">恣游</label>
+                                        </div>
+                                        <div class="col l12 m12 s12 effects-check">
+                                            <input type="checkbox" id="shiGu" checked="checked" />
+                                            <label for="shiGu" style="font-size: 0.8rem">噬骨</label>
+                                        </div>
+                                        <div class="col l12 m12 s12 effects-check">
+                                            <input type="checkbox" id="waterMoon" checked="checked" />
+                                            <label for="waterMoon" style="font-size: 0.8rem">水月无间</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col l4 m6 s12">
+                        <ul class="collapsible col l12 m12 s12 dpscard1" data-collapsible="expandable">
+                            <li class="active col l12 m12 s12" style="width: 100%" id="li03">
+                                <div class="collapsible-header active"><i class="mdi-image-filter-drama"></i>实战团队增益</div>
+                                <div class="collapsible-body" style="display: block;">
+                                    <div class="row col s12 m12 l12" style="padding-top: 15px;">
+                                        <div class="col s4 m4 l4">
+                                            <div class="col l12 m12 s12 effects-check">
+                                                <input type="checkbox" id="xiuQi" checked="checked" />
+                                                <label for="xiuQi" style="font-size: 0.8rem">袖气</label>
+                                            </div>                                                       
+                                            <div class="col l12 m12 s12 effects-check">
+                                                <input type="checkbox" id="poCangqiong" checked="checked" />
+                                                <label for="poCangqiong" style="font-size: 0.8rem">破苍穹</label>
+                                            </div>
+                                            <div class="col l12 m12 s12 effects-check">
+                                                <input type="checkbox" id="qingJuan" checked="checked" />
+                                                <label for="qingJuan" style="font-size: 0.8rem">破防·清绢</label>
+                                            </div>
+                                            <div class="col l12 m12 s12 effects-check">
+                                                <input type="checkbox" id="sheYing" checked="checked" />
+                                                <label for="sheYing" style="font-size: 0.8rem">蛇影枯残</label>
+                                            </div>                                 
+                                            <div class="col l12 m12 s12 effects-check" style="visibility: hidden">
+                                                <input type="checkbox" id="poXiao"/>
+                                                <label for="poXiao" style="font-size: 0.8rem">易伤·破霄</label>
+                                            </div>
+                                        </div>
+                                        <div class="col s4 m4 l4">
+                                            <div class="col l12 m12 s12 effects-check">
+                                                <input type="checkbox" id="mjT" checked="checked" />
+                                                <label for="mjT" style="font-size: 0.8rem">明教T</label>
+                                            </div>
+                                            <div class="col l12 m12 s12 effects-check">
+                                                <input type="checkbox" id="tcT" />
+                                                <label for="tcT" style="font-size: 0.8rem">天策T</label>
+                                            </div>
+                                            <div class="col l12 m12 s12 effects-check">
+                                                <input type="checkbox" id="jinGang" checked="checked" />
+                                                <label for="jinGang" style="font-size: 0.8rem">金刚怒目</label>
+                                            </div>
+                                        </div>
+                                        <div class="col s4 m4 l4">
+                                            <div class="col l12 m12 s12 effects-check">
+                                                <input type="checkbox" id="manWu" />
+                                                <label for="manWu" style="font-size: 0.8rem">曼舞</label>
+                                            </div>
+                                            <div class="col l12 m12 s12 effects-check">
+                                                <input type="checkbox" id="zhengYu" checked="checked" />
+                                                <label for="zhengYu" style="font-size: 0.8rem">蒸鱼菜盘</label>
+                                            </div>
+                                            <div class="col l12 m12 s12 effects-check">
+                                                <input type="checkbox" id="shuizhuYu" />
+                                                <label for="shuizhuYu" style="font-size: 0.8rem">炼狱水煮鱼</label>
+                                            </div>
+                                            <div class="col l12 m12 s12 effects-check">
+                                                <input type="checkbox" id="daQi" />
+                                                <label for="daQi" style="font-size: 0.8rem">义薄云天·战</label>
+                                            </div>
+                                            <div class="col l12 m12 s12 effects-check" style="visibility: hidden">
+                                                <input type="checkbox" id="wucaiQiu" />
+                                                <label for="wucaiQiu" style="font-size: 0.8rem">五彩球·赤</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row col s12 m12 l12" style="margin-bottom: 1.rem;">
+                                        <div class="col l6 m6 s6" style="padding: 0.2rem 0.75rem">
+                                            <input type="checkbox" id="qxXuantian" checked="checked" />
+                                            <label for="qxXuantian" style="font-size: 0.8rem;white-space: nowrap">七秀·剑舞霓裳·玄天</label>
+                                        </div>
+                                        <div class="col l6 m6 s6" style="padding: 0.2rem 0.75rem">
+                                            <input type="checkbox" id="bianTian" checked="checked" />
+                                            <label for="bianTian" style="font-size: 0.8rem;white-space: nowrap">万花·青岩太玄·变天</label>
+                                        </div>
+                                        <div class="col l6 m6 s6" style="padding: 0.2rem 0.75rem;white-space: nowrap">
+                                            <input type="checkbox" id="mjBiantian" checked="checked" />
+                                            <label for="mjBiantian" style="font-size: 0.8rem">明教·妙火琉璃·变天</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col l3 m6 s12">
+                        <ul class="collapsible col l12 m12 s12 dpscard1 xiaochizhenfa" data-collapsible="expandable">
+                            <li class="active col l12 m12 s12" style="width: 100%" id="li04">
+                                <div class="collapsible-header active"><i class="mdi-image-filter-drama"></i>实战阵法辅助</div>
+                                <div class="collapsible-body" style="display: block;">
+                                    <div class="col l12 m12 s12 effects-check style-mtop" data-buff="yanXi">
+                                        <label class="col l4 m4 s4">宴席</label>
+                                        <select class="initialized input-field col l8 m8 s8">
+                                    <option value="0">无</option>
+                                    <option value="1">芙蓉出水宴</option>
+                                    <option value="2">烧尾宴</option>
+                                    <option value="3">佳·烧尾宴</option>
+                                </select>
+                                    </div>
+                                    <div class="col l12 m12 s12 effects-check style-mtop" data-buff="moShi">
+                                        <label class="col l4 m4 s4">磨石</label>
+                                        <select class="initialized input-field col l8 m8 s8">
+                                    <option value="0">无（磨石与兵鉴冲突）</option>
+                                    <option value="1">佳·剑胆·熔锭（内伤）</option>
+                                </select>
+                                    </div>
+                                    <div class="col l12 m12 s12 effects-check style-mtop" data-buff="zhenFa">
+                                        <label class="col l4 m4 s4">阵法</label>
+                                        <select class="initialized input-field col l8 m8 s8">
+                                    <option value="0">无</option>
+                                    <option value="1">天鼓雷音阵</option>
+                                    <option value="2">万蛊噬心阵</option>
+                                    <option value="3">九宫八卦阵</option>
+                                    <option value="4">七绝逍遥阵</option>
+                                </select>
+                                    </div>
+                                    <div class="col l12 m12 s12 effects-check style-mtop" data-food="yishuZq">
+                                        <label class="col l4 m4 s4">医术增强</label>
+                                        <select class="initialized input-field col l8 m8 s8">
+                                    <option value="0">无</option>
+                                    <option value="1">苍·提神香囊（破防）</option>
+                                    <option value="2">苍·上品展凤丹（攻击）</option>
+                                    <option value="3">尚·上品玉露丹（会效）</option>
+                                    <option value="4">佳·白信丹（会心）</option>
+                                    <option value="5">白信丹（会心）</option>
+                                    <option value="6">佳·妙香丹（会效）</option> 
+                                    <option value="7">妙香丹（会效）</option>  
+                                    <option value="8">珍·养魂丹（会效）</option>                                  
+                                </select>
+                                    </div>
+                                    <div class="col l12 m12 s12 effects-check style-mtop" data-food="yishuFz">
+                                        <label class="col l4 m4 s4">医术辅助</label>
+                                        <select class="initialized input-field col l8 m8 s8">
+                                    <option value="0">无</option>
+                                    <option value="1">佳·养神丹（元气）</option>
+                                    <option value="2">养神丹（元气）</option>
+                                    <option value="3">珍·益神丹（元气）</option>
+                                </select>
+                                    </div>
+                                    <div class="col l12 m12 s12 effects-check style-mtop" data-food="pengrenZq">
+                                        <label class="col l4 m4 s4">烹饪增强</label>
+                                        <select class="initialized input-field col l8 m8 s8">
+                                    <option value="0">无</option>
+                                    <option value="1">苍·提神汤（破防）</option>
+                                    <option value="2">佳·五生盘（会心）</option>
+                                    <option value="3">五生盘（会心）</option>
+                                    <option value="4">佳·贵妃红（命中）</option>
+                                    <option value="5">贵妃红（命中）</option>
+                                    <option value="6">佳·通花软牛肠（会效）</option> 
+                                    <option value="7">佳·御黄王母饭（破防）</option>  
+                                    <option value="8">佳·八方寒食饼（攻击）</option>
+                                    <option value="9">珍·金乳酥（会心）</option>  
+                                    <option value="10">珍·凤凰鱼翅（会效）</option>
+                                </select>
+                                    </div>
+                                    <div class="col l12 m12 s12 effects-check style-mtop" data-food="pengrenFz">
+                                        <label class="col l4 m4 s4">烹饪辅助</label>
+                                        <select class="initialized input-field col l8 m8 s8">
+                                    <option value="0">无</option>
+                                    <option value="1">佳·长生粥（元气）</option>
+                                    <option value="2">长生粥（元气）</option>
+                                    <option value="3">珍·云梦肉（元气）</option>
+                                </select>
+                                    </div>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="row result">
+                    <div class="col l4 m12 s12">
+                        <ul class="collapsible col l12 m12 s12 dpscard2" data-collapsible="expandable">
+                            <li class="active col l12 m12 s12" style="width: 100%" id="li05">
+                                <div class="collapsible-header active"><i class="mdi-image-filter-drama"></i>奇穴选择</div>
+                                <div class="collapsible-body" style="display: block;">
+                                    <div class="col l1 m1 s1 radio-button">
+                                        <a class="waves-effect waves-light btn col l12 m12 s12 chosen">烟霞</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">弹指</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">少阳</a>
+                                    </div>
+                                    <div class="col l1 m1 s1 radio-button">
+                                        <a class="waves-effect waves-light btn col l12 m12 s12 chosen">寒碧</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">寒血</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">花语酥心</a>
+                                    </div>
+                                    <div class="col l1 m1 s1 radio-button">
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">青歌</a>
+                                        <a class="waves-effect waves-light btn col l12 m12 s12 chosen">风烟翠</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">倚天</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">清风垂露</a>
+                                    </div>
+                                    <div class="col l1 m1 s1 radio-button">
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">束发</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">列宿</a>
+                                        <a class="waves-effect waves-light btn col l12 m12 s12 chosen">潜催</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">厥阴指</a>
+                                    </div>
+                                    <div class="col l1 m1 s1 radio-button">
+                                        <a class="waves-effect waves-light btn col l12 m12 s12 chosen">焚玉</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">弹梦</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">轻弃</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">星影</a>
+                                    </div>
+                                    <div class="col l1 m1 s1 radio-button">
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">放歌</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">踏歌</a>
+                                        <a class="waves-effect waves-light btn col l12 m12 s12 chosen">青冠</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">闲垂影</a>
+                                    </div>
+                                    <div class="col l1 m1 s1 radio-button">
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">夜思</a>
+                                        <a class="waves-effect waves-light btn col l12 m12 s12 chosen">清流</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">雪月</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12">乱洒青荷</a>
+                                    </div>
+                                    <div class="col l1 m1 s1 radio-button">
+                                        <a class="waves-effect waves-light btn col l12 m12 s12 chosen">旋落</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">雪弃</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">金屋</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">少明指</a>
+                                    </div>
+                                    <div class="col l1 m1 s1 radio-button">
+                                        <a class="waves-effect waves-light btn col l12 m12 s12 chosen">生息</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">流离</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">金针</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">浮花浪蕊</a>
+                                    </div>
+                                    <div class="col l1 m1 s1 radio-button">
+                                        <a class="waves-effect waves-light btn col l12 m12 s12 chosen">梦歌</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">生脉</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">砚悬</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">傍花随柳</a>
+                                    </div>
+                                    <div class="col l1 m1 s1 radio-button">
+                                        <a class="waves-effect waves-light btn col l12 m12 s12 chosen">雪中行</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">踏莲</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">星移</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">摇柳</a>
+                                    </div>
+                                    <div class="col l1 m1 s1 radio-button">
+                                        <a class="waves-effect waves-light btn col l12 m12 s12 chosen">涓流</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">同宿</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">月影</a>
+                                        <a class="waves-effect waves-teal btn-flat col l12 m12 s12 disabled">南风吐月</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col l4 m6 s12">
+                        <ul class="collapsible col l12 m12 s12 dpscard2" data-collapsible="expandable">
+                            <li class="active col l12 m12 s12" style="width: 100%" id="li06">
+                                <div class="collapsible-header active"><i class="mdi-image-filter-drama"></i>站桩DPS</div>
+                                <div class="collapsible-body" style="display: block;">
+                                    <table class="bordered highlight centered" id="DPS">
+                                        <thead>
+                                            <tr>
+                                                <th data-field="id">无增益</th>
+                                                <th data-field="name">B</th>
+                                                <th data-field="price">A-</th>
+                                                <th data-field="price">A+</th>
+                                                <th data-field="price">S</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>96木桩</td>
+                                                <td>17946</td>
+                                                <td>18605</td>
+                                                <td>19594</td>
+                                                <td>23126</td>
+                                            </tr>
+                                            <tr>
+                                                <td>97木桩</td>
+                                                <td>15833</td>
+                                                <td>16415</td>
+                                                <td>17287</td>
+                                                <td>20403</td>
+                                            </tr>
+                                            <tr>
+                                                <td>98木桩</td>
+                                                <td>13426</td>
+                                                <td>13919</td>
+                                                <td>14659</td>
+                                                <td>17361</td>
+                                            </tr>
+                                            <tr>
+                                                <td>25人本</td>
+                                                <td>11576</td>
+                                                <td>12002</td>
+                                                <td>12640</td>
+                                                <td>15138</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col l4 m6 s12">
+                        <ul class="collapsible col l12 m12 s12 dpscard2" data-collapsible="expandable">
+                            <li class="active col l12 m12 s12" style="width: 100%" id="li07">
+                                <div class="collapsible-header active "><i class="mdi-image-filter-drama "></i>实战DPS</div>
+                                <div class="collapsible-body " style="display: block; ">
+                                <table class="bordered highlight centered " id="battleDPS">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="id ">有增益</th>
+                                            <th data-field="name ">B</th>
+                                            <th data-field="price ">A-</th>
+                                            <th data-field="price ">A+</th>
+                                            <th data-field="price ">S</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>96木桩</td>
+                                            <td>35328</td>
+                                            <td>36631</td>
+                                            <td>38586</td>
+                                            <td>43819</td>
+                                        </tr>
+                                        <tr>
+                                            <td>97木桩</td>
+                                            <td>31169</td>
+                                            <td>32319</td>
+                                            <td>34043</td>
+                                            <td>38660</td>
+                                        </tr>
+                                        <tr>
+                                            <td>98木桩</td>
+                                            <td>27011</td>
+                                            <td>28007</td>
+                                            <td>29502</td>
+                                            <td>33502</td>
+                                        </tr>
+                                        <tr>
+                                            <td>25人本</td>
+                                            <td>23852</td>
+                                            <td>24732</td>
+                                            <td>26052</td>
+                                            <td>29746</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                        </li>
+                   </ul>
+                   </div>
+                </div>
+            </div>
+    </main>
+
+
+    <footer>
+
+
+
+
+
+    </footer>
+    <!--js导入  -->
+    <script type="text/javascript " src="js/jquery-3.1.1.min.js "></script>
+    <script type="text/javascript " src="js/hjdps.js "></script>
+    <script type="text/javascript " src="js/materialize.min.js "></script>
+</body>
+
+</html>
