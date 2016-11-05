@@ -1,0 +1,133 @@
+body {
+    font-family: "Arial", "Roboto", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+}
+@media only screen and (min-width: 993px){
+    #li01{
+        margin-bottom: 0.6rem !important;
+    }
+    #li02{
+         margin-bottom: 0.5rem;
+    }
+    #li04{
+        margin-bottom: 0rem !important;
+    }
+}
+@media only screen and (min-width: 601px){
+    #li01{
+        margin-bottom: 0.2rem;
+    }
+    #li02{
+         margin-bottom: 0.5rem;
+    }
+    #li04{
+        margin-bottom: 1rem;
+    }
+}
+@media only screen and (max-width: 601px){
+    .dpscard1{
+        /*height: 305px;*/
+    }
+}
+.dpscard2{
+    height: 218px;
+}
+.select-wrapper input.select-dropdown {
+    margin: 0;
+    font-size: 0.6rem;
+    height: 2.6rem;
+}
+
+.dropdown-content li>span {
+    font-size: 0.6rem;
+    white-space: nowrap;
+}
+
+
+[type="checkbox"]+label:before,
+[type="checkbox"]:not(.filled-in)+label:after {
+    top: 3px;
+    left: 14px;
+    width: 14px;
+    height: 14px;
+}
+[type="radio"]:not(:checked)+label, [type="radio"]:checked+label{
+    font-size: 0.8rem;
+}
+
+[type="checkbox"]:checked+label:before {
+    top: 0px;
+    left: 12px;
+    width: 9px;
+    height: 14px;
+}
+
+header ul li a {
+    padding: 0 25px;
+}
+
+main {
+    margin: 10px;
+}
+
+.dpscard1,.dpscard2 {
+    margin: 0 15px;
+}
+
+main .validate {
+    height: 2rem;
+}
+
+main .effects .input-field {
+    margin: 2px 0;
+}
+
+main .effects .colPadding {
+    padding: 0;
+}
+.effects-check{
+    padding: 0.2rem 0 !important;
+    white-space: nowrap;
+}
+.xiaochizhenfa{
+    padding: 0 !important;
+    margin-right: 0 !important;
+}
+.xiaochizhenfa label{
+    font-size: 0.8rem;
+    padding: 0 0 0 0.4rem !important;
+    text-align: center;
+}
+.xiaochizhenfa .input-field{
+    margin-top: 0;
+}
+.xiaochizhenfa .select-wrapper input.select-dropdown{
+    height: 1.3rem;
+}
+.xiaochizhenfa .select-wrapper span.caret {
+    top: 1px;
+}
+.xiaochizhenfa span{
+    padding-left: 0.2rem !important;
+    padding-right: 0.2rem !important;
+}
+.radio-button,.radio-button a{
+    padding: 0 !important;
+    text-align: center;
+    font-size: 0.85rem;
+    border-radius:0;
+    margin: 0.15rem 0 0.2rem 0
+}
+td,th{
+    font-family: "Roboto" !important;
+    padding: 7px 7px;
+    font-size: 0.85rem;
+}
+.style-mtop{
+    margin-top: 0.82rem;
+}
+.disabled {
+    pointer-events: none; 
+}
+.btn01,.btn02,.btn03,btn05{
+    float: right !important;
+}
