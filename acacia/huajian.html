@@ -1,0 +1,654 @@
+<html lang="zh-cn" ng-app="J3DPS">
+	<head>
+		<title>花间游 | 剑网3 DPS 模拟器</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="剑网3 DPS 模拟器是全网首个以完全模拟游戏输出循环进行DPS预估的工具。">
+		<meta name="author" content="胖叔叔">
+		<meta name="keywords" content="剑网3,西山居,剑侠情缘,配装器,花间游,DPS">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!--
+			@require '../css/theme/bootstrap.css'
+			@require '../css/theme/materialadmin.css'
+			@require '../css/theme/font-awesome.min.css'
+			@require '../css/theme/material-design-iconic-font.min.css'
+			@require '../css/theme/libs/toastr/toastr.css'
+			@require '../css/theme/libs/DataTables/jquery.dataTables.css'
+			@require '../css/theme/libs/hotkeys/hotkeys.min.css'
+			@require '../components/common/common.css'
+			@require '../css/acacia.css'
+		-->
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="../js/libs/utils/html5shiv.js"></script>
+		<script type="text/javascript" src="../js/libs/utils/respond.min.js"></script>
+		<![endif]-->
+		<!-- Google 统计代码 -->
+		<script rel="text/javascript" src="../components/google-analystics/googleAnalystics.js?__inline"></script><!--ignore-->
+		<!-- 浏览器兼容性检查 -->
+		<script rel="text/javascript" src="../components/compatibility-check/compatibilityCheck.js?__inline"></script><!--ignore-->
+	</head>
+	<body class="menubar-hoverable header-fixed menubar-first" ng-controller="AppCtrl">
+		<header id="header">
+			<div class="headerbar">
+				<div class="headerbar-left">
+					<ul class="header-nav header-nav-options">
+						<li class="header-nav-brand" >
+							<div class="brand-holder">
+								<a href="#">
+									<span class="text-lg text-bold text-primary">剑网3&nbsp;DPS&nbsp;模拟器</span>
+								</a>
+							</div>
+						</li>
+						<li>
+							<a class="btn btn-icon-toggle menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+								<i class="fa fa-bars"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="headerbar-right">
+					<!-- <ul class="header-nav header-nav-options">
+						~ Right aligned navigation items ~
+					</ul> -->
+					<!-- <ul class="header-nav header-nav-profile">
+						
+					</ul> -->
+					<ul class="header-nav header-nav-toggle">
+						
+					</ul>
+				</div>
+			</div>
+		</header>
+		<div id="base">
+			<!-- <div class="offcanvas">
+				<div class="offcanvas-pane">
+					~ Offcanvas content ~
+				</div>
+				<div class="offcanvas-pane">
+					~ Offcanvas content ~
+				</div>
+			</div> -->
+			<div id="content" ng-controller="MainCtrl" ng-cloak>
+				<!-- 主界面 -->
+				<section id="home" ng-show="pageShow.home">
+					<div class="section-body">
+						<div class="rows">
+							<div class="col-md-2">
+								<div class="card style-default-bright">
+									<div class="card-body">
+										<form class="form">
+											<div class="form-group floating-label m-b-5">
+												<input type="text" class="form-control input-sm" ng-model="myself.attributes.basicAttack" id="basicAttack">
+												<label for="basicAttack">基础攻击</label>
+											</div>
+											<div class="form-group floating-label m-b-5">
+												<input type="text" class="form-control input-sm" ng-model="myself.attributes.spunk" id="spunk">
+												<label for="spunk">元气</label>
+											</div>
+											<div class="form-group floating-label m-b-5">
+												<input type="text" class="form-control input-sm" ng-model="myself.attributes.crit" id="crit">
+												<label for="crit">会心率</label>
+											</div>
+											<div class="form-group floating-label m-b-5">
+												<input type="text" class="form-control input-sm" ng-model="myself.attributes.critEff" id="critEff">
+												<label for="critEff">会心效果</label>
+											</div>
+											<div class="form-group floating-label m-b-5">
+												<input type="text" class="form-control input-sm" ng-model="myself.attributes.hit" id="hit">
+												<label for="hit">命中率</label>
+											</div>
+											<div class="form-group floating-label m-b-5">
+												<input type="text" class="form-control input-sm" ng-model="myself.attributes.haste" id="haste">
+												<label for="haste">加速等级</label>
+											</div>
+											<div class="form-group floating-label m-b-5">
+												<input type="text" class="form-control input-sm" ng-model="myself.attributes.strain" id="strain">
+												<label for="strain">无双率</label>
+											</div>
+											<div class="form-group floating-label m-b-5">
+												<input type="text" class="form-control input-sm" ng-model="myself.attributes.overcome" id="overcome">
+												<label for="overcome">破防等级</label>
+											</div>
+											<div class="form-group floating-label m-b-5">
+												<input type="text" class="form-control input-sm" ng-model="myself.attributes.delay" id="delay">
+												<label for="delay">延迟</label>
+											</div>
+											<div class="form-group floating-label m-b-5">
+												<input type="text" class="form-control input-sm" ng-model="$root.maxTime" id="maxTime">
+												<label for="maxTime">战斗时间(分钟)</label>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-10">
+								<div class="rows" ng-controller="StatsCtrl">
+									<div class="col-md-6">
+										<div class="card style-default-bright">
+											<div class="card-body">
+												<div class="row" style="margin-bottom:16px;">
+													<button class="btn ink-reaction btn-raised btn-primary" ng-click="start()">开始循环</button>
+													<button class="btn ink-reaction btn-raised btn-primary" ng-click="stop()" ng-show="$root.debug">结束循环</button>
+													<!-- <button class="btn ink-reaction btn-raised btn-primary" ng-click="checkUpdate()">更新测试</button> -->
+													<!-- <button class="btn ink-reaction btn-raised btn-primary" ng-click="clear()">清空log</button>
+													<button class="btn ink-reaction btn-raised btn-primary" ng-click="aveStart()">10次循环</button> -->
+												</div>
+												
+												<div class="row">
+													<label class="checkbox-inline checkbox-styled">
+														<input type="checkbox" ng-model="$root.macroMode"><span>宏模式</span>
+													</label>
+													<label class="checkbox-inline checkbox-styled">
+														<input type="checkbox" ng-model="$root.debug" ng-disabled="!$root.macroMode"><span>显示战斗过程</span>
+													</label>
+													<label class="checkbox-inline checkbox-styled">
+														<input type="checkbox" ng-model="$root.kill"><span>木桩掉血开关</span>
+													</label>
+
+												</div>
+											</div>
+										</div>
+										<div class="card style-default-bright">
+											<div class="card-body">
+												<div class="row" style="margin-bottom:16px;">
+													<span class="text-primary-dark">目标状态</span> {{$root.target.name}}({{$root.target.curLife}}/{{$root.target.life}})<br>
+													<span class="text-primary-dark">战斗时间</span> {{($root.time/16).toFixed(2)}}s<br>
+													<span class="text-primary-dark">DPS</span> {{$root.dps.toFixed(0)}}
+												</div>
+												<div class="row" ng-controller="BuffCtrl">
+													<div class="text-primary-dark" class="col-md-1">目标Buff</div>  
+													<div class="buff" ng-repeat="buff in buffController.targetBuffs">
+														<img ng-src="/icons/{{buff.icon}}.png" width="30px" height="30px" tooltip="{{buff.name}}" tooltip-append-to-body="true">
+														<span class="buff-time">{{(buff.remain/16).toFixed(0)<=9?'0':''}}{{(buff.remain/16).toFixed(0)}}'</span>
+														<span class="buff-level" ng-if="buff.maxLevel>1">{{buff.level}}</span>
+													</div>
+												</div>
+												<div class="row">
+													<div class="text-primary-dark" class="col-md-1">自身Buff</div> 
+													<div class="buff" ng-repeat="buff in buffController.selfBuffs">
+														<img ng-src="/icons/{{buff.icon}}.png" width="30px" height="30px" tooltip="{{buff.name}}:{{buff.desc}}" tooltip-append-to-body="true">
+														<span class="buff-time">{{(buff.remain/16).toFixed(0)<=9?'0':''}}{{(buff.remain/16).toFixed(0)}}'</span>
+														<span class="buff-level" ng-if="buff.maxLevel>1">{{buff.level}}</span>
+													</div>
+												</div>
+												<div class="row" style="margin-bottom:16px;" ng-controller="SkillCtrl">
+													<span class="text-primary-dark">读条状态</span> 
+													<span ng-if="myself.states.ota&&skillController.curSkill.type=='ota'">【{{skillController.curSkill.name}}】{{((myself.states.curOta - myself.states.otaRemain)/16).toFixed(2)}}s/{{(myself.states.curOta/16).toFixed(2)}}s</span>
+													<span ng-if="myself.states.ota&&skillController.curSkill.type=='channel'">【{{skillController.curSkill.name}}】{{(myself.states.otaRemain/16).toFixed(2)}}s/{{(myself.states.curOta/16).toFixed(2)}}s</span>
+													<div class="col-md-12">
+														<div class="progress progress-hairline col-md-7">
+															<div class="progress-bar progress-bar-primary-dark" ng-style="{'width':100*(myself.states.curOta - myself.states.otaRemain)/myself.states.curOta+'%'}" ng-if="myself.states.ota&&skillController.curSkill.type=='ota'"></div>
+															<div class="progress-bar progress-bar-primary-dark" ng-style="{'width':100*myself.states.otaRemain/myself.states.curOta+'%'}" ng-if="myself.states.ota&&skillController.curSkill.type=='channel'"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="card style-default-bright" ng-show="!$root.macroMode">
+											<div class="card-body">
+												<div class="row">
+													<div class="text-primary-dark" class="col-md-1">手动技能</div>
+													<div class="skill" ng-repeat="skillId in $root.settings.skillOrder" tooltip="{{skillController.list[skillId].name}}" tooltip-append-to-body="true">
+														<img ng-src="/icons/{{skillController.list[skillId].icon}}.png" width="48px" height="48px" >
+														<div class="skill-cd" ng-show="skillController.list[skillId].cdRemain>0">{{(skillController.list[skillId].cdRemain/16).toFixed(0)}}</div>
+														<div class="skill-nocd" ng-show="skillController.list[skillId].cdRemain<=0"></div>
+														<span class="skill-hotkey">{{$root.hotkeyList[$index].toUpperCase()}}</span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="card style-default-bright">
+											<div class="card-body">
+												<table id="skillDT" class="table table-hover table-condensed" datatable="ng" dt-options="skillTable.dtOptions" dt-column-defs="skillTable.dtColumnDefs" dt-instance="dtInstances.skillTable">
+													<thead class="text-md">
+														<tr><th>技能</th><th>计数</th><th>伤害</th><th>占比</th></tr>
+													</thead>
+													<tbody class="text-sm">
+														<tr ng-repeat="skill in dpsLog.skillDetails" ng-class="skill.name==skillHighlight?'info':''">
+															<td>{{skill.name}}</td>
+															<td>{{skill.count}}</td>
+															<td>{{skill.damage}}</td>
+															<td>{{(skill.damage/$root.globalDamage*100).toFixed(1)}}%</td>
+														</tr>
+													</tbody>
+												</table>
+												
+											</div>
+										</div>
+										<div class="card style-default-bright">
+											<div class="card-body">
+												<table id="DetailDT" class="table table-condensed" datatable="ng" dt-options="detailTable.dtOptions" dt-column-defs="detailTable.dtColumnDefs" dt-instance="dtInstances.detailTable">
+													<thead class="text-defalut" class="text-sm">
+														<tr><th>类别</th><th>计数</th><th>最大/最小伤害</th><th>平均伤害</th><th>占比</th></tr>
+													</thead>
+													<tbody  class="text-xs">
+														<tr ng-repeat="type in typeList" ng-show="$root.curSkillStats[type].count>0">
+															<td>{{typeDesc[type]}}</td>
+															<td>{{$root.curSkillStats[type].count}}</td>
+															<td>{{$root.curSkillStats[type].max}}/{{$root.curSkillStats[type].min}}</td>
+															<td>{{($root.curSkillStats[type].damage/($root.curSkillStats[type].count)).toFixed(0)}}</td>
+															<td>{{($root.curSkillStats[type].count/$root.curSkillStats.count*100).toFixed(1)}}%</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- 设置界面 -->
+				<section id="setting" ng-show="pageShow.setting" >
+					<div class="row" ng-controller="QixueCtrl">
+						<div class="col-md-12">
+							<div class="card card-underline">
+								<div class="card-head">
+									<header>奇穴设置</header>
+								</div>
+								<div class="card-body">
+									<div class="col-sm-1" ng-repeat="option in options" style="padding-left: 8px;padding-right: 8px;">
+										<div class="qixue dropdown">
+											<button id="add-buff" type="button" class="btn btn-default dropdown-toggle" ng-style="{background:'url(/icons/'+option.icon+'.png) 0 0 no-repeat'}" style="width:64px;height:50px;padding:3px" data-toggle="dropdown" tooltip="{{option.name+'：'+option.desc}}" tooltip-append-to-body="true">
+												<span class="caret right" style="color: black;"></span>
+											</button>
+											<ul class="dropdown-menu" role="menu" aria-labelledby="qixue">
+												<li role="menuitem" ng-repeat="opts in $root.skillOption[option.id]" ng-click="toggleOption(opts.name,option.id)" tooltip="{{opts.desc}}" tooltip-append-to-body="true" tooltip-placement="{{opts.firstChild?'right':'left'}}"><a href style="display:inline"><img ng-src="{{'/icons/'+opts.icon+'.png'}}" style="width:24px;height:24px"></img><span>{{opts.name}}</span></a></li>
+											</ul>
+										</div>
+										<span>{{option.name}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6" ng-controller="TargetCtrl">
+							<div class="card card-underline">
+								<div class="card-head">
+									<header>目标设置</header>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<div class="col-sm-4">
+											<div class="radio radio-styled"><label ng-click="setTarget(0)">
+												<input type="radio" name="target" ng-model="targetSelectId" value="0"><span> 初级试炼木桩(96)</span>
+											</label></div>
+											<div class="radio radio-styled"><label ng-click="setTarget(1)">
+												<input type="radio" name="target" ng-model="targetSelectId" value="1"><span> 中级试炼木桩(97)</span>
+											</label></div>
+											<div class="radio radio-styled"><label ng-click="setTarget(2)">
+												<input type="radio" name="target" ng-model="targetSelectId" value="2"><span> 高级试炼木桩(98)</span>
+											</label></div>
+											<div class="radio radio-styled"><label ng-click="setTarget(3)">
+												<input type="radio" name="target" ng-model="targetSelectId" value="3"><span> 极境试炼木桩(99)</span>
+											</label></div>
+
+										</div>
+										<div class="col-sm-4">
+											<span class="text-primary-dark">命中要求</span> {{$root.target.hitRequire}}%<br>
+											<span class="text-primary-dark">无双要求</span> {{$root.target.strainRequire}}%<br>
+											<span class="text-primary-dark">目标防御</span> {{$root.target.shield}}%<br>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6" ng-controller="EffectCtrl">
+							<div class="card card-underline">
+								<div class="card-head">
+									<header>特效设置</header>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<div class="col-sm-3">
+											<label>橙武特效</label><br>
+											<div class="radio radio-styled" ng-repeat="texiao in cw">
+												<label ng-click="$root.effects.cw = texiao.id">
+													<input type="radio" name="texiao_cw" ng-model="$root.effects.cw" ng-value="texiao.id">
+													<span>{{texiao.name}}</span>
+												</label>
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<label>水特效</label><br>
+											<div class="radio radio-styled" ng-repeat="texiao in water">
+												<label ng-click="$root.effects.water = texiao.id">
+													<input type="radio" name="texiao_water" ng-model="$root.effects.water" ng-value="texiao.id">
+													<span>{{texiao.name}}</span>
+												</label>
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<label>雷特效</label><br>
+											<div class="radio radio-styled" ng-repeat="texiao in thunder">
+												<label ng-click="$root.effects.thunder = texiao.id">
+													<input type="radio" name="texiao_thunder" ng-model="$root.effects.thunder" ng-value="texiao.id">
+													<span>{{texiao.name}}</span>
+												</label>
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<label>套装特效</label><br>
+											<div class="checkbox checkbox-styled" ng-repeat="texiao in setEffect">
+												<label ng-click="toggleSetEffect(texiao.id)">
+													<input type="checkbox" name="texiao_set" ng-model="texiao.check">
+													<span>{{texiao.name}}</span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<small><del>腰坠特效请在宏中使用/use 命令开启</del>（该功能暂未开放）</small>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6" ng-controller="MacroCtrl">
+							<div class="card card-underline">
+								<div class="card-head">
+									<header>宏设置</header>
+								</div>
+								<div class="card-body">
+									<div class="form-group" >
+										<textarea class="form-control" rows="10" ng-model="$root.macroText" id="macroTextArea" style="font-size: 12px;padding-top: 16px;"></textarea>
+										<label for="macroTextArea">在此输入宏</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-6" ng-controller="HotkeyCtrl">
+							<div class="card card-underline">
+								<div class="card-head">
+									<header>手动模式快捷键设置</header>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<table class="table table-condensed">
+											<thead class="text-defalut" class="text-sm">
+												<tr><th>技能栏位置：当前技能</th><th>快捷键</th></tr>
+											</thead>
+											<tbody  class="text-xs">
+												<tr ng-repeat="skillButton in hotkeySetting track by $index">
+													<td>{{$index+1}}：{{$root.originalSkillList[$root.settings.skillOrder[$index]].name}}</td>
+													<td><input type="text" class="form-control input-sm" ng-model="hotkeySetting[$index]" ng-change="hotkeyChange($index)"></td>
+												</tr>
+											</tbody>
+										</table>
+										<small>由于 ctrl、alt 等键位在浏览器中有特殊作用，若需要组合快捷键请自行输入组合键键名。例如 shift+c 表示同时按下 Shift 键和 C 键</small>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12" ng-controller="RecipeCtrl">
+							<div class="card card-underline">
+								<div class="card-head">
+									<header>秘籍设置</header>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<div class="col-sm-2" style="width:20%" ng-repeat="recipe in recipeList">
+											<label>{{recipe.name}}</label>
+											<div class="checkbox checkbox-styled" ng-repeat="item in $root.skillRecipe[recipe.id]">
+												<label>
+													<input type="checkbox" value="" ng-model="item.active" ng-click="toggleRecipe(recipe.id)" ng-disabled="!item.active&&recipeLCtrl[recipe.id]==4">
+													<span>{{item.desc}}</span>
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- 使用说明 -->
+				<section id="guide" ng-show="pageShow.guide">
+					<div class="section-body contain-lg">
+						<div class="row">
+							<div class="col-lg-12">
+								<h1 class="text-primary">剑网3 DPS 模拟器</h1>
+							</div>
+							<div class="col-lg-8">
+								<article class="margin-bottom-xxl">
+									<p class="lead">
+										剑网3 DPS 模拟器是一款由剑网3配装器旗下的 DPS 循环模拟工具，也是剑三第一款实现完全模拟角色输出过程的工具。该工具能根据用户所设置的奇穴、秘籍、属性、特效实现对应的技能效果，并计算伤害。
+									</p>
+									<p class="lead">
+										剑网3 DPS 模拟器目前仅支持<span class="text-primary-dark">花间游</span>心法，其他心法将在未来逐步支持。
+									</p>
+									<p class="lead">
+										剑网3 DPS 模拟器的一大特点就是能够根据玩家输入的宏文件自动完成技能循环，并将在未来提供更多的宏命令以供测试。
+									</p>
+								</article>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-12">
+								<h2 class="text-primary">DPS 模拟</h2>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>属性输入</h4>
+							</div><!--end .col -->
+							<div class="col-lg-3 col-md-4">
+								<article class="margin-bottom-xxl">
+									<p>
+										玩家可在模拟器中手动输入当前角色的属性值。玩家需要输入角色的元气、基础攻击、会心、会效、破防等级、命中、无双、加速等级，并可自行定义延迟和模拟战斗时间。其中，基础攻击、破防等级和加速等级均需要通过鼠标悬停在游戏内角色属性信息上查看。
+									</p>
+									<p>
+										用户一旦输入了数据后，这些数据将会自动保存在模拟器内，以供后续使用。
+									</p>
+								</article>
+							</div>
+							<div class="col-lg-offset-1 col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<img src="../guide/attributes_app.png" style="margin-right:100px">
+											<img src="../guide/attributes_game.png">
+										</div>
+									</div>
+								</div>
+								<em class="text-caption">属性输入栏</em>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>状态面板</h4>
+							</div><!--end .col -->
+							<div class="col-lg-3 col-md-4">
+								<article class="margin-bottom-xxl">
+									<p>
+										状态面板用于显示当前输出的状态，当玩家勾选“显示战斗过程”后，下方卡片就会实时显示读条、目标 buff、自身 buff 的情况，以方便玩家确认输出流程。同时，在 DPS 栏将会显示实时 DPS。
+									</p>
+									<p>
+										若玩家没有勾选“显示战斗过程”，此处将会显示战斗最后一秒的状态。需要注意的是，此处 DPS 为模拟过程最后一秒时的 DPS，考虑到脸的因素，多次模拟时，该 DPS 会产生上下浮动，属于正常情况。
+									</p>
+								</article>
+							</div>
+							<div class="col-lg-offset-1 col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<img src="../guide/status_panel.png">
+									</div>
+								</div>
+								<em class="text-caption">状态面板</em>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>DPS 统计</h4>
+							</div>
+							<div class="col-lg-3 col-md-4">
+								<article class="margin-bottom-xxl">
+									<p>
+										在 DPS 模拟界面的右侧，可以查看本次模拟的 DPS 统计信息，玩家可以查看本次循环的技能伤害比例，次数，和各个技能的详细信息等。
+									</p>
+								</article>
+							</div>
+							<div class="col-lg-offset-1 col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<img src="../guide/stats.png">
+									</div>
+								</div>
+								<em class="text-caption">DPS 统计面板</em>
+							</div>
+						</div>
+						
+						<hr class="ruler-xxl">
+						
+						<div class="row">
+							<div class="col-lg-12">
+								<h2 class="text-primary">设置</h2>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>DPS 模拟设置</h4>
+							</div>
+							<div class="col-lg-3 col-md-4">
+								<article class="margin-bottom-xxl">
+									<p>
+										玩家可在设置中对奇穴、目标、特效、秘籍和宏进行设置，其中每个技能的秘籍最多选择四项。
+									</p>
+								</article>
+							</div>
+							<div class="col-lg-offset-1 col-md-8">
+								<div class="card">
+									<div class="card-body">
+										<img src="../guide/settings.png" class="col-md-12">
+									</div>
+								</div>
+								<em class="text-caption">DPS 设置</em>
+							</div>
+						</div>
+						
+					</div>
+				</section>
+				<!-- 更新说明 -->
+				<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="modal">软件更新</h4>
+							</div>
+							<div class="modal-body">
+								<span class="text-primary-dark">最新版本</span>：{{$root.update.version}}<br>
+								<span class="text-primary-dark">更新说明</span>
+								<p>{{$root.update.desc}}</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">下次提醒我</button>
+								<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="update()">进行更新</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<div id="menubar" class="menubar-inverse ">
+				<div class="menubar-fixed-panel">
+					<div>
+						<a class="btn btn-icon-toggle btn-default menubar-toggle" data-toggle="menubar" href="javascript:void(0);">
+							<i class="fa fa-bars"></i>
+						</a>
+					</div>
+					<div class="expanded">
+						<a href="#">
+							<span class="text-lg text-bold text-primary ">剑网3&nbsp;DPS&nbsp;模拟器</span>
+						</a>
+					</div>
+				</div>
+				<div class="menubar-scroll-panel" style="height:">
+					<ul id="main-menu" class="gui-controls gui-controls-tree">
+						<li ng-class="pageShow.home?'active':''">
+							<a href="#" ng-click="pageSwitch('home')" >
+								<div class="gui-icon"><i class="md md-home"></i></div>
+								<span class="title">DPS 模拟</span>
+							</a>
+						</li>
+						<li ng-class="pageShow.setting?'active':''">
+							<a href="#" ng-click="pageSwitch('setting')">
+								<div class="gui-icon"><i class="md md-settings"></i></div>
+								<span class="title">设置</span>
+							</a>
+						</li>
+						<li ng-class="pageShow.guide?'active':''">
+							<a href="#" ng-click="pageSwitch('guide')" >
+								<div class="gui-icon"><i class="md md-description"></i></div>
+								<span class="title">使用说明</span>
+							</a>
+						</li>
+						<li class="gui-folder">
+							<a>
+								<div class="gui-icon"><i class="fa fa-puzzle-piece fa-fw"></i></div>
+								<span class="title">小工具</span>
+							</a>
+							<ul>
+								<li><a href="/tools/haste/" ><span class="title">加速宝典</span></a></li>
+								<li><a href="/tools/prediction/" ><span class="title">瑰石查询</span></a></li>
+							</ul>
+						</li>
+					</ul>
+					<div class="menubar-foot-panel">
+						<small class="no-linebreak hidden-folded">
+							<span class="opacity-75">Copyright &copy; 2013-2016</span> <strong><a href="https://www.j3pz.com/">剑网3配装器</a></strong>
+						</small>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="offcanvas">
+				<div class="offcanvas-pane">
+					<div id="log" style="max-height:350px;overflow-y:scroll;" ng-show="$root.debug"></div>
+				</div>
+				<div class="offcanvas-pane">
+					~ Offcanvas content ~
+				</div>
+			</div> -->
+		</div>
+
+		<!-- 外部库 JAVASCRIPT -->
+		<script src="../js/libs/jquery/jquery-1.11.2.min.js" data-framework></script>
+		<script src="../js/libs/jquery/jquery-migrate-1.2.1.min.js" data-framework></script>
+		<script src="../js/libs/bootstrap/bootstrap.min.js" data-framework></script>
+		<script src="../js/libs/nanoscroller/jquery.nanoscroller.min.js" data-framework></script>
+		<script src="../js/libs/DataTables/jquery.dataTables.min.js" data-framework></script>
+		<script src="../js/libs/angular/angular.min.js" data-framework></script>
+		<script src="../js/libs/angular/angular-animate.min.js" data-framework></script>
+		<script src="../js/libs/angular/angular-aria.min.js" data-framework></script>
+		<script src="../js/libs/icheck/icheck.min.js" data-framework></script>
+		<script src="../js/libs/DataTables/angular-datatables.min.js" data-framework></script>
+		<script src="../js/libs/toastr/toastr.js" data-framework></script>
+		<script src="../js/libs/hotkeys/hotkeys.min.js" data-framework></script>
+		<script src="../js/libs/bootstrap/ui-bootstrap-tpls-0.13.2.min.js" data-framework></script>
+		<script src="../js/core/source/App.min.js"></script>
+		<!-- DPS 模拟器 Javascript -->
+		<script src="scripts/dps.js"></script>
+		<script src="scripts/skill.js"></script>
+		<script src="scripts/buff.js"></script>
+		<script src="scripts/utils.js"></script>
+		<script src="s_huajian/buffs.js"></script>
+		<script src="s_huajian/skills.js"></script>
+		<script src="s_huajian/recipes.js"></script>
+		<script src="s_huajian/options.js"></script>
+		<script src="scripts/mainCtrl.js"></script>
+		<script src="scripts/settingsCtrl.js"></script>
+
+	</body>
+</html>
