@@ -757,7 +757,7 @@ $(document).ready(function () {
     d97: defenseCal(97, 750),
     d98: defenseCal(98, 1321),
     d99: defenseCal(99, 1771),
-    d25: defenseCal(98, 1636),
+    d25: defenseCal(98, 920),
   }
 
   var actualSP96 = 0;
