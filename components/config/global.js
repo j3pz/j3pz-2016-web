@@ -24,7 +24,7 @@ var menpaiList = {
 		'baseOvercomePlus': 0,
 		'baseHPlus': 1.2,
 		'baseMagicShield': 28,
-		'tixingOption': [1, 1, 1, 0]
+		'tixingOption': [1, 1, 1, 1]
 	},
 	'fenying': {
 		'name': 'fenying',
@@ -146,7 +146,7 @@ var menpaiList = {
 		'baseCritEffPlus': 0.08,
 		'baseOvercomePlus': 0,
 		'baseHPlus': 1.2,
-		'tixingOption': [1, 1, 1, 0]
+		'tixingOption': [1, 1, 1, 1]
 	},
 	'aoxue': {
 		'name': 'aoxue',
