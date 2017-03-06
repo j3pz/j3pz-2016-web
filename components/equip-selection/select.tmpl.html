@@ -22,18 +22,26 @@
 			<label for="quality">品质筛选 {{$root.equipListfilter.range[0]}}品-{{$root.equipListfilter.range[1]}}品</label>
 			<div><input class="slider-input" type="text" style="width:100%" /></div>
 			<!-- <br> -->
-			<ui-select ng-model="$root.equipLists[$root.focus].setAs" on-select="setEquip($root.equipLists[$root.focus].setAs.id)" theme="bootstrap" search-enabled="true" append-to-body="true">
+			<ui-select ng-model="$root.equipLists[$root.focus].setAs" on-select="setEquip($root.equipLists[$root.focus].setAs.id)" theme="bootstrap" search-enabled="true" append-to-body="true" class="hidden-xs">
 				<ui-select-match placeholder="您可以在这里输入装备名称进行搜索">{{$root.equipLists[$root.focus].setAs.name}}</ui-select-match>
 				<ui-select-choices repeat="equipItem in $root.equipLists[$root.focus].list | filter: $select.search | filter: checkFilter">
 					<!-- <div ng-bind-html="trustAsHtml((equipItem.name | highlight: $select.search),equipItem.quality)"></div>
 					<small ng-bind-html="generateAttr(equipItem.filter,equipItem.class)"></small> -->
 					<div ng-bind-html="simpleSelect((equipItem.name | highlight: $select.search),equipItem.filter)"></div>
 				</ui-select-choices>
-			</ui-select> 
+			</ui-select>
+			<br>
+			<ui-select ng-model="$root.equipLists[$root.focus].setAs" on-select="setEquip($root.equipLists[$root.focus].setAs.id)" theme="bootstrap" search-enabled="false" append-to-body="true">
+				<ui-select-match placeholder="选择装备">{{$root.equipLists[$root.focus].setAs.name}}</ui-select-match>
+				<ui-select-choices repeat="equipItem in $root.equipLists[$root.focus].list | filter: checkFilter">
+					<div ng-bind-html="simpleSelect((equipItem.name | highlight: $select.search),equipItem.filter)"></div>
+				</ui-select-choices>
+			</ui-select>
 			<br>
 			<div class="btn-group btn-group-justified" role="group" aria-label="select-option">
 				<a class="btn ink-reaction btn-raised btn-default-bright" ng-click="setEquip(0)">脱下装备</a>
-				<a class="btn ink-reaction btn-raised btn-default-bright" ng-click="searchEquip()">搜索其他装备</a>
+				<a class="btn ink-reaction btn-raised btn-default-bright hidden-xs" ng-click="searchEquip()">搜索其他装备</a>
+				<a class="btn ink-reaction btn-raised btn-default-bright visiable-xs" ng-click="searchEquip()">搜索</a>
 				<div class="btn-group" role="group">
 					<a class="btn ink-reaction btn-raised btn-default-bright dropdown-toggle" id="source-filter" type="button"  data-toggle="dropdown">指定来源 <i class="fa fa-caret-down text-default-light"></i></a>
 					<ul class="dropdown-menu animation-expand" role="menu" aria-labelledby="source-filter" style="max-height: 250px;overflow-x: hidden;">
