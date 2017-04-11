@@ -50,7 +50,7 @@ app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', '$locatio
 		.error(function(response) {
 			toastr.error(response.errors[0].detail);
 		});
-	}
+	};
 
 	$scope.getCaseList = function() {
 		$scope.caseList = [];
@@ -152,7 +152,7 @@ app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', '$locatio
 			var qualitySlider = $('input.slider-input').slider({
 				range: true,
 				min: 450,
-				max: 1200,
+				max: 1280,
 				values: $scope.preference.range,
 				step: 5,
 				tooltip: 'hide'
@@ -214,7 +214,7 @@ app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', '$locatio
 	};
 
 	var panel = $location.path();
-	if(panel!=''){
+	if (panel != '') {
 		var pathArr = panel.split('/');
 		var tab = pathArr[pathArr.length - 1];
 		$scope.switchList(tab);
