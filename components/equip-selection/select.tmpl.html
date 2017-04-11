@@ -31,7 +31,7 @@
 				</ui-select-choices>
 			</ui-select>
 			<br>
-			<ui-select ng-model="$root.equipLists[$root.focus].setAs" on-select="setEquip($root.equipLists[$root.focus].setAs.id)" theme="bootstrap" search-enabled="false" append-to-body="true">
+			<ui-select ng-model="$root.equipLists[$root.focus].setAs" on-select="setEquip($root.equipLists[$root.focus].setAs.id)" theme="bootstrap" search-enabled="false" append-to-body="true" class="visible-xs-block">
 				<ui-select-match placeholder="选择装备">{{$root.equipLists[$root.focus].setAs.name}}</ui-select-match>
 				<ui-select-choices repeat="equipItem in $root.equipLists[$root.focus].list | filter: checkFilter">
 					<div ng-bind-html="simpleSelect((equipItem.name | highlight: $select.search),equipItem.filter)"></div>
