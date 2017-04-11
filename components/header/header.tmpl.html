@@ -233,9 +233,46 @@
 					</div>
 				</ul>
 			</li>
+			<li ng-show="$root.isPz" ng-if="$root.isLogin" ng-cloak class="dropdown case-opt visible-xs" title="保存配装">
+				<a href="javascript:void(0);" class="btn btn-icon-toggle btn-default" data-toggle="dropdown">
+					<i class="md md-save"></i>
+				</a>
+				<ul class="dropdown-menu animation-expand" style="max-height:500px;overflow-x:hidden;">
+					<li class="dropdown-header">保存配装</li>
+					<li ng-repeat="case in saveList.list" ng-click="saveCaseConfirm(case.id,case.name,$event)"><a href>{{case.name}}</a></li>
+					<li class="divider"></li>
+					<li ng-click="saveNewCase($event)"><a href>保存一套新方案</a></li>
+				</ul>
+			</li>
+			<li ng-show="$root.isPz" ng-if="$root.isLogin" ng-cloak class="dropdown case-opt visible-xs" title="读取配装">
+				<a href="javascript:void(0);" class="btn btn-icon-toggle btn-default" data-toggle="dropdown">
+					<i class="md md-folder-open"></i>
+				</a>
+				<ul class="dropdown-menu animation-expand" style="max-height:500px;overflow-x:hidden;">
+					<li class="dropdown-header">读取配装</li>
+					<li ng-repeat="case in saveList.list" ng-click="loadCase(case.id)"><a href>{{case.name}}</a></li>
+					<li class="divider"></li>
+					<li><a href="/user/#!/case">方案设置</a></li>
+				</ul>
+			</li>
+			<li ng-if="$root.isLogin" ng-cloak class="visible-xs">
+				<a href="/user/" class="btn btn-flat btn-default">{{$root.user.name}}</a>
+			</li>
+		</ul>
+		<ul class="header-nav header-nav-options right visible-xs" ng-if="!$root.isLogin" ng-cloak>
+			<li>
+				<a class="btn btn-flat btn-default" data-toggle="modal" data-target="#loginModal">
+					登录
+				</a>
+			</li>
+			<li>
+				<a class="btn btn-flat btn-default" href="/register/">
+					注册
+				</a>
+			</li>
 		</ul>
 	</div>
-	<div class="headerbar-right" ng-if="$root.isLogin" ng-cloak>
+	<div class="headerbar-right hidden-xs" ng-if="$root.isLogin" ng-cloak>
 		<ul class="header-nav header-nav-options">
 			<li ng-show="$root.isPz" class="dropdown case-opt" title="保存配装">
 				<a href="javascript:void(0);" class="btn btn-icon-toggle btn-default" data-toggle="dropdown">
@@ -280,7 +317,7 @@
 			</li>
 		</ul>
 	</div>
-	<div class="headerbar-right" ng-if="!$root.isLogin" ng-cloak>
+	<div class="headerbar-right hidden-xs" ng-if="!$root.isLogin" ng-cloak>
 		<ul class="header-nav header-nav-options">
 			<li>
 				<a class="btn btn-flat btn-default" data-toggle="modal" data-target="#loginModal">
