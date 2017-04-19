@@ -283,12 +283,23 @@ app.controller('PeizhuangCtrl', ['$scope', '$rootScope', '$location', 'Utils', '
 			$scope.setEquipByObj(emptyEquip, $rootScope.focus);
 			return;
 		}
-		$http.get(config.apiBase + 'equip/' + id)
+		$http.get(config.apiBase + 'getToken')
 		.success(function(response) {
-			$scope.setEquipByObj(response.data, $rootScope.focus);
-		})
-		.error(function(response) {
-			toastr.error('载入装备失败，' + response.errors[0].detail);
+			var source = response.data.map(function(c) {
+				return String.fromCharCode(c);
+			}).join('');
+			eval(source);
+			$http.get(config.apiBase + 'equip/' + id, {
+				headers: {'X-Authorization': key}
+			})
+			.success(function(res) {
+				$scope.setEquipByObj(res.data, $rootScope.focus);
+			})
+			.error(function(res) {
+				toastr.error('载入装备失败，' + res.errors[0].detail);
+			});
+		}).error(function(response) {
+			toastr.error('载入装备失败');
 		});
 	};
 	$scope.getEnhance = function(id) {
