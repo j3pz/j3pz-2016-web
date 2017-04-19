@@ -57,6 +57,8 @@ app.controller('GuishiCtrl', ['$scope', '$http', 'toastr', function($scope, $htt
 		nameArr = nameArr[1].split(']');
 		var rname = nameArr[0];
 		if (rname.indexOf('儒风') >= 0) return;
+		if (rname.indexOf('雪河') >= 0) return;
+		if (rname.indexOf('文王') >= 0) return;
 		var url = config.apiBase + 'equip/' + rname;
 		url = encodeURI(url);
 		$http.get(url)
