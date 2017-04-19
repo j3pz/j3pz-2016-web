@@ -20,7 +20,7 @@ fis.media('server').match('*', {
 
 fis.media('local').match('*', {
 	deploy: fis.plugin('local-deliver', {
-		to: 'F:\\workspace\\apiv2-node\\public'
+		to: 'F:\\workspace\\j3pz.com\\apiv2-node\\public'
 	})
 });
 
