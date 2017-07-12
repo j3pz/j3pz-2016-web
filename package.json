@@ -1,6 +1,6 @@
 {
   "name": "j3pz-web",
-  "version": "3.2.4",
+  "version": "3.2.5",
   "description": "剑网3配装器前端代码仓库",
   "main": "fis-conf.js",
   "scripts": {
