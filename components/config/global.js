@@ -48,7 +48,7 @@ var menpaiList = {
 		'baseCritPlus': 0.15,
 		'baseCritEffPlus': 0.05,
 		'baseOvercomePlus': 0,
-		'baseHPlus': 1.2,
+		'baseHPlus': 1.3,
 		'basePhysicsShield': 22,
 		'baseMagicShield': 26,
 		'tixingOption': [1, 0, 0, 1]
