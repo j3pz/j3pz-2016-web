@@ -11,25 +11,33 @@
 					<tbody>
 						<tr><th>生效账户</th><th>{{isLogin?$root.user.name:'您没有登录'}}</th></tr>
 						<tr><th>订购产品</th><th><span class="item">{{item.name}}</span></th></tr>
-						<tr><th>需要支付</th><th><span class="price">{{item.price}}</span></th></tr>
+						<tr ng-show="!hasQrCode"><th>需要支付</th><th><span class="price">{{item.price}}</span></th></tr>
+						<tr ng-show="hasQrCode"><th>实际支付</th><th><span class="price">{{price}}</span></th></tr>
 					</tbody>
 				</table>
-				<div class="alert alert-callout alert-info" role="alert">
-					当您点击下方确认购买后，您将会跳转到支付宝网站进行支付
+				<div ng-show="hasQrCode" style="width: 100%;">
+					<img ng-src="{{qrCode}}" style="width: 100%; height: auto;"/>
 				</div>
-				<div class="alert alert-callout alert-warning" role="alert" ng-if="!isLogin">
-					<strong>警告:</strong> 您需要登录后才能进行购买
-				</div>
-				<div class="alert alert-callout alert-warning" role="alert" ng-if="isLogin&&!canBuy&&item.id!='10'">
-					<strong>警告:</strong> 您的账号不满足购买条件（购买后的最大方案数不能超过60套）
-				</div>
-				<div class="alert alert-callout alert-warning" role="alert" ng-if="isLogin&&!canBuy&&item.id=='10'">
-					<strong>警告:</strong> 您的账号不满足购买条件（只有当前最大方案数为3的用户方能购买）
+				<div ng-show="!hasQrCode">
+					<div class="alert alert-callout alert-info" role="alert">
+						当您在下方选择购买方式后，请扫描出现的二维码进行购买
+					</div>
+					<div class="alert alert-callout alert-warning" role="alert" ng-if="!isLogin">
+						<strong>警告:</strong> 您需要登录后才能进行购买
+					</div>
+					<div class="alert alert-callout alert-warning" role="alert" ng-if="isLogin&&!canBuy&&item.id!='10'">
+						<strong>警告:</strong> 您的账号不满足购买条件（购买后的最大方案数不能超过60套）
+					</div>
+					<div class="alert alert-callout alert-warning" role="alert" ng-if="isLogin&&!canBuy&&item.id=='10'">
+						<strong>警告:</strong> 您的账号不满足购买条件（只有当前最大方案数为3的用户方能购买）
+					</div>
+					<button type="button" class="btn btn-accent btn-block" ng-disabled="!canBuy||!isLogin" ng-click="buy(item.id, 1)">使用支付宝购买</button>
+					<button type="button" class="btn btn-success btn-block" ng-disabled="!canBuy||!isLogin" ng-click="buy(item.id, 2)">使用微信购买</button>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-				<button type="button" class="btn btn-primary" ng-disabled="!canBuy||!isLogin" ng-click="buy(item.id)">确认购买</button>
+				<button type="button" ng-show="!hasQrCode" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" ng-show="hasQrCode" class="btn btn-primary" data-dismiss="modal">完成</button>
 			</div>
 		</div>
 	</div>
