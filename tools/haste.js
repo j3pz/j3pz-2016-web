@@ -13,9 +13,9 @@ app.controller('HasteCtrl', ['$scope', function($scope){
 	$scope.acceExtraList = {
 		none:{name:"无",value:0},
 		mengge_hj:{name:"梦歌",value:60},
-		mengge_lj:{name:"梦歌",value:50},
+		// mengge_lj:{name:"梦歌",value:50},
 		zhenshang:{name:"枕上",value:50},
-		dushou:{name:"毒手",value:102},
+		// dushou:{name:"毒手",value:102},
 		bingsi:{name:"冰丝",value:60},
 		jujing:{name:"聚精凝神",value:205},
 		yuepo:{name:"辉耀红尘",value:52},
