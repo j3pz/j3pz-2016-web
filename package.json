@@ -4,7 +4,8 @@
   "description": "剑网3配装器前端代码仓库",
   "main": "fis-conf.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "fis3 release local -w"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,10 @@
   "homepage": "https://github.com/ziofat/j3pz-2016-web#readme",
   "devDependencies": {
     "eslint": "^3.2.2"
+  },
+  "dependencies": {
+    "fis3": "^3.4.39",
+    "fis3-optimizer-htmlminify": "^1.0.1",
+    "fis3-postpackager-loader": "^2.1.10"
   }
 }
