@@ -3,7 +3,13 @@ app.controller('CasePreviewController', ['$rootScope', '$scope', '$http', 'toast
 		$scope.toSave = $rootScope.toSave;
 		$scope.imgUrl = '';
 		$scope.loaded = false;
-		$http.post(config.apiBase + 'share', $scope.toSave)
+		var token = localStorage.getItem('token');
+		$http({
+			url: config.apiBase + 'share',
+			data: $scope.toSave,
+			method: 'POST',
+			headers: { 'Authorization': 'Bearer ' + token }
+		})
 		.success(function(response) {
 			$scope.imgUrl = response.data;
 			$scope.loaded = true;
