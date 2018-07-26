@@ -7,12 +7,12 @@ app.controller('ChangeEquipController', ['$scope', '$rootScope', '$http', '$sce'
 	var qualitySlider = $('input.slider-input').slider({
 		range: true,
 		min: 450,
-		max: 1400,
+		max: 1550,
 		values: $rootScope.equipListfilter.range,
 		step: 5,
 		tooltip: 'hide',
-		ticks: [450, 1100, 1400],
-		ticks_positions: [0, 25, 100],
+		ticks: [450, 1100, 1550],
+		ticks_positions: [0, 20, 100],
 		ticks_snap_bounds: 20
 	});
 	qualitySlider.on('slide', function(event) {
