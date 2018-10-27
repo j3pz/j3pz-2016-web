@@ -25,11 +25,14 @@ app.controller('HasteCtrl', ['$scope', function($scope){
 		rufeng:{name:"如风",value:51},
 		fengyi:{name:"风倚",value:51}
 	};
-
+	$scope.isNext = false;
 	$scope.results = [{newtime:$scope.oriTime,hastepercentage:0,hasteLevel:0}];
 
 	$scope.extra = "none";
 	$scope.$watch('extra',function(){
+		$scope.calc();
+	});
+	$scope.$watch('isNext',function(){
 		$scope.calc();
 	});
 	$scope.calc = function(){
@@ -39,7 +42,7 @@ app.controller('HasteCtrl', ['$scope', function($scope){
 		var hastePercentLimit = 0;
 		var level = 0;
 		var lastTime = Number($scope.oriTime)+0.1;
-		var hasteCof = 47.17425;
+		var hasteCof = $scope.isNext ? 188.309 : 47.17425;
 		for (var i = 0; hastePercentLimit<25; i++) {
 			var baseHaste = i/hasteCof*10.24;
 			var extraHaste = $scope.acceExtraList[$scope.extra].value;

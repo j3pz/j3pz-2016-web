@@ -5,7 +5,8 @@
   "main": "fis-conf.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "fis3 release local -w"
+    "start": "fis3 release local -w",
+    "build": "fis3 release server"
   },
   "repository": {
     "type": "git",
