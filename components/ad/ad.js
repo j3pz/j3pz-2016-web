@@ -1,6 +1,6 @@
 $(document).ready(function() {
   var roll = Math.random();
-  if (roll < 0.5) {
+  if (roll < 0) {
     $('#google-ad').hide();
     $('#custom-ad-1').show();
     $('#custom-ad-1').click(function() {
