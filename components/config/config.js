@@ -1,6 +1,6 @@
 var config = {
 	apiBase: '/api/',
 	defaultValues: {
-		qualityRange: [1100, 1550]
+		qualityRange: [1200, 2400]
 	}
 };
