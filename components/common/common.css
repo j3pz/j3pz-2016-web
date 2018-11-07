@@ -5,8 +5,7 @@
 @font-face {
 	font-family: 'jx3icon';
 	src: url('/css/fonts/jx3icon.eot');
-	src: url('/css/fonts/jx3icon.eot') format('embedded-opentype'),
-		 url('/css/fonts/jx3icon.woff') format('woff'),
+	src: url('/css/fonts/jx3icon.woff') format('woff'),
 		 url('/css/fonts/jx3icon.ttf') format('truetype'),
 		 url('/css/fonts/jx3icon.svg#jx3icon') format('svg');
 }
@@ -15,19 +14,21 @@
 	font-family: 'jx3icon';
 }
 
-.jx3icon-mj:before { content: "\e602"; }
-.jx3icon-qx:before { content: "\e603"; }
-.jx3icon-sl:before { content: "\e604"; }
-.jx3icon-tm:before { content: "\e605"; }
-.jx3icon-tc:before { content: "\e606"; }
-.jx3icon-wh:before { content: "\e607"; }
-.jx3icon-wd:before { content: "\e608"; }
-.jx3icon-cj:before { content: "\e609"; }
-.jx3icon-sd:before { content: "\e60a"; }
-.jx3icon-cg:before { content: "\e60b"; }
-.jx3icon-cy:before { content: "\e60c"; }
-.jx3icon-gb:before { content: "\e60d"; }
-.jx3icon-pl:before { content: "\e6ac"; }
+.jx3icon-qx:after{content:'\e004';}
+.jx3icon-wd:after{content:'\e003';}
+.jx3icon-cy:after{content:'\e009';}
+.jx3icon-wh:after{content:'\e000';}
+.jx3icon-tm:after{content:'\e007';}
+.jx3icon-sl:after{content:'\e001';}
+.jx3icon-tc:after{content:'\e005';}
+.jx3icon-cj:after{content:'\e006';}
+.jx3icon-gb:after{content:'\e00a';}
+.jx3icon-mj:after{content:'\e008';}
+.jx3icon-sd:after{content:'\e00b';}
+.jx3icon-cg:after{content:'\e00c';}
+.jx3icon-bd:after{content:'\e00d';}
+.jx3icon-pz:after{content:'\0040';}
+.jx3icon-pl:after{content:'\000e';}
 
 .p-a-0 { padding:		0 !important; }
 .p-t-0 { padding-top:	0 !important; }
