@@ -24,7 +24,7 @@ fis.media('server').match('*', {
 	})
 });
 
-fis.media('local').match('*', {
+fis.media('exp').match('*', {
 	deploy: fis.plugin('local-deliver', {
 		// to: 'F:\\workspace\\j3pz.com\\apiv2-node\\public'
 		to: '../j3pz-server-node/public'
