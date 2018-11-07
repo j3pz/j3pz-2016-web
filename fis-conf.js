@@ -85,12 +85,12 @@ fis.match('/acacia/(*)(.{html,js})', {
 
 fis.match('/components/*/(**.{jpg,png,gif,ico})', {
 	release: '/images/$1',
-	useHash: true
+	useHash: false
 });
 
 fis.match('/components/*/imgs/(**.{jpg,png,gif,ico})', {
 	release: '/images/$1',
-	useHash: true
+	useHash: false
 });
 
 fis.match('components/**/*.{js,css}', {
