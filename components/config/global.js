@@ -785,10 +785,10 @@ var positionIconList = {
 };
 var stoneScore = [0, 2.66, 5.33, 8, 10.66, 13.17, 16, 21, 27.33];
 var tixingOptions = [
-	{name: '成男', body: 33, spunk: 32, spirit: 33, strength: 32, agility: 33},
-	{name: '成女', body: 33, spunk: 32, spirit: 33, strength: 32, agility: 33},
-	{name: '萝莉', body: 33, spunk: 32, spirit: 33, strength: 32, agility: 33},
-	{name: '正太', body: 33, spunk: 32, spirit: 33, strength: 32, agility: 33}
+	{ name: '成男', body: 35, spunk: 34, spirit: 34, strength: 34, agility: 34 },
+	{ name: '成女', body: 35, spunk: 34, spirit: 34, strength: 34, agility: 34 },
+	{ name: '萝莉', body: 35, spunk: 34, spirit: 34, strength: 34, agility: 34 },
+	{ name: '正太', body: 35, spunk: 34, spirit: 34, strength: 34, agility: 34 },
 ];
 /* 分析装备前缀描述 */
 function analysisPre(xinfatype) {
@@ -817,6 +817,7 @@ function analysisPre(xinfatype) {
 		['外功', '纯阳(太虚剑意)'],
 		['外功', '藏剑(均可)'],
 		['外功', '苍云(分山劲)'],
+		['外功', '蓬莱(凌海诀)'],
 		// 治疗
 		['混元性内功', '万花(离经易道)'],
 		['阴性内功', '七秀(云裳心经)'],
