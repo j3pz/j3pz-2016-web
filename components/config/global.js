@@ -794,7 +794,7 @@ var tixingOptions = [
 function analysisPre(xinfatype) {
 	str = Number(xinfatype);
 	str = str.toString(2);
-	str = addZero(str, 23);
+	str = addZero(str, 24);
 	var avaMenpai = str.split('');
 	var preArr = ['', ''];
 	var xinfaList = [
