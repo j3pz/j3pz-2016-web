@@ -522,11 +522,11 @@ app.service('Utils', ['$rootScope', function($rootScope) {
 		} else if (menpai.type == 't') {
 			// 闪避
 			$rootScope.results.dodge = Math.floor((results.dodge + menpai.baseDodge) * (1 + buffPercentValue.dodge / 100) + $rootScope.results.body * menpai.baseDodgePlus + buffBaseValue.dodge);
-			$rootScope.results.dodge = $rootScope.results.dodge / ($rootScope.results.dodge + 2400.175) * 100;
+			$rootScope.results.dodge = $rootScope.results.dodge / ($rootScope.results.dodge + 9025.3) * 100;
 			$rootScope.results.dodge = $rootScope.results.dodge.toFixed(2) - -1 * buffFinalValue.dodge.toFixed(2);
 			// 招架
 			$rootScope.results.parryBase = ((results.parryBase + menpai.baseParryBase) * (1 + buffPercentValue.parryBase / 100) + $rootScope.results.body * menpai.baseParryBasePlus + buffBaseValue.parryBase);
-			$rootScope.results.parryBase = $rootScope.results.parryBase / ($rootScope.results.parryBase + 1733.675) * 100 + 3;
+			$rootScope.results.parryBase = $rootScope.results.parryBase / ($rootScope.results.parryBase + 6517.8) * 100 + 3;
 			$rootScope.results.parryBase = $rootScope.results.parryBase.toFixed(2) - -1 * buffFinalValue.parryBase.toFixed(2);
 			// 拆招
 			$rootScope.results.parryValue = (results.parryValue + menpai.baseParryValue) * (1 + buffPercentValue.parryValue / 100) + $rootScope.results.body * menpai.baseParryValuePlus + buffBaseValue.parryValue;
@@ -560,44 +560,44 @@ app.service('Utils', ['$rootScope', function($rootScope) {
 		}
 		$rootScope.results.attack = Math.floor($rootScope.results.attack);
 		$rootScope.results.crit = Math.floor(($rootScope.results.crit + buffBaseValue.crit) * (1 + buffPercentValue.crit / 100));
-		$rootScope.results.crit = $rootScope.results.crit / 41.43925;
+		$rootScope.results.crit = $rootScope.results.crit / 153.442;
 		$rootScope.results.crit = $rootScope.results.crit - -1 * buffFinalValue.crit.toFixed(2);
 		$rootScope.results.crit = $rootScope.results.crit.toFixed(2);
 		$rootScope.results.critEffect = Math.floor(($rootScope.results.critEffect + buffBaseValue.critEffect) * (1 + buffPercentValue.critEffect / 100));
-		$rootScope.results.critEffect = $rootScope.results.critEffect / 15.066 + 175;
+		$rootScope.results.critEffect = $rootScope.results.critEffect / 53.703 + 175;
 		$rootScope.results.critEffect = $rootScope.results.critEffect - -1 * buffFinalValue.critEffect.toFixed(2);
 		$rootScope.results.critEffect = $rootScope.results.critEffect.toFixed(2);
 		$rootScope.results.overcome = Math.floor(($rootScope.results.overcome + buffBaseValue.overcome) * (1 + buffPercentValue.overcome / 100)) + buffFinalValue.overcome;
-		$rootScope.results.overcomeRate = $rootScope.results.overcome / 36.16925;
+		$rootScope.results.overcomeRate = $rootScope.results.overcome / 153.442;
 		$rootScope.results.overcomeRate = $rootScope.results.overcomeRate.toFixed(0);
 		// 命中
 		$rootScope.results.hit = Math.floor((results.hit + menpai.baseHit + buffBaseValue.hit) * (1 + buffPercentValue.hit / 100));
-		$rootScope.results.hit = $rootScope.results.hit / 34.24725 + 90;
+		$rootScope.results.hit = $rootScope.results.hit / 139.485 + 90;
 		$rootScope.results.hit = $rootScope.results.hit - -1 * buffFinalValue.hit.toFixed(2);
 		$rootScope.results.hit = $rootScope.results.hit.toFixed(2);
 		// 无双
 		$rootScope.results.strain = Math.floor((results.strain + buffBaseValue.strain) * (1 + buffPercentValue.strain / 100));
-		$rootScope.results.strain = $rootScope.results.strain / 25.6835;
+		$rootScope.results.strain = $rootScope.results.strain / 87.176;
 		$rootScope.results.strain = $rootScope.results.strain.toFixed(2) - -1 * buffFinalValue.strain.toFixed(2);
 		// 急速
 		$rootScope.results.acceLevel = results.acce;
-		$rootScope.results.acce = results.acce / 47.17425;
+		$rootScope.results.acce = results.acce / 188.309;
 		$rootScope.results.acce = $rootScope.results.acce.toFixed(2);
 		// 内防
 		$rootScope.results.magicShield = Math.floor((results.basicMagicShield + results.magicShield + menpai.baseMagicShield) * (1 + buffPercentValue.magicShield / 100) + $rootScope.results.body * menpai.baseMagicShieldPlus + buffBaseValue.magicShield);
-		$rootScope.results.magicShield = $rootScope.results.magicShield / ($rootScope.results.magicShield + 1846.05) * 100;
+		$rootScope.results.magicShield = $rootScope.results.magicShield / ($rootScope.results.magicShield + 6942.8) * 100;
 		$rootScope.results.magicShield = $rootScope.results.magicShield.toFixed(2) - -1 * buffFinalValue.magicShield.toFixed(2);
 		// 外防
 		$rootScope.results.physicsShield = Math.floor((results.basicPhysicsShield + results.physicsShield + menpai.basePhysicsShield) * (1 + buffPercentValue.physicsShield / 100) + $rootScope.results.body * menpai.basePhysicsShieldPlus + buffBaseValue.physicsShield);
-		$rootScope.results.physicsShield = $rootScope.results.physicsShield / ($rootScope.results.physicsShield + 1846.05) * 100;
+		$rootScope.results.physicsShield = $rootScope.results.physicsShield / ($rootScope.results.physicsShield + 6942.8) * 100;
 		$rootScope.results.physicsShield = $rootScope.results.physicsShield.toFixed(2) - -1 * buffFinalValue.physicsShield.toFixed(2);
 		// 御劲
 		$rootScope.results.toughness = Math.floor((results.toughness + buffBaseValue.toughness) * (1 + buffPercentValue.toughness / 100));
-		$rootScope.results.toughness = $rootScope.results.toughness / 4143.92 * 100;
+		$rootScope.results.toughness = $rootScope.results.toughness / 15344.2 * 100;
 		$rootScope.results.toughness = $rootScope.results.toughness.toFixed(2) - -1 * buffFinalValue.toughness.toFixed(2);
 		// 化劲
 		$rootScope.results.huajing = Math.floor((results.huajing + 244 + buffBaseValue.huajing) * (1 + buffPercentValue.huajing / 100));
-		$rootScope.results.huajing = $rootScope.results.huajing / ($rootScope.results.huajing + 732.375) * 100;
+		$rootScope.results.huajing = $rootScope.results.huajing / ($rootScope.results.huajing + 3884.5) * 100;
 		$rootScope.results.huajing = $rootScope.results.huajing.toFixed(2) - -1 * buffFinalValue.huajing.toFixed(2);
 		// 装分
 		$rootScope.results.score = Math.floor(results.score);
