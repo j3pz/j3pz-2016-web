@@ -25,9 +25,9 @@
 			<ui-select ng-model="$root.equipLists[$root.focus].setAs" on-select="setEquip($root.equipLists[$root.focus].setAs.id)" theme="bootstrap" search-enabled="true" append-to-body="true" class="hidden-xs">
 				<ui-select-match placeholder="您可以在这里输入装备名称进行搜索">{{$root.equipLists[$root.focus].setAs.name}}</ui-select-match>
 				<ui-select-choices repeat="equipItem in $root.equipLists[$root.focus].list | filter: $select.search | filter: checkFilter">
-					<!-- <div ng-bind-html="trustAsHtml((equipItem.name | highlight: $select.search),equipItem.quality)"></div>
-					<small ng-bind-html="generateAttr(equipItem.filter,equipItem.class)"></small> -->
-					<div ng-bind-html="simpleSelect((equipItem.name | highlight: $select.search),equipItem.filter)"></div>
+					<div ng-bind-html="nameAndQuality((equipItem.name | highlight: $select.search), equipItem.quality)"></div>
+					<small ng-bind-html="generateAttr(equipItem.filter, equipItem.class)"></small>
+					<!-- <div ng-bind-html="simpleSelect((equipItem.name | highlight: $select.search),equipItem.filter)"></div> -->
 				</ui-select-choices>
 			</ui-select>
 			<!--<br>-->

@@ -153,6 +153,11 @@ app.controller('ChangeEquipController', ['$scope', '$rootScope', '$http', '$sce'
 		html += '</span>';
 		return $sce.trustAsHtml(html);
 	};
+	$scope.nameAndQuality = function(value, quality) {
+		var html = '<b>' + value + "</b><span class='right nostyle'>";
+		html += quality + '品</span>';
+		return $sce.trustAsHtml(html);
+	};
 	$rootScope.$watch('equipListfilter.range', $scope.filter, true);
 	$scope.getEquipList = function() {
 		if (!$rootScope.equipLists[$rootScope.focus].isCached) {
