@@ -57,6 +57,8 @@ app.controller('RegFormCtrl', ['$scope', '$http', '$window', 'toastr', function(
 		$scope.regForm.captcha.$setValidity('captchaErr', captchaErr);
 	};
 	$scope.reg = function(event) {
+		toastr.info('体服版不支持注册');
+		return;
 		if ($scope.regForm.$valid) {
 			var regData = {
 				email: $scope.user.email,
