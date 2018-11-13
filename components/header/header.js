@@ -61,6 +61,10 @@ app.controller('HeaderCtrl', ['$scope', '$http', 'toastr', '$rootScope', '$sce',
 		getUserInfo(token);
 	}
 
+	$scope.feedback = function() {
+		$('#feedbackModal').modal();
+	}
+
 	$scope.checkUpdate = function(forceOpen) {
 		$http.get(config.apiBase + 'update')
 		.success(function(response) {
