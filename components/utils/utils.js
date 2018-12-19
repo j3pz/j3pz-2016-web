@@ -596,7 +596,7 @@ app.service('Utils', ['$rootScope', function($rootScope) {
 		$rootScope.results.toughness = $rootScope.results.toughness / 15344.2 * 100;
 		$rootScope.results.toughness = $rootScope.results.toughness.toFixed(2) - -1 * buffFinalValue.toughness.toFixed(2);
 		// 化劲
-		$rootScope.results.huajing = Math.floor((results.huajing + 244 + buffBaseValue.huajing) * (1 + buffPercentValue.huajing / 100));
+		$rootScope.results.huajing = Math.floor((results.huajing + menpai.baseHuajing + buffBaseValue.huajing) * (1 + buffPercentValue.huajing / 100));
 		$rootScope.results.huajing = $rootScope.results.huajing / ($rootScope.results.huajing + 3884.5) * 100;
 		$rootScope.results.huajing = $rootScope.results.huajing.toFixed(2) - -1 * buffFinalValue.huajing.toFixed(2);
 		// 装分
