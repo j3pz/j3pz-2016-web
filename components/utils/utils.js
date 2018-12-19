@@ -453,7 +453,7 @@ app.service('Utils', ['$rootScope', function($rootScope) {
 			// 会效
 			$rootScope.results.critEffect = results.critEffect + Math.floor(menpai.baseCritEffPlus * $rootScope.results.spirit);// + Math.floor(.15 * $rootScope.results.spirit);
 			// 破防
-			$rootScope.results.overcome = results.overcome + menpai.baseOvercome + menpai.baseOvercomePlus * $rootScope.results.spirit + .25 * $rootScope.results.spunk;
+			$rootScope.results.overcome = results.overcome + menpai.baseOvercome + menpai.baseOvercomePlus * $rootScope.results.spirit + .3 * $rootScope.results.spunk;
 		} else if (menpai.type == 'strength') {// 力道门派计算
 			// 基础攻击
 			$rootScope.results.basicAttack = results.attack + menpai.baseAttack + .15 * ($rootScope.results.strength);
@@ -465,7 +465,7 @@ app.service('Utils', ['$rootScope', function($rootScope) {
 			// 会效
 			$rootScope.results.critEffect = results.critEffect + Math.floor(menpai.baseCritEffPlus * $rootScope.results.strength);//$ + Math.floor(.15 * $rootScope.results.agility);
 			// 破防
-			$rootScope.results.overcome = results.overcome + menpai.baseOvercome + (menpai.baseOvercomePlus + .25) * $rootScope.results.strength;
+			$rootScope.results.overcome = results.overcome + menpai.baseOvercome + (menpai.baseOvercomePlus + .3) * $rootScope.results.strength;
 		} else if (menpai.type == 'agility') {// 身法门派计算
 			// 基础攻击
 			$rootScope.results.basicAttack = results.attack + menpai.baseAttack + .15 * $rootScope.results.strength;
@@ -477,7 +477,7 @@ app.service('Utils', ['$rootScope', function($rootScope) {
 			// 会效
 			$rootScope.results.critEffect = results.critEffect + Math.floor(menpai.baseCritEffPlus * $rootScope.results.agility);
 			// 破防
-			$rootScope.results.overcome = results.overcome + menpai.baseOvercome + (menpai.baseOvercomePlus * $rootScope.results.agility + .25 * $rootScope.results.strength);
+			$rootScope.results.overcome = results.overcome + menpai.baseOvercome + (menpai.baseOvercomePlus * $rootScope.results.agility + .3 * $rootScope.results.strength);
 			if (menpai.name == 'fenshan') {
 				// 苍云招架
 				$rootScope.results.parryBase = (results.parryBase + menpai.baseParryBase + $rootScope.results.agility * menpai.baseParryBasePlus);
@@ -504,7 +504,7 @@ app.service('Utils', ['$rootScope', function($rootScope) {
 				$rootScope.results.critEffect = results.critEffect + Math.floor(menpai.baseCritEffPlus * $rootScope.results.spunk);// + Math.floor(.15 * (results.agility + $rootScope.role.agility));
 			}
 			// 破防
-			$rootScope.results.overcome = results.overcome + menpai.baseOvercome + (menpai.baseOvercomePlus + .25) * $rootScope.results.spunk;
+			$rootScope.results.overcome = results.overcome + menpai.baseOvercome + (menpai.baseOvercomePlus + .3) * $rootScope.results.spunk;
 		} else if (menpai.type == 'hps') {
 			// 基础攻击
 			$rootScope.results.basicAttack = results.attack + .18 * $rootScope.results.spunk;
