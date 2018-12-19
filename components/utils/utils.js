@@ -449,7 +449,7 @@ app.service('Utils', ['$rootScope', function($rootScope) {
 			// 面板攻击
 			$rootScope.results.attack = Math.floor($rootScope.results.basicAttack * (1 + buffPercentValue.attack / 100) + menpai.baseAttackPlus * $rootScope.results.spirit + buffBaseValue.attack);
 			// 会心
-			$rootScope.results.crit = results.crit + menpai.baseCrit + Math.floor(menpai.baseCritPlus * $rootScope.results.spirit) + Math.round(.64 * $rootScope.results.spirit);
+			$rootScope.results.crit = results.crit + menpai.baseCrit + Math.floor(menpai.baseCritPlus * $rootScope.results.spirit) + Math.floor(.64 * $rootScope.results.spirit);
 			// 会效
 			$rootScope.results.critEffect = results.critEffect + Math.floor(menpai.baseCritEffPlus * $rootScope.results.spirit);// + Math.floor(.15 * $rootScope.results.spirit);
 			// 破防
@@ -461,7 +461,7 @@ app.service('Utils', ['$rootScope', function($rootScope) {
 			// 面板攻击
 			$rootScope.results.attack = Math.floor($rootScope.results.basicAttack * (1 + buffPercentValue.attack / 100) + menpai.baseAttackPlus * $rootScope.results.strength + buffBaseValue.attack);
 			// 会心
-			$rootScope.results.crit = results.crit + menpai.baseCrit + Math.floor(menpai.baseCritPlus * $rootScope.results.strength) + Math.round(.64 * $rootScope.results.agility);
+			$rootScope.results.crit = results.crit + menpai.baseCrit + Math.floor(menpai.baseCritPlus * $rootScope.results.strength) + Math.floor(.64 * $rootScope.results.agility);
 			// 会效
 			$rootScope.results.critEffect = results.critEffect + Math.floor(menpai.baseCritEffPlus * $rootScope.results.strength);//$ + Math.floor(.15 * $rootScope.results.agility);
 			// 破防
@@ -473,7 +473,7 @@ app.service('Utils', ['$rootScope', function($rootScope) {
 			// 面板攻击
 			$rootScope.results.attack = Math.floor($rootScope.results.basicAttack * (1 + buffPercentValue.attack / 100) + menpai.baseAttackPlus * $rootScope.results.agility + buffBaseValue.attack);
 			// 会心
-			$rootScope.results.crit = results.crit + menpai.baseCrit + Math.floor(menpai.baseCritPlus * $rootScope.results.agility) + Math.round(.64 * $rootScope.results.agility);
+			$rootScope.results.crit = results.crit + menpai.baseCrit + Math.floor(menpai.baseCritPlus * $rootScope.results.agility) + Math.floor(.64 * $rootScope.results.agility);
 			// 会效
 			$rootScope.results.critEffect = results.critEffect + Math.floor(menpai.baseCritEffPlus * $rootScope.results.agility);
 			// 破防
@@ -494,12 +494,12 @@ app.service('Utils', ['$rootScope', function($rootScope) {
 			// 面板攻击
 			$rootScope.results.attack = Math.floor($rootScope.results.basicAttack * (1 + buffPercentValue.attack / 100) + menpai.baseAttackPlus * $rootScope.results.spunk + buffBaseValue.attack);
 			// 会心
-			$rootScope.results.crit = results.crit + menpai.baseCrit + Math.floor(menpai.baseCritPlus * $rootScope.results.spunk) + Math.round(.64 * $rootScope.results.spirit);
+			$rootScope.results.crit = results.crit + menpai.baseCrit + Math.floor(menpai.baseCritPlus * $rootScope.results.spunk) + Math.floor(.64 * $rootScope.results.spirit);
 			// 会效
 			$rootScope.results.critEffect = results.critEffect + Math.floor(menpai.baseCritEffPlus * $rootScope.results.spunk); // + Math.floor(.15 * $rootScope.results.spirit);
 			if (menpai.name == 'tianluo') {
 				// 会心
-				$rootScope.results.crit = results.crit + menpai.baseCrit + Math.floor(menpai.baseCritPlus * $rootScope.results.spunk) + Math.round(.64 * (results.agility + $rootScope.role.agility));
+				$rootScope.results.crit = results.crit + menpai.baseCrit + Math.floor(menpai.baseCritPlus * $rootScope.results.spunk) + Math.floor(.64 * (results.agility + $rootScope.role.agility));
 				// 会效
 				$rootScope.results.critEffect = results.critEffect + Math.floor(menpai.baseCritEffPlus * $rootScope.results.spunk);// + Math.floor(.15 * (results.agility + $rootScope.role.agility));
 			}
@@ -516,9 +516,9 @@ app.service('Utils', ['$rootScope', function($rootScope) {
 			// 面板治疗
 			$rootScope.results.heal = Math.floor($rootScope.results.basicHeal * (1 + buffPercentValue.heal / 100) + menpai.baseHealPlus * $rootScope.results.spirit + buffBaseValue.heal);
 			// 会心
-			$rootScope.results.crit = results.crit + menpai.baseCrit + Math.floor(menpai.baseCritPlus * $rootScope.results.spirit) + Math.floor(.3 * $rootScope.results.spirit);
+			$rootScope.results.crit = results.crit + menpai.baseCrit + Math.floor(menpai.baseCritPlus * $rootScope.results.spirit) + Math.floor(.64 * $rootScope.results.spirit);
 			// 会效
-			$rootScope.results.critEffect = results.critEffect + Math.floor(menpai.baseCritEffPlus * $rootScope.results.spirit) + Math.floor(.15 * $rootScope.results.spirit);
+			$rootScope.results.critEffect = results.critEffect + Math.floor(menpai.baseCritEffPlus * $rootScope.results.spirit);// + Math.floor(.15 * $rootScope.results.spirit);
 		} else if (menpai.type == 't') {
 			// 闪避
 			$rootScope.results.dodge = Math.floor((results.dodge + menpai.baseDodge) * (1 + buffPercentValue.dodge / 100) + $rootScope.results.body * menpai.baseDodgePlus + buffBaseValue.dodge);

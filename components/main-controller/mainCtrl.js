@@ -156,12 +156,6 @@ app.controller('PeizhuangCtrl', ['$scope', '$rootScope', '$location', 'Utils', '
 					if (i === 0 && j != 3) $scope.$broadcast('getAttributeStoneList', j);
 				}
 			}
-			var tixingOptions = [
-				{name: '成男', body: 33, spunk: 32, spirit: 33, strength: 32, agility: 33},
-				{name: '成女', body: 33, spunk: 32, spirit: 33, strength: 32, agility: 33},
-				{name: '萝莉', body: 33, spunk: 32, spirit: 33, strength: 32, agility: 33},
-				{name: '正太', body: 33, spunk: 32, spirit: 33, strength: 32, agility: 33}
-			];
 			$rootScope.role = tixingOptions[parseInt(response.tixing)];
 			$scope.$broadcast('setTixing', $rootScope.role);
 			for (var i = 0; i < positions.length; i++) {

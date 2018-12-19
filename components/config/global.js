@@ -176,7 +176,7 @@ var menpaiList = {
 		'name': 'aoxue',
 		'type': 'strength',
 		'baseAttack': 677,
-		'baseHit': 394,
+		'baseHit': 397,
 		'baseAttackPlus': 1.6,
 		'baseCritPlus': 0,
 		'baseCritEffPlus': 0,
