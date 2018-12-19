@@ -1,10 +1,11 @@
 /* @require /components/config/config.js */
 app.controller('CaseSettingsController', ['$scope', '$rootScope', 'toastr', '$http', function($scope, $rootScope, toastr, $http) {
+	$scope.tixingOptions = tixingOptions;
 	$scope.init = function() {
 		var menpai = $rootScope.menpai.name;
-		for (var i = 0; i < tixingOptions.length; i++) {
-			tixingOptions[i].isAvailable = $rootScope.menpai.tixingOption[i] == 1;
-			tixingOptions[i].isSelected = $rootScope.role.tixing == tixingOptions[i].name;
+		for (var i = 0; i < $scope.tixingOptions.length; i++) {
+			$scope.tixingOptions[i].isAvailable = $rootScope.menpai.tixingOption[i] == 1;
+			$scope.tixingOptions[i].isSelected = $rootScope.role.tixing == $scope.tixingOptions[i].name;
 		}
 	};
 	$scope.setTixing = function(option) {
@@ -16,8 +17,8 @@ app.controller('CaseSettingsController', ['$scope', '$rootScope', 'toastr', '$ht
 			strength: option.strength,
 			agility: option.agility
 		};
-		for (var i = 0; i < tixingOptions.length; i++) {
-			tixingOptions[i].isSelected = option.name == tixingOptions[i].name;
+		for (var i = 0; i < $scope.tixingOptions.length; i++) {
+			$scope.tixingOptions[i].isSelected = option.name == $scope.tixingOptions[i].name;
 		}
 	};
 	$scope.init();
