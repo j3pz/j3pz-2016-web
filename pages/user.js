@@ -151,7 +151,7 @@ app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', '$locatio
 			$scope.strengthenHover = response.prefer.strengthen;
 			var qualitySlider = $('input.slider-input').slider({
 				range: true,
-				min: 1200,
+				min: 1080,
 				max: 2400,
 				values: $scope.preference.range,
 				step: 5,
