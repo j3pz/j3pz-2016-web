@@ -3,8 +3,6 @@ var app = angular.module('J3Login', ['toastr']);
 /* @require /components/config/config.js */
 app.controller('LoginCtrl', ['$scope', 'toastr', '$http', '$interval', '$location', function($scope, toastr, $http, $interval, $location) {
 	$scope.login = function() {
-		toastr.info('体服版不支持登录');
-		return;
 		$http({
 			url: config.apiBase + 'user/auth',
 			method: 'POST',

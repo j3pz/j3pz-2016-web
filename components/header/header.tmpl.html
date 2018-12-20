@@ -267,7 +267,7 @@
 				<a href="/user/" class="btn btn-flat btn-default">{{$root.user.name}}</a>
 			</li>
 		</ul>
-		<ul class="header-nav header-nav-options right visible-xs" ng-if="false && !$root.isLogin" ng-cloak>
+		<ul class="header-nav header-nav-options right visible-xs" ng-if="!$root.isLogin" ng-cloak>
 			<li>
 				<a class="btn btn-flat btn-default" data-toggle="modal" data-target="#loginModal">
 					登录
@@ -276,13 +276,6 @@
 			<li>
 				<a class="btn btn-flat btn-default" href="/register/">
 					注册
-				</a>
-			</li>
-		</ul>
-		<ul class="header-nav header-nav-options right visible-xs" ng-if="!$root.isLogin" ng-cloak>
-			<li>
-				<a class="btn btn-flat btn-default">
-					体服版仅供体验，不能登录
 				</a>
 			</li>
 		</ul>
@@ -332,7 +325,7 @@
 			</li>
 		</ul>
 	</div>
-	<div class="headerbar-right hidden-xs" ng-if="false && !$root.isLogin" ng-cloak>
+	<div class="headerbar-right hidden-xs" ng-if="!$root.isLogin" ng-cloak>
 		<ul class="header-nav header-nav-options">
 			<li>
 				<a class="btn btn-flat btn-default" data-toggle="modal" data-target="#loginModal">
@@ -342,15 +335,6 @@
 			<li>
 				<a class="btn btn-flat btn-default" href="/register/">
 					注册
-				</a>
-			</li>
-		</ul>
-	</div>
-	<div class="headerbar-right hidden-xs" ng-if="!$root.isLogin" ng-cloak>
-		<ul class="header-nav header-nav-options">
-			<li>
-				<a class="btn btn-flat btn-default">
-					体服版仅供体验，不能登录
 				</a>
 			</li>
 		</ul>
