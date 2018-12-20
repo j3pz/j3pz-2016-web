@@ -112,7 +112,7 @@ app.controller('ChangeEquipController', ['$scope', '$rootScope', '$http', '$sce'
 				for (var i = 0; i < $rootScope.equipListfilter.attr.length; i++) {
 					if (i == 5) satisfied = value.filter[i] == $rootScope.equipListfilter.attr[i];
 					else satisfied = value.filter[i] >= $rootScope.equipListfilter.attr[i];
-					satisfied = satisfied && ($scope.ctrl.sourceFilter[value.class] || !allSource);
+					// satisfied = satisfied && ($scope.ctrl.sourceFilter[value.class] || !allSource);
 					if (!satisfied) break;
 				}
 			}
