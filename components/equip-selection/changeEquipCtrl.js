@@ -133,7 +133,7 @@ app.controller('ChangeEquipController', ['$scope', '$rootScope', '$http', '$sce'
 			if (attr[i] > 0) html += $scope.itemText[i] + ' ';
 		}
 		var sourceType = '';
-		if (classType < 0 || classType > 12) sourceType = '其他';
+		if (isNaN(classType)) sourceType = classType;
 		else sourceType = $scope.sourceType[classType].label;
 		html += "</i><span class='right nostyle'>" + sourceType + '</span>';
 		return $sce.trustAsHtml(html);
