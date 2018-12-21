@@ -1,7 +1,7 @@
 /*
  * @require /components/config/config.js
  */
-app.controller('footerCtrl', ['$scope', '$http', function($scope, $rootScope, $http, $sce, toastr) {
+app.controller('footerCtrl', ['$scope', '$http', function($scope, $http) {
     $scope.dbVersion = '未知';
     $http.get(config.apiBase + 'update/dbVersion')
         .success(function(response) {
