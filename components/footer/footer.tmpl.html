@@ -1,5 +1,8 @@
-<!-- @require footer.css -->
-<div id="footer" class="footer">
+<!-- 
+	@require footer.js 
+	@require footer.css
+-->
+<div id="footer" class="footer" ng-controller="footerCtrl">
 	<div class="container" style="list-style:none;">
 		<div class="row">
 			<div class="col-sm-6 col-xs-6">
@@ -21,6 +24,7 @@
 				<li><a href="/about/" target="_blank">关于剑网3配装器</a></li>
 				<li><a href="/credit/" target="_blank">致谢</a></li>
 				<li><a href="/policy/" target="_blank">免责声明与隐私条款</a></li>
+				<li><a href="#">数据库匹配游戏版本号：{{dbVersion}}</a></li>
 			</div>
 		</div>
 	</div>

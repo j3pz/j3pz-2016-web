@@ -134,7 +134,7 @@ app.controller('ChangeEquipController', ['$scope', '$rootScope', '$http', '$sce'
 		}
 		var sourceType = '';
 		if (isNaN(classType)) sourceType = classType;
-		else sourceType = $scope.sourceType[classType].label;
+		else sourceType = $scope.sourceType[classType] ? $scope.sourceType[classType].label : '其他';
 		html += "</i><span class='right nostyle'>" + sourceType + '</span>';
 		return $sce.trustAsHtml(html);
 	};
