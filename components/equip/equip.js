@@ -127,6 +127,9 @@ var Equip = {
 			r +=  equip.recommendSchool[i];
 			return r;
 		};
+		equip.getDropSource = function() {
+			return equip.data.dropSource.replace(/\//g, '\n');
+		};
 		equip.analysisHole = function() {
 			// 初始化镶嵌孔数据
 			equip.data.xiangqian = equip.data.xiangqian ? equip.data.xiangqian : '0';
