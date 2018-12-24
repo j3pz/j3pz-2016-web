@@ -43,6 +43,7 @@ app.controller('InitCtrl', ['$scope', '$rootScope', '$location', 'CollectionCont
 		baseParryValuePlus: 0,
 		baseParryBase: 0,
 		baseParryValue: 0,
+		baseHuajing: 0,
 		tixingOption: [0, 0, 0, 0]
 	};
 	var path = $location.absUrl();

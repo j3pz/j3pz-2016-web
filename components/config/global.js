@@ -84,6 +84,7 @@ var menpaiList = {
 		'baseMagicShield': 353,
 		'baseDodge': 265,
 		'baseHPlus': 1.21,
+		'baseHuajing': 1295,
 		'tixingOption': [0, 1, 1, 1]
 	},
 	'dujing': {
