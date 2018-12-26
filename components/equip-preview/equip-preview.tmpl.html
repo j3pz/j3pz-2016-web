@@ -35,7 +35,7 @@
 				</li>
 				<li class="basicInfo" ng-if="$root.focus === 'b_primaryWeapon' || $root.focus === 'c_primaryWeapon'" >
 					近身伤害提高{{equips[$root.focus].getWeaponDamageRange()}}
-					<span class="right">速度{{equips[$root.focus].getWeaponSpeed()}}</span>
+					<span class="right" style="color: #F2F2F2">速度{{equips[$root.focus].getWeaponSpeed()}}</span>
 				</li>
 				<li class="basicInfo" ng-if="$root.focus === 'b_primaryWeapon' || $root.focus === 'c_primaryWeapon'" >
 					每秒伤害{{equips[$root.focus].getWeaponDamage()}}
