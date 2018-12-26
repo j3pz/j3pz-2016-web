@@ -33,6 +33,13 @@
 				<li class="basicInfo" ng-repeat="prefixName in basicInfoWithoutJL" ng-if="equips[$root.focus].data[prefixName]" >
 					{{equips[$root.focus].descList[prefixName]}}{{equips[$root.focus].data[prefixName]}}
 				</li>
+				<li class="basicInfo" ng-if="$root.focus === 11" >
+					近身伤害提高{{equips[$root.focus].getWeaponDamageRange()}}
+					<span class="right">速度{{equips[$root.focus].getWeaponSpeed()}}</span>
+				</li>
+				<li class="basicInfo" ng-if="$root.focus === 11" >
+					每秒伤害{{equips[$root.focus].getWeaponDamage()}}
+				</li>
 				<!-- 装备基础属性 -->
 				<li class="basicInfo" ng-repeat="prefixName in basicInfoWithJL" ng-if="equips[$root.focus].data[prefixName]" >
 					{{equips[$root.focus].descList[prefixName]}}{{equips[$root.focus].data[prefixName]}}

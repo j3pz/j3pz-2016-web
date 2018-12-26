@@ -130,6 +130,16 @@ var Equip = {
 		equip.getDropSource = function() {
 			return equip.data.dropSource.replace(/\//g, '\n');
 		};
+		equip.getWeaponDamageRange = function() {
+			return equip.data.damageBase + '-' + (equip.data.damageBase + equip.data.damageRange);
+		};
+		equip.getWeaponSpeed = function() {
+			return (equip.data.attackSpeed / 16).toFixed(1);
+		};
+		equip.getWeaponDamage = function() {
+			var damage = (equip.data.damageBase + equip.data.damageRange / 2) / (equip.data.attackSpeed / 16);
+			return Math.round(damage * 2) / 2;
+		};
 		equip.analysisHole = function() {
 			// 初始化镶嵌孔数据
 			equip.data.xiangqian = equip.data.xiangqian ? equip.data.xiangqian : '0';
