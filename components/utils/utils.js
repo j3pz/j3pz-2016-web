@@ -569,7 +569,7 @@ app.service('Utils', ['$rootScope', function($rootScope) {
 		$rootScope.results.critEffect = $rootScope.results.critEffect.toFixed(2);
 		$rootScope.results.overcome = Math.floor(($rootScope.results.overcome + buffBaseValue.overcome) * (1 + buffPercentValue.overcome / 100)) + buffFinalValue.overcome;
 		$rootScope.results.overcomeRate = $rootScope.results.overcome / 153.442;
-		$rootScope.results.overcomeRate = $rootScope.results.overcomeRate.toFixed(0);
+		$rootScope.results.overcomeRate = $rootScope.results.overcomeRate.toFixed(2);
 		// 命中
 		$rootScope.results.hit = Math.floor((results.hit + menpai.baseHit + buffBaseValue.hit) * (1 + buffPercentValue.hit / 100));
 		$rootScope.results.hit = $rootScope.results.hit / 139.485 + 90;
