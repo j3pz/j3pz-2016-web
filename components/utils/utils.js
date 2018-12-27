@@ -435,7 +435,7 @@ app.service('Utils', ['$rootScope', function($rootScope) {
 		// 体质
 		results.body += $rootScope.role.body + buffBaseValue.body;
 		$rootScope.results.body = Math.floor(results.body * (1 + buffPercentValue.body / 100));
-		results.life += ($rootScope.results.body * 10 + 4159 + buffBaseValue.basicLife) * (1 + buffPercentValue.life / 100) * (menpai.baseHPlus + buffPercentValue.basicLife / 100) + $rootScope.results.body * menpai.baseBodyPlus;
+		results.life += ($rootScope.results.body * 10 + 9116 + buffBaseValue.basicLife) * (1 + buffPercentValue.life / 100) * (menpai.baseHPlus + buffPercentValue.basicLife / 100) + $rootScope.results.body * menpai.baseBodyPlus;
 		$rootScope.results.life = Math.floor((results.life + buffBaseValue.life)) + Math.floor(buffFinalValue.life);
 		$rootScope.results.spirit = Math.floor((results.spirit + $rootScope.role.spirit + buffBaseValue.spirit) * (1 + buffPercentValue.spirit / 100)) + Math.floor(buffFinalValue.spirit);
 		$rootScope.results.strength = Math.floor((results.strength + $rootScope.role.strength + buffBaseValue.strength) * (1 + buffPercentValue.strength / 100)) + Math.floor(buffFinalValue.strength);
