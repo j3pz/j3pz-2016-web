@@ -9,7 +9,8 @@ var menpaiList = {
 		'baseCritEffPlus': 0,
 		'baseOvercomePlus': 0.19,
 		'baseHPlus': 1.21,
-		'baseMagicShield': 176,
+		'baseMagicShield': 576,
+		'basePhysicsShield': 400,
 		'baseHuajing': 1295,
 		'tixingOption': [1, 1, 1, 1]
 	},
@@ -24,7 +25,8 @@ var menpaiList = {
 		'baseCritEffPlus': 0,
 		'baseOvercomePlus': 0,
 		'baseHPlus': 1.21,
-		'baseMagicShield': 176,
+		'baseMagicShield': 576,
+		'basePhysicsShield': 400,
 		'baseHuajing': 1295,
 		'tixingOption': [1, 1, 1, 1]
 	},
@@ -38,7 +40,8 @@ var menpaiList = {
 		'baseCritEffPlus': 0,
 		'baseOvercomePlus': 0,
 		'baseHPlus': 1.21,
-		'baseMagicShield': 221,
+		'baseMagicShield': 621,
+		'basePhysicsShield': 400,
 		'baseHuajing': 1295,
 		'tixingOption': [1, 1, 1, 0]
 	},
@@ -52,8 +55,8 @@ var menpaiList = {
 		'baseCritEffPlus': 0,
 		'baseOvercomePlus': 0,
 		'baseHPlus': 1.32,
-		'basePhysicsShield': 141,
-		'baseMagicShield': 167,
+		'basePhysicsShield': 541,
+		'baseMagicShield': 567,
 		'baseHuajing': 1295,
 		'tixingOption': [1, 0, 0, 1]
 	},
@@ -68,7 +71,8 @@ var menpaiList = {
 		'baseCritEffPlus': 0,
 		'baseOvercomePlus': 0,
 		'baseHPlus': 1.21,
-		'baseMagicShield': 265,
+		'baseMagicShield': 665,
+		'basePhysicsShield': 400,
 		'baseHuajing': 1295,
 		'tixingOption': [1, 1, 1, 1]
 	},
@@ -81,7 +85,8 @@ var menpaiList = {
 		'baseCritPlus': 0.28,
 		'baseCritEffPlus': 0,
 		'baseOvercomePlus': 0,
-		'baseMagicShield': 353,
+		'baseMagicShield': 753,
+		'basePhysicsShield': 400,
 		'baseDodge': 265,
 		'baseHPlus': 1.21,
 		'baseHuajing': 1295,
@@ -97,7 +102,8 @@ var menpaiList = {
 		'baseCritEffPlus': 0,
 		'baseOvercomePlus': 0.19,
 		'baseHPlus': 1.21,
-		'baseMagicShield': 221,
+		'baseMagicShield': 621,
+		'basePhysicsShield': 400,
 		'baseHuajing': 1295,
 		'tixingOption': [1, 1, 1, 1]
 	},
@@ -112,7 +118,8 @@ var menpaiList = {
 		'baseCritEffPlus': 0,
 		'baseOvercomePlus': 0,
 		'baseHPlus': 1.21,
-		'baseMagicShield': 176,
+		'baseMagicShield': 576,
+		'basePhysicsShield': 400,
 		'baseHuajing': 1295,
 		'tixingOption': [1, 1, 1, 1]
 	},
@@ -127,6 +134,8 @@ var menpaiList = {
 		'baseCritEffPlus': 0,
 		'baseOvercomePlus': 0,
 		'baseHPlus': 1.21,
+		'baseMagicShield': 400,
+		'basePhysicsShield': 400,
 		'baseHuajing': 1295,
 		'tixingOption': [1, 1, 1, 1]
 	},
@@ -142,6 +151,8 @@ var menpaiList = {
 		'baseOvercomePlus': 0.25,
 		'baseDodge': 221,
 		'baseHPlus': 1.21,
+		'baseMagicShield': 400,
+		'basePhysicsShield': 400,
 		'baseHuajing': 1295,
 		'tixingOption': [1, 1, 1, 1]
 	},
@@ -155,6 +166,8 @@ var menpaiList = {
 		'baseCritPlus': 0.36,
 		'baseCritEffPlus': 0,
 		'baseOvercomePlus': 0,
+		'baseMagicShield': 400,
+		'basePhysicsShield': 400,
 		'baseHPlus': 1.21,
 		'baseHuajing': 1295,
 		'tixingOption': [1, 1, 1, 1]
@@ -169,6 +182,8 @@ var menpaiList = {
 		'baseCritPlus': 0.59,
 		'baseCritEffPlus': 0,
 		'baseOvercomePlus': 0,
+		'baseMagicShield': 400,
+		'basePhysicsShield': 400,
 		'baseHPlus': 1.21,
 		'baseHuajing': 1295,
 		'tixingOption': [1, 1, 1, 1]
@@ -183,7 +198,8 @@ var menpaiList = {
 		'baseCritEffPlus': 0,
 		'baseOvercomePlus': 0.25,
 		'baseHPlus': 1.21,
-		'basePhysicsShield': 198,
+		'baseMagicShield': 400,
+		'basePhysicsShield': 598,
 		'baseHuajing': 1295,
 		'tixingOption': [1, 1, 1, 1]
 	},
@@ -197,7 +213,8 @@ var menpaiList = {
 		'baseCritEffPlus': 0,
 		'baseOvercomePlus': 0.47,
 		'baseHPlus': 1.21,
-		'basePhysicsShield': 159,
+		'baseMagicShield': 400,
+		'basePhysicsShield': 559,
 		'baseHuajing': 1295,
 		'tixingOption': [1, 1, 1, 1]
 	},
@@ -210,6 +227,8 @@ var menpaiList = {
 		'basePhysicsShield': 186,
 		'baseAttackPlus': 1.55,
 		'baseOvercomePlus': 0.36,
+		'baseMagicShield': 400,
+		'basePhysicsShield': 400,
 		'baseHuajing': 1295,
 		'tixingOption': [1, 1, 1, 1]
 	},
@@ -224,6 +243,8 @@ var menpaiList = {
 		'baseParryBasePlus': 0.1,
 		'baseParryValuePlus': 1,
 		'baseParryBase': 318,
+		'baseMagicShield': 400,
+		'basePhysicsShield': 400,
 		'baseHuajing': 1295,
 		'tixingOption': [1, 1, 1, 1]
 	},
@@ -235,7 +256,8 @@ var menpaiList = {
 		'baseCritPlus': 0.41,
 		'baseCritEffPlus': 0,
 		'baseHPlus': 1.21,
-		'baseMagicShield': 221,
+		'baseMagicShield': 621,
+		'basePhysicsShield': 400,
 		'baseHuajing': 1295,
 		'tixingOption': [1, 1, 1, 1]
 	},
@@ -247,7 +269,8 @@ var menpaiList = {
 		'baseCritPlus': 0.21,
 		'baseCritEffPlus': 0,
 		'baseHPlus': 1.21,
-		'baseMagicShield': 221,
+		'baseMagicShield': 621,
+		'basePhysicsShield': 400,
 		'baseDodge': 243,
 		'baseHuajing': 1295,
 		'tixingOption': [0, 1, 1, 1]
@@ -258,7 +281,8 @@ var menpaiList = {
 		'baseHeal': 2072,
 		'baseHealPlus': 1.85,
 		'baseHPlus': 1.21,
-		'baseMagicShield': 221,
+		'baseMagicShield': 621,
+		'basePhysicsShield': 400,
 		'baseHuajing': 1295,
 		'tixingOption': [1, 1, 1, 1]
 	},
@@ -270,7 +294,8 @@ var menpaiList = {
 		'baseCritPlus': 0.31,
 		'baseCritEffPlus': 0,
 		'baseHPlus': 1.21,
-		'baseMagicShield': 221,
+		'baseMagicShield': 621,
+		'basePhysicsShield': 400,
 		'baseHuajing': 1295,
 		'tixingOption': [1, 1, 1, 1]
 	},
@@ -282,7 +307,8 @@ var menpaiList = {
 		'baseParryBasePlus': 0.1,
 		'baseParryValue': 958,
 		'basePhysicsShieldPlus': 0.1,
-		'basePhysicsShield': 414,
+		'basePhysicsShield': 814,
+		'basePhysicsShield': 400,
 		'baseParryBase': 249,
 		'tixingOption': [1, 1, 1, 1]
 	},
@@ -292,8 +318,8 @@ var menpaiList = {
 		'baseHPlus': 1.57,
 		'baseBodyPlus': 2.5,
 		'baseMagicShieldPlus': 0.1,
-		'baseMagicShield': 414,
-		'basePhysicsShield': 249,
+		'baseMagicShield': 814,
+		'basePhysicsShield': 649,
 		'tixingOption': [1, 0, 0, 1]
 	},
 	'mingzun': {
@@ -302,8 +328,8 @@ var menpaiList = {
 		'baseHPlus': 1.47,
 		'baseBodyPlus': 1.25,
 		'baseDodgePlus': 0.225,
-		'baseMagicShield': 207,
-		'basePhysicsShield': 207,
+		'baseMagicShield': 607,
+		'basePhysicsShield': 607,
 		'baseDodge': 414,
 		'tixingOption': [1, 1, 1, 0]
 	},
@@ -312,7 +338,8 @@ var menpaiList = {
 		'type': 't',
 		'baseHPlus': 1.47,
 		'baseBodyPlus': 2.2,
-		'basePhysicsShield': 249,
+		'basePhysicsShield': 649,
+		'baseMagicShield': 400,
 		'baseParryBase': 414,
 		'baseParryValue': 958,
 		'baseParryBasePlus': 0.15,
