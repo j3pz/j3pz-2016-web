@@ -27,6 +27,11 @@
 	font-size: 11px;
 }
 
+.buff-component {
+	padding-left: 6px;
+	padding-right: 6px;
+}
+
 .dropdown-submenu:hover>.dropdown-menu {
 	display: block;
 }
