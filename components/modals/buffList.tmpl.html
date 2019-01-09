@@ -15,7 +15,7 @@
 				<div class="card-body tab-content">
 					<div class="tab-pane active" id="ordinary">
 						<div class="row">
-							<div class="col-xs-2" ng-repeat="buff in buffList.OrdinaryBuff" title="{{buff.desc}}" data-toggle="tooltip" data-container="body" ng-click="setBuff(buff.id,true)">
+							<div class="col-xs-2 buff-component" ng-repeat="buff in buffList.OrdinaryBuff" title="{{buff.desc}}" data-toggle="tooltip" data-container="body" ng-click="setBuff(buff.id,true)">
 								<div class="buff-icon" ng-style="{background:'url(/icons/'+buff.icon+'.png) 0/45px no-repeat'}"></div>
 								<div class="buff-title">{{buff.name}}</div>
 							</div>
@@ -23,7 +23,7 @@
 					</div>
 					<div class="tab-pane" id="infight">
 						<div class="row">
-							<div class="col-xs-2" ng-repeat="buff in buffList.InfightBuff" title="{{buff.desc}}" data-toggle="tooltip" data-container="body" ng-click="setBuff(buff.id,true)">
+							<div class="col-xs-2 buff-component" ng-repeat="buff in buffList.InfightBuff" title="{{buff.desc}}" data-toggle="tooltip" data-container="body" ng-click="setBuff(buff.id,true)">
 								<div class="buff-icon" ng-style="{background:'url(/icons/'+buff.icon+'.png) 0/45px no-repeat'}"></div>
 								<div class="buff-title">{{buff.name}}</div>
 							</div>
@@ -31,7 +31,7 @@
 					</div>
 					<div class="tab-pane" id="food">
 						<div class="row">
-							<div class="col-xs-2" ng-repeat="buff in buffList.Food" title="{{buff.desc}}" data-toggle="tooltip" data-container="body" ng-click="setBuff(buff.id,true)">
+							<div class="col-xs-2 buff-component" ng-repeat="buff in buffList.Food" title="{{buff.desc}}" data-toggle="tooltip" data-container="body" ng-click="setBuff(buff.id,true)">
 								<div class="buff-icon" ng-style="{background:'url(/icons/'+buff.icon+'.png) 0/45px no-repeat'}"></div>
 								<div class="buff-title">{{buff.name}}</div>
 							</div>
@@ -39,7 +39,7 @@
 					</div>
 					<div class="tab-pane" id="formation">
 						<div class="row">
-							<div class="col-xs-2" ng-repeat="buff in buffList.Formation" title="{{buff.desc}}" data-toggle="tooltip" data-container="body" ng-click="setBuff(buff.id,true)">
+							<div class="col-xs-2 buff-component" ng-repeat="buff in buffList.Formation" title="{{buff.desc}}" data-toggle="tooltip" data-container="body" ng-click="setBuff(buff.id,true)">
 								<div class="buff-icon" ng-style="{background:'url(/icons/'+buff.icon+'.png) 0/45px no-repeat'}"></div>
 								<div class="buff-title">{{buff.name}}</div>
 							</div>
