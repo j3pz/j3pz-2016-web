@@ -811,7 +811,8 @@ var positionIconList = {
 	'8_ring_1': {icon: '../../images/pl_2.png'},
 	'9_ring_2': {icon: '../../images/pl_2.png'}
 };
-var stoneScore = [0, 2.66, 5.33, 8, 10.66, 13.17, 16, 21, 27.33];
+// var stoneScore = [0, 2.66, 5.33, 8, 10.66, 13.17, 16, 21, 27.33];
+var stoneScore = [0, 5.32, 10.66, 16, 21.32, 26.34, 32, 42, 54.66];
 var tixingOptions = [
 	{ name: '成男', body: 35, spunk: 34, spirit: 34, strength: 34, agility: 34 },
 	{ name: '成女', body: 35, spunk: 34, spirit: 34, strength: 34, agility: 34 },

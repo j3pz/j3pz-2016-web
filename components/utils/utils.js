@@ -255,9 +255,9 @@ app.service('Utils', ['$rootScope', function($rootScope) {
 		$rootScope.equips[$rootScope.focus].embed.score[index] = embeddedStone.score;
 		var exteaStoneScore = 0;
 		if ($rootScope.equips[$rootScope.focus].type == 'b_primaryWeapon')
-			exteaStoneScore = $rootScope.attributeStone[0].level * 77;
+			exteaStoneScore = $rootScope.attributeStone[0].level * 77 * 2;
 		if ($rootScope.equips[$rootScope.focus].type == 'c_primaryWeapon')
-			exteaStoneScore = $rootScope.attributeStone[1].level * 77;
+			exteaStoneScore = $rootScope.attributeStone[1].level * 77 * 2;
 		$rootScope.equips[$rootScope.focus].embed.totalScore = Math.round(eval($rootScope.equips[$rootScope.focus].embed.score.join('+')) + exteaStoneScore);
 		this.attributeStoneActivation();
 	};
