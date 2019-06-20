@@ -11,7 +11,7 @@ var menpaiList = {
 		'baseHPlus': 1.21,
 		'baseMagicShield': 576,
 		'basePhysicsShield': 400,
-		'baseHuajing': 1295,
+		'baseHuajing': 1078,
 		'tixingOption': [1, 1, 1, 1]
 	},
 	'tianluo': {
@@ -27,7 +27,7 @@ var menpaiList = {
 		'baseHPlus': 1.21,
 		'baseMagicShield': 576,
 		'basePhysicsShield': 400,
-		'baseHuajing': 1295,
+		'baseHuajing': 1078,
 		'tixingOption': [1, 1, 1, 1]
 	},
 	'fenying': {
@@ -42,7 +42,7 @@ var menpaiList = {
 		'baseHPlus': 1.21,
 		'baseMagicShield': 621,
 		'basePhysicsShield': 400,
-		'baseHuajing': 1295,
+		'baseHuajing': 1078,
 		'tixingOption': [1, 1, 1, 0]
 	},
 	'yijin': {
@@ -57,7 +57,7 @@ var menpaiList = {
 		'baseHPlus': 1.32,
 		'basePhysicsShield': 541,
 		'baseMagicShield': 567,
-		'baseHuajing': 1295,
+		'baseHuajing': 1078,
 		'tixingOption': [1, 0, 0, 1]
 	},
 	'zixia': {
@@ -73,7 +73,7 @@ var menpaiList = {
 		'baseHPlus': 1.21,
 		'baseMagicShield': 665,
 		'basePhysicsShield': 400,
-		'baseHuajing': 1295,
+		'baseHuajing': 1078,
 		'tixingOption': [1, 1, 1, 1]
 	},
 	'bingxin': {
@@ -89,7 +89,7 @@ var menpaiList = {
 		'basePhysicsShield': 400,
 		'baseDodge': 265,
 		'baseHPlus': 1.21,
-		'baseHuajing': 1295,
+		'baseHuajing': 1078,
 		'tixingOption': [0, 1, 1, 1]
 	},
 	'dujing': {
@@ -104,7 +104,7 @@ var menpaiList = {
 		'baseHPlus': 1.21,
 		'baseMagicShield': 621,
 		'basePhysicsShield': 400,
-		'baseHuajing': 1295,
+		'baseHuajing': 1078,
 		'tixingOption': [1, 1, 1, 1]
 	},
 	'mowen': {
@@ -120,7 +120,7 @@ var menpaiList = {
 		'baseHPlus': 1.21,
 		'baseMagicShield': 576,
 		'basePhysicsShield': 400,
-		'baseHuajing': 1295,
+		'baseHuajing': 1078,
 		'tixingOption': [1, 1, 1, 1]
 	},
 	'taixu': {
@@ -136,7 +136,7 @@ var menpaiList = {
 		'baseHPlus': 1.21,
 		'baseMagicShield': 400,
 		'basePhysicsShield': 400,
-		'baseHuajing': 1295,
+		'baseHuajing': 1078,
 		'tixingOption': [1, 1, 1, 1]
 	},
 	'cangjian': {
@@ -153,7 +153,7 @@ var menpaiList = {
 		'baseHPlus': 1.21,
 		'baseMagicShield': 400,
 		'basePhysicsShield': 400,
-		'baseHuajing': 1295,
+		'baseHuajing': 1078,
 		'tixingOption': [1, 1, 1, 1]
 	},
 	'linghai': {
@@ -169,7 +169,7 @@ var menpaiList = {
 		'baseMagicShield': 400,
 		'basePhysicsShield': 400,
 		'baseHPlus': 1.21,
-		'baseHuajing': 1295,
+		'baseHuajing': 1078,
 		'tixingOption': [1, 1, 1, 1]
 	},
 	'jingyu': {
@@ -185,7 +185,7 @@ var menpaiList = {
 		'baseMagicShield': 400,
 		'basePhysicsShield': 400,
 		'baseHPlus': 1.21,
-		'baseHuajing': 1295,
+		'baseHuajing': 1078,
 		'tixingOption': [1, 1, 1, 1]
 	},
 	'aoxue': {
@@ -200,7 +200,7 @@ var menpaiList = {
 		'baseHPlus': 1.21,
 		'baseMagicShield': 400,
 		'basePhysicsShield': 598,
-		'baseHuajing': 1295,
+		'baseHuajing': 1078,
 		'tixingOption': [1, 1, 1, 1]
 	},
 	'xiaochen': {
@@ -215,7 +215,7 @@ var menpaiList = {
 		'baseHPlus': 1.21,
 		'baseMagicShield': 400,
 		'basePhysicsShield': 559,
-		'baseHuajing': 1295,
+		'baseHuajing': 1078,
 		'tixingOption': [1, 1, 1, 1]
 	},
 	'beiao': {
@@ -229,7 +229,7 @@ var menpaiList = {
 		'baseOvercomePlus': 0.36,
 		'baseMagicShield': 400,
 		'basePhysicsShield': 400,
-		'baseHuajing': 1295,
+		'baseHuajing': 1078,
 		'tixingOption': [1, 1, 1, 1]
 	},
 	'fenshan': {
@@ -245,7 +245,7 @@ var menpaiList = {
 		'baseParryBase': 318,
 		'baseMagicShield': 400,
 		'basePhysicsShield': 400,
-		'baseHuajing': 1295,
+		'baseHuajing': 1078,
 		'tixingOption': [1, 1, 1, 1]
 	},
 	'lijing': {
@@ -258,7 +258,7 @@ var menpaiList = {
 		'baseHPlus': 1.21,
 		'baseMagicShield': 621,
 		'basePhysicsShield': 400,
-		'baseHuajing': 1295,
+		'baseHuajing': 1078,
 		'tixingOption': [1, 1, 1, 1]
 	},
 	'yunchang': {
@@ -272,7 +272,7 @@ var menpaiList = {
 		'baseMagicShield': 621,
 		'basePhysicsShield': 400,
 		'baseDodge': 243,
-		'baseHuajing': 1295,
+		'baseHuajing': 1078,
 		'tixingOption': [0, 1, 1, 1]
 	},
 	'butian': {
@@ -283,7 +283,7 @@ var menpaiList = {
 		'baseHPlus': 1.21,
 		'baseMagicShield': 621,
 		'basePhysicsShield': 400,
-		'baseHuajing': 1295,
+		'baseHuajing': 1078,
 		'tixingOption': [1, 1, 1, 1]
 	},
 	'xiangzhi': {
@@ -296,7 +296,7 @@ var menpaiList = {
 		'baseHPlus': 1.21,
 		'baseMagicShield': 621,
 		'basePhysicsShield': 400,
-		'baseHuajing': 1295,
+		'baseHuajing': 1078,
 		'tixingOption': [1, 1, 1, 1]
 	},
 	'tielao': {
@@ -817,7 +817,7 @@ var tixingOptions = [
 	{ name: '成男', body: 35, spunk: 34, spirit: 34, strength: 34, agility: 34 },
 	{ name: '成女', body: 35, spunk: 34, spirit: 34, strength: 34, agility: 34 },
 	{ name: '萝莉', body: 35, spunk: 34, spirit: 34, strength: 34, agility: 34 },
-	{ name: '正太', body: 35, spunk: 34, spirit: 34, strength: 34, agility: 34 },
+	{ name: '正太', body: 35, spunk: 34, spirit: 34, strength: 34, agility: 34 }
 ];
 /* 分析装备前缀描述 */
 function analysisPre(xinfatype) {
