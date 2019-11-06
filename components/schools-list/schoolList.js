@@ -15,5 +15,6 @@ app.controller('SchoolListCtrl', ['$scope', function($scope) {
 		{name: '长歌', icon: 'jx3icon-cg', xinfa: 2, type2: 'hps',	xinfa1: 'mowen',	xinfa2: 'xiangzhi',	xinfaName1: '莫问',		xinfaName2: '相知',		color: '#44919F', size: 64, hover: false},
 		{name: '霸刀', icon: 'jx3icon-bd', xinfa: 1, type2: 'dps',	xinfa1: 'beiao',	xinfa2: '',			xinfaName1: '北傲诀',	xinfaName2: '',			color: '#5064E8', size: 64, hover: false},
 		{name: '蓬莱', icon: 'jx3icon-pl', xinfa: 1, type2: 'dps',	xinfa1: 'linghai',	xinfa2: '',			xinfaName1: '凌海诀',	xinfaName2: '',			color: '#162641', size: 64, hover: false},
+		{name: '凌雪', icon: 'jx3icon-lx', xinfa: 1, type2: 'dps',	xinfa1: 'yinlong',	xinfa2: '',			xinfaName1: '隐龙诀',	xinfaName2: '',			color: '#F02820', size: 64, hover: false}
 	];
 }]);
