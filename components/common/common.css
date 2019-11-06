@@ -4,10 +4,10 @@
 
 @font-face {
 	font-family: 'jx3icon';
-	src: url('/css/fonts/jx3icon.eot');
-	src: url('/css/fonts/jx3icon.woff') format('woff'),
-		 url('/css/fonts/jx3icon.ttf') format('truetype'),
-		 url('/css/fonts/jx3icon.svg#jx3icon') format('svg');
+	src: url('/css/fonts/jx3icon.eot?t=20191107');
+	src: url('/css/fonts/jx3icon.woff?t=20191107') format('woff'),
+		 url('/css/fonts/jx3icon.ttf?t=20191107') format('truetype'),
+		 url('/css/fonts/jx3icon.svg#jx3icon?t=20191107') format('svg');
 }
 
 .jx3icon{
