@@ -172,6 +172,22 @@ var menpaiList = {
 		'baseHuajing': 1078,
 		'tixingOption': [1, 1, 1, 1]
 	},
+	'yinlong': {
+		'name': 'yinlong',
+		'type': 'agility',
+		'baseAttack': 652,
+		'baseHit': 398,
+		'baseOvercome': 217,
+		'baseAttackPlus': 1.5,
+		'baseCritPlus': 0,
+		'baseCritEffPlus': 0,
+		'baseOvercomePlus': 0.47,
+		'baseMagicShield': 400,
+		'basePhysicsShield': 400,
+		'baseHPlus': 1.21,
+		'baseHuajing': 1078,
+		'tixingOption': [1, 1, 1, 1]
+	},
 	'jingyu': {
 		'name': 'jingyu',
 		'type': 'strength',
