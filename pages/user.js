@@ -115,7 +115,7 @@ app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', '$locatio
 		.error(function(response) {
 			toastr.error('更改失败, ' + response.errors[0].detail);
 		})
-		["finally"](function() {
+		['finally'](function() {
 			savedCase.isEditing = false;
 		});
 	};
@@ -126,7 +126,7 @@ app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', '$locatio
 	$scope.deleteCase = function(savedCase) {
 		var csid = savedCase.id;
 		var token = localStorage.getItem('token');
-		$http["delete"](config.apiBase + 'user/case/' + csid, {
+		$http['delete'](config.apiBase + 'user/case/' + csid, {
 			headers: {'Authorization': 'Bearer ' + token}
 		}).success(function(response) {
 			toastr.success('删除成功');
@@ -152,7 +152,7 @@ app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', '$locatio
 			var qualitySlider = $('input.slider-input').slider({
 				range: true,
 				min: 1080,
-				max: 2650,
+				max: 3000,
 				values: $scope.preference.range,
 				step: 5,
 				tooltip: 'hide'
