@@ -839,7 +839,7 @@ var tixingOptions = [
 function analysisPre(xinfatype) {
 	str = Number(xinfatype);
 	str = str.toString(2);
-	str = addZero(str, 24);
+	str = addZero(str, 25);
 	var avaMenpai = str.split('');
 	var preArr = ['', ''];
 	var xinfaList = [
@@ -889,14 +889,14 @@ function analysisPre(xinfatype) {
 		preArr[0] = xinfaList[firstHit][0];
 		preArr[1] = xinfaList[firstHit][0];
 		if (firstHit == 2) preArr[1] = '外功';
-	} else if (sum <= 4) {	// 通用装备
+	} else if (sum <= 5) {	// 通用装备
 		switch (firstHit) {
 		case 0: preArr = ['内功', '全']; break;	// 元气
 		case 4: preArr = ['内功', '内功']; break;	// 根骨
 		case 8: preArr = ['外功', '外功']; break;	// 力道
 		case 12: preArr = ['外功', '外功']; break;// 身法
-		case 15: preArr = ['内功', '内功']; break;// 治疗
-		case 19: preArr = ['全', '全']; break;	// 防御
+		case 17: preArr = ['内功', '内功']; break;// 治疗
+		case 21: preArr = ['全', '全']; break;	// 防御
 		}
 	}
 	if (sum >= 6) {			// 精简装备
