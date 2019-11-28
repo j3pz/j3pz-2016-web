@@ -16,7 +16,7 @@ app.controller('HasteCtrl', ['$scope', function($scope){
 		// mengge_lj:{name:"梦歌",value:50},
 		zhenshang:{name:"枕上",value:50},
 		// dushou:{name:"毒手",value:102},
-		bingsi:{name:"冰丝",value:60},
+		bingsi:{name:"冰丝",value:93},
 		jujing:{name:"聚精凝神",value:205},
 		yuepo:{name:"辉耀红尘",value:52},
 		taiji:{name:"太极无极",value:60},
