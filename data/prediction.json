@@ -2,7 +2,7 @@
 	{
 		"id": "prediction_1",
 		"instance": "普通敖龙岛",
-		"fullname": "英雄饕餮洞",
+		"fullname": "普通敖龙岛",
 		"img": "2350.png",
 		"boss": ["铁黎", "陈徽", "藤原武裔", "源思弦", "驺吾", "方有崖"],
 		"prediction":[
