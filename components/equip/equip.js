@@ -99,7 +99,7 @@ var Equip = {
 				if ($.inArray(key, jinglianList) >= 0) {
 					var originalData = value;
 					if (key in equip.xilian.num) originalData -= equip.xilian.num[key] * -1;
-					var finalData = originalData * cof[v];
+					var finalData = originalData * cof[equip.jinglian.strengthen];
 					if (key === 'threat') finalData = finalData.toFixed(1);
 					else finalData = finalData.toFixed(0);
 					equip.jinglian[key] = finalData;
@@ -108,7 +108,7 @@ var Equip = {
 			angular.forEach(equip.xilian.num, function(value, key) {
 				if (value > 0) {
 					var originalData = value;
-					var finalData = originalData * cof[v];
+					var finalData = originalData * cof[equip.jinglian.strengthen];
 					finalData = finalData.toFixed(0);
 					equip.jinglian[key] = finalData;
 				}
