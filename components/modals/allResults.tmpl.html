@@ -18,10 +18,18 @@
 								<tr><td ng-repeat="item in list_3">{{result[item]?result[item]:0}}</td></tr>
 							</tbody>
 						</table>
+						<div id="copyzone" style="position: absolute; top: -99999px;"></div>
 					</div>
 				</div>
 				<div class="card-actionbar">
 					<div class="card-actionbar-row">
+						<div class="btn-group" style="margin-right: 8px;">
+							<button type="button" class="btn ink-reaction btn-raised dropdown-toggle" data-toggle="dropdown" aria-expanded="false">复制结果 <i class="fa fa-caret-down"></i></button>
+							<ul class="dropdown-menu dropdown-menu-right" role="menu">
+								<li><a href="#" ng-click="copyResult('csv')">CSV</a></li>
+								<li><a href="#" ng-click="copyResult('json')">JSON</a></li>
+							</ul>
+						</div>
 						<button type="button" class="btn ink-reaction btn-raised btn-primary" data-dismiss="modal">关闭</button>
 					</div>
 				</div>
