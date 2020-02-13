@@ -11,19 +11,13 @@ app.controller('HasteCtrl', ['$scope', function($scope){
 	$scope.oriTime = 1.5;
 	$scope.x = 1;
 	$scope.acceExtraList = {
-		none:{name:"无",value:0},
-		mengge_hj:{name:"梦歌",value:60},
-		// mengge_lj:{name:"梦歌",value:50},
-		zhenshang:{name:"枕上",value:50},
-		// dushou:{name:"毒手",value:102},
-		bingsi:{name:"冰丝",value:93},
-		jujing:{name:"聚精凝神",value:205},
-		yuepo:{name:"辉耀红尘",value:52},
-		taiji:{name:"太极无极",value:60},
-		qinxin:{name:"沁心",value:51},
-		miaojing:{name:"法镜",value:105},
-		rufeng:{name:"如风",value:51},
-		fengyi:{name:"风倚",value:51}
+		none: { name:'无', value: 0 },
+		xinjian: { name: '心剑两忘', value: 31 * 3 },
+		mengge: { name: '梦歌', value: 30 * 2 },
+		zhenshang: { name: '枕上', value: 10 * 5 },
+		miaojing: { name: '法镜', value: 21 * 5 },
+		rufeng: { name: '如风', value: 82 },
+		ningjue: { name: '凝绝', value: 51 },
 	};
 	$scope.results = [{newtime:$scope.oriTime,hastepercentage:0,hasteLevel:0}];
 
