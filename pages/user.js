@@ -152,7 +152,7 @@ app.controller('UserCtrl', ['$scope', '$rootScope', '$http', 'toastr', '$locatio
 			var qualitySlider = $('input.slider-input').slider({
 				range: true,
 				min: 1080,
-				max: 3000,
+				max: 3300,
 				values: $scope.preference.range,
 				step: 5,
 				tooltip: 'hide'
