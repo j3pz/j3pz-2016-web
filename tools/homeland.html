@@ -193,7 +193,12 @@
 												</thead>
 												<tbody>
 													<tr ng-repeat="item in data">
-														<td><span ng-class="'furniture-quality-' + item.attributes.quality">{{item.attributes.name}}</span></td>
+														<td>
+															<span ng-class="'furniture-quality-' + item.attributes.quality">{{item.attributes.name}}</span>
+															<span ng-if="item.attributes.interact" class="furniture-icon furniture-interactable" tooltip="可交互" tooltip-append-to-body="true"></span>
+															<span ng-if="item.attributes.scaleRange" class="furniture-icon furniture-scaleable" tooltip="可缩放" tooltip-append-to-body="true"></span>
+															<!-- <span ng-if="item.attributes." class="furniture-icon furniture-chainable" tooltip="可连刷" tooltip-append-to-body="true"></span> -->
+														</td>
 														<td>{{item.attributes.level}}</td>
 														<td>{{item.attributes.limit}}</td>
 														<td>{{item.attributes.beauty}}</td>

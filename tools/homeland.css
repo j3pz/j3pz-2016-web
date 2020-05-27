@@ -1,14 +1,18 @@
 .furniture-quality-1 {
     color: #000;
+    vertical-align: middle;
 }
 .furniture-quality-2 {
     color: #2e7d32;
+    vertical-align: middle;
 }
 .furniture-quality-3 {
     color: #283593;
+    vertical-align: middle;
 }
 .furniture-quality-4 {
     color: #ef6c00;
+    vertical-align: middle;
 }
 
 .homeland-icon {
@@ -22,4 +26,23 @@
 .homeland-icon.icon2 {
     background-image: url(./icon2.png);
     background-size: 988px 520px;
+}
+
+.furniture-icon {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background-image: url(./icon3.png);
+    background-size: 64px 16px;
+    vertical-align: middle;
+}
+
+.furniture-icon.furniture-interactable {
+    background-position: -32px 0px;
+}
+.furniture-icon.furniture-scaleable {
+    background-position: 0px 0px;
+}
+.furniture-icon.furniture-chainable {
+    background-position: -48px 0px;
 }
