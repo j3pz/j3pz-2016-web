@@ -10,3 +10,16 @@
 .furniture-quality-4 {
     color: #ef6c00;
 }
+
+.homeland-icon {
+    width: 52px;
+    height: 52px;
+}
+.homeland-icon.icon1 {
+    background-image: url(./icon1.png);
+    background-size: 988px 468px;
+}
+.homeland-icon.icon2 {
+    background-image: url(./icon2.png);
+    background-size: 988px 520px;
+}

@@ -54,7 +54,7 @@
 												<li class="tile" ng-repeat="item in categorys[0]" ng-click="chooseCategory(item)" ng-class="item.key == category ? 'active':''">
 													<a class="tile-content ink-reaction">
 														<div class="tile-icon">
-															<i class="fa fa-th-large"></i>
+															<div class="homeland-icon" ng-class="item.icon.file" ng-style="getIcon(item)"></div>
 														</div>
 														<div class="tile-text" style="font-size: 14px;">
 															{{item.value}}
@@ -79,7 +79,7 @@
 												<li class="tile" ng-repeat="item in categorys[1]" ng-click="chooseCategory(item)" ng-class="item.key == category ? 'active':''">
 													<a class="tile-content ink-reaction">
 														<div class="tile-icon">
-															<i class="fa fa-th-large"></i>
+															<div class="homeland-icon" ng-class="item.icon.file" ng-style="getIcon(item)"></div>
 														</div>
 														<div class="tile-text" style="font-size: 14px;">
 															{{item.value}}
@@ -104,7 +104,7 @@
 												<li class="tile" ng-repeat="item in categorys[2]" ng-click="chooseCategory(item)" ng-class="item.key == category ? 'active':''">
 													<a class="tile-content ink-reaction">
 														<div class="tile-icon">
-															<i class="fa fa-th-large"></i>
+															<div class="homeland-icon" ng-class="item.icon.file" ng-style="getIcon(item)"></div>
 														</div>
 														<div class="tile-text" style="font-size: 14px;">
 															{{item.value}}
@@ -129,7 +129,7 @@
 												<li class="tile" ng-repeat="item in categorys[3]" ng-click="chooseCategory(item)" ng-class="item.key == category ? 'active':''">
 													<a class="tile-content ink-reaction">
 														<div class="tile-icon">
-															<i class="fa fa-th-large"></i>
+															<div class="homeland-icon" ng-class="item.icon.file" ng-style="getIcon(item)"></div>
 														</div>
 														<div class="tile-text" style="font-size: 14px;">
 															{{item.value}}
@@ -146,7 +146,7 @@
                                     <div class="card-body">
 										<div style=" margin-bottom: 24px;">
 											<label class="text-primary-dark" for="extra">筛选</label><br>
-											<div class="rows" style="">
+											<div class="rows">
 												<div class="dropdown" style="display: inline-block; margin-right: 24px;">
 													<a class="btn ink-reaction btn-raised btn-default-bright dropdown-toggle" id="source-filter" type="button"  data-toggle="dropdown">来源：{{source}} <i class="fa fa-caret-down text-default-light"></i></a>
 													<ul class="dropdown-menu animation-expand" role="menu" aria-labelledby="source-filter" style="max-height: 250px;overflow-x: hidden;">
