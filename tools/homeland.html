@@ -15,6 +15,7 @@
 			@require '../css/theme/libs/toastr/toastr.css'
 			@require '../components/common/common.css'
 			@require '../css/all.css'
+			@require 'homeland.css'
 		-->
 		<!-- STYLE_PLACEHOLDER -->
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -37,20 +38,20 @@
 		<div id="base">
 			<div id="content" ng-controller="FurnitureCtrl" ng-cloak>
 				<section style="padding:0;overflow-x:hidden;">
-					<div class="section-body content">
-						<div class="rows">
+					<div class="section-body content" style="display: flex; flex-direction: column;margin-top: 0; padding-top: 24px;">
+						<div class="rows" style="width: 100%;">
                             <div class="col-md-3 panel-group" id="accordionOne">
-                                <div class="card style-default-bright">
-									<div class="card-body no-padding">
-										<div class="card-head card-head-sm" data-toggle="collapse" data-parent="#accordionOne" href="#collapseOne" data-target="#collapseOne">
-											<header>建筑</header>
-											<div class="tools">
-												<a class="btn btn-icon-toggle"><i class="fa fa-angle-down"></i></a>
-											</div>
+                                <div class="card style-default-bright panel">
+									<div class="card-head card-head-sm" data-toggle="collapse" data-parent="#accordionOne" href="#collapseOne" data-target="#collapseOne">
+										<header>建筑</header>
+										<div class="tools">
+											<a class="btn btn-icon-toggle"><i class="fa fa-angle-down"></i></a>
 										</div>
-										<div id="collapseOne" class="collapse in">
+									</div>
+									<div id="collapseOne" class="collapse in">
+										<div class="card-body no-padding">
 											<ul class="list divider-full-bleed">
-												<li class="tile" ng-repeat="item in categorys" ng-click="chooseInstance($index)" ng-class="item.key == category ? 'active':''">
+												<li class="tile" ng-repeat="item in categorys[0]" ng-click="chooseCategory(item)" ng-class="item.key == category ? 'active':''">
 													<a class="tile-content ink-reaction">
 														<div class="tile-icon">
 															<i class="fa fa-th-large"></i>
@@ -65,17 +66,67 @@
 									</div>
 								</div>
 
-								<div class="card style-default-bright">
-									<div class="card-body no-padding">
-										<div class="card-head card-head-sm" data-toggle="collapse" data-parent="#accordionOne" href="#collapseTwo" data-target="#collapseTwo">
-											<header>建筑</header>
-											<div class="tools">
-												<a class="btn btn-icon-toggle"><i class="fa fa-angle-down"></i></a>
-											</div>
+								<div class="card style-default-bright panel">
+									<div class="card-head card-head-sm" data-toggle="collapse" data-parent="#accordionOne" href="#collapseTwo" data-target="#collapseTwo">
+										<header>家具</header>
+										<div class="tools">
+											<a class="btn btn-icon-toggle"><i class="fa fa-angle-down"></i></a>
 										</div>
-										<div id="collapseTwo" class="collapse">
+									</div>
+									<div id="collapseTwo" class="collapse">
+										<div class="card-body no-padding">
 											<ul class="list divider-full-bleed">
-												<li class="tile" ng-repeat="item in categorys" ng-click="chooseInstance($index)" ng-class="item.key == category ? 'active':''">
+												<li class="tile" ng-repeat="item in categorys[1]" ng-click="chooseCategory(item)" ng-class="item.key == category ? 'active':''">
+													<a class="tile-content ink-reaction">
+														<div class="tile-icon">
+															<i class="fa fa-th-large"></i>
+														</div>
+														<div class="tile-text" style="font-size: 14px;">
+															{{item.value}}
+														</div>
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								
+								<div class="card style-default-bright panel">
+									<div class="card-head card-head-sm" data-toggle="collapse" data-parent="#accordionOne" href="#collapseThree" data-target="#collapseThree">
+										<header>景观</header>
+										<div class="tools">
+											<a class="btn btn-icon-toggle"><i class="fa fa-angle-down"></i></a>
+										</div>
+									</div>
+									<div id="collapseThree" class="collapse">
+										<div class="card-body no-padding">
+											<ul class="list divider-full-bleed">
+												<li class="tile" ng-repeat="item in categorys[2]" ng-click="chooseCategory(item)" ng-class="item.key == category ? 'active':''">
+													<a class="tile-content ink-reaction">
+														<div class="tile-icon">
+															<i class="fa fa-th-large"></i>
+														</div>
+														<div class="tile-text" style="font-size: 14px;">
+															{{item.value}}
+														</div>
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								
+								<div class="card style-default-bright panel">
+									<div class="card-head card-head-sm" data-toggle="collapse" data-parent="#accordionOne" href="#collapseFour" data-target="#collapseFour">
+										<header>收藏</header>
+										<div class="tools">
+											<a class="btn btn-icon-toggle"><i class="fa fa-angle-down"></i></a>
+										</div>
+									</div>
+									<div id="collapseFour" class="collapse">
+										<div class="card-body no-padding">
+											<ul class="list divider-full-bleed">
+												<li class="tile" ng-repeat="item in categorys[3]" ng-click="chooseCategory(item)" ng-class="item.key == category ? 'active':''">
 													<a class="tile-content ink-reaction">
 														<div class="tile-icon">
 															<i class="fa fa-th-large"></i>
@@ -93,8 +144,62 @@
                             <div class="col-md-9">
                                 <div class="card style-default-bright">
                                     <div class="card-body">
-                                        <label class="text-primary-dark" for="extra">家具列表</label><br>
-
+										<div style=" margin-bottom: 24px;">
+											<label class="text-primary-dark" for="extra">筛选</label><br>
+											<div class="rows" style="">
+												<div class="dropdown" style="display: inline-block; margin-right: 24px;">
+													<a class="btn ink-reaction btn-raised btn-default-bright dropdown-toggle" id="source-filter" type="button"  data-toggle="dropdown">来源：{{source}} <i class="fa fa-caret-down text-default-light"></i></a>
+													<ul class="dropdown-menu animation-expand" role="menu" aria-labelledby="source-filter" style="max-height: 250px;overflow-x: hidden;">
+														<li ng-repeat="sourceItem in sources" ng-click="setSource(sourceItem)"><a href>{{sourceItem}}</a></li>
+													</ul>
+												</div>
+												<div class="dropdown" style="display: inline-block; margin-right: 24px;">
+													<a class="btn ink-reaction btn-raised btn-default-bright dropdown-toggle" id="source-filter" type="button"  data-toggle="dropdown">最高家园等级：{{level}} 级 <i class="fa fa-caret-down text-default-light"></i></a>
+													<ul class="dropdown-menu animation-expand" role="menu" aria-labelledby="source-filter" style="max-height: 250px;overflow-x: hidden;">
+														<li ng-repeat="levelItem in levels" ng-click="setLevel(levelItem)"><a href>家园 {{levelItem}} 级</a></li>
+													</ul>
+												</div>
+												<div class="dropdown" style="display: inline-block;">
+													<a class="btn ink-reaction btn-raised btn-default-bright dropdown-toggle" id="source-filter" type="button"  data-toggle="dropdown">排序：{{orders[order].desc}} <i class="fa fa-caret-down text-default-light"></i></a>
+													<ul class="dropdown-menu animation-expand" role="menu" aria-labelledby="source-filter" style="max-height: 250px;overflow-x: hidden;">
+														<li ng-repeat="orderItem in orders track by $index" ng-click="setOrder($index)"><a href>{{orderItem.desc}}</a></li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<label class="text-primary-dark" for="extra">家具列表</label><br>
+										<div class="table-container" style="max-height: 800px;overflow: auto;">
+											<table class="table">
+												<thead>
+													<tr>
+														<th>名称</th>
+														<th>品质等级</th>
+														<th>可用家园等级</th>
+														<th>景观</th>
+														<th>实用</th>
+														<th>坚固</th>
+														<th>风水</th>
+														<th>趣味</th>
+														<th>来源</th>
+														<th>价格</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr ng-repeat="item in data">
+														<td><span ng-class="'furniture-quality-' + item.attributes.quality">{{item.attributes.name}}</span></td>
+														<td>{{item.attributes.level}}</td>
+														<td>{{item.attributes.limit}}</td>
+														<td>{{item.attributes.beauty}}</td>
+														<td>{{item.attributes.practicality}}</td>
+														<td>{{item.attributes.robustness}}</td>
+														<td>{{item.attributes.environment}}</td>
+														<td>{{item.attributes.fun}}</td>
+														<td>{{item.attributes.source}}</td>
+														<td>{{item.attributes.price}}</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
                                     </div>
                                 </div>
                             </div>
