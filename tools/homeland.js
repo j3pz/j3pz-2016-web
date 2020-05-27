@@ -38,6 +38,13 @@ app.controller('FurnitureCtrl', ['$scope', '$http', 'toastr',  function($scope, 
         };
     }
 
+    $scope.searchAll = function() {
+        $scope.category = undefined;
+        toastr.info('数据量原因，全部类别下将不可查看全部来源或园宅币来源的家具。');
+        $scope.source = '副本';
+        $scope.fetch();
+    }
+
     $scope.categorys = [
         [
             { key: 11000, value: '水池', icon: { file: 'icon1', check: 13, frame: 14 } },
@@ -134,9 +141,15 @@ app.controller('FurnitureCtrl', ['$scope', '$http', 'toastr',  function($scope, 
         '未知',
     ];
 
+    $scope.shouldDisable = function(item) {
+        return $scope.category === undefined && ['全部', '园宅币'].indexOf(item) >= 0;
+    }
+
     $scope.setSource = function(source) {
-        $scope.source = source;
-        $scope.fetch();
+        if (!$scope.shouldDisable(source)) {
+            $scope.source = source;
+            $scope.fetch();
+        }
     }
 
     $scope.source = '全部';
