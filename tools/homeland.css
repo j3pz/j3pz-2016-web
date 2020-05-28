@@ -1,18 +1,22 @@
 .furniture-quality-1 {
     color: #000;
     vertical-align: middle;
+    border-bottom: 1px solid #000;
 }
 .furniture-quality-2 {
     color: #2e7d32;
     vertical-align: middle;
+    border-bottom: 1px solid #2e7d32;
 }
 .furniture-quality-3 {
     color: #283593;
     vertical-align: middle;
+    border-bottom: 1px solid #283593;
 }
 .furniture-quality-4 {
     color: #ef6c00;
     vertical-align: middle;
+    border-bottom: 1px solid #ef6c00;
 }
 
 .homeland-icon {
