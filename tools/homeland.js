@@ -10,7 +10,7 @@ var app = angular.module('J3Homeland', ['ui.bootstrap', 'toastr'])
 app.controller('FurnitureCtrl', ['$scope', '$http', 'toastr',  function($scope, $http, toastr) {
     $scope.data = [];
     $scope.fetch = function () {
-        $http.get('http://9.134.9.30:8080/api/furniture', {
+        $http.get('https://apis.j3pz.com/furniture', {
             params: {
                 category: $scope.category,
                 source: $scope.source === '全部' ? undefined : $scope.source,
