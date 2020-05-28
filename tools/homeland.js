@@ -10,7 +10,7 @@ var app = angular.module('J3Homeland', ['ui.bootstrap', 'toastr'])
 app.controller('FurnitureCtrl', ['$scope', '$http', 'toastr',  function($scope, $http, toastr) {
     $scope.data = [];
     $scope.fetch = function () {
-        $http.get('https://apis.j3pz.com/furniture', {
+        $http.get('http://9.134.9.30:8080/api/furniture', {
             params: {
                 category: $scope.category,
                 source: $scope.source === '全部' ? undefined : $scope.source,
@@ -180,17 +180,17 @@ app.controller('FurnitureCtrl', ['$scope', '$http', 'toastr',  function($scope, 
     }
 
     $scope.orders = [
-        { key: 'beauty', order: 'asc', desc: '景观 - 升序' },
-        { key: 'practicality', order: 'asc', desc: '实用 - 升序' },
-        { key: 'robustness', order: 'asc', desc: '坚固 - 升序' },
-        { key: 'environment', order: 'asc', desc: '风水 - 升序' },
-        { key: 'fun', order: 'asc', desc: '趣味 - 升序' },
-        { key: 'price', order: 'asc', desc: '价格 - 升序' },
         { key: 'beauty', order: 'desc', desc: '景观 - 降序' },
         { key: 'practicality', order: 'desc', desc: '实用 - 降序' },
         { key: 'robustness', order: 'desc', desc: '坚固 - 降序' },
         { key: 'environment', order: 'desc', desc: '风水 - 降序' },
         { key: 'fun', order: 'desc', desc: '趣味 - 降序' },
+        { key: 'price', order: 'asc', desc: '价格 - 升序' },
+        { key: 'beauty', order: 'asc', desc: '景观 - 升序' },
+        { key: 'practicality', order: 'asc', desc: '实用 - 升序' },
+        { key: 'robustness', order: 'asc', desc: '坚固 - 升序' },
+        { key: 'environment', order: 'asc', desc: '风水 - 升序' },
+        { key: 'fun', order: 'asc', desc: '趣味 - 升序' },
         { key: 'price', order: 'desc', desc: '价格 - 降序' },
     ];
 
@@ -198,6 +198,12 @@ app.controller('FurnitureCtrl', ['$scope', '$http', 'toastr',  function($scope, 
     $scope.setOrder = function(order) {
         $scope.order = order;
         $scope.fetch();
+    }
+
+    $scope.furniture = {};
+
+    $scope.preview = function(item) {
+        $scope.furniture = item;
     }
 
     $scope.fetch();
