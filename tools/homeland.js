@@ -7,7 +7,7 @@ var app = angular.module('J3Homeland', ['ui.bootstrap', 'toastr'])
 	});
 }]);
 
-app.controller('FurnitureCtrl', ['$scope', '$http', 'toastr',  function($scope, $http, toastr) {
+app.controller('FurnitureCtrl', ['$scope', '$http', 'toastr', '$sce', function($scope, $http, toastr, $sce) {
     $scope.data = [];
     $scope.fetch = function () {
         $http.get('https://apis.j3pz.com/furniture', {
@@ -207,4 +207,8 @@ app.controller('FurnitureCtrl', ['$scope', '$http', 'toastr',  function($scope, 
     }
 
     $scope.fetch();
+
+    $scope.html = function(text) {
+		return $sce.trustAsHtml(text.replace(/\\n/g, '<br />'));
+	};
 }]);
