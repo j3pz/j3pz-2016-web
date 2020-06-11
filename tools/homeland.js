@@ -17,6 +17,8 @@ app.controller('FurnitureCtrl', ['$scope', '$http', 'toastr', '$sce', function($
                 limit: $scope.level,
                 orderBy: $scope.orders[$scope.order].key,
                 order: $scope.orders[$scope.order].order === 'asc' ? '1' : '0',
+                page: 1,
+                size: 1000,
             },
         }).success(function(response) {
             $scope.data = response.data;
