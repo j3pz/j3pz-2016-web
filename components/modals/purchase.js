@@ -29,7 +29,7 @@ app.controller('PurchaseCtrl', ['$scope', '$rootScope', '$http', 'toastr',
 			})
 			.success(function(response) {
 				var res = response.data.qrCode;
-				$scope.qrCode = 'https://www.kuaizhan.com/common/encode-png?large=true&data=' + res.data.qrcode;
+				$scope.qrCode = 'https://pay.bearsoftware.net.cn/get_code_image_show_image?url=' + res.data.qrcode;
 				$scope.price = res.data.realprice;
 				toastr.info(res.msg);
 				$scope.hasQrCode = true;
