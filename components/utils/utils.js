@@ -580,7 +580,7 @@ app.service('Utils', ['$rootScope', function($rootScope) {
 		$rootScope.results.strain = $rootScope.results.strain / 87.176;
 		$rootScope.results.strain = $rootScope.results.strain.toFixed(2) - -1 * buffFinalValue.strain.toFixed(2);
 		// 急速
-		$rootScope.results.acceLevel = results.acce;
+		$rootScope.results.acceLevel = Math.floor((results.acce + buffBaseValue.acce) * (1 + buffPercentValue.acce / 100));
 		$rootScope.results.acce = results.acce / 188.309;
 		$rootScope.results.acce = $rootScope.results.acce.toFixed(2);
 		// 内防
