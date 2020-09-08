@@ -581,7 +581,7 @@ app.service('Utils', ['$rootScope', function($rootScope) {
 		$rootScope.results.strain = $rootScope.results.strain.toFixed(2) - -1 * buffFinalValue.strain.toFixed(2);
 		// 急速
 		$rootScope.results.acceLevel = Math.floor((results.acce + buffBaseValue.acce) * (1 + buffPercentValue.acce / 100));
-		$rootScope.results.acce = results.acce / 188.309;
+		$rootScope.results.acce = $rootScope.results.acceLevel / 188.309;
 		$rootScope.results.acce = $rootScope.results.acce.toFixed(2);
 		// 内防
 		$rootScope.results.magicShield = Math.floor((results.basicMagicShield + results.magicShield + menpai.baseMagicShield) * (1 + buffPercentValue.magicShield / 100) + $rootScope.results.body * menpai.baseMagicShieldPlus + buffBaseValue.magicShield);
